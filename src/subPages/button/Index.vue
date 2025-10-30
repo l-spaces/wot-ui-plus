@@ -7,6 +7,12 @@
         <wd-button type="info">{{ $t('xin-xi-an-niu') }}</wd-button>
         <wd-button type="warning">{{ $t('jing-gao-an-niu-0') }}</wd-button>
         <wd-button type="error">{{ $t('wei-xian-an-niu') }}</wd-button>
+        <br />
+        <wd-button :round="false">{{ $t('zhu-yao-an-niu') }}</wd-button>
+        <wd-button :round="false" type="success">{{ $t('cheng-gong-an-niu-0') }}</wd-button>
+        <wd-button :round="false" type="info">{{ $t('xin-xi-an-niu') }}</wd-button>
+        <wd-button :round="false" type="warning">{{ $t('jing-gao-an-niu-0') }}</wd-button>
+        <wd-button :round="false" type="error">{{ $t('wei-xian-an-niu') }}</wd-button>
       </demo-block>
       <demo-block :title="$t('jin-yong-an-niu')">
         <wd-button disabled>{{ $t('zhu-yao-an-niu') }}</wd-button>

@@ -21,7 +21,12 @@
           <wd-button :round="false" type="info" size="small">{{ $t('huiFu-1') }}</wd-button>
         </wd-badge>
       </demo-block>
-
+      <demo-block :title="$t('zhanShiXiaoXiShuLiang')">
+        <wd-badge custom-class="badge" :modelValue="12">
+          <wd-icon name="star-on" size="22px"></wd-icon>
+        </wd-badge>
+        <wd-badge :is-dot="false" :modelValue="12"></wd-badge>
+      </demo-block>
       <demo-block :title="$t('keDingYiXiaoXiZuiDaZhi')">
         <wd-badge custom-class="badge" :modelValue="200" :max="99">
           <wd-button :round="false" type="info" size="small">{{ $t('pingLun-2') }}</wd-button>

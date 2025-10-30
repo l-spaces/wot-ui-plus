@@ -10,6 +10,19 @@
         @blur="handleBlur"
       />
     </demo-block>
+    <demo-block :title="$t('jiBenYongFa')">
+      <wd-input
+        type="text"
+        input-border="border"
+        @input="handleInput"
+        v-model="value"
+        prefix-icon="dong"
+        suffix-icon="list"
+        :placeholder="$t('qing-shu-ru-wai-bi-ba-bu')"
+        @change="handleChange"
+        @blur="handleBlur"
+      />
+    </demo-block>
     <demo-block :title="$t('jin-yong-zhuang-tai')">
       <wd-input type="text" @input="handleInput" v-model="value1" disabled />
     </demo-block>
