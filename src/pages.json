@@ -16,6 +16,21 @@
       }
     },
     {
+      "path": "pages/demo/Index",
+      "name": "demo",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        // #ifdef MP
+        "navigationBarTitleText": "测试页",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%index-title%"
+        // #endif
+      }
+    },
+    {
       "path": "pages/about/Index",
       "name": "about",
       "style": {
@@ -1339,6 +1354,12 @@
       {
         "pagePath": "pages/index/Index",
         "text": "Demo",
+        "iconPath": "static/icon/app.png",
+        "selectedIconPath": "static/icon/app_selected.png"
+      },
+            {
+        "pagePath": "pages/demo/Index",
+        "text": "测试",
         "iconPath": "static/icon/app.png",
         "selectedIconPath": "static/icon/app_selected.png"
       },
