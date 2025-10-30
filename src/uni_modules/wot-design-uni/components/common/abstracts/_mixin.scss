@@ -1,30 +1,44 @@
 /**
- * 混合宏
+ * 混合宏集合
+ * 此文件包含了UI组件库中使用的各种SCSS混合宏，主要分为BEM规范相关、常用样式和特殊效果混合宏
  */
-@import "config";
-@import "function";
+@import "config";     // 引入配置变量
+@import "function";  // 引入工具函数
 
 /**
-  * BEM，定义块（b)
+  * BEM命名规范 - 定义块（Block） 定义块选择器，生成命名空间前缀的类名
+  * @param {string} $block - 块名称
+  * @description 生成以命名空间为前缀的块选择器，并将块名称保存为全局变量
+  * @example @include b(button) 会生成 .wot-button {...}
   */
 @mixin b($block) {
-  $B: $namespace + "-"+ $block !global;
+  // 生成全局块名称变量，格式为: 命名空间-块名
+  $B: $namespace + "-" + $block !global;
 
+  // 创建块选择器
   .#{$B} {
-    @content;
+    @content;  // 插入调用者提供的样式内容
   }
 }
 
-/* 定义元素（e），对于伪类，会自动将 e 嵌套在 伪类 底下 */
+/**
+  * BEM命名规范 - 定义元素（Element） 定义元素选择器，生成块名-元素名的类名
+  * @param {list} $element... - 一个或多个元素名称
+  * @description 根据上下文智能生成元素选择器，支持伪类嵌套情况
+  * @example 在b(button)内部使用@include e(text) 会生成 .wot-button__text {...}
+  */
 @mixin e($element...) {
-  $selector: &;
-  $selectors: "";
+  $selector: &;         // 获取当前选择器上下文
+  $selectors: "";       // 存储生成的选择器字符串
 
+  // 检查是否在伪类内部使用
   @if containsPseudo($selector) {
+    // 为每个元素生成选择器
     @each $item in $element {
       $selectors: #{$selectors + "." + $B + $elementSeparator + $item + ","};
     }
 
+    // 将元素选择器嵌套在伪类内部
     @at-root {
       #{$selector} {
         #{$selectors} {
@@ -34,6 +48,7 @@
     }
   }
 
+  // 正常情况下的元素选择器生成
   @else {
     @each $item in $element {
       $selectors: #{$selectors + $selector + $elementSeparator + $item + ","};
@@ -47,11 +62,13 @@
   }
 }
 
-
-
-/* 此方法用于生成穿透样式 */
-
-/* 定义元素（e），对于伪类，会自动将 e 嵌套在 伪类 底下 */
+/**
+  * BEM命名规范 - 定义穿透样式元素（Element with deep） 定义元素选择器，生成块名-元素名的类名，用于穿透组件样式隔离
+  * @param {list} $element... - 一个或多个元素名称
+  * @description 与e混合宏类似，但生成带有:deep()的元素选择器，用于穿透组件样式隔离
+  * @example 在组件中使用@include edeep(text) 会生成 :deep(.wot-button__text) {...}
+  * @note 适用于Vue等框架中的样式隔离场景，需要穿透到子组件内部修改样式
+  */
 @mixin edeep($element...) {
   $selector: &;
   $selectors: "";
@@ -87,11 +104,16 @@
   }
 }
 
-
-/* 定义状态（m） */
+/**
+  * BEM命名规范 - 定义修饰符（Modifier） 定义修饰符选择器，生成块名-修饰符名的类名
+  * @param {list} $modifier... - 一个或多个修饰符名称
+  * @description 为当前选择器生成修饰符选择器
+  * @example 在b(button)内部使用@include m(primary) 会生成 .wot-button--primary {...}
+  */
 @mixin m($modifier...) {
   $selectors: "";
 
+  // 为每个修饰符生成选择器
   @each $item in $modifier {
     $selectors: #{$selectors + & + $modifierSeparator + $item + ","};
   }
@@ -103,7 +125,13 @@
   }
 }
 
-/* 定义状态（m） */
+/**
+  * BEM命名规范 - 定义穿透样式修饰符（Modifier with deep） 定义修饰符选择器，生成块名-修饰符名的类名，用于穿透组件样式隔离
+  * @param {list} $modifier... - 一个或多个修饰符名称
+  * @description 与m混合宏类似，但生成带有:deep()的修饰符选择器
+  * @example 在组件中使用@include mdeep(primary) 会生成 :deep(.wot-button--primary) {...}
+  * @note 适用于需要穿透组件样式隔离修改修饰符样式的场景
+  */
 @mixin mdeep($modifier...) {
   $selectors: "";
 
@@ -120,11 +148,18 @@
   }
 }
 
-/* 对于需要需要嵌套在 m 底下的 e，调用这个混合宏，一般在切换整个组件的状态，如切换颜色的时候 */
+/**
+  * BEM命名规范 - 定义修饰符下的元素（Element under Modifier） 定义元素选择器，生成块名-修饰符名-元素名的类名，用于状态切换时元素样式的改变
+  * @param {list} $element... - 一个或多个元素名称
+  * @description 生成修饰符状态下的元素选择器，用于状态切换时元素样式的改变
+  * @example 在m(primary)内部使用@include me(text) 会生成 .wot-button--primary .wot-button__text {...}
+  * @note 适用于组件状态切换时（如颜色、尺寸等变化）需要同步改变内部元素样式的场景
+  */
 @mixin me($element...) {
   $selector: &;
   $selectors: "";
 
+  // 检查当前选择器是否已经是修饰符
   @if containsModifier($selector) {
     @each $item in $element {
       $selectors: #{$selectors + "." + $B + $elementSeparator + $item + ","};
@@ -152,7 +187,13 @@
   }
 }
 
-/* 状态，生成 is-$state 类名 */
+/**
+  * 状态类生成器  定义状态类选择器，生成以状态前缀开头的状态类名
+  * @param {list} $states... - 一个或多个状态名称
+  * @description 生成以状态前缀开头的状态类选择器
+  * @example @include when(active, disabled) 会生成 &.is-active {...} 和 &.is-disabled {...}
+  * @note 适用于需要表示组件不同状态的场景，如激活、禁用、加载中等
+  */
 @mixin when($states...) {
   @at-root {
     @each $state in $states {
@@ -164,17 +205,27 @@
 }
 
 /**
-  * 常用混合宏
+  * 常用混合宏集合
   */
 
-/* 单行超出隐藏 */
+/**
+  * 单行文本超出省略
+  * @description 设置文本在一行内显示，超出部分用省略号表示
+  * @example 用于按钮文字、标签等需要控制显示长度的场景
+  */
 @mixin lineEllipsis {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-/* 多行超出隐藏 */
+/**
+  * 多行文本超出省略
+  * @param {number} $lineNumber - 显示的行数，默认为3行
+  * @description 设置文本在指定行数内显示，超出部分用省略号表示
+  * @example 用于描述文本、内容预览等场景
+  * @note 该方法使用webkit私有属性，在非webkit内核浏览器可能存在兼容性问题
+  */
 @mixin multiEllipsis($lineNumber: 3) {
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -182,7 +233,11 @@
   overflow: hidden;
 }
 
-/* 清除浮动 */
+/**
+  * 清除浮动
+  * @description 使用伪元素法清除子元素的浮动影响
+  * @example 用于包含浮动元素的容器，确保容器能正确包裹子元素
+  */
 @mixin clearFloat {
   &::after {
     display: block;
@@ -194,7 +249,15 @@
   }
 }
 
-/* 0.5px 边框 指定方向*/
+/**
+  * 0.5px边框（指定方向）
+  * @param {string} $direction - 边框方向，可选值为"bottom"或"top"，默认为"bottom"
+  * @param {number|string} $left - 左侧偏移量，默认为0
+  * @param {color} $color - 边框颜色，默认为$color-border-light
+  * @description 使用伪元素和transform实现0.5px细边框效果
+  * @example 用于需要显示极细边框的场景，如列表分割线
+  * @note 适用于高分辨率屏幕，可创建比1px更细的视觉效果
+  */
 @mixin halfPixelBorder($direction: "bottom", $left: 0, $color: $-color-border-light) {
   position: relative;
 
@@ -203,32 +266,36 @@
     display: block;
     content: "";
 
-    @if ($left==0) {
+    // 根据左侧偏移量计算宽度
+    @if ($left == 0) {
       width: 100%;
-    }
-
-    @else {
+    } @else {
       width: calc(100% - #{$left});
     }
 
     height: 1px;
     left: $left;
 
-    @if ($direction=="bottom") {
+    // 根据方向确定定位位置
+    @if ($direction == "bottom") {
       bottom: 0;
-    }
-
-    @else {
+    } @else {
       top: 0;
     }
 
+    // 使用transform缩放实现0.5px效果
     transform: scaleY(0.5);
     background: $color;
   }
 }
 
-
-/* 0.5px 边框 环绕 */
+/**
+  * 0.5px环绕边框
+  * @param {color} $color - 边框颜色，默认为$color-border-light
+  * @description 使用伪元素和transform实现0.5px的环绕边框效果
+  * @example 用于需要显示极细边框的卡片、输入框等组件
+  * @note 通过将伪元素尺寸设为200%再缩放50%实现，可适配高分辨率屏幕
+  */
 @mixin halfPixelBorderSurround($color: $-color-border-light) {
   position: relative;
 
@@ -236,78 +303,95 @@
     position: absolute;
     display: block;
     content: ' ';
-    pointer-events: none;
+    pointer-events: none;  // 确保伪元素不影响交互
     width: 200%;
     height: 200%;
     left: 0;
     top: 0;
     border: 1px solid $color;
-    transform: scale(0.5);
+    transform: scale(0.5);  // 缩放到50%实现0.5px效果
     box-sizing: border-box;
-    transform-origin: left top;
+    transform-origin: left top;  // 以左上角为缩放原点
   }
 }
 
+/**
+  * 清除按钮默认样式
+  * @description 重置按钮的默认外观样式，使其成为透明按钮
+  * @example 用于自定义按钮样式，去除浏览器默认样式影响
+  */
 @mixin buttonClear {
   outline: none;
   -webkit-appearance: none;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;  // 消除iOS点击高亮
   background: transparent;
 }
 
 /**
-  * 三角形实现尖角样式，适用于背景透明情况
-  * @param $size 三角形高，底边为 $size * 2
-  * @param $bg 三角形背景颜色
+  * 三角形箭头（背景透明场景）
+  * @param {number|string} $size - 三角形高度，底边长为高度的2倍
+  * @param {color} $bg - 三角形背景颜色
+  * @description 使用CSS边框实现三角形箭头效果，适用于下拉菜单、提示框等组件
+  * @example 用于Popover、Dropdown等需要指示方向的组件
+  * @note 生成四种方向的箭头：上、下、左、右
   */
 @mixin triangleArrow($size, $bg) {
+  // 箭头基础样式
   @include e(arrow) {
     position: absolute;
     width: 0;
     height: 0;
   }
 
+  // 向下箭头
   @include e(arrow-down) {
     border-left: $size solid transparent;
     border-right: $size solid transparent;
     border-top: $size solid $bg;
-    transform: translateX(-50%);
-    bottom: calc(-1 * $size)
+    transform: translateX(-50%);  // 水平居中
+    bottom: calc(-1 * $size);     // 定位在父元素底部外侧
   }
 
+  // 向上箭头
   @include e(arrow-up) {
     border-left: $size solid transparent;
     border-right: $size solid transparent;
     border-bottom: $size solid $bg;
-    transform: translateX(-50%);
-    top: calc(-1 * $size)
+    transform: translateX(-50%);  // 水平居中
+    top: calc(-1 * $size);        // 定位在父元素顶部外侧
   }
 
+  // 向左箭头
   @include e(arrow-left) {
     border-top: $size solid transparent;
     border-bottom: $size solid transparent;
     border-right: $size solid $bg;
-    transform: translateY(-50%);
-    left: calc(-1 * $size)
+    transform: translateY(-50%);  // 垂直居中
+    left: calc(-1 * $size);       // 定位在父元素左侧外侧
   }
 
+  // 向右箭头
   @include e(arrow-right) {
     border-top: $size solid transparent;
     border-bottom: $size solid transparent;
     border-left: $size solid $bg;
-    transform: translateY(-50%);
-    right: calc(-1 * $size)
+    transform: translateY(-50%);  // 垂直居中
+    right: calc(-1 * $size);      // 定位在父元素右侧外侧
   }
 }
 
 /**
-  * 正方形实现尖角样式，适用于背景不透明情况
-  * @param $size 正方形边长
-  * @param $bg 正方形背景颜色
-  * @param $z-index z-index属性值，不得大于外部包裹器
-  * @param $box-shadow 阴影
-*/
+  * 正方形箭头（背景不透明场景）
+  * @param {number|string} $size - 正方形边长
+  * @param {color} $bg - 正方形背景颜色
+  * @param {number} $z-index - z-index属性值，需小于外部包裹器
+  * @param {string} $box-shadow - 阴影效果
+  * @description 使用旋转的正方形实现箭头效果，适用于带背景色和阴影的场景
+  * @example 用于Tooltip、Popover等需要与背景色一致的箭头组件
+  * @note 通过旋转45度的正方形伪元素实现，可更好地匹配父元素背景和阴影
+  */
 @mixin squareArrow($size, $bg, $z-index, $box-shadow) {
+  // 箭头容器
   @include e(arrow) {
     position: absolute;
     width: $size;
@@ -315,6 +399,7 @@
     z-index: $z-index;
   }
 
+  // 向下箭头
   @include e(arrow-down) {
     transform: translateX(-50%);
     bottom: 0;
@@ -326,12 +411,13 @@
       background-color: $bg;
       position: absolute;
       left: 0;
-      bottom: calc(-1 * $size / 2);
-      transform: rotateZ(45deg);
+      bottom: calc(-1 * $size / 2);  // 定位在容器底部中间
+      transform: rotateZ(45deg);     // 旋转45度形成三角形效果
       box-shadow: $box-shadow;
     }
   }
 
+  // 向上箭头
   @include e(arrow-up) {
     transform: translateX(-50%);
     top: 0;
@@ -343,12 +429,13 @@
       background-color: $bg;
       position: absolute;
       left: 0;
-      top: calc(-1 * $size / 2);
-      transform: rotateZ(45deg);
+      top: calc(-1 * $size / 2);     // 定位在容器顶部中间
+      transform: rotateZ(45deg);     // 旋转45度形成三角形效果
       box-shadow: $box-shadow;
     }
   }
 
+  // 向左箭头
   @include e(arrow-left) {
     transform: translateY(-50%);
     left: 0;
@@ -359,13 +446,14 @@
       height: $size;
       background-color: $bg;
       position: absolute;
-      left: calc(-1 * $size / 2);
+      left: calc(-1 * $size / 2);    // 定位在容器左侧中间
       top: 0;
-      transform: rotateZ(45deg);
+      transform: rotateZ(45deg);     // 旋转45度形成三角形效果
       box-shadow: $box-shadow;
     }
   }
 
+  // 向右箭头
   @include e(arrow-right) {
     transform: translateY(-50%);
     right: 0;
@@ -376,9 +464,9 @@
       height: $size;
       background-color: $bg;
       position: absolute;
-      right: calc(-1 * $size / 2);
+      right: calc(-1 * $size / 2);   // 定位在容器右侧中间
       top: 0;
-      transform: rotateZ(45deg);
+      transform: rotateZ(45deg);     // 旋转45度形成三角形效果
       box-shadow: $box-shadow;
     }
   }

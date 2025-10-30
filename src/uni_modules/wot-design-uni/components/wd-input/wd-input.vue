@@ -193,13 +193,42 @@ const isRequired = computed(() => {
 })
 
 const rootClass = computed(() => {
-  return `wd-input  ${props.label || slots.label ? 'is-cell' : ''} ${props.center ? 'is-center' : ''} ${cell.border.value ? 'is-border' : ''} ${
-    props.size ? 'is-' + props.size : ''
-  } ${props.error ? 'is-error' : ''} ${props.disabled ? 'is-disabled' : ''}  ${
-    inputValue.value && String(inputValue.value).length > 0 ? 'is-not-empty' : ''
-  }  ${props.noBorder ? 'is-no-border' : ''} ${props.customClass}`
+  const classes = ['wd-input']
+  // 布局相关类名
+  if (props.label || slots.label) {
+    classes.push('is-cell')
+  }
+  if (props.center) {
+    classes.push('is-center')
+  }
+  // 边框样式类名 - 确保正确的优先级
+  if (props.noBorder) {
+    classes.push('is-no-border')
+  } else if (props.inputBorder === 'border') {
+    classes.push('is-border')
+  } else if (props.inputBorder === 'underline' || cell.border.value) {
+    classes.push('is-underline')
+  }
+  // 状态相关类名
+  if (props.size) {
+    classes.push(`is-${props.size}`)
+  }
+  if (props.error) {
+    classes.push('is-error')
+  }
+  if (props.disabled) {
+    classes.push('is-disabled')
+  }
+  if (inputValue.value && String(inputValue.value).length > 0) {
+    classes.push('is-not-empty')
+  }
+  // 自定义类名
+  if (props.customClass) {
+    classes.push(props.customClass)
+  }
+  return classes.join(' ')
 })
-
+// ${props.noBorder || props.plain ? 'is-no-border' : 'is-border'}  ${props.plain ? 'is-plain' : 'is-no-plain'}
 const labelClass = computed(() => {
   return `wd-input__label ${props.customLabelClass}`
 })

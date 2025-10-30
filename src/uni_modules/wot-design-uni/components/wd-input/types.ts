@@ -12,6 +12,8 @@ export type InputSize = 'large'
 
 export type InputMode = 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url'
 
+export type InputBorder = 'border' | 'underline' | 'none'
+
 export const inputProps = {
   ...baseProps,
   customInputClass: makeStringProp(''),
@@ -183,7 +185,12 @@ export const inputProps = {
   /**
    * 必填标记位置，可选值：before（标签前）、after（标签后）
    */
-  markerSide: makeStringProp<'before' | 'after'>('before')
+  markerSide: makeStringProp<'before' | 'after'>('before'),
+
+  /**
+   * 边框类型，可选值：border（边框）、underline（下划线）
+   */
+  inputBorder: makeStringProp<InputBorder>('underline')
 }
 
 export type InputProps = ExtractPropTypes<typeof inputProps>
