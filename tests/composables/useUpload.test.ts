@@ -1,5 +1,5 @@
-import { useUpload } from '@/uni_modules/wot-design-uni/components/composables/useUpload'
-import type { UploadFileItem } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
+import { useUpload } from '@/uni_modules/wot-ui-plus/components/composables/useUpload'
+import type { UploadFileItem } from '@/uni_modules/wot-ui-plus/components/wd-upload/types'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 // Mock uni API

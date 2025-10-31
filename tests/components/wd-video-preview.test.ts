@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils'
-import WdVideoPreview from '@/uni_modules/wot-design-uni/components/wd-video-preview/wd-video-preview.vue'
+import WdVideoPreview from '@/uni_modules/wot-ui-plus/components/wd-video-preview/wd-video-preview.vue'
 import { describe, test, expect, vi, beforeEach } from 'vitest'
 import { nextTick } from 'vue'
-import { PreviewVideo } from '@/uni_modules/wot-design-uni/components/wd-video-preview/types'
+import { type PreviewVideo } from '@/uni_modules/wot-ui-plus/components/wd-video-preview/types'
 
 describe('WdVideoPreview', () => {
   beforeEach(() => {

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import WdImgCropper from '@/uni_modules/wot-design-uni/components/wd-img-cropper/wd-img-cropper.vue'
+import WdImgCropper from '@/uni_modules/wot-ui-plus/components/wd-img-cropper/wd-img-cropper.vue'
 import { describe, expect, test, vi, beforeEach } from 'vitest'
 import { nextTick } from 'vue'
 

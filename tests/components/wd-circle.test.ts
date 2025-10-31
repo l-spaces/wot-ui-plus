@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils'
 import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest'
 import { nextTick } from 'vue'
-import { StrokeLinecapType } from '@/uni_modules/wot-design-uni/components/wd-circle/types'
-import WdCircle from '@/uni_modules/wot-design-uni/components/wd-circle/wd-circle.vue'
+import { type StrokeLinecapType } from '@/uni_modules/wot-ui-plus/components/wd-circle/types'
+import WdCircle from '@/uni_modules/wot-ui-plus/components/wd-circle/wd-circle.vue'
 describe('WdCircle', () => {
   beforeEach(() => {
     vi.useFakeTimers()

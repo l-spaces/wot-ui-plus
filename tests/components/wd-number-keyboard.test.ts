@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import '../mocks/wd-transition.mock'
-import WdNumberKeyboard from '@/uni_modules/wot-design-uni/components/wd-number-keyboard/wd-number-keyboard.vue'
+import WdNumberKeyboard from '@/uni_modules/wot-ui-plus/components/wd-number-keyboard/wd-number-keyboard.vue'
 import { describe, expect, test } from 'vitest'
 
 describe('WdNumberKeyboard', () => {

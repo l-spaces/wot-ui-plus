@@ -1,4 +1,4 @@
-import { useTouch } from '@/uni_modules/wot-design-uni/components/composables/useTouch'
+import { useTouch } from '@/uni_modules/wot-ui-plus/components/composables/useTouch'
 import { describe, expect, it } from 'vitest'
 
 describe('useTouch', () => {

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import WdWatermark from '@/uni_modules/wot-design-uni/components/wd-watermark/wd-watermark.vue'
+import WdWatermark from '@/uni_modules/wot-ui-plus/components/wd-watermark/wd-watermark.vue'
 import { describe, test, expect, beforeAll, vi } from 'vitest'
 
 // 在测试开始前模拟 Canvas API 和 uni API

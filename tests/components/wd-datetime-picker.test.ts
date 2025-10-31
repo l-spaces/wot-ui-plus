@@ -1,11 +1,11 @@
 import '../mocks/wd-transition.mock'
 import { mount } from '@vue/test-utils'
-import WdDatetimePicker from '@/uni_modules/wot-design-uni/components/wd-datetime-picker/wd-datetime-picker.vue'
+import WdDatetimePicker from '@/uni_modules/wot-ui-plus/components/wd-datetime-picker/wd-datetime-picker.vue'
 import { describe, expect, test, vi } from 'vitest'
 import { nextTick } from 'vue'
-import WdPopup from '@/uni_modules/wot-design-uni/components/wd-popup/wd-popup.vue'
-import WdIcon from '@/uni_modules/wot-design-uni/components/wd-icon/wd-icon.vue'
-import WdDatetimePickerView from '@/uni_modules/wot-design-uni/components/wd-datetime-picker-view/wd-datetime-picker-view.vue'
+import WdPopup from '@/uni_modules/wot-ui-plus/components/wd-popup/wd-popup.vue'
+import WdIcon from '@/uni_modules/wot-ui-plus/components/wd-icon/wd-icon.vue'
+import WdDatetimePickerView from '@/uni_modules/wot-ui-plus/components/wd-datetime-picker-view/wd-datetime-picker-view.vue'
 
 const globalComponents = {
   WdPopup,

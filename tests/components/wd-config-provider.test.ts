@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { describe, test, expect } from 'vitest'
-import type { ConfigProviderThemeVars } from '@/uni_modules/wot-design-uni'
-import WdConfigProvider from '@/uni_modules/wot-design-uni/components/wd-config-provider/wd-config-provider.vue'
+import type { ConfigProviderThemeVars } from '@/uni_modules/wot-ui-plus'
+import WdConfigProvider from '@/uni_modules/wot-ui-plus/components/wd-config-provider/wd-config-provider.vue'
 
 describe('WdConfigProvider', () => {
   // 测试基本渲染

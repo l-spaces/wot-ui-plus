@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
-import WdRadio from '@/uni_modules/wot-design-uni/components/wd-radio/wd-radio.vue'
-import WdRadioGroup from '@/uni_modules/wot-design-uni/components/wd-radio-group/wd-radio-group.vue'
+import WdRadio from '@/uni_modules/wot-ui-plus/components/wd-radio/wd-radio.vue'
+import WdRadioGroup from '@/uni_modules/wot-ui-plus/components/wd-radio-group/wd-radio-group.vue'
 import { describe, test, expect } from 'vitest'
 
 describe('单选框组件', () => {

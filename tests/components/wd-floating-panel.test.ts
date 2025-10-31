@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import WdFloatingPanel from '@/uni_modules/wot-design-uni/components/wd-floating-panel/wd-floating-panel.vue'
+import WdFloatingPanel from '@/uni_modules/wot-ui-plus/components/wd-floating-panel/wd-floating-panel.vue'
 import { describe, expect, test } from 'vitest'
 
 describe('WdFloatingPanel', () => {

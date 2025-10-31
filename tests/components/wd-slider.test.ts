@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import WdSlider from '@/uni_modules/wot-design-uni/components/wd-slider/wd-slider.vue'
+import WdSlider from '@/uni_modules/wot-ui-plus/components/wd-slider/wd-slider.vue'
 import { describe, test, expect } from 'vitest'
 
 describe('WdSlider', () => {

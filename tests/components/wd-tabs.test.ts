@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, test, vi, beforeEach } from 'vitest'
 import { nextTick } from 'vue'
-import WdTabs from '@/uni_modules/wot-design-uni/components/wd-tabs/wd-tabs.vue'
-import WdTab from '@/uni_modules/wot-design-uni/components/wd-tab/wd-tab.vue'
-import WdBadge from '@/uni_modules/wot-design-uni/components/wd-badge/wd-badge.vue'
-import WdIcon from '@/uni_modules/wot-design-uni/components/wd-icon/wd-icon.vue'
-import { pause } from '@/uni_modules/wot-design-uni/components/common/util'
+import WdTabs from '@/uni_modules/wot-ui-plus/components/wd-tabs/wd-tabs.vue'
+import WdTab from '@/uni_modules/wot-ui-plus/components/wd-tab/wd-tab.vue'
+import WdBadge from '@/uni_modules/wot-ui-plus/components/wd-badge/wd-badge.vue'
+import WdIcon from '@/uni_modules/wot-ui-plus/components/wd-icon/wd-icon.vue'
+import { pause } from '@/uni_modules/wot-ui-plus/components/common/util'
 
 // 全局组件
 const globalComponents = {

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import WdPagination from '@/uni_modules/wot-design-uni/components/wd-pagination/wd-pagination.vue'
+import WdPagination from '@/uni_modules/wot-ui-plus/components/wd-pagination/wd-pagination.vue'
 import { describe, test, expect, vi } from 'vitest'
 
 describe('WdPagination', () => {

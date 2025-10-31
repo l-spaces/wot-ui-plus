@@ -1,13 +1,13 @@
 import { mount } from '@vue/test-utils'
-import WdCalendarView from '@/uni_modules/wot-design-uni/components/wd-calendar-view/wd-calendar-view.vue'
-import monthPanel from '@/uni_modules/wot-design-uni/components/wd-calendar-view/monthPanel/month-panel.vue'
-import yearPanel from '@/uni_modules/wot-design-uni/components/wd-calendar-view/yearPanel/year-panel.vue'
-import year from '@/uni_modules/wot-design-uni/components/wd-calendar-view/year/year.vue'
-import month from '@/uni_modules/wot-design-uni/components/wd-calendar-view/month/month.vue'
+import WdCalendarView from '@/uni_modules/wot-ui-plus/components/wd-calendar-view/wd-calendar-view.vue'
+import monthPanel from '@/uni_modules/wot-ui-plus/components/wd-calendar-view/monthPanel/month-panel.vue'
+import yearPanel from '@/uni_modules/wot-ui-plus/components/wd-calendar-view/yearPanel/year-panel.vue'
+import year from '@/uni_modules/wot-ui-plus/components/wd-calendar-view/year/year.vue'
+import month from '@/uni_modules/wot-ui-plus/components/wd-calendar-view/month/month.vue'
 
 import { describe, expect, test, vi, beforeEach } from 'vitest'
 import { nextTick } from 'vue'
-import { CalendarFormatter, CalendarTimeFilter } from '@/uni_modules/wot-design-uni/components/wd-calendar-view/types'
+import { type CalendarFormatter, type CalendarTimeFilter } from '@/uni_modules/wot-ui-plus/components/wd-calendar-view/types'
 
 describe('WdCalendarView', () => {
   beforeEach(() => {

@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils'
-import WdSignature from '@/uni_modules/wot-design-uni/components/wd-signature/wd-signature.vue'
-import WdButton from '@/uni_modules/wot-design-uni/components/wd-button/wd-button.vue'
+import WdSignature from '@/uni_modules/wot-ui-plus/components/wd-signature/wd-signature.vue'
+import WdButton from '@/uni_modules/wot-ui-plus/components/wd-button/wd-button.vue'
 import { describe, expect, test } from 'vitest'
-import type { SignatureResult } from '@/uni_modules/wot-design-uni/components/wd-signature/types'
+import type { SignatureResult } from '@/uni_modules/wot-ui-plus/components/wd-signature/types'
 
 describe('WdSignature', () => {
   // 基本渲染测试

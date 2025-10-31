@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils'
 import '../mocks/wd-transition.mock'
-import WdMessageBox from '@/uni_modules/wot-design-uni/components/wd-message-box/wd-message-box.vue'
+import WdMessageBox from '@/uni_modules/wot-ui-plus/components/wd-message-box/wd-message-box.vue'
 import { describe, test, expect, vi } from 'vitest'
 import { nextTick, defineComponent } from 'vue'
-import WdPopup from '@/uni_modules/wot-design-uni/components/wd-popup/wd-popup.vue'
-import WdButton from '@/uni_modules/wot-design-uni/components/wd-button/wd-button.vue'
-import WdInput from '@/uni_modules/wot-design-uni/components/wd-input/wd-input.vue'
-import { useMessage } from '@/uni_modules/wot-design-uni/components/wd-message-box'
+import WdPopup from '@/uni_modules/wot-ui-plus/components/wd-popup/wd-popup.vue'
+import WdButton from '@/uni_modules/wot-ui-plus/components/wd-button/wd-button.vue'
+import WdInput from '@/uni_modules/wot-ui-plus/components/wd-input/wd-input.vue'
+import { useMessage } from '@/uni_modules/wot-ui-plus/components/wd-message-box'
 
 const globalComponents = {
   WdPopup,

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import WdSwitch from '@/uni_modules/wot-design-uni/components/wd-switch/wd-switch.vue'
+import WdSwitch from '@/uni_modules/wot-ui-plus/components/wd-switch/wd-switch.vue'
 import { describe, test, expect, vi } from 'vitest'
 import { nextTick } from 'vue'
 

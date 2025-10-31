@@ -1,9 +1,15 @@
 import { mount } from '@vue/test-utils'
-import WdButton from '@/uni_modules/wot-design-uni/components/wd-button/wd-button.vue'
-import wdIcon from '@/uni_modules/wot-design-uni/components/wd-icon/wd-icon.vue'
+import WdButton from '@/uni_modules/wot-ui-plus/components/wd-button/wd-button.vue'
+import wdIcon from '@/uni_modules/wot-ui-plus/components/wd-icon/wd-icon.vue'
 import { describe, test, expect, vi, beforeEach } from 'vitest'
 import { nextTick } from 'vue'
-import { ButtonSize, ButtonType, ButtonOpenType, ButtonLang, ButtonScope } from '@/uni_modules/wot-design-uni/components/wd-button/types'
+import {
+  type ButtonSize,
+  type ButtonType,
+  type ButtonOpenType,
+  type ButtonLang,
+  type ButtonScope
+} from '@/uni_modules/wot-ui-plus/components/wd-button/types'
 
 describe('WdButton', () => {
   beforeEach(() => {

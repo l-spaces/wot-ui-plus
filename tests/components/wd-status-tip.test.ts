@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
-import WdStatusTip from '@/uni_modules/wot-design-uni/components/wd-status-tip/wd-status-tip.vue'
-import WdImg from '@/uni_modules/wot-design-uni/components/wd-img/wd-img.vue'
+import WdStatusTip from '@/uni_modules/wot-ui-plus/components/wd-status-tip/wd-status-tip.vue'
+import WdImg from '@/uni_modules/wot-ui-plus/components/wd-img/wd-img.vue'
 import { describe, test, expect, vi, beforeEach } from 'vitest'
 
 describe('WdStatusTip', () => {

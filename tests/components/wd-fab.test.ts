@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import WdFab from '@/uni_modules/wot-design-uni/components/wd-fab/wd-fab.vue'
+import WdFab from '@/uni_modules/wot-ui-plus/components/wd-fab/wd-fab.vue'
 import { describe, expect, test } from 'vitest'
 
 describe('WdFab', () => {

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import WdSwipeAction from '@/uni_modules/wot-design-uni/components/wd-swipe-action/wd-swipe-action.vue'
+import WdSwipeAction from '@/uni_modules/wot-ui-plus/components/wd-swipe-action/wd-swipe-action.vue'
 import { describe, expect, test, vi } from 'vitest'
 
 describe('WdSwipeAction', () => {

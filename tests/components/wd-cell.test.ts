@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
-import WdCell from '@/uni_modules/wot-design-uni/components/wd-cell/wd-cell.vue'
-import WdIcon from '@/uni_modules/wot-design-uni/components/wd-icon/wd-icon.vue'
+import WdCell from '@/uni_modules/wot-ui-plus/components/wd-cell/wd-cell.vue'
+import WdIcon from '@/uni_modules/wot-ui-plus/components/wd-icon/wd-icon.vue'
 import { describe, test, expect, vi, beforeEach } from 'vitest'
 
 describe('WdCell', () => {

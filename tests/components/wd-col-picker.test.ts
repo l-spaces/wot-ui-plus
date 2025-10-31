@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils'
 import '../mocks/wd-transition.mock'
 import { describe, expect, test, vi } from 'vitest'
-import WdColPicker from '@/uni_modules/wot-design-uni/components/wd-col-picker/wd-col-picker.vue'
+import WdColPicker from '@/uni_modules/wot-ui-plus/components/wd-col-picker/wd-col-picker.vue'
 import type {
   ColPickerColumnChange,
   ColPickerDisplayFormat,
   ColPickerColumnChangeOption
-} from '@/uni_modules/wot-design-uni/components/wd-col-picker/types'
+} from '@/uni_modules/wot-ui-plus/components/wd-col-picker/types'
 
 describe('WdColPicker', () => {
   test('基本渲染', async () => {

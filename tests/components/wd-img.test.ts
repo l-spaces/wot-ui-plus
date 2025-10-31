@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
-import WdImg from '@/uni_modules/wot-design-uni/components/wd-img/wd-img.vue'
+import WdImg from '@/uni_modules/wot-ui-plus/components/wd-img/wd-img.vue'
 import { describe, test, expect, vi } from 'vitest'
-import type { ImageMode } from '@/uni_modules/wot-design-uni/components/wd-img/types'
+import type { ImageMode } from '@/uni_modules/wot-ui-plus/components/wd-img/types'
 
 describe('WdImg', () => {
   // 测试基本渲染

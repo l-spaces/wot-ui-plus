@@ -4,11 +4,11 @@
  * @LastEditTime: 2025-05-03 22:58:04
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: /wot-design-uni/tests/components/wd-resize.test.ts
+ * @FilePath: /wot-ui-plus/tests/components/wd-resize.test.ts
  * 记得注释
  */
 import { mount } from '@vue/test-utils'
-import WdResize from '@/uni_modules/wot-design-uni/components/wd-resize/wd-resize.vue'
+import WdResize from '@/uni_modules/wot-ui-plus/components/wd-resize/wd-resize.vue'
 import { describe, test, expect } from 'vitest'
 
 describe('WdResize', () => {

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import WdTextarea from '@/uni_modules/wot-design-uni/components/wd-textarea/wd-textarea.vue'
+import WdTextarea from '@/uni_modules/wot-ui-plus/components/wd-textarea/wd-textarea.vue'
 import { describe, test, expect } from 'vitest'
 
 describe('WdTextarea', () => {

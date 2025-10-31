@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
-import WdUpload from '@/uni_modules/wot-design-uni/components/wd-upload/wd-upload.vue'
+import WdUpload from '@/uni_modules/wot-ui-plus/components/wd-upload/wd-upload.vue'
 import { describe, expect, test, vi, beforeEach } from 'vitest'
-import { UploadFile } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
+import { type UploadFile } from '@/uni_modules/wot-ui-plus/components/wd-upload/types'
 import { nextTick } from 'vue'
 
 describe('WdUpload', () => {
