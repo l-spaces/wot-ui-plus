@@ -71,8 +71,8 @@
 </template>
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import { useToast } from '@/uni_modules/wot-design-uni'
-import type { ColPickerColumnChange } from '@/uni_modules/wot-design-uni/components/wd-col-picker/types'
+import { useToast } from '@/uni_modules/wot-ui-plus'
+import type { ColPickerColumnChange } from '@/uni_modules/wot-ui-plus/components/wd-col-picker/types'
 import { useColPickerData } from '@/hooks/useColPickerData'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()

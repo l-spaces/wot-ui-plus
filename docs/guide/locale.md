@@ -12,14 +12,14 @@ import uni from '@dcloudio/vite-plugin-uni'
 export default defineConfig({
   ...
   optimizeDeps: {
-    exclude: process.env.UNI_PLATFORM === 'h5' && process.env.NODE_ENV === 'development' ? ['wot-design-uni'] : []
+    exclude: process.env.UNI_PLATFORM === 'h5' && process.env.NODE_ENV === 'development' ? ['wot-ui-plus'] : []
   }
   ...
 })
 
 ```
 
-使用[optimizeDeps.exclude](https://cn.vitejs.dev/config/dep-optimization-options.html#optimizedeps-exclude)在预构建中强制排除`wot-design-uni`模块，在`uni_modules`模式下，不需要做任何处理。
+使用[optimizeDeps.exclude](https://cn.vitejs.dev/config/dep-optimization-options.html#optimizedeps-exclude)在预构建中强制排除`wot-ui-plus`模块，在`uni_modules`模式下，不需要做任何处理。
 
 :::
 
@@ -28,9 +28,9 @@ export default defineConfig({
 我们通过 **Locale** 组件实现多语言支持，使用 **Locale.use** 方法可以切换当前使用的语言。
 
 ```typescript
-import { Locale } from 'wot-design-uni'
+import { Locale } from 'wot-ui-plus'
 // 引入英文语言包
-import enUS from 'wot-design-uni/locale/lang/en-US'
+import enUS from 'wot-ui-plus/locale/lang/en-US'
 
 Locale.use('en-US', enUS)
 ```
@@ -40,7 +40,7 @@ Locale.use('en-US', enUS)
 通过 **Locale.add** 方法可以实现文案的修改和扩展，示例如下：
 
 ```typescript
-import { Locale } from 'wot-design-uni'
+import { Locale } from 'wot-ui-plus'
 
 const messages = {
   'zh-CN': {
@@ -73,4 +73,4 @@ Locale.add(messages)
 | 土耳其语             | tr-TR    | `v1.3.12` |
 | 俄语             | ru-RU    | `v1.3.12` |
 
-如果你需要使用其他的语言，欢迎贡献 [PR](https://github.com/Moonofweisheng/wot-design-uni/pulls)，只需在[这里](https://github.com/Moonofweisheng/wot-design-uni/tree/master/src/uni_modules/wot-design-uni/locale/lang)添加一个语言配置文件即可。
+如果你需要使用其他的语言，欢迎贡献 [PR](https://github.com/Moonofweisheng/wot-ui-plus/pulls)，只需在[这里](https://github.com/Moonofweisheng/wot-ui-plus/tree/master/src/uni_modules/wot-ui-plus/locale/lang)添加一个语言配置文件即可。

@@ -35,7 +35,7 @@
 ```
 
 ```typescript
-import { useToast, useQueue } from '@/uni_modules/wot-design-uni'
+import { useToast, useQueue } from '@/uni_modules/wot-ui-plus'
 
 
 const { closeOutside } = useQueue()
@@ -158,7 +158,7 @@ function changeState(position: string) {
 ```
 
 ```typescript
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { useToast } from '@/uni_modules/wot-ui-plus'
 
 const toast = useToast()
 
@@ -196,7 +196,7 @@ const beforeClose = (reason, position) => {
 ```
 
 ```typescript
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { useToast } from '@/uni_modules/wot-ui-plus'
 
 const toast = useToast()
 

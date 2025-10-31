@@ -48,7 +48,7 @@
 ```
 
 ```typescript
-import type { ProgressColor } from '@/uni_modules/wot-design-uni/components/wd-progress/types'
+import type { ProgressColor } from '@/uni_modules/wot-ui-plus/components/wd-progress/types'
 
 const colorObject = ref<ProgressColor>([
   {

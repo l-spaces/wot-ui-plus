@@ -71,7 +71,7 @@ const value = ref<string[]>(['item1'])
 ```
 
 ```ts
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { useToast } from '@/uni_modules/wot-ui-plus'
 const toast = useToast()
 const value = ref<string[]>(['item1'])
 
@@ -254,7 +254,7 @@ const collapseList = ref<Array<string[]>>([['item1'], ['item2'], ['item3'], ['it
 
 ```ts
 import { ref } from 'vue'
-import type { CollapseInstance } from '@/uni_modules/wot-design-uni/components/wd-collapse/types'
+import type { CollapseInstance } from '@/uni_modules/wot-ui-plus/components/wd-collapse/types'
 
 const collapseRef = ref<CollapseInstance>()
 

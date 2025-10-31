@@ -83,7 +83,7 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import type { TableColumn } from '@/uni_modules/wot-design-uni/components/wd-table-col/types'
+import type { TableColumn } from '@/uni_modules/wot-ui-plus/components/wd-table-col/types'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

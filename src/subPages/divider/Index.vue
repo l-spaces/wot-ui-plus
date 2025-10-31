@@ -4,7 +4,7 @@
  * @LastEditTime: 2025-04-02 20:11:32
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/src/pages/divider/Index.vue
+ * @FilePath: /wot-ui-plus/src/pages/divider/Index.vue
  * 记得注释
 -->
 <template>

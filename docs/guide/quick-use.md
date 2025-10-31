@@ -22,15 +22,15 @@
 ::: code-group
 
 ```bash [npm]
-npm i wot-design-uni
+npm i wot-ui-plus
 ```
 
 ```bash [yarn]
-yarn add wot-design-uni
+yarn add wot-ui-plus
 ```
 
 ```bash [pnpm]
-pnpm add wot-design-uni
+pnpm add wot-ui-plus
 ```
 
 :::
@@ -43,10 +43,10 @@ pnpm add wot-design-uni
 
 ```bash
 - uni_modules
-- - - wot-design-uni 
+- - - wot-ui-plus 
 ```
 
-下载地址：<a href="https://ext.dcloud.net.cn/plugin?id=13889"><span>wot-design-uni</span></a>
+下载地址：<a href="https://ext.dcloud.net.cn/plugin?id=13889"><span>wot-ui-plus</span></a>
 
 ## Sass
 
@@ -98,7 +98,7 @@ pnpm add sass -D
  "easycom": {
   "autoscan": true,
   "custom": {
-    "^wd-(.*)": "wot-design-uni/components/wd-$1/wd-$1.vue"
+    "^wd-(.*)": "wot-ui-plus/components/wd-$1/wd-$1.vue"
   }
  },
  
@@ -115,7 +115,7 @@ pnpm add sass -D
 
 :::tip 提醒
 
-- 推荐使用 `@uni-helper/vite-plugin-uni-components@0.0.9` 及以上版本，因为在 0.0.9 版本开始其内置了 `wot-design-uni` 的`resolver`。
+- 推荐使用 `@uni-helper/vite-plugin-uni-components@0.0.9` 及以上版本，因为在 0.0.9 版本开始其内置了 `wot-ui-plus` 的`resolver`。
 - 如果使用此方案时控制台打印很多 `Sourcemap for  points to missing source files​` ，可以尝试将 `Vite` 版本升级至 `4.5.x` 以上版本。
 
 :::
@@ -175,7 +175,7 @@ cli 项目使用 `uni_modules` 安装无需配置，对 `Volar` 的支持自动�
 // tsconfig.json
 {
   "compilerOptions": {
-    "types": ["wot-design-uni/global"]
+    "types": ["wot-ui-plus/global"]
   }
 }
 ```

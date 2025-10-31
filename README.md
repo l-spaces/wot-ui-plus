@@ -11,28 +11,28 @@
 
 <p align="center">
 
-<a href="https://github.com/Moonofweisheng/wot-design-uni">
-  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Moonofweisheng/wot-design-uni?logo=github&color=%234d80f0&link=https%3A%2F%2Fgithub.com%2FMoonofweisheng%2Fwot-design-uni&style=flat-square">
+<a href="https://github.com/Moonofweisheng/wot-ui-plus">
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Moonofweisheng/wot-ui-plus?logo=github&color=%234d80f0&link=https%3A%2F%2Fgithub.com%2FMoonofweisheng%2Fwot-ui-plus&style=flat-square">
  </a>
 
 
-<a href="https://github.com/Moonofweisheng/wot-design-uni">
-  <img alt="GitHub" src="https://img.shields.io/codecov/c/github/Moonofweisheng/wot-design-uni?style=flat-square">
+<a href="https://github.com/Moonofweisheng/wot-ui-plus">
+  <img alt="GitHub" src="https://img.shields.io/codecov/c/github/Moonofweisheng/wot-ui-plus?style=flat-square">
  </a>
 
-<a href="https://www.npmjs.com/package/wot-design-uni">
-  <img alt="npm" src="https://img.shields.io/npm/dm/wot-design-uni?logo=npm&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fwot-design-uni&style=flat-square">
+<a href="https://www.npmjs.com/package/wot-ui-plus">
+  <img alt="npm" src="https://img.shields.io/npm/dm/wot-ui-plus?logo=npm&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fwot-ui-plus&style=flat-square">
 </a>
 
- <a href="https://www.npmjs.com/package/wot-design-uni">
-  <img alt="npm" src="https://img.shields.io/npm/v/wot-design-uni?logo=npm&color=%234d80f0&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fwot-design-uni&style=flat-square">
+ <a href="https://www.npmjs.com/package/wot-ui-plus">
+  <img alt="npm" src="https://img.shields.io/npm/v/wot-ui-plus?logo=npm&color=%234d80f0&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fwot-ui-plus&style=flat-square">
 </a>
 
 <a href="https://github.com/actions-cool/" target="_blank" referrerpolicy="no-referrer">
   <img src="https://img.shields.io/badge/using-actions--cool-red?style=flat-square" alt="actions-cool" />
 </a>
 
-<a href="https://app.netlify.com/sites/wot-design-uni/deploys" target="_blank" referrerpolicy="no-referrer">
+<a href="https://app.netlify.com/sites/wot-ui-plus/deploys" target="_blank" referrerpolicy="no-referrer">
   <img src="https://api.netlify.com/api/v1/badges/0991d8a9-0fb0-483b-8961-5bde066bbd50/deploy-status" alt="deploy-status" />
 </a>
 
@@ -40,8 +40,8 @@
 
 <p align="center">
   🚀 <a href="https://wot-ui.cn">文档网站 (推荐)</a>&nbsp;
-  ✈️ <a href="https://wot-design-uni.pages.dev/">文档网站（cloudflare）</a>&nbsp;
-  🔥 <a href="https://wot-design-uni.netlify.app/">文档网站 (Netlify)</a>
+  ✈️ <a href="https://wot-ui-plus.pages.dev/">文档网站（cloudflare）</a>&nbsp;
+  🔥 <a href="https://wot-ui-plus.netlify.app/">文档网站 (Netlify)</a>
 </p>
 
 ## ✨ 特性
@@ -74,14 +74,14 @@
 
 - [常见问题](https://wot-ui.cn/guide/common-problems.html)
 - [更新日志](https://wot-ui.cn/guide/changelog.html)
-- [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions)
+- [Discussions 讨论区](https://github.com/Moonofweisheng/wot-ui-plus/discussions)
 - [QQ 群](https://wot-ui.cn/guide/join-group.html)
   
 ## 优秀案例
 
 [这里](https://wot-ui.cn/guide/cases.html)我们收集了一些优秀的案例，欢迎大家体验！
 
-我们也非常欢迎大家一起贡献优秀的 Demo 与案例，欢迎在此 [issue](https://github.com/Moonofweisheng/wot-design-uni/issues/16) 提交案例。
+我们也非常欢迎大家一起贡献优秀的 Demo 与案例，欢迎在此 [issue](https://github.com/Moonofweisheng/wot-ui-plus/issues/16) 提交案例。
 
 ## 周边生态
 
@@ -91,14 +91,14 @@
 
 修改代码请阅读我们的 [贡献指南](./.github/CONTRIBUTING.md)。
 
-使用过程中发现任何问题都可以提 [Issue](https://github.com/Moonofweisheng/wot-design-uni/issues) 给我们，当然，我们也非常欢迎你给我们发 [PR](https://github.com/Moonofweisheng/wot-design-uni/pulls)。
+使用过程中发现任何问题都可以提 [Issue](https://github.com/Moonofweisheng/wot-ui-plus/issues) 给我们，当然，我们也非常欢迎你给我们发 [PR](https://github.com/Moonofweisheng/wot-ui-plus/pulls)。
 
 ## 贡献者们
 
-感谢以下所有给 Wot UI 贡献过代码的 [开发者](https://github.com/Moonofweisheng/wot-design-uni/graphs/contributors)。
+感谢以下所有给 Wot UI 贡献过代码的 [开发者](https://github.com/Moonofweisheng/wot-ui-plus/graphs/contributors)。
 
-<a href="https://github.com/Moonofweisheng/wot-design-uni/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Moonofweisheng/wot-design-uni" />
+<a href="https://github.com/Moonofweisheng/wot-ui-plus/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Moonofweisheng/wot-ui-plus" />
 </a>
 
 ## 捐赠本项目
@@ -122,9 +122,9 @@
 
 ## 鸣谢
 
-- [wot-design](https://github.com/jd-ftf/wot-design-mini) - 感谢 wot-design 团队多年来的不断维护，让 wot-design-uni 能够站在巨人的肩膀上。
-- [uni-helper](https://github.com/uni-helper) - 感谢 uni-helper 团队提供的 uni-app 工具库，让 wot-design-uni 能够更方便地使用。
-- [捐赠者](https://wot-ui.cn/reward/donor.html) - 感谢所有捐赠者，是你们的捐赠让 wot-design-uni 能够更好地发展。
+- [wot-design](https://github.com/jd-ftf/wot-design-mini) - 感谢 wot-design 团队多年来的不断维护，让 wot-ui-plus 能够站在巨人的肩膀上。
+- [uni-helper](https://github.com/uni-helper) - 感谢 uni-helper 团队提供的 uni-app 工具库，让 wot-ui-plus 能够更方便地使用。
+- [捐赠者](https://wot-ui.cn/reward/donor.html) - 感谢所有捐赠者，是你们的捐赠让 wot-ui-plus 能够更好地发展。
 
 
 ## 开源协议
@@ -132,4 +132,4 @@
 本项目基于 [MIT](https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89) 协议，请自由地享受和参与开源。
 
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Moonofweisheng/wot-design-uni&type=Date)](https://star-history.com/#Moonofweisheng/wot-design-uni&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Moonofweisheng/wot-ui-plus&type=Date)](https://star-history.com/#Moonofweisheng/wot-ui-plus&Date)

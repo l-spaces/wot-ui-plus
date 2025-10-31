@@ -4,7 +4,7 @@
  * @LastEditTime: 2025-04-08 11:13:02
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/src/App.vue
+ * @FilePath: /wot-ui-plus/src/App.vue
  * 记得注释
 -->
 <script setup lang="ts">

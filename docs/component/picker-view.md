@@ -10,7 +10,7 @@
 <wd-picker-view :columns="columns" v-model="value" @change="onChange" />
 ```
 ```typescript
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { useToast } from '@/uni_modules/wot-ui-plus'
 const toast = useToast()
 const columns = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
 const value3 = ref<string>('')

@@ -1,6 +1,6 @@
 # Cases
 
-We warmly welcome everyone to contribute excellent demos and cases. Feel free to submit cases in this [issue](https://github.com/Moonofweisheng/wot-design-uni/issues/16).
+We warmly welcome everyone to contribute excellent demos and cases. Feel free to submit cases in this [issue](https://github.com/Moonofweisheng/wot-ui-plus/issues/16).
 
 Wot UI is being used in production environments by many companies and teams. Here are some excellent cases:
 

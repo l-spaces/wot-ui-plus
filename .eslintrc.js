@@ -4,7 +4,7 @@
  * @LastEditTime: 2025-05-06 21:14:16
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: /wot-design-uni/.eslintrc.js
+ * @FilePath: /wot-ui-plus/.eslintrc.js
  * 记得注释
  */
 module.exports = {

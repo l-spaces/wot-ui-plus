@@ -72,8 +72,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { useUpload, useToast } from '@/uni_modules/wot-design-uni'
-import { type UploadFileItem } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
+import { useUpload, useToast } from '@/uni_modules/wot-ui-plus'
+import { type UploadFileItem } from '@/uni_modules/wot-ui-plus/components/wd-upload/types'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const { startUpload, UPLOAD_STATUS } = useUpload()

@@ -69,10 +69,10 @@
   <wd-message-box />
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
-import { dayjs } from '@/uni_modules/wot-design-uni'
-import type { CalendarDayItem, CalendarFormatter } from '@/uni_modules/wot-design-uni/components/wd-calendar-view/types'
-import type { CalendarInstance, CalendarOnShortcutsClickOption } from '@/uni_modules/wot-design-uni/components/wd-calendar/types'
+import { useToast } from '@/uni_modules/wot-ui-plus'
+import { dayjs } from '@/uni_modules/wot-ui-plus'
+import type { CalendarDayItem, CalendarFormatter } from '@/uni_modules/wot-ui-plus/components/wd-calendar-view/types'
+import type { CalendarInstance, CalendarOnShortcutsClickOption } from '@/uni_modules/wot-ui-plus/components/wd-calendar/types'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()

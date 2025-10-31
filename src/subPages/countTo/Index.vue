@@ -37,7 +37,7 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import type { CountToInstance } from '@/uni_modules/wot-design-uni/components/wd-count-to/types'
+import type { CountToInstance } from '@/uni_modules/wot-ui-plus/components/wd-count-to/types'
 import { ref } from 'vue'
 
 const endVal = ref<number>(2024)

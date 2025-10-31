@@ -4,7 +4,7 @@
  * @LastEditTime: 2025-05-13 13:16:42
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: /wot-design-uni/src/subPages/slider/Index.vue
+ * @FilePath: /wot-ui-plus/src/subPages/slider/Index.vue
  * 记得注释
 -->
 <template>

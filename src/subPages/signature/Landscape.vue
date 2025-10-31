@@ -28,8 +28,8 @@
 </template>
 
 <script lang="ts" setup>
-import { pause } from '@/uni_modules/wot-design-uni/components/common/util'
-import type { SignatureInstance, SignatureResult } from '@/uni_modules/wot-design-uni/components/wd-signature/types'
+import { pause } from '@/uni_modules/wot-ui-plus/components/common/util'
+import type { SignatureInstance, SignatureResult } from '@/uni_modules/wot-ui-plus/components/wd-signature/types'
 import { ref, onMounted } from 'vue'
 
 const signatureRef = ref<SignatureInstance>()

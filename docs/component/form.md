@@ -330,7 +330,7 @@ function handleSubmit() {
 
 ```typescript [typescript]
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { useToast } from '@/uni_modules/wot-ui-plus'
 import { reactive, ref } from 'vue'
 
 interface PhoneItem {
@@ -431,8 +431,8 @@ const submit = () => {
 
 ```typescript [typescript]
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
-import type { FormInstance } from '@/uni_modules/wot-design-uni/components/wd-form/types'
+import { useToast } from '@/uni_modules/wot-ui-plus'
+import type { FormInstance } from '@/uni_modules/wot-ui-plus/components/wd-form/types'
 import { reactive, ref } from 'vue'
 
 const { success: showSuccess } = useToast()
@@ -616,9 +616,9 @@ function handleValidate() {
 
 ```typescript [typescript]
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
-import { isArray } from '@/uni_modules/wot-design-uni/components/common/util'
-import { FormRules } from '@/uni_modules/wot-design-uni/components/wd-form/types'
+import { useToast } from '@/uni_modules/wot-ui-plus'
+import { isArray } from '@/uni_modules/wot-ui-plus/components/common/util'
+import { FormRules } from '@/uni_modules/wot-ui-plus/components/wd-form/types'
 import { reactive, ref } from 'vue'
 // useColPickerData可以参考本章节顶部的介绍
 // 导入路径根据自己实际情况调整，万不可一贴了之

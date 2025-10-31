@@ -33,7 +33,7 @@
   </view>
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { useToast } from '@/uni_modules/wot-ui-plus'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const toast = useToast()

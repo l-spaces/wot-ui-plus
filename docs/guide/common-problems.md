@@ -219,19 +219,19 @@ uni-app 3.99.2023122704 将支付宝小程序的`styleIsolation`默认值设置�
 }
 ```
 
-## 为什么组件库文档中都是从`@/uni_modules/wot-design-uni`导入方法和工具类？
+## 为什么组件库文档中都是从`@/uni_modules/wot-ui-plus`导入方法和工具类？
 
-当前组件库本身的开发方式是将组件库代码放到`@/uni_modules/wot-design-uni`这个目录的，所以文档中都是从`@/uni_modules/wot-design-uni`导入方法和工具类，使用`npm`方式安装组件库的时候可以这样调整：
+当前组件库本身的开发方式是将组件库代码放到`@/uni_modules/wot-ui-plus`这个目录的，所以文档中都是从`@/uni_modules/wot-ui-plus`导入方法和工具类，使用`npm`方式安装组件库的时候可以这样调整：
 
 ```ts
 // useToast、useNotify等同理
-import { useMessage } from '@/uni_modules/wot-design-uni'
+import { useMessage } from '@/uni_modules/wot-ui-plus'
 ```
 
 替换为
 
 ```ts
-import { useMessage } from 'wot-design-uni'
+import { useMessage } from 'wot-ui-plus'
 ```
 
 ## uni-app 如何自定义编译平台，例如钉钉小程序？
@@ -327,4 +327,4 @@ function handleOpened() {
 
 ## 关于我们
 
-**如果您的问题不在上述列表中或您有更好的建议，请联系我们 [Moonofweisheng](https://github.com/Moonofweisheng/wot-design-uni)**
+**如果您的问题不在上述列表中或您有更好的建议，请联系我们 [Moonofweisheng](https://github.com/Moonofweisheng/wot-ui-plus)**

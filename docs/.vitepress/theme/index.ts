@@ -4,7 +4,7 @@
  * @LastEditTime: 2025-10-30 11:09:04
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/docs/.vitepress/theme/index.ts
+ * @FilePath: /wot-ui-plus/docs/.vitepress/theme/index.ts
  * 记得注释
  */
 import { h } from 'vue'
@@ -55,7 +55,7 @@ export default {
     if (typeof window !== 'undefined') {
       // 检测是否为旧域名，只在页面首次加载时检测
       const checkSiteMigration = async () => {
-        if (window.location.hostname === 'wot-design-uni.pages.dev') {
+        if (window.location.hostname === 'wot-ui-plus.pages.dev') {
           try {
             // 使用 Element Plus 的 MessageBox 弹出确认对话框
             await ElMessageBox.confirm(

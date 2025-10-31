@@ -4,7 +4,7 @@
  * @LastEditTime: 2025-05-07 18:55:52
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/src/subPages/sidebar/Index.vue
+ * @FilePath: /wot-ui-plus/src/subPages/sidebar/Index.vue
  * 记得注释
 -->
 <template>
@@ -49,8 +49,8 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
-import type { SidebarBeforeChange } from '@/uni_modules/wot-design-uni/components/wd-sidebar/types'
+import { useToast } from '@/uni_modules/wot-ui-plus'
+import type { SidebarBeforeChange } from '@/uni_modules/wot-ui-plus/components/wd-sidebar/types'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { loading: showLoading, close: closeLoading } = useToast()

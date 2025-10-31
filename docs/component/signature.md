@@ -162,7 +162,7 @@ function changeDisabled() {
 
 ```typescript
 import { ref } from 'vue'
-import type { SignatureInstance, SignatureResult } from '@/uni_modules/wot-design-uni/components/wd-signature/types'
+import type { SignatureInstance, SignatureResult } from '@/uni_modules/wot-ui-plus/components/wd-signature/types'
 
 const show = ref(false)
 const img = ref<Partial<SignatureResult>>({})
@@ -300,7 +300,7 @@ onMounted(() => {
 ```
 
 ```ts
-import { pause } from '@/uni_modules/wot-design-uni/components/common/util'
+import { pause } from '@/uni_modules/wot-ui-plus/components/common/util'
 
 const height = ref(0)
 const width = ref(0)
@@ -394,7 +394,7 @@ onMounted(() => {
 ```
 
 ```ts
-import { pause } from '@/uni_modules/wot-design-uni/components/common/util'
+import { pause } from '@/uni_modules/wot-ui-plus/components/common/util'
 
 const height = ref(0)
 const width = ref(0)

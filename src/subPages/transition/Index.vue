@@ -39,7 +39,7 @@
   </view>
 </template>
 <script lang="ts" setup>
-import type { TransitionName } from '@/uni_modules/wot-design-uni/components/wd-transition/types'
+import type { TransitionName } from '@/uni_modules/wot-ui-plus/components/wd-transition/types'
 import { ref } from 'vue'
 
 const show = ref<boolean>(false)

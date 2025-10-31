@@ -16,7 +16,7 @@ alert 弹框只有确定按钮，用于强提醒。
 ```
 
 ```typescript
-import { useMessage } from '@/uni_modules/wot-design-uni'
+import { useMessage } from '@/uni_modules/wot-ui-plus'
 const message = useMessage()
 
 function alert() {
@@ -32,7 +32,7 @@ function alert() {
 ```
 
 ```typescript
-import { useMessage } from '@/uni_modules/wot-design-uni'
+import { useMessage } from '@/uni_modules/wot-ui-plus'
 const message = useMessage()
 
 function alert() {
@@ -51,7 +51,7 @@ function alert() {
 ```
 
 ```typescript
-import { useMessage } from '@/uni_modules/wot-design-uni'
+import { useMessage } from '@/uni_modules/wot-ui-plus'
 const message = useMessage()
 
 function alert() {
@@ -72,7 +72,7 @@ function alert() {
 ```
 
 ```typescript
-import { useMessage } from '@/uni_modules/wot-design-uni'
+import { useMessage } from '@/uni_modules/wot-ui-plus'
 const message = useMessage()
 
 function confirm() {
@@ -100,7 +100,7 @@ prompt 会展示一个输入框，并可以进行输入校验。
 ```
 
 ```typescript
-import { useMessage } from '@/uni_modules/wot-design-uni'
+import { useMessage } from '@/uni_modules/wot-ui-plus'
 const message = useMessage()
 
 function prompt() {
@@ -132,7 +132,7 @@ function prompt() {
 ```
 
 ```typescript
-import { useMessage } from '@/uni_modules/wot-design-uni'
+import { useMessage } from '@/uni_modules/wot-ui-plus'
 const rate = ref<number>(1)
 const message = useMessage('wd-message-box-slot')
 
@@ -168,7 +168,7 @@ function withSlot() {
 ```
 
 ```typescript
-import { useMessage, useToast } from '@/uni_modules/wot-design-uni'
+import { useMessage, useToast } from '@/uni_modules/wot-ui-plus'
 const message = useMessage()
 const toast = useToast()
 

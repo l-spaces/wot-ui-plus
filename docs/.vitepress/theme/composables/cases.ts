@@ -4,7 +4,7 @@
  * @LastEditTime: 2025-09-21 19:53:02
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/docs/.vitepress/theme/composables/cases.ts
+ * @FilePath: /wot-ui-plus/docs/.vitepress/theme/composables/cases.ts
  * 记得注释
  */
 import { ref, onMounted } from 'vue'

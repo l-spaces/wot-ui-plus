@@ -91,8 +91,8 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
-import { type InputNumberBeforeChange } from '@/uni_modules/wot-design-uni/components/wd-input-number/types'
+import { useToast } from '@/uni_modules/wot-ui-plus'
+import { type InputNumberBeforeChange } from '@/uni_modules/wot-ui-plus/components/wd-input-number/types'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { loading, close } = useToast()

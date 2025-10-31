@@ -3,7 +3,7 @@
  * 用于在 uni-app 中管理微信小程序环境下的激励视频广告功能
  * 提供广告创建、显示及用户广告豁免状态管理
  */
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { useToast } from '@/uni_modules/wot-ui-plus'
 import { ref } from 'vue'
 
 /**

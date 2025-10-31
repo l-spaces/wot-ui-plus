@@ -7,7 +7,7 @@
 将 WaterMark 组件放在页面中，可以通过`content`字段设置水印显示内容，通过`width`和`height`设置单个水印的高度与宽度，展示一个全屏的水印。
 
 ```html
-<wd-watermark content="wot-design-uni" :width="130" :height="130"></wd-watermark>
+<wd-watermark content="wot-ui-plus" :width="130" :height="130"></wd-watermark>
 ```
 
 ### 图片水印
@@ -26,7 +26,7 @@
 通过`full-screen`设置是否为全屏水印。
 
 ```html
-<wd-watermark content="wot-design-uni" :full-screen="false"></wd-watermark>
+<wd-watermark content="wot-ui-plus" :full-screen="false"></wd-watermark>
 ```
 
 ### 自定义层级和透明度
@@ -34,7 +34,7 @@
 通过`opacity`设置透明度、`z-index`设置水印层级。
 
 ```html
-<wd-watermark content="wot-design-uni" :opacity="0.4"></wd-watermark>
+<wd-watermark content="wot-ui-plus" :opacity="0.4"></wd-watermark>
 ```
 
 

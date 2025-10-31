@@ -105,10 +105,10 @@ export default {
 
 ### Using with TypeScript
 
-When defining `themeVars` in TypeScript, it's recommended to use the **ConfigProviderThemeVars** type provided by **wot-design-uni**, which can provide comprehensive type hints:
+When defining `themeVars` in TypeScript, it's recommended to use the **ConfigProviderThemeVars** type provided by **wot-ui-plus**, which can provide comprehensive type hints:
 
 ```ts
-import type { ConfigProviderThemeVars } from 'wot-design-uni'
+import type { ConfigProviderThemeVars } from 'wot-ui-plus'
 
 const themeVars: ConfigProviderThemeVars = {
   colorTheme: 'red'
@@ -203,7 +203,7 @@ const { theme, themeVars } = useTheme({
 ```ts
 // src/composables/useTheme.ts
 
-import type { ConfigProviderThemeVars } from 'wot-design-uni'
+import type { ConfigProviderThemeVars } from 'wot-ui-plus'
 import { ref } from 'vue'
 
 const theme = ref<'light' | 'dark'>()

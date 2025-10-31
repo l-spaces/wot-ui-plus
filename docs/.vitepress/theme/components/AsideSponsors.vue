@@ -4,7 +4,7 @@
  * @LastEditTime: 2025-09-21 22:57:29
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/docs/.vitepress/theme/components/AsideSponsors.vue
+ * @FilePath: /wot-ui-plus/docs/.vitepress/theme/components/AsideSponsors.vue
  * 记得注释
 -->
 <script setup lang="ts">

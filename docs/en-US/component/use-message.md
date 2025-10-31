@@ -12,7 +12,7 @@ Alert dialog only has a confirm button, used for strong reminders.
 ```
 
 ```ts
-import { useMessage } from '@/uni_modules/wot-design-uni'
+import { useMessage } from '@/uni_modules/wot-ui-plus'
 const message = useMessage()
 
 function alert() {
@@ -30,7 +30,7 @@ Used to prompt user operations.
 ```
 
 ```ts
-import { useMessage } from '@/uni_modules/wot-design-uni'
+import { useMessage } from '@/uni_modules/wot-ui-plus'
 const message = useMessage()
 
 function confirm() {
@@ -58,7 +58,7 @@ Prompt will display an input box and can perform input validation.
 ```
 
 ```ts
-import { useMessage } from '@/uni_modules/wot-design-uni'
+import { useMessage } from '@/uni_modules/wot-ui-plus'
 const message = useMessage()
 
 function prompt() {

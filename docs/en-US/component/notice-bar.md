@@ -93,7 +93,7 @@ import { ref } from 'vue'
 const textArray = ref([
   'Welcome to wot design uni',
   'This component library is built based on uniapp ->Vue3, ts',
-  'Project address: https://github.com/Moonofweisheng/wot-design-uni',
+  'Project address: https://github.com/Moonofweisheng/wot-ui-plus',
   'Our goal is to create the strongest uniapp component library',
   'Sincerely invite everyone to build together',
   'This is a message notification, this is a message notification, this is a message notification, this is a message notification, this is a message notification'
@@ -120,7 +120,7 @@ Get the component instance through `ref` and call the `reset` method to reset th
 
 For example: In `APP-VUE`, when using `NoticeBar` on the `Tabbar` page, when returning to the `NoticeBar` page from other pages, there may be occasional `NoticeBar` animation abnormalities, at this time you can call the `reset` method to reset the animation.
 
-Reference issues: [#358](https://github.com/Moonofweisheng/wot-design-uni/issues/358), [#650](https://github.com/Moonofweisheng/wot-design-uni/issues/650)
+Reference issues: [#358](https://github.com/Moonofweisheng/wot-ui-plus/issues/358), [#650](https://github.com/Moonofweisheng/wot-ui-plus/issues/650)
 
 ```html
 <wd-notice-bar ref="notice" prefix="warn-bold" direction="vertical" :text="textArray" :delay="3" />
@@ -129,16 +129,16 @@ Reference issues: [#358](https://github.com/Moonofweisheng/wot-design-uni/issues
 
 ```ts
 // uni_modules
-import { type NoticeBarInstance } from '@/uni_modules/wot-design-uni/components/wd-notice-bar/types'
+import { type NoticeBarInstance } from '@/uni_modules/wot-ui-plus/components/wd-notice-bar/types'
 // npm
-// import { type NoticeBarInstance } from 'wot-design-uni/components/wd-notice-bar/types'
+// import { type NoticeBarInstance } from 'wot-ui-plus/components/wd-notice-bar/types'
 
 const notice = ref<NoticeBarInstance>()
 
 const textArray = ref([
   'Welcome to wot design uni',
   'This component library is built based on uniapp ->Vue3, ts',
-  'Project address: https://github.com/Moonofweisheng/wot-design-uni',
+  'Project address: https://github.com/Moonofweisheng/wot-ui-plus',
   'Our goal is to create the strongest uniapp component library',
   'Sincerely invite everyone to build together',
   'This is a message notification, this is a message notification, this is a message notification, this is a message notification, this is a message notification'

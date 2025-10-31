@@ -1,10 +1,10 @@
 {
-  "name": "wot-design-uni",
+  "name": "wot-ui-plus",
   "version": "1.13.0",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Moonofweisheng/wot-design-uni.git"
+    "url": "https://github.com/Moonofweisheng/wot-ui-plus.git"
   },
   "scripts": {
     "dev:app": "uni -p app",

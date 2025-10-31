@@ -64,9 +64,9 @@ function onChange(e) {
 
 ```ts
 const videoList = ref([
-  'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_115503.mp4',
-  'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_150752.mp4',
-  'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_155516.mp4',
+  'https://unpkg.com/wot-ui-plus-assets@1.0.3/VID_115503.mp4',
+  'https://unpkg.com/wot-ui-plus-assets@1.0.3/VID_150752.mp4',
+  'https://unpkg.com/wot-ui-plus-assets@1.0.3/VID_155516.mp4',
   'https://wot-ui.cn/assets/moon.jpg'
 ])
 ```
@@ -79,9 +79,9 @@ const videoList = ref([
 
 ```ts
 const videoList = ref([
-  'https://unpkg.com/wot-design-uni-assets/VID_115503.mp4',
-  'https://unpkg.com/wot-design-uni-assets/VID_150752.mp4',
-  'https://unpkg.com/wot-design-uni-assets/VID_155516.mp4'
+  'https://unpkg.com/wot-ui-plus-assets/VID_115503.mp4',
+  'https://unpkg.com/wot-ui-plus-assets/VID_150752.mp4',
+  'https://unpkg.com/wot-ui-plus-assets/VID_155516.mp4'
 ])
 ```
 
@@ -100,9 +100,9 @@ const videoList = ref([
 
 ```ts
 const videoList = ref([
-  'https://unpkg.com/wot-design-uni-assets/VID_115503.mp4',
-  'https://unpkg.com/wot-design-uni-assets/VID_150752.mp4',
-  'https://unpkg.com/wot-design-uni-assets/VID_155516.mp4'
+  'https://unpkg.com/wot-ui-plus-assets/VID_115503.mp4',
+  'https://unpkg.com/wot-ui-plus-assets/VID_150752.mp4',
+  'https://unpkg.com/wot-ui-plus-assets/VID_155516.mp4'
 ])
 ```
 

@@ -47,7 +47,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import { computed, ref, onMounted, nextTick } from 'vue'
-import { setNotifyDefaultOptions, useQueue, type ConfigProviderThemeVars } from '@/uni_modules/wot-design-uni'
+import { setNotifyDefaultOptions, useQueue, type ConfigProviderThemeVars } from '@/uni_modules/wot-ui-plus'
 import { useDark } from '../../store'
 import { useRewardAd } from '@/store/useRewardAd'
 

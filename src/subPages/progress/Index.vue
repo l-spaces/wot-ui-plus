@@ -31,7 +31,7 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import type { ProgressColor } from '@/uni_modules/wot-design-uni/components/wd-progress/types'
+import type { ProgressColor } from '@/uni_modules/wot-ui-plus/components/wd-progress/types'
 import { ref } from 'vue'
 
 const percentageZero = ref<number>(30)

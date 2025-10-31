@@ -51,7 +51,7 @@ const checked = ref<boolean>(true)
 ```
 
 ```typescript
-import { useMessage } from '@/uni_modules/wot-design-uni'
+import { useMessage } from '@/uni_modules/wot-ui-plus'
 
 const message = useMessage()
 

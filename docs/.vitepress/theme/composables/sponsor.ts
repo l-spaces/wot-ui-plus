@@ -12,8 +12,8 @@ export function useSponsor() {
 
     // 定义数据源URL列表，按优先级排序
     const urls = [
-      'https://sponsor.wot-ui.cn/wot-design-uni.json',
-      'https://wot-sponsors.pages.dev/wot-design-uni.json'
+      'https://sponsor.wot-ui.cn/wot-ui-plus.json',
+      'https://wot-sponsors.pages.dev/wot-ui-plus.json'
     ]
 
     // 尝试从多个数据源获取数据

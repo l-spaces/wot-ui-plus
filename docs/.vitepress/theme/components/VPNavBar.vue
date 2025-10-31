@@ -4,7 +4,7 @@
  * @LastEditTime: 2024-12-07 15:15:28
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/docs/.vitepress/theme/components/VPNavBar.vue
+ * @FilePath: /wot-ui-plus/docs/.vitepress/theme/components/VPNavBar.vue
  * 记得注释
 -->
 <script lang="ts" setup>

@@ -20,10 +20,10 @@
 
 ### 镜像仓库
 
-如果 GitHub 克隆速度较慢，你也可以直接克隆 Wot UI 在 gitee 上的[镜像仓库](https://gitee.com/wot-design-uni/wot-design-uni)：
+如果 GitHub 克隆速度较慢，你也可以直接克隆 Wot UI 在 gitee 上的[镜像仓库](https://gitee.com/wot-ui-plus/wot-ui-plus)：
 
 ```bash
-git clone https://gitee.com/wot-design-uni/wot-design-uni.git
+git clone https://gitee.com/wot-ui-plus/wot-ui-plus.git
 ```
 
 镜像仓库仅用于加快国内的访问速度，请勿在镜像仓库中提 issue 和 Pull Request。
@@ -204,7 +204,7 @@ type：commit message
 
 ```bash
 # 添加主仓库到 remote
-git remote add upstream https://github.com/Moonofweisheng/wot-design-uni.git
+git remote add upstream https://github.com/Moonofweisheng/wot-ui-plus.git
 
 # 拉取主仓库最新代码
 git fetch upstream

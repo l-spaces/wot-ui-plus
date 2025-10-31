@@ -39,8 +39,8 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
-import type { DatetimePickerViewFilter, DatetimePickerViewFormatter } from '@/uni_modules/wot-design-uni/components/wd-datetime-picker-view/types'
+import { useToast } from '@/uni_modules/wot-ui-plus'
+import type { DatetimePickerViewFilter, DatetimePickerViewFormatter } from '@/uni_modules/wot-ui-plus/components/wd-datetime-picker-view/types'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()

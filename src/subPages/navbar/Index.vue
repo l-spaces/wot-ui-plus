@@ -4,7 +4,7 @@
  * @LastEditTime: 2025-03-31 22:54:02
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/src/pages/navbar/Index.vue
+ * @FilePath: /wot-ui-plus/src/pages/navbar/Index.vue
  * 记得注释
 -->
 <template>
@@ -67,7 +67,7 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { useToast } from '@/uni_modules/wot-ui-plus'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()

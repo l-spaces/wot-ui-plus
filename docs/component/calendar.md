@@ -281,7 +281,7 @@ function handleConfirm({ value }) {
 ```
 
 ```typescript
-import { dayjs } from '@/uni_modules/wot-design-uni'
+import { dayjs } from '@/uni_modules/wot-ui-plus'
 
 const value = ref<string>('')
 
@@ -313,7 +313,7 @@ function handleConfirm({ value }) {
 ```
 
 ```typescript
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { useToast } from '@/uni_modules/wot-ui-plus'
 
 const toast = useToast()
 
@@ -377,7 +377,7 @@ function handleConfirm({ value }) {
 
 ```typescript
 import { ref } from 'vue'
-import type { CalendarInstance } from '@/uni_modules/wot-design-uni/components/wd-calendar/types'
+import type { CalendarInstance } from '@/uni_modules/wot-ui-plus/components/wd-calendar/types'
 
 const calendar = ref<CalendarInstance>()
 const value = ref<number>(Date.now())

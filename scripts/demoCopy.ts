@@ -4,7 +4,7 @@
  * @LastEditTime: 2025-01-24 00:03:16
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: /wot-design-uni/scripts/demoCopy.ts
+ * @FilePath: /wot-ui-plus/scripts/demoCopy.ts
  * 记得注释
  */
 import fs from 'fs'

@@ -24,7 +24,7 @@
 ```
 
 ```typescript
-import { useQueue } from '@/uni_modules/wot-design-uni'
+import { useQueue } from '@/uni_modules/wot-ui-plus'
 
 const { closeOutside } = useQueue()
 const value1 = ref<number>(0)
@@ -136,8 +136,8 @@ function handleOpened() {
 ```
 
 ```typescript
-import { useMessage } from '@/uni_modules/wot-design-uni'
-import type { DropMenuItemBeforeToggle } from '@/uni_modules/wot-design-uni/components/wd-drop-menu-item/types'
+import { useMessage } from '@/uni_modules/wot-ui-plus'
+import type { DropMenuItemBeforeToggle } from '@/uni_modules/wot-ui-plus/components/wd-drop-menu-item/types'
 
 const messageBox = useMessage()
 

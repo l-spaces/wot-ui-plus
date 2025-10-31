@@ -138,8 +138,8 @@
   </view>
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
-import type { CollapseInstance } from '@/uni_modules/wot-design-uni/components/wd-collapse/types'
+import { useToast } from '@/uni_modules/wot-ui-plus'
+import type { CollapseInstance } from '@/uni_modules/wot-ui-plus/components/wd-collapse/types'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()

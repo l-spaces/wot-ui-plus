@@ -18,7 +18,7 @@
 </template>
 <script lang="ts" setup>
 import { onMounted, ref, computed } from 'vue'
-import { getRect } from '@/uni_modules/wot-design-uni/components/common/util'
+import { getRect } from '@/uni_modules/wot-ui-plus/components/common/util'
 import { useI18n } from 'vue-i18n'
 
 interface CategoryItem {

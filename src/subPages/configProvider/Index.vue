@@ -116,12 +116,12 @@
   </page-wraper>
 </template>
 <script setup lang="ts">
-import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
-import type { ColPickerColumnChangeOption } from '@/uni_modules/wot-design-uni/components/wd-col-picker/types'
+import { useToast, useMessage } from '@/uni_modules/wot-ui-plus'
+import type { ColPickerColumnChangeOption } from '@/uni_modules/wot-ui-plus/components/wd-col-picker/types'
 import { ref } from 'vue'
 import { useColPickerData } from '@/hooks/useColPickerData'
 import { useI18n } from 'vue-i18n'
-import { type Action } from '@/uni_modules/wot-design-uni/components/wd-action-sheet/types'
+import { type Action } from '@/uni_modules/wot-ui-plus/components/wd-action-sheet/types'
 const { colPickerData, findChildrenByCode } = useColPickerData()
 
 const { t } = useI18n()

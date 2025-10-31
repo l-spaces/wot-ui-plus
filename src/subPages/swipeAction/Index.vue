@@ -102,8 +102,8 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { useToast, useQueue } from '@/uni_modules/wot-design-uni'
-import type { SwipeActionBeforeClose, SwipeActionStatus } from '@/uni_modules/wot-design-uni/components/wd-swipe-action/types'
+import { useToast, useQueue } from '@/uni_modules/wot-ui-plus'
+import type { SwipeActionBeforeClose, SwipeActionStatus } from '@/uni_modules/wot-ui-plus/components/wd-swipe-action/types'
 const { t } = useI18n()
 const { closeOutside } = useQueue()
 

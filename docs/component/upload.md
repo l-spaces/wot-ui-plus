@@ -7,7 +7,7 @@
 :::
 
 ::: warning 关于微信小程序隐私协议
-`upload`在微信小程序平台使用了`wx.chooseImage`、`wx.chooseMedia`、`wx.chooseVideo`三个隐私接口需要配置微信隐私协议，可以参考[小程序隐私协议开发指南](https://developers.weixin.qq.com/miniprogram/dev/framework/user-privacy/PrivacyAuthorize.html)进行相关配置和开发，否则会导致上传功能无法使用。推荐使用[微信小程序隐私保护弹出框](https://ext.dcloud.net.cn/plugin?id=14346)或者组件库演示用的[微信隐私协议弹框](https://github.com/Moonofweisheng/wot-design-uni/tree/master/src/components/wd-privacy-popup)。
+`upload`在微信小程序平台使用了`wx.chooseImage`、`wx.chooseMedia`、`wx.chooseVideo`三个隐私接口需要配置微信隐私协议，可以参考[小程序隐私协议开发指南](https://developers.weixin.qq.com/miniprogram/dev/framework/user-privacy/PrivacyAuthorize.html)进行相关配置和开发，否则会导致上传功能无法使用。推荐使用[微信小程序隐私保护弹出框](https://ext.dcloud.net.cn/plugin?id=14346)或者组件库演示用的[微信隐私协议弹框](https://github.com/Moonofweisheng/wot-ui-plus/tree/master/src/components/wd-privacy-popup)。
 :::
 
 ## 基本用法
@@ -122,7 +122,7 @@ const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86e
 ```
 
 ```typescript
-import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
+import { useToast, useMessage } from '@/uni_modules/wot-ui-plus'
 
 const messageBox = useMessage()
 const toast = useToast()
@@ -165,7 +165,7 @@ function handleChange({ fileList }) {
 ```
 
 ```typescript
-import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
+import { useToast, useMessage } from '@/uni_modules/wot-ui-plus'
 
 const messageBox = useMessage()
 const toast = useToast()
@@ -208,7 +208,7 @@ function handleChange({ fileList }) {
 ```
 
 ```typescript
-import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
+import { useToast, useMessage } from '@/uni_modules/wot-ui-plus'
 
 const messageBox = useMessage()
 const toast = useToast()
@@ -252,7 +252,7 @@ function handleChange({ fileList }) {
 ```
 
 ```typescript
-import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
+import { useToast, useMessage } from '@/uni_modules/wot-ui-plus'
 
 const messageBox = useMessage()
 const toast = useToast()
@@ -543,7 +543,7 @@ const onUploadClick = () => {
 ```
 
 ```typescript
-import type { UploadMethod, UploadFile } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
+import type { UploadMethod, UploadFile } from '@/uni_modules/wot-ui-plus/components/wd-upload/types'
 
 const fileList = ref<UploadFile[]>([])
 const customUpload: UploadMethod = (file, formData, options) => {

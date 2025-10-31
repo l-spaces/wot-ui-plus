@@ -4,7 +4,7 @@
  * @LastEditTime: 2025-05-07 22:06:37
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: /wot-design-uni/vite.config.ts
+ * @FilePath: /wot-ui-plus/vite.config.ts
  * 记得注释
  */
 import { defineConfig } from 'vite'

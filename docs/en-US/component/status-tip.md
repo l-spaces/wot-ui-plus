@@ -7,11 +7,11 @@ The images used in this component are external links and **_stability is not gua
 
 Download links:
 
-1. Github repository: [https://github.com/Moonofweisheng/wot-design-uni-assets](https://github.com/Moonofweisheng/wot-design-uni-assets)
+1. Github repository: [https://github.com/Moonofweisheng/wot-ui-plus-assets](https://github.com/Moonofweisheng/wot-ui-plus-assets)
 2. npm address:
 
-- npm: [https://www.npmjs.com/package/wot-design-uni-assets](https://www.npmjs.com/package/wot-design-uni-assets)
-- Taobao mirror: [https://npmmirror.com/package/wot-design-uni-assets](https://npmmirror.com/package/wot-design-uni-assets)
+- npm: [https://www.npmjs.com/package/wot-ui-plus-assets](https://www.npmjs.com/package/wot-ui-plus-assets)
+- Taobao mirror: [https://npmmirror.com/package/wot-ui-plus-assets](https://npmmirror.com/package/wot-ui-plus-assets)
 
 :::
 
@@ -72,7 +72,7 @@ Use the `image` slot to customize image content.
 | image-size | Image size, default unit is `px` | `string`/`number`/`ImageSize` | - | - | - |
 | tip | Prompt text | string | - | - | - |
 | image-mode | Mode property for preview image | `ImageMode` | - | aspectFit | 1.2.12 |
-| url-prefix | Image path prefix, points to the directory where images are located, used for concatenating image URLs | string | - | https://registry.npmmirror.com/wot-design-uni-assets/*/files/ | 1.3.11 |
+| url-prefix | Image path prefix, points to the directory where images are located, used for concatenating image URLs | string | - | https://registry.npmmirror.com/wot-ui-plus-assets/*/files/ | 1.3.11 |
 
 ### ImageSize
 

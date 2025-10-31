@@ -104,10 +104,10 @@ export default {
 ```
 
 ### 在 TypeScript 中使用
-在 TypeScript 中定义 `themeVars` 时，建议使用 **wot-design-uni** 提供的 **ConfigProviderThemeVars** 类型，可以提供完善的类型提示：
+在 TypeScript 中定义 `themeVars` 时，建议使用 **wot-ui-plus** 提供的 **ConfigProviderThemeVars** 类型，可以提供完善的类型提示：
 
 ```ts
-import type { ConfigProviderThemeVars } from 'wot-design-uni';
+import type { ConfigProviderThemeVars } from 'wot-ui-plus';
 
 const themeVars: ConfigProviderThemeVars = {
   colorTheme: 'red'
@@ -200,7 +200,7 @@ const { theme, themeVars } = useTheme({
 ```ts
 // src/composables/useTheme.ts
 
-import type { ConfigProviderThemeVars } from 'wot-design-uni'
+import type { ConfigProviderThemeVars } from 'wot-ui-plus'
 import { ref } from 'vue'
 
 const theme = ref<'light' | 'dark'>()

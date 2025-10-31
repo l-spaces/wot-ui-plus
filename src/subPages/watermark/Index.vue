@@ -1,5 +1,5 @@
 <template>
-  <wd-watermark :image="image" :width="130" :height="140" :image-width="38" content="wot-design-uni" :image-height="38" :opacity="0.5"></wd-watermark>
+  <wd-watermark :image="image" :width="130" :height="140" :image-width="38" content="wot-ui-plus" :image-height="38" :opacity="0.5"></wd-watermark>
   <view>
     <page-wraper>
       <demo-block :title="$t('ji-chu-yong-fa-0')">

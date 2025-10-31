@@ -1,6 +1,6 @@
 # 案例
 
-我们非常欢迎大家一起贡献优秀的 Demo 与案例，欢迎在此 [issue](https://github.com/Moonofweisheng/wot-design-uni/issues/16) 提交案例。
+我们非常欢迎大家一起贡献优秀的 Demo 与案例，欢迎在此 [issue](https://github.com/Moonofweisheng/wot-ui-plus/issues/16) 提交案例。
 
 Wot UI 已被很多公司和团队在生产环境使用，下面是一些优秀的案例：
 

@@ -26,7 +26,7 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import type { PickerViewColumnChange } from '@/uni_modules/wot-design-uni/components/wd-picker-view/types'
+import type { PickerViewColumnChange } from '@/uni_modules/wot-ui-plus/components/wd-picker-view/types'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()

@@ -114,7 +114,7 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import type { CheckboxInstance } from '@/uni_modules/wot-design-uni/components/wd-checkbox/types'
+import type { CheckboxInstance } from '@/uni_modules/wot-ui-plus/components/wd-checkbox/types'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

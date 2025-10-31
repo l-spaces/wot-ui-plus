@@ -8,7 +8,7 @@ export default defineConfig({
       text: '最后更新'
     },
     editLink: {
-      pattern: 'https://github.com/Moonofweisheng/wot-design-uni/edit/master/docs/:path',
+      pattern: 'https://github.com/Moonofweisheng/wot-ui-plus/edit/master/docs/:path',
       text: '为此页提供修改建议'
     },
     nav: [

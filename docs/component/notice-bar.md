@@ -93,7 +93,7 @@ import { ref } from 'vue'
 const textArray = ref([
   '欢迎使用wot design uni',
   '该组件库基于uniapp ->Vue3, ts构建',
-  '项目地址：https://github.com/Moonofweisheng/wot-design-uni',
+  '项目地址：https://github.com/Moonofweisheng/wot-ui-plus',
   '我们的目标是打造最强uniapp组件库',
   '诚挚邀请大家共同建设',
   '这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息'
@@ -120,7 +120,7 @@ const onNext = (index: number) => {
 
 例如：在`APP-VUE`端，`Tabbar`页面使用`NoticeBar`时，从其它界面返回到`NoticeBar`页面，会偶发`NoticeBar`动画异常，此时可以调用`reset`方法重置动画。
 
-参考issues：[#358](https://github.com/Moonofweisheng/wot-design-uni/issues/358)、[#650](https://github.com/Moonofweisheng/wot-design-uni/issues/650)
+参考issues：[#358](https://github.com/Moonofweisheng/wot-ui-plus/issues/358)、[#650](https://github.com/Moonofweisheng/wot-ui-plus/issues/650)
 
 ```html
 <wd-notice-bar ref="notice" prefix="warn-bold" direction="vertical" :text="textArray" :delay="3" />
@@ -129,16 +129,16 @@ const onNext = (index: number) => {
 
 ```ts
 // uni_modules
-import { type NoticeBarInstance } from '@/uni_modules/wot-design-uni/components/wd-notice-bar/types'
+import { type NoticeBarInstance } from '@/uni_modules/wot-ui-plus/components/wd-notice-bar/types'
 // npm
-// import { type NoticeBarInstance } from 'wot-design-uni/components/wd-notice-bar/types'
+// import { type NoticeBarInstance } from 'wot-ui-plus/components/wd-notice-bar/types'
 
 const notice = ref<NoticeBarInstance>()
 
 const textArray = ref([
   '欢迎使用wot design uni',
   '该组件库基于uniapp ->Vue3, ts构建',
-  '项目地址：https://github.com/Moonofweisheng/wot-design-uni',
+  '项目地址：https://github.com/Moonofweisheng/wot-ui-plus',
   '我们的目标是打造最强uniapp组件库',
   '诚挚邀请大家共同建设',
   '这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息'

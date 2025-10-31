@@ -40,7 +40,7 @@
   </view>
 </template>
 <script lang="ts" setup>
-import { useMessage, useToast } from '@/uni_modules/wot-design-uni'
+import { useMessage, useToast } from '@/uni_modules/wot-ui-plus'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

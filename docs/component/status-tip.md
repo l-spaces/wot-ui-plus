@@ -7,11 +7,11 @@
 
 下载地址：
 
-1. Github 仓库：[https://github.com/Moonofweisheng/wot-design-uni-assets](https://github.com/Moonofweisheng/wot-design-uni-assets)
+1. Github 仓库：[https://github.com/Moonofweisheng/wot-ui-plus-assets](https://github.com/Moonofweisheng/wot-ui-plus-assets)
 2. npm 地址：
 
-- npm：[https://www.npmjs.com/package/wot-design-uni-assets](https://www.npmjs.com/package/wot-design-uni-assets)
-- 淘宝镜像：[https://npmmirror.com/package/wot-design-uni-assets](https://npmmirror.com/package/wot-design-uni-assets)
+- npm：[https://www.npmjs.com/package/wot-ui-plus-assets](https://www.npmjs.com/package/wot-ui-plus-assets)
+- 淘宝镜像：[https://npmmirror.com/package/wot-ui-plus-assets](https://npmmirror.com/package/wot-ui-plus-assets)
 
 :::
 
@@ -72,7 +72,7 @@
 | image-size | 图片大小，默认单位为 `px`                          | `string`/`number`/`ImageSize` | -                                                               | -                                                             | -                |
 | tip        | 提示文案                                           | string                        | -                                                               | -                                                             | -                |
 | image-mode | 预览图片的 mode 属性                               | `ImageMode`                   | -                                                               | aspectFit                                                     | 1.2.12           |
-| url-prefix | 图片路径前缀，指向图片所在目录，用于拼接图片 URL。 | string                        | -                                                               | https://registry.npmmirror.com/wot-design-uni-assets/*/files/ | 1.3.11 |
+| url-prefix | 图片路径前缀，指向图片所在目录，用于拼接图片 URL。 | string                        | -                                                               | https://registry.npmmirror.com/wot-ui-plus-assets/*/files/ | 1.3.11 |
 
 ### ImageSize
 

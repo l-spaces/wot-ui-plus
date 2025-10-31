@@ -28,8 +28,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
-import { useToast } from '@/uni_modules/wot-design-uni'
-import { addUnit } from '@/uni_modules/wot-design-uni/components/common/util'
+import { useToast } from '@/uni_modules/wot-ui-plus'
+import { addUnit } from '@/uni_modules/wot-ui-plus/components/common/util'
 
 const { show } = useToast()
 

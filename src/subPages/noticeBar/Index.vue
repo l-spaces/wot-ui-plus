@@ -100,7 +100,7 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { type NoticeBarInstance } from '@/uni_modules/wot-design-uni/components/wd-notice-bar/types'
+import { type NoticeBarInstance } from '@/uni_modules/wot-ui-plus/components/wd-notice-bar/types'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
@@ -111,7 +111,7 @@ function handleReset() {
 }
 
 const textArray = ref([
-  t('huan-ying-shi-yong-wot-design-uni'),
+  t('huan-ying-shi-yong-wot-ui-plus'),
   t('gai-zu-jian-ku-ji-yu-uniapp-vue3-ts-gou-jian'),
   t('xiang-mu-di-zhi-httpsgithubcommoonofweishengwotdesignuni'),
   t('wo-men-de-mu-biao-shi-da-zao-zui-qiang-uniapp-zu-jian-ku'),

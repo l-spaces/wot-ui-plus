@@ -116,8 +116,8 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
-import type { UploadFile, UploadInstance, UploadMethod } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
+import { useToast, useMessage } from '@/uni_modules/wot-ui-plus'
+import type { UploadFile, UploadInstance, UploadMethod } from '@/uni_modules/wot-ui-plus/components/wd-upload/types'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()

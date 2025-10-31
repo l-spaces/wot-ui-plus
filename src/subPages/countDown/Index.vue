@@ -36,8 +36,8 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
-import type { CountDownInstance } from '@/uni_modules/wot-design-uni/components/wd-count-down/types'
+import { useToast } from '@/uni_modules/wot-ui-plus'
+import type { CountDownInstance } from '@/uni_modules/wot-ui-plus/components/wd-count-down/types'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { show: showToast } = useToast()

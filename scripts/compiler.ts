@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-const src = path.resolve(__dirname, '../src/uni_modules/wot-design-uni')
+const src = path.resolve(__dirname, '../src/uni_modules/wot-ui-plus')
 const libDir = path.resolve(__dirname, '../lib')
 
 const copyComponents = function (srcPath: string, tarPath: string, filter: string[] = []) {

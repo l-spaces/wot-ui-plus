@@ -4,7 +4,7 @@
  * @LastEditTime: 2025-04-08 11:18:04
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: /wot-design-uni/src/main.ts
+ * @FilePath: /wot-ui-plus/src/main.ts
  * 记得注释
  */
 import { createSSRApp } from 'vue'

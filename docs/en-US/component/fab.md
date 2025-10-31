@@ -31,7 +31,7 @@ Set the trigger type through `type`, set the trigger position through `position`
 ```
 
 ```ts
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { useToast } from '@/uni_modules/wot-ui-plus'
 const { show: showToast } = useToast()
 const type = ref<'primary' | 'success' | 'info' | 'warning' | 'error' | 'default'>('primary')
 const position = ref<'left-top'

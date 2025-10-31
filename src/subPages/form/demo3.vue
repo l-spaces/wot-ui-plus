@@ -142,11 +142,11 @@
   </view>
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
-import { isArray } from '@/uni_modules/wot-design-uni/components/common/util'
-import type { ColPickerColumnChange } from '@/uni_modules/wot-design-uni/components/wd-col-picker/types'
-import { type FormInstance, type FormRules } from '@/uni_modules/wot-design-uni/components/wd-form/types'
-import type { UploadFileItem } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
+import { useToast } from '@/uni_modules/wot-ui-plus'
+import { isArray } from '@/uni_modules/wot-ui-plus/components/common/util'
+import type { ColPickerColumnChange } from '@/uni_modules/wot-ui-plus/components/wd-col-picker/types'
+import { type FormInstance, type FormRules } from '@/uni_modules/wot-ui-plus/components/wd-form/types'
+import type { UploadFileItem } from '@/uni_modules/wot-ui-plus/components/wd-upload/types'
 import { useColPickerData } from '@/hooks/useColPickerData'
 const { t } = useI18n()
 const { colPickerData, findChildrenByCode } = useColPickerData()
@@ -482,4 +482,4 @@ function handleIconClick() {
   font-size: 12px !important;
 }
 </style>
-@/uni_modules/wot-design-uni/components/wd-form/type
+@/uni_modules/wot-ui-plus/components/wd-form/type

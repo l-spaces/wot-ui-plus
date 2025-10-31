@@ -4,7 +4,7 @@
  * @LastEditTime: 2025-03-31 23:05:54
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/src/pages/sidebar/demo1.vue
+ * @FilePath: /wot-ui-plus/src/pages/sidebar/demo1.vue
  * 记得注释
 -->
 <template>
@@ -27,7 +27,7 @@
 </template>
 <script lang="ts" setup>
 import { onMounted, ref, computed } from 'vue'
-import { getRect } from '@/uni_modules/wot-design-uni/components/common/util'
+import { getRect } from '@/uni_modules/wot-ui-plus/components/common/util'
 import { useI18n } from 'vue-i18n'
 
 interface CategoryItem {

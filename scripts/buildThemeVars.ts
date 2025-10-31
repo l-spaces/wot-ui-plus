@@ -150,8 +150,8 @@ export type baseThemeVars = {
   return tsContent
 }
 
-const tsFilePath = path.resolve(__dirname, '../src/uni_modules/wot-design-uni/components/wd-config-provider/types.ts')
-const scssFilePath = path.resolve(__dirname, '../src/uni_modules/wot-design-uni/components/common/abstracts/variable.scss')
+const tsFilePath = path.resolve(__dirname, '../src/uni_modules/wot-ui-plus/components/wd-config-provider/types.ts')
+const scssFilePath = path.resolve(__dirname, '../src/uni_modules/wot-ui-plus/components/common/abstracts/variable.scss')
 
 const variables = extractSCSSVariables(scssFilePath)
 const tsContent = generateTSFileContent(variables)

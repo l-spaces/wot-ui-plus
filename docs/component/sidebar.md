@@ -55,7 +55,7 @@ const active = ref(0)
 ```
 
 ```typescript
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { useToast } from '@/uni_modules/wot-ui-plus'
 
 const toast = useToast()
 const active = ref<number>(1)
@@ -77,8 +77,8 @@ function handleChange({ value, label }) {
 </wd-sidebar>
 ```
 ```typescript
-import { useToast } from '@/uni_modules/wot-design-uni'
-import type { SidebarBeforeChange } from '@/uni_modules/wot-design-uni/components/wd-sidebar/types'
+import { useToast } from '@/uni_modules/wot-ui-plus'
+import type { SidebarBeforeChange } from '@/uni_modules/wot-ui-plus/components/wd-sidebar/types'
 import { ref } from 'vue'
 const { loading: showLoading, close: closeLoading } = useToast()
 
@@ -122,7 +122,7 @@ sidebar 组件的锚点用法可以帮助用户在长页面上快速导航到特
 ```typescript [typescript]
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import { getRect, isArray } from '@/uni_modules/wot-design-uni/components/common/util'
+import { getRect, isArray } from '@/uni_modules/wot-ui-plus/components/common/util'
 
 const active = ref<number>(1)
 const scrollTop = ref<number>(0)
@@ -368,7 +368,7 @@ function handleChange({ value }) {
 ```typescript [typescript]
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import { getRect, isArray } from '@/uni_modules/wot-design-uni/components/common/util'
+import { getRect, isArray } from '@/uni_modules/wot-ui-plus/components/common/util'
 
 const active = ref<number>(1)
 const scrollTop = ref<number>(0)

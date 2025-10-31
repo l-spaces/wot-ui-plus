@@ -33,7 +33,7 @@
 ```
 
 ```typescript
-import { useQueue } from '@/uni_modules/wot-design-uni'
+import { useQueue } from '@/uni_modules/wot-ui-plus'
 
 const { closeOutside } = useQueue()
 
@@ -67,7 +67,7 @@ const show = ref<boolean>(false)
 ```
 
 ```typescript
-import { useQueue } from '@/uni_modules/wot-design-uni'
+import { useQueue } from '@/uni_modules/wot-ui-plus'
 
 const { closeOutside } = useQueue()
 const show = ref<boolean>(false)

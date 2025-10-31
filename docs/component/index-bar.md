@@ -146,7 +146,7 @@ const data = ref([
 
 ```typescript [typescript]
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { useToast } from '@/uni_modules/wot-ui-plus'
 import { nextTick, onMounted, ref } from 'vue'
 const { show: showToast } = useToast()
 

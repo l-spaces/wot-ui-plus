@@ -161,8 +161,8 @@ function handleChange({ value }) {
 
 ```typescript
 import { ref } from 'vue'
-import { useToast } from '@/uni_modules/wot-design-uni'
-import type { InputNumberBeforeChange } from '@/uni_modules/wot-design-uni/components/wd-input-number/types'
+import { useToast } from '@/uni_modules/wot-ui-plus'
+import type { InputNumberBeforeChange } from '@/uni_modules/wot-ui-plus/components/wd-input-number/types'
 const { loading, close } = useToast()
 
 const value = ref<number>(1)

@@ -4,7 +4,7 @@
  * @LastEditTime: 2025-04-02 20:17:36
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/src/pages/sticky/Index.vue
+ * @FilePath: /wot-ui-plus/src/pages/sticky/Index.vue
  * 记得注释
 -->
 <template>

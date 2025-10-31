@@ -4,7 +4,7 @@
  * @LastEditTime: 2025-03-30 20:47:41
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/src/pages/form/demo2.vue
+ * @FilePath: /wot-ui-plus/src/pages/form/demo2.vue
  * 记得注释
 -->
 <template>
@@ -52,8 +52,8 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
-import type { FormInstance } from '@/uni_modules/wot-design-uni/components/wd-form/types'
+import { useToast } from '@/uni_modules/wot-ui-plus'
+import type { FormInstance } from '@/uni_modules/wot-ui-plus/components/wd-form/types'
 import { reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

@@ -21,7 +21,7 @@ Popover 的属性与 [Tooltip](/component/tooltip.html) 很类似，因此对于
 ```
 
 ```typescript
-import { useQueue } from '@/uni_modules/wot-design-uni'
+import { useQueue } from '@/uni_modules/wot-ui-plus'
 
 const { closeOutside } = useQueue()
 function handleChange({ show }) {
@@ -57,7 +57,7 @@ function handleChange({ show }) {
 ```
 
 ```typescript
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { useToast } from '@/uni_modules/wot-ui-plus'
 
 const toast = useToast()
 
