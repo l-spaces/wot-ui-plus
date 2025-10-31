@@ -12,11 +12,10 @@
   >
     <view class="wd-loading-page">
       <view class="wd-loading-page__warpper">
-        <view class="wd-loading-page__warpper__loading-icon">
+        <view>
           <image
             v-if="image"
             :src="image"
-            class="wd-loading-page__warpper__loading-icon__img"
             mode="widthFit"
             :style="{
               width: addUnit(iconSize),
@@ -27,7 +26,6 @@
         </view>
         <slot>
           <text
-            class="wd-loading-page__warpper__text"
             :style="{
               fontSize: addUnit(fontSize),
               color: color

@@ -2,8 +2,9 @@
  * 混合宏集合
  * 此文件包含了UI组件库中使用的各种SCSS混合宏，主要分为BEM规范相关、常用样式和特殊效果混合宏
  */
-@import "config";     // 引入配置变量
-@import "function";  // 引入工具函数
+@import "config";
+// 引入配置变量
+@import "function"; // 引入工具函数
 
 /**
   * BEM命名规范 - 定义块（Block） 定义块选择器，生成命名空间前缀的类名
@@ -17,7 +18,7 @@
 
   // 创建块选择器
   .#{$B} {
-    @content;  // 插入调用者提供的样式内容
+    @content; // 插入调用者提供的样式内容
   }
 }
 
@@ -28,8 +29,8 @@
   * @example 在b(button)内部使用@include e(text) 会生成 .wot-button__text {...}
   */
 @mixin e($element...) {
-  $selector: &;         // 获取当前选择器上下文
-  $selectors: "";       // 存储生成的选择器字符串
+  $selector: &; // 获取当前选择器上下文
+  $selectors: ""; // 存储生成的选择器字符串
 
   // 检查是否在伪类内部使用
   @if containsPseudo($selector) {
@@ -48,7 +49,7 @@
     }
   }
 
-  // 正常情况下的元素选择器生成
+    // 正常情况下的元素选择器生成
   @else {
     @each $item in $element {
       $selectors: #{$selectors + $selector + $elementSeparator + $item + ","};
@@ -87,9 +88,7 @@
         }
       }
     }
-  }
-
-  @else {
+  } @else {
     @each $item in $element {
       $selectors: #{$selectors + $selector + $elementSeparator + $item + ","};
     }
@@ -172,9 +171,7 @@
         }
       }
     }
-  }
-
-  @else {
+  } @else {
     @each $item in $element {
       $selectors: #{$selectors + $selector + $elementSeparator + $item + ","};
     }
@@ -303,15 +300,15 @@
     position: absolute;
     display: block;
     content: ' ';
-    pointer-events: none;  // 确保伪元素不影响交互
+    pointer-events: none; // 确保伪元素不影响交互
     width: 200%;
     height: 200%;
     left: 0;
     top: 0;
     border: 1px solid $color;
-    transform: scale(0.5);  // 缩放到50%实现0.5px效果
+    transform: scale(0.5); // 缩放到50%实现0.5px效果
     box-sizing: border-box;
-    transform-origin: left top;  // 以左上角为缩放原点
+    transform-origin: left top; // 以左上角为缩放原点
   }
 }
 
@@ -323,7 +320,7 @@
 @mixin buttonClear {
   outline: none;
   -webkit-appearance: none;
-  -webkit-tap-highlight-color: transparent;  // 消除iOS点击高亮
+  -webkit-tap-highlight-color: transparent; // 消除iOS点击高亮
   background: transparent;
 }
 
@@ -348,8 +345,8 @@
     border-left: $size solid transparent;
     border-right: $size solid transparent;
     border-top: $size solid $bg;
-    transform: translateX(-50%);  // 水平居中
-    bottom: calc(-1 * $size);     // 定位在父元素底部外侧
+    transform: translateX(-50%); // 水平居中
+    bottom: calc(-1 * $size); // 定位在父元素底部外侧
   }
 
   // 向上箭头
@@ -357,8 +354,8 @@
     border-left: $size solid transparent;
     border-right: $size solid transparent;
     border-bottom: $size solid $bg;
-    transform: translateX(-50%);  // 水平居中
-    top: calc(-1 * $size);        // 定位在父元素顶部外侧
+    transform: translateX(-50%); // 水平居中
+    top: calc(-1 * $size); // 定位在父元素顶部外侧
   }
 
   // 向左箭头
@@ -366,8 +363,8 @@
     border-top: $size solid transparent;
     border-bottom: $size solid transparent;
     border-right: $size solid $bg;
-    transform: translateY(-50%);  // 垂直居中
-    left: calc(-1 * $size);       // 定位在父元素左侧外侧
+    transform: translateY(-50%); // 垂直居中
+    left: calc(-1 * $size); // 定位在父元素左侧外侧
   }
 
   // 向右箭头
@@ -375,8 +372,8 @@
     border-top: $size solid transparent;
     border-bottom: $size solid transparent;
     border-left: $size solid $bg;
-    transform: translateY(-50%);  // 垂直居中
-    right: calc(-1 * $size);      // 定位在父元素右侧外侧
+    transform: translateY(-50%); // 垂直居中
+    right: calc(-1 * $size); // 定位在父元素右侧外侧
   }
 }
 
@@ -411,8 +408,8 @@
       background-color: $bg;
       position: absolute;
       left: 0;
-      bottom: calc(-1 * $size / 2);  // 定位在容器底部中间
-      transform: rotateZ(45deg);     // 旋转45度形成三角形效果
+      bottom: calc(-1 * $size / 2); // 定位在容器底部中间
+      transform: rotateZ(45deg); // 旋转45度形成三角形效果
       box-shadow: $box-shadow;
     }
   }
@@ -429,8 +426,8 @@
       background-color: $bg;
       position: absolute;
       left: 0;
-      top: calc(-1 * $size / 2);     // 定位在容器顶部中间
-      transform: rotateZ(45deg);     // 旋转45度形成三角形效果
+      top: calc(-1 * $size / 2); // 定位在容器顶部中间
+      transform: rotateZ(45deg); // 旋转45度形成三角形效果
       box-shadow: $box-shadow;
     }
   }
@@ -446,9 +443,9 @@
       height: $size;
       background-color: $bg;
       position: absolute;
-      left: calc(-1 * $size / 2);    // 定位在容器左侧中间
+      left: calc(-1 * $size / 2); // 定位在容器左侧中间
       top: 0;
-      transform: rotateZ(45deg);     // 旋转45度形成三角形效果
+      transform: rotateZ(45deg); // 旋转45度形成三角形效果
       box-shadow: $box-shadow;
     }
   }
@@ -464,10 +461,19 @@
       height: $size;
       background-color: $bg;
       position: absolute;
-      right: calc(-1 * $size / 2);   // 定位在容器右侧中间
+      right: calc(-1 * $size / 2); // 定位在容器右侧中间
       top: 0;
-      transform: rotateZ(45deg);     // 旋转45度形成三角形效果
+      transform: rotateZ(45deg); // 旋转45度形成三角形效果
       box-shadow: $box-shadow;
     }
   }
+}
+
+/**
+ * 通过scss的mixin功能，把原来需要写4行的css，变成一行
+ * 目的是保持代码干净整洁，不至于在nvue下，到处都要写display:flex的条件编译
+ */
+@mixin flex($direction: row) {
+  display: flex;
+  flex-direction: $direction;
 }

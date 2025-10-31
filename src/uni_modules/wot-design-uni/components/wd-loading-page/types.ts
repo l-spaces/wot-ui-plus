@@ -10,8 +10,8 @@
 import type { ExtractPropTypes } from 'vue'
 import { baseProps, makeBooleanProp, makeNumericProp, makeStringProp } from '../common/props'
 
-// 加载动画的模式，circle-圆形，spinner-花朵形，semicircle-半圆形
-export type LoadingType = 'outline' | 'ring' // 提示信息加载状态类型
+// 加载动画的模式，outline-圆形，ring-半圆形
+export type LoadingType = 'outline' | 'ring'
 
 export const loadingProps = {
   ...baseProps,
@@ -25,7 +25,7 @@ export const loadingProps = {
    */
   image: makeStringProp(''),
   /**
-   * 加载动画的模式，circle-圆形，spinner-花朵形，semicircle-半圆形
+   * outline-圆形，ring-半圆形
    */
   loadingMode: makeStringProp<LoadingType>('ring'),
   /**
@@ -35,7 +35,7 @@ export const loadingProps = {
   /**
    * 背景颜色
    */
-  bgColor: makeStringProp('#4e4a4aff'),
+  bgColor: makeStringProp('#ffffff'),
   /**
    * 字体颜色
    */

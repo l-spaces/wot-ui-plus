@@ -27,16 +27,24 @@ linkChildren({ props })
 
 const rowStyle = computed(() => {
   const style: CSSProperties = {}
-  const { gutter } = props
+  const { gutter, wrap } = props
+
   if (gutter < 0) {
     console.error('[wot ui] warning(wd-row): attribute gutter must be greater than or equal to 0')
   } else if (gutter) {
     style.marginLeft = addUnit(gutter / 2)
     style.marginRight = addUnit(gutter / 2)
   }
+  if (wrap) {
+    style.flexWrap = 'wrap'
+  }
   return `${objToStyle(style)}${props.customStyle}`
 })
 </script>
 <style lang="scss" scoped>
 @import './index.scss';
+
+.wd-row {
+  @include flex;
+}
 </style>

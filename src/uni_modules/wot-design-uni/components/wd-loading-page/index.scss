@@ -9,29 +9,6 @@ $u-loading-icon-margin-bottom: 10px !default;
   display: flex;
   align-items: center;
   justify-content: center;
-      text-align: center;
+  text-align: center;
   height: 100%;
-
-  @include e(warpper) {
-    // justify-content: center;
-    // align-items: center;
-    // /* #ifndef APP-NVUE */
-    // color: $text-color;
-    // font-size: $text-size;
-    // /* #endif */
-  }
-
-  @include e(loading-icon) {
-  //  margin-bottom: $u-loading-icon-margin-bottom;
-  }
-
-  @include e(img) {
-    // width: 40px;
-    // height: 40px;
-  }
-
-  @include e(text) {
-    // font-size: $text-size;
-    // color: $text-color;
-  }
 }
