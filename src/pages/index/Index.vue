@@ -261,6 +261,10 @@ const list = computed(() => [
         name: t('loading-jia-zai-zhi-shi-qi')
       },
       {
+        id: 'loadingPage',
+        name: t('loading-page-title')
+      },
+      {
         id: 'messageBox',
         name: t('messagebox-dan-kuang')
       },

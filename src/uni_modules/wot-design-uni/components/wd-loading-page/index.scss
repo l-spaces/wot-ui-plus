@@ -1,0 +1,37 @@
+@import '../common/abstracts/_mixin.scss';
+@import '../common/abstracts/variable.scss';
+
+$text-color: rgb(200, 200, 200) !default;
+$text-size: 19px !default;
+$u-loading-icon-margin-bottom: 10px !default;
+
+@include b(loading-page) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+      text-align: center;
+  height: 100%;
+
+  @include e(warpper) {
+    // justify-content: center;
+    // align-items: center;
+    // /* #ifndef APP-NVUE */
+    // color: $text-color;
+    // font-size: $text-size;
+    // /* #endif */
+  }
+
+  @include e(loading-icon) {
+  //  margin-bottom: $u-loading-icon-margin-bottom;
+  }
+
+  @include e(img) {
+    // width: 40px;
+    // height: 40px;
+  }
+
+  @include e(text) {
+    // font-size: $text-size;
+    // color: $text-color;
+  }
+}
