@@ -8,6 +8,10 @@ import { Locale } from '../uni_modules/wot-design-uni/locale'
 import i18n from '../locale'
 
 // 支持的语言列表
+/**
+ * 支持的语言列表
+ * 包含中文（简体、繁体、香港、台湾）、英文、泰文、越南文、阿拉伯文、德文、西班牙文、葡萄牙文、法文、日文、韩文、土耳其文、俄文
+ */
 const SUPPORTED_LOCALES = [
   'zh-CN',
   'en-US',
