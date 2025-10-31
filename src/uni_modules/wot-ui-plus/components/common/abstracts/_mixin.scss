@@ -1,6 +1,47 @@
 /**
- * 混合宏集合
- * 此文件包含了UI组件库中使用的各种SCSS混合宏，主要分为BEM规范相关、常用样式和特殊效果混合宏
+ * SCSS 混合宏集合模块
+ * 
+ * 本模块是 wot-design-uni 组件库中 SCSS 混合宏的核心集合，
+ * 为组件样式开发提供强大的代码复用和抽象能力，支持 BEM 命名规范、
+ * 常用样式工具和特殊视觉效果等高级样式功能。
+ * 
+ * 在项目架构中的作用：
+ * - 样式抽象层：提供可复用的 SCSS 混合宏，简化样式开发复杂度
+ * - BEM 规范支持：完整的 BEM 命名规范自动化处理能力
+ * - 样式工具集：常用样式效果和布局工具的标准化实现
+ * - 组件样式基础：为所有 UI 组件提供一致的样式抽象接口
+ * 
+ * 核心功能分类：
+ * 1. BEM 命名规范：块(Block)、元素(Element)、修饰符(Modifier)相关混合宏
+ * 2. 样式工具：文本处理、布局、边框等常用样式工具
+ * 3. 特殊效果：箭头、按钮重置等特殊视觉效果
+ * 4. 多端适配：支持 uniapp 多端开发的样式适配
+ * 
+ * 技术特色：
+ * - 函数式抽象：通过混合宏实现样式逻辑的抽象和复用
+ * - 智能上下文：根据选择器上下文智能生成合适的 CSS 选择器
+ * - 样式穿透：支持 Vue 等框架的样式穿透(:deep())功能
+ * - 多端兼容：适配 app 移动端、H5 端、小程序端
+ * 
+ * @example
+ * // 使用 BEM 规范创建按钮组件
+ * @include b(button) {
+ *   // 按钮基础样式
+ *   
+ *   @include e(text) {
+ *     // 按钮文字样式
+ *   }
+ *   
+ *   @include m(primary) {
+ *     // 主要按钮样式
+ *   }
+ * }
+ * 
+ * // 使用样式工具
+ * .card {
+ *   @include halfPixelBorderSurround(); // 0.5px 环绕边框
+ *   @include multiEllipsis(2); // 两行文本省略
+ * }
  */
 @import "config";
 // 引入配置变量
@@ -29,11 +70,14 @@
   * @example 在b(button)内部使用@include e(text) 会生成 .wot-button__text {...}
   */
 @mixin e($element...) {
-  $selector: &; // 获取当前选择器上下文
+  $selector: &; // 获取当前选择器上下文，用于智能判断是否在块内部使用
   $selectors: ""; // 存储生成的选择器字符串
 
   // 检查是否在伪类内部使用
+  // 关键逻辑：智能判断是否需要嵌套生成选择器
   @if containsPseudo($selector) {
+    // 如果包含伪类，则生成嵌套的选择器
+    // 原因：伪类(:hover, :active等)需要保持与父选择器的关联
     // 为每个元素生成选择器
     @each $item in $element {
       $selectors: #{$selectors + "." + $B + $elementSeparator + $item + ","};
@@ -50,6 +94,7 @@
   }
 
     // 正常情况下的元素选择器生成
+    // 逻辑：直接拼接块名和元素名，形成独立的 BEM 选择器
   @else {
     @each $item in $element {
       $selectors: #{$selectors + $selector + $elementSeparator + $item + ","};
@@ -112,14 +157,18 @@
 @mixin m($modifier...) {
   $selectors: "";
 
-  // 为每个修饰符生成选择器
+  // 遍历所有传入的修饰符名称
+  // 关键逻辑：为每个修饰符生成对应的选择器
   @each $item in $modifier {
+    // 拼接当前选择器上下文和修饰符，形成 .块名--修饰符 格式
     $selectors: #{$selectors + & + $modifierSeparator + $item + ","};
   }
 
+  // 使用 @at-root 将生成的选择器提升到根级别
+  // 关键：确保修饰符选择器不会继承嵌套关系，保持 BEM 规范的独立性
   @at-root {
     #{$selectors} {
-      @content;
+      @content; // 插入调用者提供的样式内容
     }
   }
 }
@@ -206,10 +255,31 @@
   */
 
 /**
-  * 单行文本超出省略
-  * @description 设置文本在一行内显示，超出部分用省略号表示
-  * @example 用于按钮文字、标签等需要控制显示长度的场景
-  */
+ * 单行文本省略混合宏
+ * 
+ * 用于实现单行文本的省略号显示效果，当文本内容超出容器宽度时自动显示省略号。
+ * 这是移动端开发中最常用的文本处理样式之一。
+ * 
+ * @example
+ * // 在卡片标题中使用单行省略
+ * .card-title {
+ *   @include lineEllipsis;
+ *   font-size: 16px;
+ *   color: #333;
+ * }
+ * 
+ * // 生成的 CSS
+ * // .card-title {
+ * //   overflow: hidden;
+ * //   white-space: nowrap;
+ * //   text-overflow: ellipsis;
+ * //   font-size: 16px;
+ * //   color: #333;
+ * // }
+ * 
+ * @see multiEllipsis() - 多行文本省略
+ * @see textEllipsis() - 通用文本省略
+ */
 @mixin lineEllipsis {
   overflow: hidden;
   text-overflow: ellipsis;

@@ -1,10 +1,72 @@
 /**
- * 辅助函数
+ * SCSS 辅助函数模块
+ * 
+ * 本模块是 wot-design-uni 组件库中 SCSS 工具函数的核心集合，
+ * 为组件样式开发提供强大的函数式编程能力，支持 BEM 命名规范、
+ * 主题色管理和渐变色彩生成等高级样式功能。
+ * 
+ * 在项目架构中的作用：
+ * - 样式工具层：提供可复用的 SCSS 函数，简化样式开发复杂度
+ * - BEM 支持层：为 BEM 命名规范提供选择器分析和处理能力
+ * - 主题管理核心：实现动态主题色切换和色彩变换功能
+ * - 渐变生成器：提供灵活的线性渐变色生成和配置能力
+ * 
+ * 核心功能：
+ * 1. 选择器处理：CSS 选择器字符串转换和分析工具
+ * 2. BEM 分析：BEM 命名规范中修饰符和伪类的检测功能
+ * 3. 主题色管理：基于配置的主题色动态变换和混合功能
+ * 4. 渐变生成：智能的线性渐变色生成和参数化配置
+ * 
+ * 使用场景：
+ * - 组件样式开发中需要动态色彩管理的场景
+ * - BEM 命名规范的自动化检测和处理
+ * - 主题切换功能的底层色彩计算支持
+ * - 渐变背景和边框的自动化生成
+ * 
+ * 技术特色：
+ * - 函数式编程：纯函数设计，无副作用，易于测试和复用
+ * - 类型安全：严格的参数类型检查和默认值处理
+ * - 配置驱动：基于 _config.scss 的灵活配置机制
+ * - 算法优化：高效的字符串处理和色彩计算算法
+ * 
+ * @example
+ * // 使用主题色函数
+ * .button {
+ *   background-color: themeColor($primary-color, 'dark');
+ *   
+ *   // 生成渐变背景
+ *   background: resultColor(45deg, $primary-color, ('dark', 'light'), (#333, #666), (0%, 100%));
+ * }
+ * 
+ * // BEM 选择器分析
+ * @if containsModifier(&) {
+ *   // 当前选择器包含修饰符的处理逻辑
+ * }
  */
 @import 'config';
 $default-theme: #4d80f0 !default; // 正常色
 
-/* 转换成字符串 */
+/**
+ * 将 SCSS 选择器对象转换为字符串表示
+ * 
+ * 该函数用于处理 SCSS 中的选择器对象，将其转换为可读的字符串格式，
+ * 主要用于 BEM 命名规范的分析和选择器字符串处理场景。
+ * 
+ * @param {List} $selector - SCSS 选择器对象，通常为 & 符号或选择器列表
+ * @returns {String} 转换后的选择器字符串，去除首尾的括号
+ * 
+ * @example
+ * // 输入：&__button--primary
+ * // 输出："&__button--primary"
+ * 
+ * // 输入：(button, .btn)
+ * // 输出："button, .btn"
+ * 
+ * @algorithm
+ * 1. 使用 inspect() 函数将选择器转换为字符串表示
+ * 2. 使用 str-slice() 去除字符串首尾的括号字符
+ * 3. 返回处理后的纯净选择器字符串
+ */
 @function selectorToString($selector) {
   $selector: inspect($selector);
   $selector: str-slice($selector, 2, -2);
@@ -12,7 +74,29 @@ $default-theme: #4d80f0 !default; // 正常色
   @return $selector;
 }
 
-/* 判断是否存在 Modifier */
+/**
+ * 检测选择器中是否包含 BEM 修饰符
+ * 
+ * 该函数用于分析 CSS 选择器字符串，判断是否包含 BEM 命名规范中的修饰符，
+ * 主要用于组件样式中针对不同状态或变体的条件样式处理。
+ * 
+ * @param {List} $selector - SCSS 选择器对象，需要检测的目标选择器
+ * @returns {Boolean} 如果选择器包含修饰符返回 true，否则返回 false
+ * 
+ * @example
+ * // 输入：&__button--primary
+ * // 输出：true（包含 --primary 修饰符）
+ * 
+ * // 输入：&__button
+ * // 输出：false（不包含修饰符）
+ * 
+ * @algorithm
+ * 1. 使用 selectorToString() 将选择器转换为字符串
+ * 2. 使用 str-index() 查找修饰符分隔符 $modifierSeparator 的位置
+ * 3. 如果找到分隔符则返回 true，否则返回 false
+ * 
+ * @note 修饰符分隔符默认为 '--'，可在 _config.scss 中配置
+ */
 @function containsModifier($selector) {
   $selector: selectorToString($selector);
 
@@ -25,7 +109,29 @@ $default-theme: #4d80f0 !default; // 正常色
   }
 }
 
-/* 判断是否存在伪类 */
+/**
+ * 检测选择器中是否包含伪类选择器
+ * 
+ * 该函数用于分析 CSS 选择器字符串，判断是否包含伪类选择器（如 :hover, :active 等），
+ * 主要用于组件样式中针对交互状态的样式隔离和条件处理。
+ * 
+ * @param {List} $selector - SCSS 选择器对象，需要检测的目标选择器
+ * @returns {Boolean} 如果选择器包含伪类返回 true，否则返回 false
+ * 
+ * @example
+ * // 输入：&__button:hover
+ * // 输出：true（包含 :hover 伪类）
+ * 
+ * // 输入：&__button
+ * // 输出：false（不包含伪类）
+ * 
+ * @algorithm
+ * 1. 使用 selectorToString() 将选择器转换为字符串
+ * 2. 使用 str-index() 查找冒号字符 ':' 的位置
+ * 3. 如果找到冒号则返回 true，否则返回 false
+ * 
+ * @note 该函数检测所有伪类选择器，包括 :hover, :active, :focus, :before, :after 等
+ */
 @function containsPseudo($selector) {
   $selector: selectorToString($selector);
 
@@ -38,12 +144,77 @@ $default-theme: #4d80f0 !default; // 正常色
   }
 }
 
+/**
+ * 检测选择器中是否包含状态类 主题色切换
+ * 
+ * 该函数用于分析 CSS 选择器字符串，判断是否包含状态类选择器（如 .is-active, .is-disabled 等），
+ * 主要用于组件样式中针对组件状态的样式隔离和条件处理。
+ * 
+ * @param {List} $selector - SCSS 选择器对象，需要检测的目标选择器
+ * @returns {Boolean} 如果选择器包含状态类返回 true，否则返回 false
+ * 
+ * @example
+ * // 输入：&.is-active
+ * // 输出：true（包含 .is-active 状态类）
+ * 
+ * // 输入：&__button
+ * // 输出：false（不包含状态类）
+ * 
+ * @algorithm
+ * 1. 使用 selectorToString() 将选择器转换为字符串
+ * 2. 使用 str-index() 查找状态类前缀 '.is-' 的位置
+ * 3. 如果找到状态类前缀则返回 true，否则返回 false
+ * 
+ * @note 状态类前缀默认为 '.is-'，可在 _config.scss 中通过 $state-prefix 配置
+ */
+@function containsState($selector) {
+	$selector: selectorToString($selector);
+	@if str-index($selector, '.is-') {
+		@return true;
+	}
+	@return false;
+}
+
 
 /**
- * 主题色切换
- * @params $theme-color 主题色
- * @params $type 变暗’dark‘ 变亮 'light'
- * @params $mix-color 自己设置的混色
+ * 主题色变换函数
+ * 
+ * 该函数基于基础颜色生成不同状态的主题色变体，支持正常、浅色、深色和禁用状态，
+ * 主要用于组件样式中实现一致的颜色主题系统和状态反馈。
+ * 
+ * @param {Color} $color - 基础主题颜色，通常为组件的主要颜色
+ * @param {String} $type - 颜色变体类型，可选值：'normal', 'light', 'dark', 'disabled'
+ * @returns {Color} 根据类型变换后的颜色值
+ * 
+ * @example
+ * // 基础蓝色主题色
+ * $primary-color: #4d80f0;
+ * 
+ * // 生成不同状态的颜色
+ * .button {
+ *   background-color: themeColor($primary-color, 'normal'); // #4d80f0
+ *   
+ *   &.hover {
+ *     background-color: themeColor($primary-color, 'light'); // 浅蓝色
+ *   }
+ *   
+ *   &.active {
+ *     background-color: themeColor($primary-color, 'dark'); // 深蓝色
+ *   }
+ *   
+ *   &.disabled {
+ *     background-color: themeColor($primary-color, 'disabled'); // 禁用色
+ *   }
+ * }
+ * 
+ * @algorithm
+ * 1. normal 类型：直接返回原始颜色，不进行任何变换
+ * 2. light 类型：使用 mix() 函数与白色混合，混合比例为 70%
+ * 3. dark 类型：使用 mix() 函数与黑色混合，混合比例为 15%
+ * 4. disabled 类型：使用 mix() 函数与白色混合，混合比例为 50%
+ * 5. 默认情况：返回原始颜色作为安全回退
+ * 
+ * @note 该函数确保所有颜色变体都基于同一基础颜色，保持视觉一致性
  */
 @function themeColor($theme-color, $type: "", $mix-color: "") {
   @if $default-theme !=#4d80f0 {
@@ -66,24 +237,57 @@ $default-theme: #4d80f0 !default; // 正常色
 }
 
 /**
- * 颜色结果切换， 如果开启线性渐变色 使用渐变色，如果没有开启，那么使用主题色
- * @params $open-linear 是否开启线性渐变色
- * @params $deg 渐变色角度
- * @params $theme-color 当前配色
- * @params [Array] $set 主题色明暗设置，与 $color-list 数量对应
- * @params [Array] $color-list 渐变色顺序， $color-list 和 $per-list 数量相同
- * @params [Array] $per-list 渐变色比例
+ * 颜色结果切换函数 - 智能渐变与主题色切换
+ * 
+ * 该函数根据配置参数智能生成线性渐变色或返回主题色，支持复杂的多色渐变配置，
+ * 主要用于组件样式中实现丰富的颜色效果和视觉层次。
+ * 
+ * @param {Number} $deg - 线性渐变的角度，控制渐变方向（如 90deg 表示从左到右）
+ * @param {Color} $theme-color - 基础主题颜色，作为渐变色的主要参考色
+ * @param {Array} $set - 主题色明暗设置数组，指定每个渐变点的颜色变体类型
+ * @param {Array} $color-list - 渐变色顺序数组，定义渐变中使用的颜色序列
+ * @param {Array} $per-list - 渐变色比例数组，控制每个颜色在渐变中的位置比例
+ * @returns {Gradient} 生成的线性渐变色值，可直接用于 CSS background 属性
+ * 
+ * @example
+ * // 生成从浅到深的蓝色渐变
+ * .gradient-button {
+ *   background: resultColor(
+ *     90deg,           // 从左到右渐变
+ *     #4d80f0,         // 基础蓝色
+ *     ('light', 'normal', 'dark'),  // 颜色变体序列
+ *     (#4d80f0, #4d80f0, #4d80f0),  // 颜色序列
+ *     (0%, 50%, 100%)  // 渐变位置
+ *   );
+ * }
+ * 
+ * @algorithm
+ * 1. 计算颜色列表长度，确定渐变点的数量
+ * 2. 初始化渐变参数，以角度值作为起点
+ * 3. 遍历颜色列表，为每个渐变点：
+ *    a. 使用 themeColor() 函数根据 $set 配置生成对应变体颜色
+ *    b. 将颜色值与 $per-list 中的比例值组合
+ *    c. 构建渐变参数字符串
+ * 4. 使用 unquote() 函数去除字符串引号，生成有效的 CSS 渐变值
+ * 5. 返回 linear-gradient() 函数调用结果
+ * 
+ * @note 该函数实现了动态渐变生成，支持任意数量的渐变点和复杂的颜色变体组合
+ * @note 渐变参数构建采用字符串拼接方式，确保与 CSS 语法兼容
+ * @note 通过 themeColor() 函数复用，确保渐变颜色与主题系统保持一致
  */
 @function resultColor($deg, $theme-color, $set, $color-list, $per-list) {
-  // 开启渐变
-
+  // 计算颜色列表长度，确定渐变点的数量
   $len: length($color-list);
+  
+  // 初始化渐变参数，以角度值作为起点
   $arg: $deg;
 
+  // 遍历颜色列表，构建渐变参数
   @for $i from 1 through $len {
+    // 为每个渐变点生成颜色和位置组合
     $arg: $arg + ","+ themeColor($theme-color, nth($set, $i), nth($color-list, $i)) + " "+ nth($per-list, $i);
   }
 
+  // 生成最终的线性渐变色
   @return linear-gradient(unquote($arg));
-
 }

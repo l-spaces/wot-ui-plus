@@ -95,5 +95,7 @@
     "`${item}`"
   ],
   "i18n-ally.extract.ignoredByFiles": {
-  }
+  },
+  "files.eol": "\n",
+  "files.insertFinalNewline": true
 }
