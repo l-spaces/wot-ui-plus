@@ -54,7 +54,7 @@
  * @see {@link ../wd-keyboard/key/index.vue 键盘按键使用示例}
  * @see {@link ../tests/composables/useTouch.test.ts 单元测试示例}
  *
- * @author wot-design-uni 组件库团队
+ * @author wot-ui-plus 组件库团队
  * @version 1.0.0
  * @since 2023
  */

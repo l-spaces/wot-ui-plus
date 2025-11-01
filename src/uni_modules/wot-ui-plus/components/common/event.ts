@@ -39,7 +39,7 @@
  * @see {@link https://v3.vuejs.org/guide/component-custom-events.html Vue 3 自定义事件文档}
  * @see {@link https://uniapp.dcloud.net.cn/component/ Vue 组件开发文档}
  *
- * @author wot-design-uni 组件库团队
+ * @author wot-ui-plus 组件库团队
  * @version 1.0.0
  * @since 2023
  */

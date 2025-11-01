@@ -39,7 +39,7 @@
  * @see {@link ../locale/index.ts Locale 国际化模块}
  * @see {@link ../common/util.ts 工具函数模块}
  *
- * @author wot-design-uni 组件库团队
+ * @author wot-ui-plus 组件库团队
  * @version 1.0.0
  * @since 2023
  */

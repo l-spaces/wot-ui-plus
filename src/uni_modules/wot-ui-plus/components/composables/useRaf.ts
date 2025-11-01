@@ -44,7 +44,7 @@
  * @see {@link ../common/util.ts 工具函数模块}
  * @see {@link ./useCountDown.ts 倒计时组件（使用动画帧优化）}
  *
- * @author wot-design-uni 组件库团队
+ * @author wot-ui-plus 组件库团队
  * @version 1.0.0
  * @since 2023
  */

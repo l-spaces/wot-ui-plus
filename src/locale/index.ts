@@ -1,7 +1,7 @@
 /**
  * 国际化配置文件
  *
- * 本文件是 wot-design-uni 组件库的国际化核心配置文件，负责：
+ * 本文件是 wot-ui-plus 组件库的国际化核心配置文件，负责：
  * 1. 创建和管理 Vue I18n 实例
  * 2. 加载中英文语言包资源
  * 3. 提供统一的国际化消息翻译功能
@@ -37,7 +37,7 @@ import WotEnUS from '../uni_modules/wot-ui-plus/locale/lang/en-US'
  * 添加组件库英文语言包到国际化系统
  *
  * 功能描述：
- * 将 wot-design-uni 组件库的英文语言包注册到全局国际化系统中，
+ * 将 wot-ui-plus 组件库的英文语言包注册到全局国际化系统中，
  * 确保组件库的文本内容能够正确显示英文翻译
  */
 Locale.add({ 'en-US': WotEnUS })
@@ -85,7 +85,7 @@ const i18n = createI18n({
  * 配置组件库使用当前国际化实例
  *
  * 功能描述：
- * 将创建好的 i18n 实例应用到 wot-design-uni 组件库中，
+ * 将创建好的 i18n 实例应用到 wot-ui-plus 组件库中，
  * 确保组件库能够使用统一的国际化配置
  */
 Locale.use(i18n.global.locale.value)
