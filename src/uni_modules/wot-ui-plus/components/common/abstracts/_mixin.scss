@@ -43,8 +43,7 @@
  *   @include multiEllipsis(2); // 两行文本省略
  * }
  */
-@import "config";
-// 引入配置变量
+@import "config"; // 引入配置变量
 @import "function"; // 引入工具函数
 
 /**
