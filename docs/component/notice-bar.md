@@ -91,7 +91,7 @@
 import { ref } from 'vue'
 
 const textArray = ref([
-  '欢迎使用wot design uni',
+  '欢迎使用wot-ui-plus',
   '该组件库基于uniapp ->Vue3, ts构建',
   '项目地址：https://github.com/Moonofweisheng/wot-ui-plus',
   '我们的目标是打造最强uniapp组件库',
@@ -136,7 +136,7 @@ import { type NoticeBarInstance } from '@/uni_modules/wot-ui-plus/components/wd-
 const notice = ref<NoticeBarInstance>()
 
 const textArray = ref([
-  '欢迎使用wot design uni',
+  '欢迎使用wot-ui-plus',
   '该组件库基于uniapp ->Vue3, ts构建',
   '项目地址：https://github.com/Moonofweisheng/wot-ui-plus',
   '我们的目标是打造最强uniapp组件库',

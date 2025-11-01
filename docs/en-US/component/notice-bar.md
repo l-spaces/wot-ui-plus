@@ -91,7 +91,7 @@ Pass a `string[]` to the `text` property to enable multiple text carousel, and t
 import { ref } from 'vue'
 
 const textArray = ref([
-  'Welcome to wot design uni',
+  'Welcome to wot-ui-plus',
   'This component library is built based on uniapp ->Vue3, ts',
   'Project address: https://github.com/Moonofweisheng/wot-ui-plus',
   'Our goal is to create the strongest uniapp component library',
@@ -136,7 +136,7 @@ import { type NoticeBarInstance } from '@/uni_modules/wot-ui-plus/components/wd-
 const notice = ref<NoticeBarInstance>()
 
 const textArray = ref([
-  'Welcome to wot design uni',
+  'Welcome to wot-ui-plus',
   'This component library is built based on uniapp ->Vue3, ts',
   'Project address: https://github.com/Moonofweisheng/wot-ui-plus',
   'Our goal is to create the strongest uniapp component library',
