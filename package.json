@@ -62,7 +62,7 @@
     "test": "vitest",
     "test:h5": "cross-env UNI_PLATFORM=h5 vitest",
     "test:mp-weixin": "cross-env UNI_PLATFORM=mp-weixin vitest",
-    "test:all": "npm run test:h5 && npm run test:mp-weixin",
+    "test:all": "pnpm run test:h5 && pnpm run test:mp-weixin",
     "coverage": "vitest run --coverage",
     "coverage:h5": "cross-env UNI_PLATFORM=h5 vitest run --coverage",
     "test:component": "esno ./scripts/test-component.ts",

@@ -71,6 +71,20 @@ export const makeArrayProp = <T>() => ({
 })
 
 /**
+ * 创建可选数组类型的属性定义
+ *
+ * @returns 类型为Array，默认值为undefined的属性配置对象
+ * @example
+ * const props = {
+ *   items: makeUnArrayProp<Item>()
+ * }
+ */
+export const makeUnArrayProp = <T>() => ({
+  type: Array as PropType<T[]>,
+  default: () => undefined
+})
+
+/**
  * 创建布尔类型的属性定义
  *
  * @param defaultVal 默认值
@@ -128,6 +142,20 @@ export const makeNumericProp = <T>(defaultVal: T) => ({
 export const makeStringProp = <T>(defaultVal: T) => ({
   type: String as unknown as PropType<T>,
   default: defaultVal
+})
+
+/**
+ * 创建函数类型的属性定义
+ *
+ * @returns 类型为Function，默认值为undefined的属性配置对象
+ * @example
+ * const props = {
+ *   loadNode: makeFunctionProp()
+ * }
+ */
+export const makeFunctionProp = <T>() => ({
+  type: Function,
+  default: () => null
 })
 
 /**

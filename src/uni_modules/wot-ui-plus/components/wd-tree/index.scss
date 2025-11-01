@@ -1,0 +1,29 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(tree) {
+  @include e(nodes) {
+
+   @include m(wrapper) {
+      @include flex(row);
+      align-items: center;
+    }
+  }
+
+  @include e(switcher) {
+    margin-right: 6px;
+  }
+
+   @include e(content) {
+    flex: 1;
+    border-radius: 4px;
+    padding: 2px 0px;
+  }
+
+   @include e(label) {
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 2px 0px;
+  }
+}
