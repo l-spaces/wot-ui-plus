@@ -15,7 +15,7 @@
       </view>
       <view class="page__bd">
         <wd-card v-for="(item, index) in list" :key="index" :title="item.name">
-          <view>
+          <view :id="item.id" @click="kindToggle(item.id)">
             <wd-grid square clickable :column="3">
               <wd-grid-item v-for="(page, j) in item.pages" :key="j">
                 <template #icon>
@@ -472,10 +472,6 @@ const list = computed(() => [
   }
 ])
 
-function getIcon(path: string) {
-  return '../images/example/' + path + '.png'
-}
-
 function handleClick(url: string) {
   uni.navigateTo({
     url
@@ -525,7 +521,7 @@ onShareTimeline(() => {
 .page__hd {
   padding: 40px 40px 30px;
   margin-bottom: 30px;
-  background: #fff;
+  background: $-dark-color;
 }
 
 .page__title {
@@ -569,6 +565,6 @@ onShareTimeline(() => {
 
 .kind-list__text {
   font-size: 12px;
-  color: #000000;
+  color: $-dark-color4;
 }
 </style>
