@@ -10,11 +10,7 @@
           </view>
         </view>
         <view class="page__desc">
-          {{
-            $t(
-              'wot-ui-plus-shi-yi-ge-ji-yu-vue3ts-kai-fa-de-uniapp-zu-jian-ku-ti-gong-70-gao-zhi-liang-zu-jian-zhi-chi-an-hei-mo-shi-guo-ji-hua-he-zi-ding-yi-zhu-ti'
-            )
-          }}
+          {{ $t('wot-ui-plus-info') }}
         </view>
       </view>
       <view class="page__bd">
