@@ -1,74 +1,74 @@
 @import "./../common/abstracts/_mixin.scss";
 @import "./../common/abstracts/variable.scss";
 
-.wot-theme-dark {
-  @include b(checkbox) {
-    @include e(shape) {
-      background: transparent;
-      border-color: $-checkbox-border-color;
-      color: $-checkbox-check-color;
-    }
+// .wot-theme-dark {
+//   @include b(checkbox) {
+//     @include e(shape) {
+//       background: transparent;
+//       border-color: $-checkbox-border-color;
+//       color: $-checkbox-check-color;
+//     }
 
-    @include e(label) {
-      color: $-dark-color;
-    }
+//     @include e(label) {
+//       color: $-dark-color;
+//     }
 
-    @include when(disabled) {
-      .wd-checkbox__shape {
-        border-color: $-dark-color-gray;
-        background: $-dark-background4;
-      }
+//     @include when(disabled) {
+//       .wd-checkbox__shape {
+//         border-color: $-dark-color-gray;
+//         background: $-dark-background4;
+//       }
 
-      .wd-checkbox__label {
-        color: $-dark-color-gray;
-      }
+//       .wd-checkbox__label {
+//         color: $-dark-color-gray;
+//       }
 
-      :deep(.wd-checkbox__check) {
-        color: $-dark-color-gray;
-      }
+//       :deep(.wd-checkbox__check) {
+//         color: $-dark-color-gray;
+//       }
 
-      @include when(checked) {
-        .wd-checkbox__shape {
-          color: $-dark-color-gray;
-        }
+//       @include when(checked) {
+//         .wd-checkbox__shape {
+//           color: $-dark-color-gray;
+//         }
 
-        .wd-checkbox__label {
-          color: $-dark-color-gray;
-        }
-      }
+//         .wd-checkbox__label {
+//           color: $-dark-color-gray;
+//         }
+//       }
 
-      @include when(button) {
+//       @include when(button) {
 
-        .wd-checkbox__label {
-          border-color: #c8c9cc;
-          background: #3a3a3c;
-          color: $-dark-color-gray;
-        }
+//         .wd-checkbox__label {
+//           border-color: #c8c9cc;
+//           background: #3a3a3c;
+//           color: $-dark-color-gray;
+//         }
 
-        @include when(checked) {
-          .wd-checkbox__label {
-            border-color: #c8c9cc;
-            background: #3a3a3c;
-            color: #c8c9cc;
-          }
-        }
-      }
-    }
+//         @include when(checked) {
+//           .wd-checkbox__label {
+//             border-color: #c8c9cc;
+//             background: #3a3a3c;
+//             color: #c8c9cc;
+//           }
+//         }
+//       }
+//     }
 
-    @include when(button) {
-      .wd-checkbox__label {
-        background-color: $-dark-background;
-      }
+//     @include when(button) {
+//       .wd-checkbox__label {
+//         background-color: $-dark-background;
+//       }
 
-      @include when(checked) {
-        .wd-checkbox__label {
-          background-color: $-dark-background2;
-        }
-      }
-    }
+//       @include when(checked) {
+//         .wd-checkbox__label {
+//           background-color: $-dark-background2;
+//         }
+//       }
+//     }
 
-  }
-}
+//   }
+// }
 
 @include b(checkbox) {
   display: block;
@@ -144,6 +144,23 @@
       border-color: currentColor;
     }
 
+    :deep(.wd-checkbox__check) {
+      opacity: 1;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  // 支持中间状态（部分选中）
+  &.is-indeterminate {
+    .wd-checkbox__shape {
+      color: $-checkbox-checked-color;
+      background: currentColor;
+      border-color: currentColor;
+    }
+    
     :deep(.wd-checkbox__check) {
       opacity: 1;
       position: absolute;

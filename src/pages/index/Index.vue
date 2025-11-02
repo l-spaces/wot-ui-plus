@@ -18,25 +18,20 @@
         </view>
       </view>
       <view class="page__bd">
-        <block v-for="(item, index) in list" :key="index">
-          <view class="kind-list__item">
-            <view :id="item.id" class="wd-flex kind-list__item-hd" @click="kindToggle(item.id)">
-              <view class="wd-flex__item title">{{ item.name }}</view>
-              <image class="kind-list__img" :src="item.icon"></image>
-            </view>
-            <view :class="['kind-list__item-bd', openState[item.id] ? 'kind-list__item-bd_show' : '']">
-              <view :class="['wd-cells', openState[item.id] ? 'wd-cells_show' : '']">
-                <wd-cell
-                  v-for="(page, j) in item.pages"
-                  :key="j"
-                  is-link
-                  :label="page.name"
-                  @click="handleClick(`/subPages/${page.id}/Index`)"
-                ></wd-cell>
-              </view>
-            </view>
+        <wd-card v-for="(item, index) in list" :key="index" :title="item.name">
+          <view>
+            <wd-grid square clickable :column="3">
+              <wd-grid-item v-for="(page, j) in item.pages" :key="j">
+                <template #icon>
+                  <image class="kind-list__img" :src="page.icon" @click="handleClick(`/subPages/${page.id}/Index`)" />
+                </template>
+                <template #text>
+                  <text class="kind-list__text">{{ page.name }}</text>
+                </template>
+              </wd-grid-item>
+            </wd-grid>
           </view>
-        </block>
+        </wd-card>
       </view>
     </view>
   </page-wraper>
@@ -49,54 +44,64 @@ import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
-const imgModules: any = import.meta.glob('../images/*.png', { eager: true })
+const imgModules: any = import.meta.glob(['../images/*.png', '../images/example/*.png'], { eager: true })
 
 // 使用computed使list响应语言变化
 const list = computed(() => [
   {
     id: 'widget',
     name: t('ji-chu'),
-    open: false,
+    open: true,
     icon: imgModules['../images/icon_nav_widget.png'].default,
     pages: [
       {
         id: 'button',
+        icon: imgModules['../images/example/button.png'].default,
         name: t('button-an-niu')
       },
       {
         id: 'icon',
+        icon: imgModules['../images/example/icon.png'].default,
         name: t('icon-tu-biao')
       },
       {
         id: 'layout',
+        icon: imgModules['../images/example/layout.png'].default,
         name: t('layout-bu-ju')
       },
       {
         id: 'configProvider',
+        icon: imgModules['../images/example/poster.png'].default,
         name: t('configprovider-quan-ju-pei-zhi')
       },
       {
         id: 'popup',
+        icon: imgModules['../images/example/popup.png'].default,
         name: t('popup-dan-chu-ceng')
       },
       {
         id: 'resize',
+        icon: imgModules['../images/example/poster.png'].default,
         name: t('resize-jian-ting-yuan-su-chi-cun-bian-hua')
       },
       {
         id: 'transition',
+        icon: imgModules['../images/example/transition.png'].default,
         name: t('transition-dong-hua')
       },
       {
         id: 'fab',
+        icon: imgModules['../images/example/fab.png'].default,
         name: t('fab-xuan-fu-an-niu')
       },
       {
         id: 'text',
+        icon: imgModules['../images/example/text.png'].default,
         name: t('text-wen-ben')
       },
       {
         id: 'rootPortal',
+        icon: imgModules['../images/example/table.png'].default,
         name: t('rootportal-title')
       }
     ]
@@ -104,44 +109,53 @@ const list = computed(() => [
   {
     id: 'nav',
     name: t('dao-hang'),
-    open: false,
+    open: true,
     icon: imgModules['../images/icon_nav_nav.png'].default,
 
     pages: [
       {
         id: 'pagination',
+        icon: imgModules['../images/example/pagination.png'].default,
         name: t('pagination-fen-ye')
       },
       {
         id: 'popover',
+        icon: imgModules['../images/example/tooltip.png'].default,
         name: t('popover-qi-pao')
       },
       {
         id: 'tabs',
+        icon: imgModules['../images/example/tabs.png'].default,
         name: t('tabs-biao-qian-ye')
       },
       {
         id: 'segmented',
+        icon: imgModules['../images/example/subsection.png'].default,
         name: t('segmented-fen-duan-qi')
       },
       {
         id: 'tabbar',
+        icon: imgModules['../images/example/tabbar.png'].default,
         name: t('tabbar-biao-qian-lan')
       },
       {
         id: 'navbar',
+        icon: imgModules['../images/example/navbar.png'].default,
         name: t('navbar-dao-hang-lan')
       },
       {
         id: 'sidebar',
+        icon: imgModules['../images/example/sidebar.png'].default,
         name: t('sidebar-ce-bian-lan')
       },
       {
         id: 'backtop',
+        icon: imgModules['../images/example/backTop.png'].default,
         name: t('backtop-hui-dao-ding-bu')
       },
       {
         id: 'indexBar',
+        icon: imgModules['../images/example/indexList.png'].default,
         name: t('indexbar-suo-yin-lan')
       }
     ]
@@ -154,86 +168,107 @@ const list = computed(() => [
     pages: [
       {
         id: 'calendar',
+        icon: imgModules['../images/example/calendar.png'].default,
         name: t('calendar-ri-li-xuan-ze-qi')
       },
       {
         id: 'calendarView',
+        icon: imgModules['../images/example/calendar.png'].default,
         name: t('calendarview-ri-li-mian-ban')
       },
       {
         id: 'checkbox',
+        icon: imgModules['../images/example/checkbox.png'].default,
         name: t('checkbox-fu-xuan-kuang')
       },
       {
         id: 'colPicker',
+        icon: imgModules['../images/example/colorPicker.png'].default,
         name: t('colpicker-duo-lie-xuan-ze-qi')
       },
       {
         id: 'datetimePicker',
+        icon: imgModules['../images/example/datetimePicker.png'].default,
         name: t('datetimepicker-shi-jian-xuan-ze-qi')
       },
       {
         id: 'datetimePickerView',
+        icon: imgModules['../images/example/datetimePicker.png'].default,
         name: t('datetimepickerview-shi-jian-xuan-ze-qi-shi-tu')
       },
       {
         id: 'input',
+        icon: imgModules['../images/example/field.png'].default,
         name: t('input-shu-ru-kuang')
       },
       {
         id: 'textarea',
+        icon: imgModules['../images/example/textarea.png'].default,
         name: t('textarea-wen-ben-yu')
       },
       {
         id: 'inputNumber',
+        icon: imgModules['../images/example/numberBox.png'].default,
         name: t('inputnumber-ji-shu-qi')
       },
       {
         id: 'picker',
+        icon: imgModules['../images/example/picker.png'].default,
         name: t('picker-xuan-ze-qi')
       },
       {
         id: 'pickerView',
+        icon: imgModules['../images/example/picker.png'].default,
         name: t('pickerview-xuan-ze-qi-shi-tu')
       },
       {
         id: 'radio',
+        icon: imgModules['../images/example/radio.png'].default,
         name: t('radio-dan-xuan-kuang')
       },
       {
         id: 'rate',
+        icon: imgModules['../images/example/rate.png'].default,
         name: t('rate-ping-fen')
       },
       {
         id: 'search',
+        icon: imgModules['../images/example/search.png'].default,
         name: t('search-sou-suo')
       },
       {
         id: 'selectPicker',
+        icon: imgModules['../images/example/select.png'].default,
         name: t('selectpicker-dan-fu-xuan-xuan-ze-qi')
       },
       {
         id: 'slider',
+        icon: imgModules['../images/example/slider.png'].default,
         name: t('slider-hua-kuai')
       },
       {
         id: 'switch',
+        icon: imgModules['../images/example/switch.png'].default,
         name: t('switch-kai-guan')
       },
       {
         id: 'form',
+        icon: imgModules['../images/example/form.png'].default,
         name: t('form-biao-dan')
       },
       {
         id: 'upload',
+        icon: imgModules['../images/example/upload.png'].default,
         name: t('upload-shang-chuan')
       },
       {
         id: 'passwordInput',
+        icon: imgModules['../images/example/field.png'].default,
         name: t('passwordinput-mi-ma-shu-ru-kuang')
       },
       {
         id: 'signature',
+        icon: imgModules['../images/example/signature.png'].default,
         name: t('signature-qian-ming')
       }
     ]
@@ -246,82 +281,97 @@ const list = computed(() => [
     pages: [
       {
         id: 'actionSheet',
+        icon: imgModules['../images/example/actionSheet.png'].default,
         name: t('actionsheet-shang-la-cai-dan')
       },
       {
         id: 'dropMenu',
+        icon: imgModules['../images/example/dropdown.png'].default,
         name: t('dropmenu-xia-la-cai-dan')
       },
       {
         id: 'floatingPanel',
+        icon: imgModules['../images/example/popup.png'].default,
         name: t('floatingpanel-fu-dong-mian-ban')
       },
       {
         id: 'loading',
+        icon: imgModules['../images/example/loading.png'].default,
         name: t('loading-jia-zai-zhi-shi-qi')
       },
       {
-        id: 'loadingPage',
-        name: t('loading-page-title')
-      },
-      {
         id: 'messageBox',
+        icon: imgModules['../images/example/notify.png'].default,
         name: t('messagebox-dan-kuang')
       },
       {
         id: 'overlay',
+        icon: imgModules['../images/example/mask.png'].default,
         name: t('overlay-zhe-zhao-ceng')
       },
       {
         id: 'noticeBar',
+        icon: imgModules['../images/example/noticeBar.png'].default,
         name: t('noticebar-tong-zhi-lan')
       },
       {
         id: 'progress',
+        icon: imgModules['../images/example/progress.png'].default,
         name: t('progress-jin-du-tiao')
       },
       {
         id: 'circle',
+        icon: imgModules['../images/example/progress.png'].default,
         name: t('circle-huan-xing-jin-du-tiao')
       },
       {
         id: 'sortButton',
+        icon: imgModules['../images/example/numberBox.png'].default,
         name: t('sortbutton-pai-xu-an-niu')
       },
       {
         id: 'statusTip',
+        icon: imgModules['../images/example/notify.png'].default,
         name: t('statustip-que-sheng-ti-shi')
       },
       {
         id: 'swipeAction',
+        icon: imgModules['../images/example/swipeAction.png'].default,
         name: t('swipeaction-hua-dong-cao-zuo')
       },
       {
         id: 'toast',
+        icon: imgModules['../images/example/toast.png'].default,
         name: t('toast-qing-ti-shi')
       },
       {
         id: 'notify',
+        icon: imgModules['../images/example/notify.png'].default,
         name: t('notify-xiao-xi-tong-zhi')
       },
       {
         id: 'tooltip',
+        icon: imgModules['../images/example/tooltip.png'].default,
         name: t('tooltip-wen-zi-ti-shi')
       },
       {
         id: 'countDown',
+        icon: imgModules['../images/example/countDown.png'].default,
         name: t('countdown-dao-ji-shi')
       },
       {
         id: 'countTo',
+        icon: imgModules['../images/example/countTo.png'].default,
         name: t('countto-shu-zi-gun-dong')
       },
       {
         id: 'keyboard',
+        icon: imgModules['../images/example/keyboard.png'].default,
         name: t('keyboard-xu-ni-jian-pan')
       },
       {
         id: 'numberKeyboard',
+        icon: imgModules['../images/example/field.png'].default,
         name: t('numberkeyboard-shu-zi-jian-pan')
       }
     ]
@@ -334,79 +384,101 @@ const list = computed(() => [
     pages: [
       {
         id: 'badge',
+        icon: imgModules['../images/example/badge.png'].default,
         name: t('badge-hui-biao')
       },
       {
         id: 'card',
+        icon: imgModules['../images/example/card.png'].default,
         name: t('card-ka-pian')
       },
       {
         id: 'cell',
+        icon: imgModules['../images/example/cell.png'].default,
         name: t('cell-dan-yuan-ge')
       },
       {
         id: 'collapse',
+        icon: imgModules['../images/example/collapse.png'].default,
         name: t('collapse-zhe-die-mian-ban')
       },
       {
         id: 'curtain',
+        icon: imgModules['../images/example/popup.png'].default,
         name: t('curtain-mu-lian')
       },
       {
         id: 'divider',
+        icon: imgModules['../images/example/divider.png'].default,
         name: t('divider-fen-ge-xian')
       },
       {
         id: 'gap',
+        icon: imgModules['../images/example/gap.png'].default,
         name: t('gap-jian-ge-cao')
       },
       {
         id: 'img',
+        icon: imgModules['../images/example/image.png'].default,
         name: t('img-tu-pian')
       },
       {
         id: 'imgCropper',
+        icon: imgModules['../images/example/cropper.png'].default,
         name: t('imgcropper-tu-pian-cai-jian')
       },
       {
         id: 'grid',
+        icon: imgModules['../images/example/grid.png'].default,
         name: t('grid-gong-ge')
       },
       {
         id: 'loadmore',
+        icon: imgModules['../images/example/loadmore.png'].default,
         name: t('loadmore-jia-zai-geng-duo')
       },
       {
         id: 'skeleton',
+        icon: imgModules['../images/example/skeleton.png'].default,
         name: t('skeleton-gu-jia-ping')
       },
       {
         id: 'steps',
+        icon: imgModules['../images/example/steps.png'].default,
         name: t('steps-bu-zhou-tiao')
       },
       {
         id: 'sticky',
+        icon: imgModules['../images/example/sticky.png'].default,
         name: t('sticky-xi-ding-bu-ju')
       },
       {
         id: 'tag',
+        icon: imgModules['../images/example/tag.png'].default,
         name: t('tag-biao-qian')
       },
       {
         id: 'watermark',
+        icon: imgModules['../images/example/poster.png'].default,
         name: t('watermark-shui-yin')
       },
       {
         id: 'swiper',
+        icon: imgModules['../images/example/swiper.png'].default,
         name: t('swiper-lun-bo-tu')
       },
       {
         id: 'table',
+        icon: imgModules['../images/example/table.png'].default,
         name: t('table-biao-ge')
       }
     ]
   }
 ])
+
+function getIcon(path: string) {
+  return '../images/example/' + path + '.png'
+}
 
 function handleClick(url: string) {
   uni.navigateTo({
@@ -441,10 +513,6 @@ onShareTimeline(() => {
 <style lang="scss" scoped>
 .wot-theme-dark {
   .page__hd,
-  .kind-list__item {
-    background: $-dark-background2;
-  }
-
   .title {
     color: $-dark-color;
   }
@@ -473,14 +541,9 @@ onShareTimeline(() => {
 
 .page__desc {
   margin-top: 20px;
-  color: #999;
+  color: #000000;
   text-align: left;
   font-size: 12px;
-}
-
-.page__bd {
-  padding: 0 15px 30px 20px;
-  user-select: none;
 }
 
 .logo {
@@ -503,94 +566,13 @@ onShareTimeline(() => {
   font-size: 14px;
 }
 
-.wd-cell_access {
-  padding: 15px 20px;
-}
-
-.wd-cell__ft {
-  padding-right: 16px;
-  position: relative;
-}
-
-.wd-cells {
-  position: relative;
-  margin-top: 0;
-  opacity: 0;
-  transform: translateY(-50%);
-  transition: 0.3s;
-
-  :deep(.wd-cell__label) {
-    color: rgba(0, 0, 0, 0.65);
-  }
-}
-
-.wd-cells_show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.kind-list__item {
-  border-radius: 30px;
-  background: #fff;
-  overflow: hidden;
-
-  &:not(:last-child) {
-    margin-bottom: 20px;
-  }
-}
-
 .kind-list__img {
   width: 20px;
   height: 20px;
 }
 
-.kind-list__item-hd {
-  padding: 15px 30px;
-  transition: opacity 0.3s;
-}
-
-.kind-list__item-bd {
-  height: 0;
-  overflow: hidden;
-}
-
-.kind-list__item-bd_show {
-  height: auto;
-}
-
-.wd-flex {
-  display: flex;
-}
-
-.wd-flex__item {
-  flex: 1;
-}
-
-.title {
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.85);
-}
-
-.page-name {
+.kind-list__text {
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.65);
-}
-
-.wd-tool-right-line-angle::after {
-  content: ' ';
-  display: inline-block;
-  height: 8px;
-  width: 8px;
-  border-width: 2px 2px 0 0;
-  border-color: #b2b2b2;
-  border-style: solid;
-  -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
-  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
-  position: relative;
-  top: -2px;
-  position: absolute;
-  top: 50%;
-  margin-top: -5px;
-  right: 0;
+  color: #000000;
 }
 </style>

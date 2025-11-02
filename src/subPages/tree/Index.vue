@@ -43,7 +43,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const check1 = ref<boolean>(true)
 /**
  * 树节点基础接口 - 与 wd-tree 组件类型保持一致
  */

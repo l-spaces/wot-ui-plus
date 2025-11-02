@@ -47,6 +47,13 @@ export const checkboxProps = {
     default: false
   },
   /**
+   * 半选中状态
+   */
+  indeterminate: {
+    type: Boolean,
+    default: false
+  },
+  /**
    * 设置大小，可选值：large
    */
   size: String,
