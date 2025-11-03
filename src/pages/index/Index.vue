@@ -51,6 +51,11 @@ const list = computed(() => [
     icon: imgModules['../images/icon_nav_widget.png'].default,
     pages: [
       {
+        id: 'avatar',
+        icon: imgModules['../images/example/avatar.png'].default,
+        name: '头像组件'
+      },
+      {
         id: 'waterfall',
         icon: imgModules['../images/example/waterfall.png'].default,
         name: '瀑布流组件'

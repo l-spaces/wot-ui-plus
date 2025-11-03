@@ -25,14 +25,14 @@
  * 
  * @example
  * // 使用 BEM 规范创建按钮组件
- * @include b(button) {
+ * @include b(button) {      .wot-button
  *   // 按钮基础样式
  *   
- *   @include e(text) {
+ *   @include e(text) {      .wot-button__text
  *     // 按钮文字样式
  *   }
  *   
- *   @include m(primary) {
+ *   @include m(primary) {   .wot-button--primary
  *     // 主要按钮样式
  *   }
  * }

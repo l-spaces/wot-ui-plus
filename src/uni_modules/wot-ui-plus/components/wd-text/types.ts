@@ -20,10 +20,10 @@ export const textProps = {
   text: makeNumericProp(''),
   /**
    * 字体大小
-   * 类型：string
-   * 默认值：'空字符串'
+   * 类型：number | string
+   * 默认值：0
    */
-  size: makeStringProp(''),
+  size: makeNumericProp(''),
   /**
    * 文本处理的匹配模式
    * 可选值：'text-普通文本' / 'date - 日期' / 'phone - 手机号' / 'name - 姓名' / 'price - 金额'

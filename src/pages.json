@@ -50,7 +50,22 @@
     {
       "root": "subPages",
       "pages": [
-                {
+        {
+          "path": "avatar/Index",
+          "name": "avatar",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "头像组件",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%avatar-title%"
+            // #endif
+          }
+        },
+        {
           "path": "waterfall/Index",
           "name": "waterfall",
           "style": {
@@ -1402,7 +1417,7 @@
         "iconPath": "static/icon/app.png",
         "selectedIconPath": "static/icon/app_selected.png"
       },
-            {
+      {
         "pagePath": "pages/demo/Index",
         "text": "测试",
         "iconPath": "static/icon/app.png",

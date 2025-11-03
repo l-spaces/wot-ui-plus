@@ -1,0 +1,27 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(avatar) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include m(circle) {
+    border-radius: 100px;
+  }
+
+  @include m(square) {
+    border-radius: 4px;
+  }
+
+  @include e(image) {
+    @include m(circle) {
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    @include m(square) {
+      border-radius: 4px;
+    }
+  }
+}
