@@ -26,12 +26,21 @@ const state = ref<any>('loading')
 const num = ref<number>(0)
 const max = ref<number>(60)
 
+/**
+ * 监听页面滚动到底部事件
+ * 当列表数量达到45条时，模拟加载失败，将状态置为错误
+ * 若当前数量小于最大限制，则继续加载下一页数据
+ * 当数量达到最大限制时，标记为已加载全部，状态置为完成
+ */
 onReachBottom(() => {
+  // 当列表数量达到45条时，模拟加载失败，将状态置为错误
   if (num.value === 45) {
     state.value = 'error'
   } else if (num.value < max.value) {
+    // 若当前数量小于最大限制，则继续加载下一页数据
     loadmore()
   } else if (num.value === max.value) {
+    // 当数量达到最大限制时，标记为已加载全部，状态置为完成
     state.value = 'finished'
   }
 })
@@ -44,7 +53,7 @@ function loadmore() {
   setTimeout(() => {
     num.value = num.value + 15
     state.value = 'loading'
-  }, 200)
+  }, 1500)
 }
 </script>
 <style lang="scss" scoped>

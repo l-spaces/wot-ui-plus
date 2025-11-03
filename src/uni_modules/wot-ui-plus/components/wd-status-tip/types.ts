@@ -59,7 +59,7 @@ export const statusTipProps = {
    * 类型: string
    * 默认值: https://registry.npmmirror.com/wot-ui-plus-assets/*\/files/
    */
-  urlPrefix: makeStringProp('https://registry.npmmirror.com/wot-ui-plus-assets/*/files/')
+  urlPrefix: makeStringProp('https://registry.npmmirror.com/wot-design-uni-assets/*/files/')
 }
 
 export type StatusTipProps = ExtractPropTypes<typeof statusTipProps>
