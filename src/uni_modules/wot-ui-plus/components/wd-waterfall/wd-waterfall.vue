@@ -213,7 +213,7 @@ function modify(id: string | number, key: string, value: any) {
   }
 
   // 修改父组件的数据中的对应id的条目
-  const flowIndex = flowList.value.findIndex((val) => val[props.idKey as keyof typeof val] == id)
+  const flowIndex = flowList.value.findIndex((val) => (val as any)[props.idKey] == id)
   if (flowIndex !== -1) {
     // 复制一份数据进行修改，避免直接修改原数组
     const newList = cloneData(flowList.value)

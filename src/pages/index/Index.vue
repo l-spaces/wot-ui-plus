@@ -45,6 +45,24 @@ const imgModules: any = import.meta.glob(['../images/*.png', '../images/example/
 // 使用computed使list响应语言变化
 const list = computed(() => [
   {
+    id: 'added',
+    name: '新增',
+    open: true,
+    icon: imgModules['../images/icon_nav_widget.png'].default,
+    pages: [
+      {
+        id: 'waterfall',
+        icon: imgModules['../images/example/waterfall.png'].default,
+        name: '瀑布流组件'
+      },
+      {
+        id: 'tree',
+        icon: imgModules['../images/example/tree.png'].default,
+        name: '树形组件'
+      }
+    ]
+  },
+  {
     id: 'widget',
     name: t('ji-chu'),
     open: true,

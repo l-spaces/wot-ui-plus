@@ -5,7 +5,7 @@ export const waterfallProps = {
   ...baseProps,
 
   // 瀑布流数据
-  modelValue: makeArrayProp<[]>(),
+  modelValue: makeArrayProp(),
 
   // 每次向结构插入数据的时间间隔，间隔越长，越能保证两列高度相近，但是对用户体验越不好
   // 单位ms

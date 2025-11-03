@@ -50,6 +50,36 @@
     {
       "root": "subPages",
       "pages": [
+                {
+          "path": "waterfall/Index",
+          "name": "waterfall",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "瀑布流组件",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%waterfall-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "tree/Index",
+          "name": "tree",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "树形组件",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%tree-title%"
+            // #endif
+          }
+        },
         {
           "path": "button/Index",
           "name": "button",
