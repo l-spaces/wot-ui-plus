@@ -1,5 +1,5 @@
 import type { ExtractPropTypes } from 'vue'
-import { baseProps, makeArrayProp, makeBooleanProp, makeNumericProp, makeStringProp } from '../common/props'
+import { baseProps, makeArrayProp, makeNumericProp, makeStringProp } from '../common/props'
 
 export const waterfallProps = {
   ...baseProps,

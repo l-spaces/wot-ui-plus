@@ -1,6 +1,6 @@
 <template>
-  <view class="u-waterfall">
-    <view v-for="(columnList, columnIndex) in columns" :key="columnIndex" :id="`u-column-${columnIndex}`" class="u-column">
+  <view class="wd-waterfall">
+    <view v-for="(columnList, columnIndex) in columns" :key="columnIndex" :id="`wd-column-${columnIndex}`" class="wd-waterfall--column">
       <slot :columnList="columnList" :columnIndex="columnIndex"></slot>
     </view>
   </view>
@@ -31,7 +31,6 @@ const emit = defineEmits<{
 // 响应式数据
 const columns = ref<any[][]>([])
 const tempList = ref<any[]>([])
-const children = ref<any[]>([])
 
 // 计算属性
 const flowList = computed(() => props.modelValue)
@@ -88,7 +87,7 @@ async function splitData() {
   const columnHeights: number[] = []
   for (let i = 0; i < columns.value.length; i++) {
     try {
-      const rect = await getElementRect(`#u-column-${i}`)
+      const rect = await getElementRect(`#wd-column-${i}`)
       columnHeights.push(rect ? rect.height : 0)
     } catch (error) {
       columnHeights.push(0)
@@ -222,6 +221,13 @@ function modify(id: string | number, key: string, value: any) {
     emit('update:modelValue', newList)
   }
 }
+
+// 暴露方法给组件外部使用
+defineExpose({
+  clear,
+  remove,
+  modify
+})
 </script>
 
 <style lang="scss" scoped>

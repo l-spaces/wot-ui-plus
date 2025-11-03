@@ -1,18 +1,15 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
-
-.u-waterfall {
-  @include flex(row);
+@include b(waterfall) {
+  display: flex;
+  flex-direction: row;
   align-items: flex-start;
-}
 
-.u-column {
-  @include flex(column);
-  flex: 1;
-  height: auto;
-}
-
-.u-image {
-  width: 100%;
+  @include m(column) {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: auto;
+  }
 }
