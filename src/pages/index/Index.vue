@@ -56,6 +56,11 @@ const list = computed(() => [
         name: '头像组件'
       },
       {
+        id: 'lazyLoad',
+        icon: imgModules['../images/example/lazyLoad.png'].default,
+        name: '懒加载组件'
+      },
+      {
         id: 'waterfall',
         icon: imgModules['../images/example/waterfall.png'].default,
         name: '瀑布流组件'

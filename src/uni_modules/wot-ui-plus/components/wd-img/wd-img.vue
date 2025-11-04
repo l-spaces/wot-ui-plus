@@ -34,7 +34,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { addUnit, isDef, objToStyle } from '../common/util'
 import { imgProps } from './types'
 
@@ -65,6 +65,14 @@ const rootClass = computed(() => {
 })
 
 const status = ref<'loading' | 'error' | 'success'>('loading')
+
+// 监听src属性变化，当图片源改变时重置状态为loading
+watch(
+  () => props.src,
+  () => {
+    status.value = 'loading'
+  }
+)
 
 function handleError(event: any) {
   status.value = 'error'

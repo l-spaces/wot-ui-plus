@@ -3,9 +3,9 @@
 
 @include b(tree) {
   @include e(nodes) {
-
-   @include m(wrapper) {
-      @include flex(row);
+    @include m(wrapper) {
+      display: flex;
+      flex-direction: row;
       align-items: center;
     }
   }
@@ -14,13 +14,13 @@
     margin-right: 6px;
   }
 
-   @include e(content) {
+  @include e(content) {
     flex: 1;
     border-radius: 4px;
     padding: 2px 0px;
   }
 
-   @include e(label) {
+  @include e(label) {
     display: inline-block;
     font-size: 14px;
     border-radius: 4px;

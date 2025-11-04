@@ -8,3 +8,7 @@
     content: "";
   }
 }
+
+.wd-row {
+  @include flex;
+}

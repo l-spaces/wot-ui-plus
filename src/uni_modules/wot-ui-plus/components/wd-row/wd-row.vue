@@ -43,8 +43,4 @@ const rowStyle = computed(() => {
 </script>
 <style lang="scss" scoped>
 @import './index.scss';
-
-.wd-row {
-  @include flex;
-}
 </style>

@@ -3,7 +3,7 @@
     <wd-waterfall v-model="flowList" :column="columns" ref="waterfallRef">
       <template #default="{ columnList }">
         <view class="demo-warter" v-for="(item, index) in columnList" :key="index">
-          <wd-img :src="item.image" class="demo-image" />
+          <wd-lazy-load threshold="-450" round="10" :image="item.image" :index="index" />
           <view class="demo-title">{{ item.title }}</view>
           <view class="demo-price">{{ item.price }}元</view>
           <view class="demo-tag">

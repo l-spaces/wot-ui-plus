@@ -66,6 +66,21 @@
           }
         },
         {
+          "path": "lazyLoad/Index",
+          "name": "lazyLoad",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "懒加载组件",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%lazyLoad-title%"
+            // #endif
+          }
+        },
+        {
           "path": "waterfall/Index",
           "name": "waterfall",
           "style": {
