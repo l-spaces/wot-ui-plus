@@ -1,21 +1,28 @@
 <template>
   <view class="wd-page">
-    <wd-card title="基础用法">
+    <demo-block title="基础用法">
       <wd-tree :data="basicData" :default-expanded-keys="['1', '1-1']" expand-on-click checkable />
-    </wd-card>
-    <wd-card title="隐藏箭头">
+    </demo-block>
+    <demo-block title="隐藏箭头">
       <wd-tree :data="basicData" :default-expanded-keys="['1', '1-1']" :show-switcher="false" expand-on-click checkable />
-    </wd-card>
+    </demo-block>
 
-    <wd-card title="自定义图标">
-      <wd-tree :data="basicData" :default-expanded-keys="['1', '1-1']" expand-icon="plus" collapse-icon="minus" expand-on-click selectable />
-    </wd-card>
+    <demo-block title="自定义图标">
+      <wd-tree
+        :data="basicData"
+        :default-expanded-keys="['1', '1-1']"
+        expand-icon="unfold-more"
+        collapse-icon="unfold-less"
+        expand-on-click
+        selectable
+      />
+    </demo-block>
 
-    <wd-card title="自定义字段名">
-      <wd-tree :data="customFieldData" :default-expanded-keys="['1', '1-1']" key-field="id" label-field="name" children-field="items" selectable />
-    </wd-card>
+    <demo-block title="自定义字段名">
+      <wd-tree :data="customFieldData" :default-expanded-keys="['1', '1-1']" key-field="key" label-field="name" children-field="items" selectable />
+    </demo-block>
 
-    <wd-card title="级联选择">
+    <demo-block title="级联选择">
       <wd-tree
         :data="cascadeData"
         cascade
@@ -27,16 +34,16 @@
       <view class="checked-info">
         <text>已选中: {{ checkedKeys.join(', ') || '无' }}</text>
       </view>
-    </wd-card>
+    </demo-block>
 
-    <wd-card title="搜索过滤">
+    <demo-block title="搜索过滤">
       <wd-input v-model="searchPattern" placeholder="输入节点名称搜索" :clearable="true" />
       <wd-tree :data="searchData" expand-on-click :pattern="searchPattern" :show-irrelevant-nodes="showIrrelevantNodes" />
-    </wd-card>
+    </demo-block>
 
-    <wd-card title="异步加载">
+    <demo-block title="异步加载">
       <wd-tree :data="asyncData" :load-node="loadNodeData" />
-    </wd-card>
+    </demo-block>
   </view>
 </template>
 
@@ -48,7 +55,7 @@ import { ref } from 'vue'
  */
 interface TreeNode {
   label: string
-  key: string
+  id: string
   children?: TreeNode[]
   isLeaf?: boolean
   tag?: string
@@ -59,7 +66,7 @@ interface TreeNode {
  */
 interface CustomTreeNode {
   name: string
-  id: string
+  key: string
   items?: CustomTreeNode[]
 }
 
@@ -67,7 +74,7 @@ interface CustomTreeNode {
  * 树节点加载函数参数接口 - 用于异步加载场景
  */
 interface LoadNodeParams {
-  key: string
+  id: string
   label: string
   children?: TreeNode[]
 }
@@ -76,37 +83,37 @@ interface LoadNodeParams {
 const basicData = ref<TreeNode[]>([
   {
     label: '技术部',
-    key: '1',
+    id: '1',
     children: [
       {
         label: '前端组',
-        key: '1-1',
+        id: '1-1',
         children: [
           {
             label: 'Vue开发',
-            key: '1-1-1',
+            id: '1-1-1',
             children: [
               {
                 label: '组件库开发',
-                key: '1-1-1-1'
+                id: '1-1-1-1'
               },
               {
                 label: '页面开发',
-                key: '1-1-1-2'
+                id: '1-1-1-2'
               }
             ]
           },
           {
             label: 'React开发',
-            key: '1-1-2',
+            id: '1-1-2',
             children: [
               {
                 label: 'Hooks开发',
-                key: '1-1-2-1'
+                id: '1-1-2-1'
               },
               {
                 label: '状态管理',
-                key: '1-1-2-2'
+                id: '1-1-2-2'
               }
             ]
           }
@@ -114,11 +121,11 @@ const basicData = ref<TreeNode[]>([
       },
       {
         label: '后端组',
-        key: '1-2',
+        id: '1-2',
         children: [
-          { label: 'Java开发', key: '1-2-1' },
-          { label: 'Python开发', key: '1-2-2' },
-          { label: '数据库设计', key: '1-2-3' }
+          { label: 'Java开发', id: '1-2-1' },
+          { label: 'Python开发', id: '1-2-2' },
+          { label: '数据库设计', id: '1-2-3' }
         ]
       }
     ]
@@ -129,34 +136,34 @@ const basicData = ref<TreeNode[]>([
 const customFieldData = ref<CustomTreeNode[]>([
   {
     name: '电子产品',
-    id: '1',
+    key: '1',
     items: [
       {
         name: '手机数码',
-        id: '1-1',
+        key: '1-1',
         items: [
           {
             name: '智能手机',
-            id: '1-1-1',
+            key: '1-1-1',
             items: [
               {
                 name: 'iPhone系列',
-                id: '1-1-1-1'
+                key: '1-1-1-1'
               },
               {
                 name: 'Android系列',
-                id: '1-1-1-2'
+                key: '1-1-1-2'
               }
             ]
           },
           {
             name: '平板电脑',
-            id: '1-1-2',
+            key: '1-1-2',
             items: [
-              { name: 'iPad', id: '1-1-2-1' },
+              { name: 'iPad', key: '1-1-2-1' },
               {
                 name: 'Android平板',
-                id: '1-1-2-2'
+                key: '1-1-2-2'
               }
             ]
           }
@@ -164,11 +171,11 @@ const customFieldData = ref<CustomTreeNode[]>([
       },
       {
         name: '电脑办公',
-        id: '1-2',
+        key: '1-2',
         items: [
-          { name: '笔记本电脑', id: '1-2-1' },
-          { name: '台式电脑', id: '1-2-2' },
-          { name: '办公设备', id: '1-2-3' }
+          { name: '笔记本电脑', key: '1-2-1' },
+          { name: '台式电脑', key: '1-2-2' },
+          { name: '办公设备', key: '1-2-3' }
         ]
       }
     ]
@@ -179,33 +186,33 @@ const customFieldData = ref<CustomTreeNode[]>([
 const cascadeData = ref<TreeNode[]>([
   {
     label: '文件系统',
-    key: '0',
+    id: '0',
     children: [
       {
         label: '文档',
-        key: '0-0',
+        id: '0-0',
         children: [
-          { label: '工作文档', key: '0-0-0' },
-          { label: '学习资料', key: '0-0-1' },
-          { label: '项目文件', key: '0-0-2' }
+          { label: '工作文档', id: '0-0-0' },
+          { label: '学习资料', id: '0-0-1' },
+          { label: '项目文件', id: '0-0-2' }
         ]
       },
       {
         label: '媒体',
-        key: '0-1',
+        id: '0-1',
         children: [
-          { label: '图片', key: '0-1-0' },
-          { label: '视频', key: '0-1-1' },
-          { label: '音频', key: '0-1-2' }
+          { label: '图片', id: '0-1-0' },
+          { label: '视频', id: '0-1-1' },
+          { label: '音频', id: '0-1-2' }
         ]
       },
       {
         label: '应用程序',
-        key: '0-2',
+        id: '0-2',
         children: [
-          { label: '系统工具', key: '0-2-0' },
-          { label: '办公软件', key: '0-2-1' },
-          { label: '娱乐软件', key: '0-2-2' }
+          { label: '系统工具', id: '0-2-0' },
+          { label: '办公软件', id: '0-2-1' },
+          { label: '娱乐软件', id: '0-2-2' }
         ]
       }
     ]
@@ -216,33 +223,33 @@ const cascadeData = ref<TreeNode[]>([
 const searchData = ref<TreeNode[]>([
   {
     label: '项目管理',
-    key: '0',
+    id: '0',
     children: [
       {
         label: '需求分析',
-        key: '0-0',
+        id: '0-0',
         children: [
-          { label: '用户调研', key: '0-0-0' },
-          { label: '功能规划', key: '0-0-1' },
-          { label: '原型设计', key: '0-0-2' }
+          { label: '用户调研', id: '0-0-0' },
+          { label: '功能规划', id: '0-0-1' },
+          { label: '原型设计', id: '0-0-2' }
         ]
       },
       {
         label: '开发阶段',
-        key: '0-1',
+        id: '0-1',
         children: [
-          { label: '前端开发', key: '0-1-0' },
-          { label: '后端开发', key: '0-1-1' },
-          { label: '测试调试', key: '0-1-2' }
+          { label: '前端开发', id: '0-1-0' },
+          { label: '后端开发', id: '0-1-1' },
+          { label: '测试调试', id: '0-1-2' }
         ]
       },
       {
         label: '部署上线',
-        key: '0-2',
+        id: '0-2',
         children: [
-          { label: '环境配置', key: '0-2-0' },
-          { label: '数据迁移', key: '0-2-1' },
-          { label: '监控运维', key: '0-2-2' }
+          { label: '环境配置', id: '0-2-0' },
+          { label: '数据迁移', id: '0-2-1' },
+          { label: '监控运维', id: '0-2-2' }
         ]
       }
     ]
@@ -253,17 +260,17 @@ const searchData = ref<TreeNode[]>([
 const asyncData = ref<TreeNode[]>([
   {
     label: '在线课程',
-    key: '1',
+    id: '1',
     children: []
   },
   {
     label: '技术文档',
-    key: '2',
+    id: '2',
     children: []
   },
   {
     label: '开源项目',
-    key: '3',
+    id: '3',
     children: []
   }
 ])
@@ -272,49 +279,49 @@ const asyncData = ref<TreeNode[]>([
 const slotData = ref<TreeNode[]>([
   {
     label: '前端框架',
-    key: '1',
+    id: '1',
     tag: '热门',
     children: [
       {
         label: 'Vue.js',
-        key: '1-1',
+        id: '1-1',
         tag: '推荐',
         children: [
           {
             label: 'Vue 3.0',
-            key: '1-1-1',
+            id: '1-1-1',
             tag: '最新'
           },
-          { label: 'Vue 2.0', key: '1-1-2' }
+          { label: 'Vue 2.0', id: '1-1-2' }
         ]
       },
       {
         label: 'React',
-        key: '1-2',
+        id: '1-2',
         tag: '流行',
         children: [
           {
             label: 'React 18',
-            key: '1-2-1',
+            id: '1-2-1',
             tag: '最新'
           },
-          { label: 'Next.js', key: '1-2-2' }
+          { label: 'Next.js', id: '1-2-2' }
         ]
       }
     ]
   },
   {
     label: '后端技术',
-    key: '2',
+    id: '2',
     tag: '稳定',
     children: [
       {
         label: 'Node.js',
-        key: '2-1',
+        id: '2-1',
         tag: '高效',
         children: [
-          { label: 'Express', key: '2-1-1' },
-          { label: 'Koa', key: '2-1-2' }
+          { label: 'Express', id: '2-1-1' },
+          { label: 'Koa', id: '2-1-2' }
         ]
       }
     ]
@@ -346,24 +353,24 @@ const loadNodeData = (node: LoadNodeParams): Promise<boolean> => {
       // 根据节点key加载不同的子节点数据
       const childrenMap: Record<string, TreeNode[]> = {
         '1': [
-          { label: 'Vue.js 基础教程', key: '1-1', isLeaf: true },
-          { label: 'React 入门指南', key: '1-2', isLeaf: true },
-          { label: 'TypeScript 实战', key: '1-3', isLeaf: true }
+          { label: 'Vue.js 基础教程', id: '1-1', isLeaf: true },
+          { label: 'React 入门指南', id: '1-2', isLeaf: true },
+          { label: 'TypeScript 实战', id: '1-3', isLeaf: true }
         ],
         '2': [
-          { label: 'API 接口文档', key: '2-1' },
-          { label: '组件使用说明', key: '2-2' },
-          { label: '最佳实践指南', key: '2-3' }
+          { label: 'API 接口文档', id: '2-1' },
+          { label: '组件使用说明', id: '2-2' },
+          { label: '最佳实践指南', id: '2-3' }
         ],
         '3': [
-          { label: 'UI 组件库', key: '3-1' },
-          { label: '工具函数库', key: '3-2' },
-          { label: '示例项目', key: '3-3' }
+          { label: 'UI 组件库', id: '3-1' },
+          { label: '工具函数库', id: '3-2' },
+          { label: '示例项目', id: '3-3' }
         ]
       }
 
       // 设置子节点数据
-      node.children = childrenMap[node.key] || []
+      node.children = childrenMap[node.id] || []
       resolve(true)
     }, 1000)
   })

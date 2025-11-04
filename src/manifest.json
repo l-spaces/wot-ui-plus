@@ -1,9 +1,9 @@
 {
-    "name" : "Wot组件库",
-    "appid" : "__UNI__14C7B3C",
-    "description" : "Wot UI 组件库",
-    "versionName" : "1.0.0",
-    "versionCode" : "100",
+    "name" : "Wot UI Plus组件库",
+    "appid" : "__UNI__1AD368C",
+    "description" : "Wot UI Plus组件库",
+    "versionName" : "3.0.0",
+    "versionCode" : 1,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
@@ -46,8 +46,8 @@
             /* SDK配置 */
             "sdkConfigs" : {}
         },
-        "compatible": {  
-          "ignoreVersion": true 
+        "compatible" : {
+            "ignoreVersion" : true
         }
     },
     /* 快应用特有相关 */
@@ -56,9 +56,10 @@
     "mp-weixin" : {
         "darkmode" : true,
         "themeLocation" : "theme.json",
-        "appid" : "wx18107b71aa1672e2",
+        "appid" : "wx1431ce4de4555283",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "minified" : true
         },
         "usingComponents" : true
     },
@@ -75,6 +76,14 @@
             "treeShaking" : {
                 "enable" : true
             }
+        },
+        "title" : "Wot-UI-Plus",
+        "router" : {
+            "mode" : "hash",
+            "base" : "/"
+        },
+        "devServer" : {
+            "port" : 5273
         }
     },
     "mp-baidu" : {
@@ -86,5 +95,7 @@
     "uniStatistics" : {
         "enable" : false
     },
-    "vueVersion" : "3"
+    "vueVersion" : "3",
+    "locale" : "zh-Hans",
+    "fallbackLocale" : "zh-Hans"
 }

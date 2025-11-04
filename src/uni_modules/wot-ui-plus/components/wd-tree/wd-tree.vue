@@ -51,7 +51,7 @@ import { treeProps } from './types'
 
 // 定义节点类型接口
 interface TreeNode {
-  [key: string]: any
+  [id: string]: any
   __level?: number
   __matched?: boolean
 }

@@ -1,10 +1,10 @@
 <template>
   <page-wraper>
-    <wd-card title="基础演示">
+    <demo-block title="基础演示">
       <wd-avatar :src="src1"></wd-avatar>
-    </wd-card>
+    </demo-block>
 
-    <wd-card title="头像形状">
+    <demo-block title="头像形状">
       <view class="avatar-row">
         <view class="u-avatar-item">
           <wd-avatar :src="src2" shape="circle" @click="click"></wd-avatar>
@@ -13,9 +13,9 @@
           <wd-avatar :src="src3" shape="square"></wd-avatar>
         </view>
       </view>
-    </wd-card>
+    </demo-block>
 
-    <wd-card title="头像尺寸">
+    <demo-block title="头像尺寸">
       <view class="avatar-row">
         <view class="u-avatar-item">
           <wd-avatar :src="src4" size="30"></wd-avatar>
@@ -27,9 +27,9 @@
           <wd-avatar :src="src6" size="50"></wd-avatar>
         </view>
       </view>
-    </wd-card>
+    </demo-block>
 
-    <wd-card title="图标头像">
+    <demo-block title="图标头像">
       <view class="avatar-row">
         <view class="u-avatar-item">
           <wd-avatar icon="apple" fontSize="22"></wd-avatar>
@@ -38,9 +38,9 @@
           <wd-avatar icon="ie" fontSize="22"></wd-avatar>
         </view>
       </view>
-    </wd-card>
+    </demo-block>
 
-    <wd-card title="文字头像(自动背景色)">
+    <demo-block title="文字头像(自动背景色)">
       <view class="avatar-row">
         <view class="u-avatar-item">
           <wd-avatar text="A" fontSize="20" randomBgColor :colorIndex="0"></wd-avatar>
@@ -58,26 +58,32 @@
           <wd-avatar text="李" fontSize="18" randomBgColor></wd-avatar>
         </view>
       </view>
-    </wd-card>
+    </demo-block>
 
-    <wd-card title="图片加载失败(显示默认头像)">
+    <demo-block title="图片加载失败(显示默认头像)">
       <wd-avatar :src="src7"></wd-avatar>
-    </wd-card>
+    </demo-block>
     <!-- #ifdef MP-WEIXIN || MP-QQ || MP-BAIDU -->
-    <wd-card title="小程序开放能力">
+    <demo-block title="小程序开放能力">
       <view class="avatar-row">
         <view class="u-avatar-item">
-          <wd-avatar mpAvatar size="60"></wd-avatar>
+          <wd-avatar mpAvatar size="50"></wd-avatar>
         </view>
       </view>
-    </wd-card>
+    </demo-block>
     <!-- #endif -->
+
+    <demo-block title="头像组">
+      <wd-avatar-group :urls="urls" size="35" gap="0.4"></wd-avatar-group>
+      <view style="margin-top: 20px">
+        <wd-avatar-group :urls="urls" size="35" gap="0.6"></wd-avatar-group>
+      </view>
+    </demo-block>
   </page-wraper>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { onLoad, onReachBottom } from '@dcloudio/uni-app'
 
 const src1 = ref('https://cdn.uviewui.com/uview/album/1.jpg')
 const src2 = ref('https://cdn.uviewui.com/uview/album/2.jpg')

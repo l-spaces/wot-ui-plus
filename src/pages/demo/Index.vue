@@ -1,411 +1,234 @@
 <template>
-  <view class="wd-page">
-    <wd-card title="基础用法">
-      <wd-tree :data="basicData" :default-expanded-keys="['1', '1-1']" expand-on-click checkable />
-    </wd-card>
-    <wd-card title="隐藏箭头">
-      <wd-tree :data="basicData" :default-expanded-keys="['1', '1-1']" :show-switcher="false" expand-on-click checkable />
-    </wd-card>
-
-    <wd-card title="自定义图标">
-      <wd-tree :data="basicData" :default-expanded-keys="['1', '1-1']" expand-icon="plus" collapse-icon="minus" expand-on-click selectable />
-    </wd-card>
-
-    <wd-card title="自定义字段名">
-      <wd-tree :data="customFieldData" :default-expanded-keys="['1', '1-1']" key-field="id" label-field="name" children-field="items" selectable />
-    </wd-card>
-
-    <wd-card title="级联选择">
-      <wd-tree
-        :data="cascadeData"
-        cascade
-        :default-expanded-keys="['0', '0-0', '0-1', '0-2']"
-        :default-checked-keys="['0-0-0']"
-        @checked="updateCheckedKeys"
-        checkable
-      />
-      <view class="checked-info">
-        <text>已选中: {{ checkedKeys.join(', ') || '无' }}</text>
-      </view>
-    </wd-card>
-
-    <wd-card title="搜索过滤">
-      <wd-input v-model="searchPattern" placeholder="输入节点名称搜索" :clearable="true" />
-      <wd-tree :data="searchData" expand-on-click :pattern="searchPattern" :show-irrelevant-nodes="showIrrelevantNodes" />
-    </wd-card>
-
-    <wd-card title="异步加载">
-      <wd-tree :data="asyncData" :load-node="loadNodeData" />
-    </wd-card>
-  </view>
+  <page-wraper>
+    <wd-waterfall v-model="flowList" :column="columns" ref="waterfallRef">
+      <template #default="{ columnList }">
+        <view class="demo-warter" v-for="(item, index) in columnList" :key="index">
+          <wd-img :src="item.image" width="100%" :height="100" radius="10" class="demo-image" />
+          <view class="demo-title">{{ item.title }}</view>
+          <view class="demo-price">{{ item.price }}元</view>
+          <view class="demo-tag">
+            <view class="demo-tag-owner">自营</view>
+            <view class="demo-tag-text">放心购</view>
+          </view>
+          <view class="demo-shop">{{ item.shop }}</view>
+          <view class="wd-close">
+            <wd-icon name="close" color="#fa3534" size="15" @click="handleRemove(item.id)" />
+          </view>
+        </view>
+      </template>
+    </wd-waterfall>
+    <wd-loadmore :state="loadStatus" @reload="loadMoreData"></wd-loadmore>
+  </page-wraper>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { onLoad, onReachBottom } from '@dcloudio/uni-app'
 
-const check1 = ref<boolean>(true)
-/**
- * 树节点基础接口 - 与 wd-tree 组件类型保持一致
- */
-interface TreeNode {
-  label: string
-  key: string
-  children?: TreeNode[]
-  isLeaf?: boolean
-  tag?: string
+// 定义数据类型
+interface ItemData {
+  id?: string
+  price: number
+  title: string
+  shop: string
+  image: string
 }
 
-/**
- * 自定义字段树节点接口 - 用于自定义字段名的场景
- */
-interface CustomTreeNode {
-  name: string
-  id: string
-  items?: CustomTreeNode[]
-}
-
-/**
- * 树节点加载函数参数接口 - 用于异步加载场景
- */
-interface LoadNodeParams {
-  key: string
-  label: string
-  children?: TreeNode[]
-}
-
-// 基础用法数据
-const basicData = ref<TreeNode[]>([
-  {
-    label: '技术部',
-    key: '1',
-    children: [
-      {
-        label: '前端组',
-        key: '1-1',
-        children: [
-          {
-            label: 'Vue开发',
-            key: '1-1-1',
-            children: [
-              {
-                label: '组件库开发',
-                key: '1-1-1-1'
-              },
-              {
-                label: '页面开发',
-                key: '1-1-1-2'
-              }
-            ]
-          },
-          {
-            label: 'React开发',
-            key: '1-1-2',
-            children: [
-              {
-                label: 'Hooks开发',
-                key: '1-1-2-1'
-              },
-              {
-                label: '状态管理',
-                key: '1-1-2-2'
-              }
-            ]
-          }
-        ]
-      },
-      {
-        label: '后端组',
-        key: '1-2',
-        children: [
-          { label: 'Java开发', key: '1-2-1' },
-          { label: 'Python开发', key: '1-2-2' },
-          { label: '数据库设计', key: '1-2-3' }
-        ]
-      }
-    ]
-  }
-])
-
-// 自定义字段数据
-const customFieldData = ref<CustomTreeNode[]>([
-  {
-    name: '电子产品',
-    id: '1',
-    items: [
-      {
-        name: '手机数码',
-        id: '1-1',
-        items: [
-          {
-            name: '智能手机',
-            id: '1-1-1',
-            items: [
-              {
-                name: 'iPhone系列',
-                id: '1-1-1-1'
-              },
-              {
-                name: 'Android系列',
-                id: '1-1-1-2'
-              }
-            ]
-          },
-          {
-            name: '平板电脑',
-            id: '1-1-2',
-            items: [
-              { name: 'iPad', id: '1-1-2-1' },
-              {
-                name: 'Android平板',
-                id: '1-1-2-2'
-              }
-            ]
-          }
-        ]
-      },
-      {
-        name: '电脑办公',
-        id: '1-2',
-        items: [
-          { name: '笔记本电脑', id: '1-2-1' },
-          { name: '台式电脑', id: '1-2-2' },
-          { name: '办公设备', id: '1-2-3' }
-        ]
-      }
-    ]
-  }
-])
-
-// 级联选择数据
-const cascadeData = ref<TreeNode[]>([
-  {
-    label: '文件系统',
-    key: '0',
-    children: [
-      {
-        label: '文档',
-        key: '0-0',
-        children: [
-          { label: '工作文档', key: '0-0-0' },
-          { label: '学习资料', key: '0-0-1' },
-          { label: '项目文件', key: '0-0-2' }
-        ]
-      },
-      {
-        label: '媒体',
-        key: '0-1',
-        children: [
-          { label: '图片', key: '0-1-0' },
-          { label: '视频', key: '0-1-1' },
-          { label: '音频', key: '0-1-2' }
-        ]
-      },
-      {
-        label: '应用程序',
-        key: '0-2',
-        children: [
-          { label: '系统工具', key: '0-2-0' },
-          { label: '办公软件', key: '0-2-1' },
-          { label: '娱乐软件', key: '0-2-2' }
-        ]
-      }
-    ]
-  }
-])
-
-// 搜索数据
-const searchData = ref<TreeNode[]>([
-  {
-    label: '项目管理',
-    key: '0',
-    children: [
-      {
-        label: '需求分析',
-        key: '0-0',
-        children: [
-          { label: '用户调研', key: '0-0-0' },
-          { label: '功能规划', key: '0-0-1' },
-          { label: '原型设计', key: '0-0-2' }
-        ]
-      },
-      {
-        label: '开发阶段',
-        key: '0-1',
-        children: [
-          { label: '前端开发', key: '0-1-0' },
-          { label: '后端开发', key: '0-1-1' },
-          { label: '测试调试', key: '0-1-2' }
-        ]
-      },
-      {
-        label: '部署上线',
-        key: '0-2',
-        children: [
-          { label: '环境配置', key: '0-2-0' },
-          { label: '数据迁移', key: '0-2-1' },
-          { label: '监控运维', key: '0-2-2' }
-        ]
-      }
-    ]
-  }
-])
-
-// 异步加载数据
-const asyncData = ref<TreeNode[]>([
-  {
-    label: '在线课程',
-    key: '1',
-    children: []
-  },
-  {
-    label: '技术文档',
-    key: '2',
-    children: []
-  },
-  {
-    label: '开源项目',
-    key: '3',
-    children: []
-  }
-])
-
-// 插槽自定义数据
-const slotData = ref<TreeNode[]>([
-  {
-    label: '前端框架',
-    key: '1',
-    tag: '热门',
-    children: [
-      {
-        label: 'Vue.js',
-        key: '1-1',
-        tag: '推荐',
-        children: [
-          {
-            label: 'Vue 3.0',
-            key: '1-1-1',
-            tag: '最新'
-          },
-          { label: 'Vue 2.0', key: '1-1-2' }
-        ]
-      },
-      {
-        label: 'React',
-        key: '1-2',
-        tag: '流行',
-        children: [
-          {
-            label: 'React 18',
-            key: '1-2-1',
-            tag: '最新'
-          },
-          { label: 'Next.js', key: '1-2-2' }
-        ]
-      }
-    ]
-  },
-  {
-    label: '后端技术',
-    key: '2',
-    tag: '稳定',
-    children: [
-      {
-        label: 'Node.js',
-        key: '2-1',
-        tag: '高效',
-        children: [
-          { label: 'Express', key: '2-1-1' },
-          { label: 'Koa', key: '2-1-2' }
-        ]
-      }
-    ]
-  }
-])
+type LoadMoreState = 'loading' | 'error' | 'finished'
 
 // 响应式数据
-const checkedKeys = ref<string[]>([])
-const searchPattern = ref<string>('')
-const showIrrelevantNodes = ref<boolean>(false)
+const columns = ref<number>(2)
+const loadStatus = ref<LoadMoreState>('loading')
+const flowList = ref<ItemData[]>([])
+const waterfallRef = ref<any>(null)
 
-/**
- * 级联选择回调函数
- * @param keys - 选中的节点key数组
- */
-const updateCheckedKeys = (keys: string[]): void => {
-  checkedKeys.value = keys
-  console.log('选中的节点：', keys)
+// 预设图片数据
+const imageData = [
+  {
+    price: 35,
+    title: '北国风光，千里冰封，万里雪飘',
+    shop: '李白杜甫白居易旗舰店',
+    image: 'https://scpic.chinaz.net/files/default/imgs/2024-12-20/697347db38cd20d4.jpg'
+  },
+  {
+    price: 75,
+    title: '望长城内外，惟余莽莽',
+    shop: '李白杜甫白居易旗舰店',
+    image: 'https://scpic1.chinaz.net/files/default/imgs/2024-12-21/8834261cfdc8553f_s.jpg'
+  },
+  {
+    price: 385,
+    title: '大河上下，顿失滔滔',
+    shop: '李白杜甫白居易旗舰店',
+    image: 'https://scpic.chinaz.net/files/default/imgs/2024-12-20/6c6a64861a36a034_s.jpg'
+  },
+  {
+    price: 784,
+    title: '欲与天公试比高',
+    shop: '李白杜甫白居易旗舰店',
+    image: 'https://scpic.chinaz.net/files/default/imgs/2024-12-20/4a2c4018bc42c4c7_s.jpg'
+  },
+  {
+    price: 7891,
+    title: '须晴日，看红装素裹，分外妖娆',
+    shop: '李白杜甫白居易旗舰店',
+    image: 'https://scpic.chinaz.net/files/default/imgs/2024-12-16/1fe12b0e5662eeb7_s.jpg'
+  },
+  {
+    price: 2341,
+    shop: '李白杜甫白居易旗舰店',
+    title: '江山如此多娇，引无数英雄竞折腰',
+    image: 'https://scpic3.chinaz.net/files/default/imgs/2024-12-17/107429f63d533b7c_s.jpg'
+  },
+  {
+    price: 661,
+    shop: '李白杜甫白居易旗舰店',
+    title: '惜秦皇汉武，略输文采',
+    image: 'https://scpic3.chinaz.net/files/default/imgs/2024-10-25/d917b43199b24fc1_s.jpg'
+  },
+  {
+    price: 1654,
+    title: '唐宗宋祖，稍逊风骚',
+    shop: '李白杜甫白居易旗舰店',
+    image: 'https://scpic3.chinaz.net/files/default/imgs/2024-11-22/b03192d842a1beea_s.jpg'
+  },
+  {
+    price: 1678,
+    title: '一代天骄，成吉思汗',
+    shop: '李白杜甫白居易旗舰店',
+    image: 'https://scpic3.chinaz.net/files/default/imgs/2024-11-17/4ba96a654e7cf8b1_s.jpg'
+  },
+  {
+    price: 924,
+    title: '只识弯弓射大雕',
+    shop: '李白杜甫白居易旗舰店',
+    image: 'https://scpic3.chinaz.net/files/default/imgs/2024-10-24/746095caea7c22fc_s.jpg'
+  },
+  {
+    price: 8243,
+    title: '俱往矣，数风流人物，还看今朝',
+    shop: '李白杜甫白居易旗舰店',
+    image: 'https://scpic1.chinaz.net/files/default/imgs/2024-10-31/e55effd975a79dc1_s.jpg'
+  }
+]
+
+// 生成随机索引的辅助函数
+const getRandomIndex = (max: number): number => {
+  return Math.floor(Math.random() * max)
 }
 
-/**
- * 异步加载节点数据
- * @param node - 需要加载数据的节点
- * @returns Promise<boolean> - 加载完成状态
- */
-const loadNodeData = (node: LoadNodeParams): Promise<boolean> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      // 根据节点key加载不同的子节点数据
-      const childrenMap: Record<string, TreeNode[]> = {
-        '1': [
-          { label: 'Vue.js 基础教程', key: '1-1', isLeaf: true },
-          { label: 'React 入门指南', key: '1-2', isLeaf: true },
-          { label: 'TypeScript 实战', key: '1-3', isLeaf: true }
-        ],
-        '2': [
-          { label: 'API 接口文档', key: '2-1' },
-          { label: '组件使用说明', key: '2-2' },
-          { label: '最佳实践指南', key: '2-3' }
-        ],
-        '3': [
-          { label: 'UI 组件库', key: '3-1' },
-          { label: '工具函数库', key: '3-2' },
-          { label: '示例项目', key: '3-3' }
-        ]
-      }
-
-      // 设置子节点数据
-      node.children = childrenMap[node.key] || []
-      resolve(true)
-    }, 1000)
-  })
+// 加载更多数据
+const loadMoreData = (): void => {
+  for (let i = 0; i < 10; i++) {
+    const index = getRandomIndex(imageData.length)
+    // 深拷贝避免对象引用导致的数据混乱
+    const item: ItemData = JSON.parse(JSON.stringify(imageData[index]))
+    item.id = `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    flowList.value.push(item)
+  }
 }
+
+// 移除指定索引的项
+const handleRemove = (id: string): void => {
+  waterfallRef.value?.remove(id)
+}
+// 页面加载时初始化数据
+onLoad(() => {
+  loadMoreData()
+  // 模拟初始加载完成
+  setTimeout(() => {
+    loadStatus.value = 'finished'
+  }, 1500)
+})
+
+// 页面滚动到底部时加载更多
+onReachBottom(() => {
+  loadStatus.value = 'loading'
+  // 模拟数据加载延迟
+  setTimeout(() => {
+    loadMoreData()
+    loadStatus.value = 'finished'
+  }, 1000)
+})
 </script>
 
 <style lang="scss" scoped>
-.checked-info {
-  margin-top: 20rpx;
-  padding: 20rpx;
-  background-color: #f8f9fa;
-  border-radius: 8rpx;
-  font-size: 28rpx;
-  color: #666;
+.demo-warter {
+  border-radius: 8px;
+  margin: 5px;
+  background-color: #ffffff;
+  padding: 8px;
+  position: relative;
+  /* #ifdef H5 */
+  cursor: pointer;
+  /* #endif */
+  .wd-close {
+    position: absolute;
+    top: 0px;
+    right: 1px;
+    opacity: 0;
+  }
+  /* #ifdef H5 */
+  &:hover {
+    .wd-close {
+      opacity: 1;
+    }
+  }
+  /* #endif */
 }
 
-.custom-switcher {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32rpx;
-  height: 32rpx;
+.demo-image {
+  width: 100%;
+  height: 100px;
+  border-radius: 10px;
 }
 
-.custom-content {
+.demo-title {
+  font-size: 14px;
+  margin-top: 5px;
+  color: #303133;
+  word-break: break-all;
+}
+
+.demo-tag {
   display: flex;
   flex-direction: row;
+  margin-top: 5px;
+}
+
+.demo-tag-owner {
+  background-color: #f56c6c;
+  color: #ffffff;
+  display: flex;
   align-items: center;
-  justify-content: space-between;
+  padding: 2px 6px;
+  border-radius: 25px;
+  font-size: 10px;
+  line-height: 1;
 }
 
-.custom-label {
-  font-size: 28rpx;
-  color: #333;
+.demo-tag-text {
+  border: 1px solid #409eff;
+  color: #409eff;
+  margin-left: 10px;
+  border-radius: 25px;
+  line-height: 1;
+  padding: 2px 6px;
+  display: flex;
+  align-items: center;
+  border-radius: 25px;
+  font-size: 10px;
 }
 
-.custom-tag {
-  font-size: 20rpx;
-  color: #fff;
-  background-color: #f57c00;
-  padding: 4rpx 8rpx;
-  border-radius: 4rpx;
+.demo-price {
+  font-size: 15px;
+  color: #f56c6c;
+  margin-top: 5px;
+}
+
+.demo-shop {
+  font-size: 11px;
+  color: #909399;
+  margin-top: 5px;
 }
 </style>

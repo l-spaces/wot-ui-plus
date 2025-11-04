@@ -9,7 +9,7 @@ export const treeProps = {
   // 数据
   data: makeArrayProp<Record<string, any>>(),
   // 选项名称映射的字段名
-  keyField: makeStringProp('key'),
+  keyField: makeStringProp('id'),
   // 展示值映射的字段名
   labelField: makeStringProp('label'),
   // 子级值映射的字段名
