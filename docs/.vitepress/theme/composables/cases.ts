@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2025-08-30 13:06:10
- * @LastEditTime: 2025-09-21 19:53:02
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-ui-plus/docs/.vitepress/theme/composables/cases.ts
- * 记得注释
- */
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 

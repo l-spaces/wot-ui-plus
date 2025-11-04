@@ -12,7 +12,7 @@ import { onLaunch, onShow, onHide, onThemeChange } from '@dcloudio/uni-app'
 import { useDark } from './store'
 import { useI18nSync } from './hooks/useI18nSync'
 import { useIframeMessage } from './hooks/useIframeMessage'
-import { getSystemInfo } from './uni_modules/wot-design-uni/components/common/util'
+import { getSystemInfo } from './uni_modules/wot-ui-plus/components/common/util'
 
 /**
  * 深色模式状态管理实例
@@ -106,7 +106,7 @@ onHide(() => {
 })
 </script>
 <style lang="scss">
-@import './iconfont/index.css';
+@import '@/iconfont/index.css';
 
 ::-webkit-scrollbar {
   width: 0;
