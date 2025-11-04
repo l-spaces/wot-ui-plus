@@ -29,7 +29,7 @@
 import { ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import { useToast } from '@/uni_modules/wot-ui-plus'
-import { addUnit } from '@/uni_modules/wot-ui-plus/components/common/util'
+import { addUnit, getSystemInfo } from '@/uni_modules/wot-ui-plus/components/common/util'
 
 const { show } = useToast()
 
@@ -45,7 +45,7 @@ const handleHeightChange = ({ height }: { height: number }) => {
 }
 
 onLoad(() => {
-  windowHeight.value = uni.getSystemInfoSync().windowHeight
+  windowHeight.value = getSystemInfo().windowHeight
   anchors.value = [100, Math.round(0.4 * windowHeight.value), Math.round(0.7 * windowHeight.value)]
   height.value = anchors.value[1]
 })

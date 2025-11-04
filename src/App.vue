@@ -1,9 +1,9 @@
 <!--
  * @Author: weisheng
  * @Date: 2024-10-12 13:07:08
- * @LastEditTime: 2025-04-08 11:13:02
+ * @LastEditTime: 2025-10-31 13:47:04
  * @LastEditors: weisheng
- * @Description: 
+ * @Description:
  * @FilePath: /wot-ui-plus/src/App.vue
  * 记得注释
 -->
@@ -12,6 +12,7 @@ import { onLaunch, onShow, onHide, onThemeChange } from '@dcloudio/uni-app'
 import { useDark } from './store'
 import { useI18nSync } from './hooks/useI18nSync'
 import { useIframeMessage } from './hooks/useIframeMessage'
+import { getSystemInfo } from './uni_modules/wot-design-uni/components/common/util'
 
 /**
  * 深色模式状态管理实例
@@ -79,7 +80,7 @@ onThemeChange((option) => {
  */
 onLaunch(() => {
   // 获取系统信息
-  const systemInfo = uni.getSystemInfoSync()
+  const systemInfo = getSystemInfo()
   // 根据系统主题设置深色模式
   darkMode.setDark(systemInfo.theme === 'dark')
 })
