@@ -1,3 +1,4 @@
+<!-- 侧边栏组件，显示导航菜单和广告内容 -->
 <script lang="ts" setup>
 import { useScrollLock } from '@vueuse/core'
 import { inBrowser } from 'vitepress'

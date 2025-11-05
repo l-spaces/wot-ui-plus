@@ -1,3 +1,4 @@
+<!-- 外部链接组件，为链接添加外部图标 -->
 <script setup lang="ts">
 import { defineComponent, h } from 'vue';
 defineProps({

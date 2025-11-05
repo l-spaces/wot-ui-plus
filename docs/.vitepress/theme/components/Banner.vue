@@ -1,3 +1,4 @@
+<!-- 顶部横幅组件，用于展示公告或推广信息，支持隐藏和24小时内不再显示 -->
 <script setup lang="ts">
 import { ref, watch, computed, onMounted } from 'vue'
 import { useBanner } from '../composables/banner'

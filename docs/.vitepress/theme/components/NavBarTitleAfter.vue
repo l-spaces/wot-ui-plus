@@ -1,3 +1,4 @@
+<!-- 导航栏标题后缀组件，用于显示当前版本号 -->
 <script setup lang="ts">
 import packageConfig from '../../../../package.json'
 

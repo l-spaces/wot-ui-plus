@@ -1,12 +1,5 @@
-<!--
- * @Author: weisheng
- * @Date: 2024-12-07 12:18:28
- * @LastEditTime: 2024-12-07 15:15:28
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-ui-plus/docs/.vitepress/theme/components/VPNavBar.vue
- * 记得注释
--->
+<!-- 导航栏组件，包含标题、搜索、菜单、语言切换等功能 -->
+
 <script lang="ts" setup>
 import { useWindowScroll } from '@vueuse/core'
 import { ref, watchPostEffect } from 'vue'

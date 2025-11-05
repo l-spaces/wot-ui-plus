@@ -1,3 +1,4 @@
+<!-- 特殊赞助商展示组件，用于展示铂金赞助商信息 -->
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAdSponsor } from '../composables/adSponsor'

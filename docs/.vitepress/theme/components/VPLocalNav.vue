@@ -1,3 +1,4 @@
+<!-- 本地导航组件，显示页面大纲和侧边栏切换按钮 -->
 <script lang="ts" setup>
 import { onContentUpdated } from 'vitepress'
 import { useWindowScroll } from '@vueuse/core'

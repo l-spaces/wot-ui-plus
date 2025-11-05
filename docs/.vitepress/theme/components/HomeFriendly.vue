@@ -1,3 +1,4 @@
+<!-- 友情链接组件，仅在非英文语言环境下显示 -->
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useFriendly } from '../composables/friendly'

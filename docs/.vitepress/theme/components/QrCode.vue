@@ -1,3 +1,4 @@
+<!-- 二维码显示组件，鼠标悬停时显示二维码图片 -->
 <template>
   <div @mouseenter="showQRCode = true" @mouseleave="showQRCode = false">
     <el-tooltip

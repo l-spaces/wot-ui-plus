@@ -1,3 +1,4 @@
+<!-- 文档页面渲染组件，包含侧边栏、内容区域和示例展示 -->
 <script setup lang="ts">
 import { useRoute } from 'vitepress'
 import { computed, ref } from 'vue'

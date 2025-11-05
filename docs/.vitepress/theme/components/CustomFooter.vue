@@ -1,12 +1,5 @@
-<!--
- * @Author: weisheng
- * @Date: 2025-05-08 22:54:27
- * @LastEditTime: 2025-08-28 13:04:43
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-ui-plus/docs/.vitepress/theme/components/CustomFooter.vue
- * 记得注释
--->
+<!-- 自定义页脚组件，根据不同域名显示不同版权信息 -->
+
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import { useData} from 'vitepress'

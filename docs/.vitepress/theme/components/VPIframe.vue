@@ -1,3 +1,4 @@
+<!-- 组件示例iframe组件，用于展示组件的在线示例，支持响应式布局 -->
 <template>
   <!-- 大屏幕：原有的固定容器 -->
   <div v-if="href && !isSmallScreen" class="demo-model" :class="{

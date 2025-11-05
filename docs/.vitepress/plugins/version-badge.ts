@@ -20,7 +20,7 @@ function extractVersionFromMarkdown(filePath: string): string | null {
       }
     }
   } catch (e) {
-    console.warn(`Failed to read file ${filePath}:`, e)
+    console.warn(`读取文件失败 ${filePath}:`, e)
   }
   
   return null
@@ -32,7 +32,7 @@ function scanComponentVersions(): Record<string, string> {
   const componentDir = resolve(__dirname, '../../component')
   
   if (!existsSync(componentDir)) {
-    console.warn('Component directory not found:', componentDir)
+    console.warn('未找到组件目录:', componentDir)
     return versionData
   }
   
@@ -46,11 +46,11 @@ function scanComponentVersions(): Record<string, string> {
       if (version) {
         const path = `/component/${filename.replace('.md', '')}`
         versionData[path] = version
-        console.log(`✅ Found version info in ${filename}:`, version)
+        console.log(`✅ 在 ${filename} 中发现版本信息：`, version)
       }
     })
   } catch (e) {
-    console.warn('Failed to scan component directory:', e)
+    console.warn('扫描组件目录失败:', e)
   }
   
   return versionData
@@ -78,9 +78,9 @@ export function VersionBadgePlugin(): Plugin {
         const outputPath = resolve(__dirname, '../config/version-data.ts')
         
         writeFileSync(outputPath, versionDataContent, 'utf-8')
-        console.log('✅ Version data generated successfully')
+        console.log('✅ 版本数据生成成功')
       } catch (e) {
-        console.error('❌ Failed to generate version data:', e)
+        console.error('❌ 生成版本数据失败:', e)
       }
     }
   }

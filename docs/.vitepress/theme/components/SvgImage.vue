@@ -1,3 +1,4 @@
+<!-- SVG图片渲染组件，用于安全地渲染SVG内容 -->
 <script setup lang="ts">
 defineProps<{ svg: string }>()
 </script>

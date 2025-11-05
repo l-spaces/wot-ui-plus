@@ -1,12 +1,5 @@
-<!--
- * @Author: weisheng
- * @Date: 2025-06-29 14:38:23
- * @LastEditTime: 2025-06-29 17:05:39
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-ui-plus/docs/.vitepress/theme/components/HomeStar.vue
- * 记得注释
--->
+<!-- 首页GitHub数据展示组件，显示Star数量和NPM下载量等信息 -->
+
 <script setup lang="ts"></script>
 
 <template>

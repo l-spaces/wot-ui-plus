@@ -1,3 +1,4 @@
+<!-- 侧边栏菜单项组件，支持多级菜单和版本信息显示 -->
 <script setup lang="ts">
 import type { DefaultTheme } from 'vitepress/theme'
 import { computed } from 'vue'

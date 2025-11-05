@@ -20,7 +20,7 @@ export default defineConfig({
     plugins: [
       llmstxt({
         ignoreFiles: ['reward/*', 'index.md', 'README.md', 'en-US/*.md', 'en-US/**/*.md', 'ads/*', 'guide/cases.md', 'guide/changelog.md', 'guide/join-group.md', 'guide/typography.md'],
-        domain: 'https://wot-ui.cn',
+        domain: 'http://106.55.153.212',
       }),
       MarkdownTransform(),
       VersionBadgePlugin(),
@@ -120,7 +120,7 @@ export default defineConfig({
       options: {
         appId: 'A74X2RFXSU',
         apiKey: '6961856d63f5181bf71cb4fa3e4398d2',
-        indexName: 'wot-ui-plus2',
+        indexName: 'wot-ui-plus',
       },
     },
 

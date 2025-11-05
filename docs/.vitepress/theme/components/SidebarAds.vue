@@ -1,3 +1,4 @@
+<!-- 侧边栏广告组件，展示广告图片并支持点击跳转 -->
 <script lang="ts" setup>
 import { ElImageViewer } from 'element-plus'
 import { ref } from 'vue'

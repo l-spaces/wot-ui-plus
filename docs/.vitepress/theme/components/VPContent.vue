@@ -1,12 +1,5 @@
-<!--
- * @Author: weisheng
- * @Date: 2024-12-07 18:41:41
- * @LastEditTime: 2024-12-07 21:28:08
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-ui-plus/docs/.vitepress/theme/components/VPContent.vue
- * 记得注释
--->
+<!-- 内容渲染组件，根据页面类型渲染不同的页面布局 -->
+
 <script setup lang="ts">
 import { useData } from 'vitepress';
 import NotFound from 'vitepress/dist/client/theme-default//NotFound.vue'

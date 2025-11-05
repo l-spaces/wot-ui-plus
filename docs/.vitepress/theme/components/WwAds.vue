@@ -1,3 +1,4 @@
+<!-- 万维广告组件，结合赞助商信息和万维广告 -->
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import AsideSponsors from './AsideSponsors.vue'
