@@ -7,8 +7,8 @@
       <!-- #ifndef MP-WEIXIN && MP-QQ && MP-BAIDU  -->
       <template v-if="mpAvatar && allowMp"></template>
       <!-- #endif -->
-      <wd-icon v-else-if="icon" :name="icon" :size="fontSize" :color="color"></wd-icon>
-      <wd-text v-else-if="text" :text="text" :size="fontSize" :color="color" customStyle="justify-content: center"></wd-text>
+      <wd-icon v-else-if="icon" :name="icon" :size="fontSize" :color="color" />
+      <wd-text v-else-if="text" :text="text" :size="fontSize" :color="color" customStyle="justify-content: center" />
       <image
         v-else
         class="wd-avatar__image"
@@ -18,6 +18,12 @@
         @error="errorHandler"
         :style="imageSizeStyle"
       />
+      <view v-if="sexIcon" class="wd-avatar__sex" :class="['wd-avatar__sex--' + sexIcon]" :style="uSexStyle">
+        <wd-icon :name="sexIcon" :size="addUnit(Number(size) / 3)" />
+      </view>
+      <view v-if="showLevel" class="wd-avatar__level" :style="uLevelStyle">
+        <wd-icon name="heart-filled" :size="addUnit(Number(size) / 3)" />
+      </view>
     </slot>
   </view>
 </template>
@@ -82,6 +88,24 @@ const colors = [
 const random = (min: number, max: number): number => {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
+
+/**
+ * 性别图标的自定义样式
+ */
+const uSexStyle = computed(() => {
+  let style: Record<string, string> = {}
+  if (props.sexBgColor) style.backgroundColor = props.sexBgColor
+  return style
+})
+
+/**
+ * 等级图标的自定义样式
+ */
+const uLevelStyle = computed(() => {
+  let style: Record<string, string> = {}
+  if (props.levelBgColor) style.backgroundColor = props.levelBgColor
+  return style
+})
 
 // 处理样式对象转换
 const addStyle = (style: string | Record<string, any> | undefined) => {

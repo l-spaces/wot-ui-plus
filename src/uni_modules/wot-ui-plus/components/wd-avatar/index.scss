@@ -2,26 +2,65 @@
 @import '../common/abstracts/mixin';
 
 @include b(avatar) {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 
   @include m(circle) {
-    border-radius: 100px;
+    border-radius: 50%;
+
+    @include me(sex) {
+      top: 0;
+      right: 0;
+    }
+    @include me(level) {
+      bottom: 0;
+      right: 0;
+    }
   }
 
   @include m(square) {
-    border-radius: 4px;
+    border-radius: 10%;
+
+    @include me(sex) {
+      top: -5px;
+      right: -5px;
+    }
+    @include me(level) {
+      bottom: -5px;
+      right: -5px;
+    }
   }
 
   @include e(image) {
     @include m(circle) {
-      border-radius: 100px;
+      border-radius: 50%;
       overflow: hidden;
     }
 
     @include m(square) {
-      border-radius: 4px;
+      border-radius: 10%;
     }
+  }
+  @include e(sex) {
+    position: absolute;
+    color: #ffffff;
+    border-radius: 50%;
+
+    &--gender-male {
+      background-color: #2979ff;
+    }
+
+    &--gender-female {
+      background-color: #fa3534;
+    }
+  }
+
+  @include e(level) {
+    position: absolute;
+    color: #ffffff;
+    background-color: #ff9900;
+    border-radius: 50%;
   }
 }

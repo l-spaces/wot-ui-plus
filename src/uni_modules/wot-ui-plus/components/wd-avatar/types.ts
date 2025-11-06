@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumericProp, makeStringProp } from '../common/props'
 
 export type ImageMode =
@@ -16,6 +16,8 @@ export type ImageMode =
   | 'top right'
   | 'bottom left'
   | 'bottom right'
+
+export type SexMode = 'gender-male' | 'gender-female'
 
 /**
  * 头像组件属性定义
@@ -91,6 +93,26 @@ export const avatarProps = {
   },
   // 组件标识符
   name: {
+    type: String,
+    default: ''
+  },
+  // 右上角性别角标，man-男，woman-女
+  sexIcon: {
+    type: String as PropType<SexMode>,
+    default: ''
+  },
+  // 右上角性别图标的背景颜色
+  sexBgColor: {
+    type: String,
+    default: ''
+  },
+  // 是否显示等级图标
+  showLevel: {
+    type: Boolean,
+    default: false
+  },
+  // 右下角等级图标背景颜色
+  levelBgColor: {
     type: String,
     default: ''
   }

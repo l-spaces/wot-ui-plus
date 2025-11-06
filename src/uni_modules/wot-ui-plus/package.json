@@ -2,7 +2,7 @@
   "id": "wot-ui-plus",
   "name": "wot-ui-plus",
   "displayName": "wot-ui-plus 基于vue3+Typescript的高颜值组件库",
-  "version": "1.13.0",
+  "version": "3.0.0",
   "license": "MIT",
   "description": "一个基于Vue3+TS开发的uni-app组件库，提供70+高质量组件，支持暗黑模式、国际化和自定义主题。",
   "keywords": [

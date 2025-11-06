@@ -1,29 +1,36 @@
 <template>
-  <page-wraper>
+  <page-wraper showDarkMode>
     <demo-block title="基础演示">
-      <wd-avatar :src="src1"></wd-avatar>
+      <view class="avatar-row">
+        <view class="wd-avatar-item">
+          <wd-avatar :src="src1" sexIcon="gender-male"></wd-avatar>
+        </view>
+        <view class="wd-avatar-item">
+          <wd-avatar :src="src1" sexIcon="gender-female"></wd-avatar>
+        </view>
+      </view>
     </demo-block>
 
     <demo-block title="头像形状">
       <view class="avatar-row">
-        <view class="u-avatar-item">
-          <wd-avatar :src="src2" shape="circle" @click="click"></wd-avatar>
+        <view class="wd-avatar-item">
+          <wd-avatar :src="src2" shape="circle" showLevel="true" size="40" sexIcon="gender-male" @click="click"></wd-avatar>
         </view>
-        <view class="u-avatar-item">
-          <wd-avatar :src="src3" shape="square"></wd-avatar>
+        <view class="wd-avatar-item">
+          <wd-avatar :src="src3" shape="square" showLevel="true" size="50" sexIcon="gender-female"></wd-avatar>
         </view>
       </view>
     </demo-block>
 
     <demo-block title="头像尺寸">
       <view class="avatar-row">
-        <view class="u-avatar-item">
+        <view class="wd-avatar-item">
           <wd-avatar :src="src4" size="30"></wd-avatar>
         </view>
-        <view class="u-avatar-item">
+        <view class="wd-avatar-item">
           <wd-avatar :src="src5" size="40"></wd-avatar>
         </view>
-        <view class="u-avatar-item">
+        <view class="wd-avatar-item">
           <wd-avatar :src="src6" size="50"></wd-avatar>
         </view>
       </view>
@@ -31,30 +38,30 @@
 
     <demo-block title="图标头像">
       <view class="avatar-row">
-        <view class="u-avatar-item">
+        <view class="wd-avatar-item">
           <wd-avatar icon="apple" fontSize="22"></wd-avatar>
         </view>
-        <view class="u-avatar-item">
-          <wd-avatar icon="ie" fontSize="22"></wd-avatar>
+        <view class="wd-avatar-item">
+          <wd-avatar icon="ie" shape="square" fontSize="22"></wd-avatar>
         </view>
       </view>
     </demo-block>
 
     <demo-block title="文字头像(自动背景色)">
       <view class="avatar-row">
-        <view class="u-avatar-item">
+        <view class="wd-avatar-item">
           <wd-avatar text="A" fontSize="20" randomBgColor :colorIndex="0"></wd-avatar>
         </view>
-        <view class="u-avatar-item">
+        <view class="wd-avatar-item">
           <wd-avatar text="赵" fontSize="18" randomBgColor></wd-avatar>
         </view>
-        <view class="u-avatar-item">
+        <view class="wd-avatar-item">
           <wd-avatar text="钱" fontSize="18" randomBgColor></wd-avatar>
         </view>
-        <view class="u-avatar-item">
+        <view class="wd-avatar-item">
           <wd-avatar text="孙" fontSize="18" randomBgColor></wd-avatar>
         </view>
-        <view class="u-avatar-item">
+        <view class="wd-avatar-item">
           <wd-avatar text="李" fontSize="18" randomBgColor></wd-avatar>
         </view>
       </view>
@@ -66,7 +73,7 @@
     <!-- #ifdef MP-WEIXIN || MP-QQ || MP-BAIDU -->
     <demo-block title="小程序开放能力">
       <view class="avatar-row">
-        <view class="u-avatar-item">
+        <view class="wd-avatar-item">
           <wd-avatar mpAvatar size="50"></wd-avatar>
         </view>
       </view>
@@ -114,7 +121,7 @@ function click(name: any) {
   align-items: center;
 }
 
-.u-avatar-item {
+.wd-avatar-item {
   margin-right: 30px;
 }
 </style>
