@@ -8,11 +8,11 @@ const { data } = useAdSponsor()
 
 // 分离超级赞助和金牌赞助
 const superSponsors = computed(() => {
-  return data.value?.find(sponsor => sponsor.tier === 'Platinum')
+  return data?.find(sponsor => sponsor.tier === 'Platinum')
 })
 
 const goldSponsors = computed(() => {
-  return data.value?.find(sponsor => sponsor.tier === 'Gold')
+  return data?.find(sponsor => sponsor.tier === 'Gold')
 })
 
 // 判断金牌赞助数量是否为奇数

@@ -56,80 +56,60 @@ export interface Sponsors {
 /**
  * 响应式赞助商数据存储
  */
-const data = ref<Sponsors[]>([])
+const data = ref<Sponsors[]>([
+  {
+      "tier": "Platinum",
+      "size": "small",
+      "items": [
+        {
+          "name": "电商系统",
+          "img": "",
+          "url": "https://gitee.com/lijiaxing_boy/huanxing-mall"
+        }
+      ]
+    }
+])
 
-/**
- * 赞助商广告数据管理组合式函数
- * 
- * @returns {Object} 包含响应式数据源的对象
- * @returns {ref<Sponsors[]>} returns.data - 赞助商数据列表
- * 
- * @example
- * // 在组件中使用
- * <script setup>
- * import { useAdSponsor } from '@theme/composables/adSponsor'
- * 
- * const { data: sponsors } = useAdSponsor()
- * </script>
- * 
- * <template>
- *   <div v-if="sponsors.length > 0">
- *     <div v-for="group in sponsors" :key="group.tier">
- *       <h3>{{ group.tier }}</h3>
- *       <div :class="`sponsor-grid ${group.size || 'medium'}`">
- *         <a 
- *           v-for="sponsor in group.items" 
- *           :key="sponsor.name" 
- *           :href="sponsor.url" 
- *           target="_blank"
- *         >
- *           <img :src="sponsor.img" :alt="sponsor.name" />
- *         </a>
- *       </div>
- *     </div>
- *   </div>
- * </template>
- */
 export function useAdSponsor() {
   // 在组件挂载后异步获取赞助商数据
-  onMounted(async () => {
-    // 定义数据源URL列表，按优先级排序
-    const urls = ['http://106.55.153.212/adSponsor.json']
+  // onMounted(async () => {
+  //   // 定义数据源URL列表，按优先级排序
+  //   const urls = ['http://106.55.153.212/adSponsor.json']
 
-    /**
-     * 多数据源容错获取函数
-     * 
-     * 依次尝试从多个数据源获取数据，任一数据源成功即返回结果，
-     * 所有数据源失败时返回空数组
-     * 
-     * @returns {Promise<Sponsors[]>} 赞助商数据列表
-     */
-    const fetchData = async () => {
-      // 遍历所有数据源，按优先级尝试获取
-      for (const url of urls) {
-        try {
-          // 添加时间戳参数避免缓存问题，设置5秒超时
-          const response = await axios.get(url + '?t=' + Date.now(), {
-            timeout: 5000 // 设置5秒超时
-          })
-          // 成功获取数据后直接返回
-          return response?.data?.data 
-        } catch (error) {
-          // 打印警告信息，继续尝试下一个URL
-          console.warn(`Failed to fetch from ${url}`)
-        }
-      }
-      // 所有数据源都失败时返回空数组
-      return [] 
-    }
+  //   /**
+  //    * 多数据源容错获取函数
+  //    * 
+  //    * 依次尝试从多个数据源获取数据，任一数据源成功即返回结果，
+  //    * 所有数据源失败时返回空数组
+  //    * 
+  //    * @returns {Promise<Sponsors[]>} 赞助商数据列表
+  //    */
+  //   const fetchData = async () => {
+  //     // 遍历所有数据源，按优先级尝试获取
+  //     for (const url of urls) {
+  //       try {
+  //         // 添加时间戳参数避免缓存问题，设置5秒超时
+  //         const response = await axios.get(url + '?t=' + Date.now(), {
+  //           timeout: 5000 // 设置5秒超时
+  //         })
+  //         // 成功获取数据后直接返回
+  //         return response?.data?.data 
+  //       } catch (error) {
+  //         // 打印警告信息，继续尝试下一个URL
+  //         console.warn(`Failed to fetch from ${url}`)
+  //       }
+  //     }
+  //     // 所有数据源都失败时返回空数组
+  //     return [] 
+  //   }
 
-    // 执行数据获取并更新响应式数据
-    data.value = await fetchData()
-  })
+  //   // 执行数据获取并更新响应式数据
+  //   data.value = await fetchData()
+  // })
 
   // 返回响应式数据
   return {
-    data,
+    data: data.value
   }
 }
 

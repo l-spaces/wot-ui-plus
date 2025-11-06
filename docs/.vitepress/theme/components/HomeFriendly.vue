@@ -9,7 +9,7 @@ const { data } = useFriendly()
 const { lang } = useData()
 
 const links = computed(() => {
-  return lang.value === 'en-US' ? [] : (data.value.length ? data.value : [])
+  return lang.value === 'en-US' ? [] : (data.length ? data : [])
 })
 
 const grid = computed(() => {

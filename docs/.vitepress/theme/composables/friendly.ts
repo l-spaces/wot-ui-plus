@@ -41,77 +41,68 @@ export type FriendlyLink = {
  * 响应式存储友好链接数据的ref对象
  * 采用单例模式，确保整个应用中只存在一份数据实例
  */
-const data = ref<FriendlyLink[]>([])
+const data = ref<FriendlyLink[]>([
+    {
+    icon: 'https://unibest.tech/logo.svg',
+    title: 'unibest',
+    details: '由 WotUI + Vite4 + UnoCss + VSCode 构建的 uniapp 开发模板，内置了许多常用的基本组件和基本功能，让你编写 uniapp 拥有 best 体验。',
+    link: 'https://unibest.tech'
+  },
+  {
+    icon: 'https://static.yicode.tech/chensuiyi-128x128.jpg',
+    title: '陈随易',
+    details: '前端之虎，农村程序员，独立开发者，行业观察员。',
+    link: 'https://me.yicode.tech/'
+  }
+])
 
-/**
- * 友好链接数据管理组合函数
- * 
- * @function useFriendly
- * @description 提供友好链接数据获取和管理功能的Vue组合式函数
- * @returns {Object} 包含响应式数据的对象
- * @returns {Ref<FriendlyLink[]>} returns.data - 友好链接数据数组的响应式引用
- * 
- * @example
- * // 在Vue组件中使用
- * import { useFriendly } from '@theme/composables/friendly'
- * 
- * export default {
- *   setup() {
- *     const { data: friendlyLinks } = useFriendly()
- *     
- *     return {
- *       friendlyLinks
- *     }
- *   }
- * }
- */
 export function useFriendly() {
   // 在组件挂载时异步获取友好链接数据
-  onMounted(async () => {
-    // 数据已存在时避免重复请求
-    if (data.value && data.value.length) {
-      return
-    }
+  // onMounted(async () => {
+  //   // 数据已存在时避免重复请求
+  //   if (data.value && data.value.length) {
+  //     return
+  //   }
 
-    // 定义数据源URL列表，按优先级排序
-    // 主数据源优先，备用数据源次之，实现故障转移机制
-    const urls = ['http://106.55.153.212/friendly.json']
+  //   // 定义数据源URL列表，按优先级排序
+  //   // 主数据源优先，备用数据源次之，实现故障转移机制
+  //   const urls = ['http://106.55.153.212/friendly.json']
 
-    /**
-     * 从多数据源获取数据的函数
-     * 实现了故障转移逻辑，逐个尝试数据源直到成功或全部失败
-     * 
-     * @async
-     * @function fetchData
-     * @returns {Promise<FriendlyLink[]>} 获取到的友好链接数据数组
-     */
-    const fetchData = async () => {
-      // 遍历所有数据源URL，按优先级尝试
-      for (const url of urls) {
-        try {
-          // 发送GET请求，添加时间戳避免缓存
-          // 设置5秒超时，防止请求长时间阻塞
-          const response = await axios.get(url + '?t=' + Date.now(), {
-            timeout: 5000
-          })
-          // 成功获取数据后直接返回，提取links字段或返回空数组
-          return response.data && response.data.links ? response.data.links : []
-        } catch (error) {
-          // 请求失败时记录警告信息，继续尝试下一个URL
-          console.warn(`Failed to fetch from ${url}`)
-        }
-      }
-      // 所有数据源都失败时返回空数组
-      return []
-    }
+  //   /**
+  //    * 从多数据源获取数据的函数
+  //    * 实现了故障转移逻辑，逐个尝试数据源直到成功或全部失败
+  //    * 
+  //    * @async
+  //    * @function fetchData
+  //    * @returns {Promise<FriendlyLink[]>} 获取到的友好链接数据数组
+  //    */
+  //   const fetchData = async () => {
+  //     // 遍历所有数据源URL，按优先级尝试
+  //     for (const url of urls) {
+  //       try {
+  //         // 发送GET请求，添加时间戳避免缓存
+  //         // 设置5秒超时，防止请求长时间阻塞
+  //         const response = await axios.get(url + '?t=' + Date.now(), {
+  //           timeout: 5000
+  //         })
+  //         // 成功获取数据后直接返回，提取links字段或返回空数组
+  //         return response.data && response.data.links ? response.data.links : []
+  //       } catch (error) {
+  //         // 请求失败时记录警告信息，继续尝试下一个URL
+  //         console.warn(`Failed to fetch from ${url}`)
+  //       }
+  //     }
+  //     // 所有数据源都失败时返回空数组
+  //     return []
+  //   }
 
-    // 执行数据获取并更新响应式数据
-    data.value = await fetchData()
-  })
+  //   // 执行数据获取并更新响应式数据
+  //   data.value = await fetchData()
+  // })
 
   // 返回响应式数据供组件使用
   return {
-    data,
+    data: data.value
   }
 }
 

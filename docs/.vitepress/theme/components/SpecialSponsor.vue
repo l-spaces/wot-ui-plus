@@ -15,7 +15,7 @@ const { data } = useAdSponsor()
 
 // 获取第一个铂金赞助商
 const platinumSponsor = computed(() => {
-  const platinum = data.value?.find(sponsor => sponsor.tier === 'Platinum')
+  const platinum = data?.find(sponsor => sponsor.tier === 'Platinum')
   return platinum?.items?.[0] || null
 })
 </script>
