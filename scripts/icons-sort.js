@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 // 文件路径
-const filePath = path.join(__dirname, 'iocn.md')
+const filePath = path.join(__dirname, '../src/uni_modules/wot-ui-plus/components/wd-icon/iocn.md')
 
 // 自定义排序函数
 function customSort(a, b) {
