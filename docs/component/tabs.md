@@ -12,11 +12,11 @@
 
 ```html
 <wd-tabs v-model="tab">
-  <block v-for="item in 4" :key="item">
-    <wd-tab :title="`标签${item}`">
-      <view class="content">内容{{ item}}</view>
-    </wd-tab>
-  </block>
+    <block v-for="item in 4" :key="item">
+        <wd-tab :title="`标签${item}`">
+            <view class="content">内容{{ item}}</view>
+        </wd-tab>
+    </block>
 </wd-tabs>
 ```
 
@@ -37,11 +37,11 @@ const tab = ref<number>(0)
 
 ```html
 <wd-tabs v-model="tab">
-  <block v-for="item in tabs" :key="item">
-    <wd-tab :title="`${item}`" :name="item">
-      <view class="content">内容{{ item }}</view>
-    </wd-tab>
-  </block>
+    <block v-for="item in tabs" :key="item">
+        <wd-tab :title="`${item}`" :name="item">
+            <view class="content">内容{{ item }}</view>
+        </wd-tab>
+    </block>
 </wd-tabs>
 ```
 
@@ -63,38 +63,38 @@ const tab = ref('例子')
 
 ```html
 <wd-tabs v-model="tabWithBadge" @change="handleChange">
-  <wd-tab v-for="(item, index) in tabsWithBadge" :key="index" :title="`${item.title}`" :badge-props="item.badgeProps">
-    <view class="content">{{ item.title }}徽标</view>
-  </wd-tab>
+    <wd-tab v-for="(item, index) in tabsWithBadge" :key="index" :title="`${item.title}`" :badge-props="item.badgeProps">
+        <view class="content">{{ item.title }}徽标</view>
+    </wd-tab>
 </wd-tabs>
 ```
 
 ```typescript
 const tabWithBadge = ref(0)
 const tabsWithBadge = ref([
-  {
-    title: '普通数值',
-    badgeProps: {
-      modelValue: 10,
-      right: '-8px'
+    {
+        title: '普通数值',
+        badgeProps: {
+            modelValue: 10,
+            right: '-8px'
+        }
+    },
+    {
+        title: '最大值',
+        badgeProps: {
+            modelValue: 100,
+            max: 99,
+            right: '-8px'
+        }
+    },
+    {
+        title: '点状',
+        badgeProps: {
+            isDot: true,
+            right: '-8px',
+            showZero: true
+        }
     }
-  },
-  {
-    title: '最大值',
-    badgeProps: {
-      modelValue: 100,
-      max: 99,
-      right: '-8px'
-    }
-  },
-  {
-    title: '点状',
-    badgeProps: {
-      isDot: true,
-      right: '-8px',
-      showZero: true
-    }
-  }
 ])
 ```
 
@@ -104,11 +104,11 @@ const tabsWithBadge = ref([
 
 ```html
 <wd-tabs v-model="tab" @change="handleChange" auto-line-width>
-  <block v-for="item in tabs" :key="item">
-    <wd-tab :title="`${item}`" :name="item">
-      <view class="content">内容{{ tab }}</view>
-    </wd-tab>
-  </block>
+    <block v-for="item in tabs" :key="item">
+        <wd-tab :title="`${item}`" :name="item">
+            <view class="content">内容{{ tab }}</view>
+        </wd-tab>
+    </block>
 </wd-tabs>
 ```
 
@@ -123,11 +123,11 @@ const tab = ref('Design')
 
 ```html
 <wd-tabs v-model="tab" sticky>
-  <block v-for="item in 4" :key="item">
-    <wd-tab :title="`标签${item}`">
-      <view class="content">内容{{ item}}</view>
-    </wd-tab>
-  </block>
+    <block v-for="item in 4" :key="item">
+        <wd-tab :title="`标签${item}`">
+            <view class="content">内容{{ item}}</view>
+        </wd-tab>
+    </block>
 </wd-tabs>
 ```
 
@@ -137,11 +137,11 @@ const tab = ref('Design')
 
 ```html
 <wd-tabs v-model="tab">
-  <block v-for="item in 4" :key="item">
-    <wd-tab :title="`标签${item}`" :disabled="item === 1">
-      <view class="content">内容{{ item }}</view>
-    </wd-tab>
-  </block>
+    <block v-for="item in 4" :key="item">
+        <wd-tab :title="`标签${item}`" :disabled="item === 1">
+            <view class="content">内容{{ item }}</view>
+        </wd-tab>
+    </block>
 </wd-tabs>
 ```
 
@@ -151,11 +151,11 @@ const tab = ref('Design')
 
 ```html
 <wd-tabs v-model="tab" @click="handleClick">
-  <block v-for="item in 4" :key="item">
-    <wd-tab :title="`标签${item}`">
-      <view class="content">内容{{ item }}</view>
-    </wd-tab>
-  </block>
+    <block v-for="item in 4" :key="item">
+        <wd-tab :title="`标签${item}`">
+            <view class="content">内容{{ item }}</view>
+        </wd-tab>
+    </block>
 </wd-tabs>
 ```
 
@@ -165,11 +165,11 @@ const tab = ref('Design')
 
 ```html
 <wd-tabs v-model="tab" swipeable>
-  <block v-for="item in 4" :key="item">
-    <wd-tab :title="`标签${item}`">
-      <view class="content">内容{{ item }}</view>
-    </wd-tab>
-  </block>
+    <block v-for="item in 4" :key="item">
+        <wd-tab :title="`标签${item}`">
+            <view class="content">内容{{ item }}</view>
+        </wd-tab>
+    </block>
 </wd-tabs>
 ```
 
@@ -179,11 +179,11 @@ const tab = ref('Design')
 
 ```html
 <wd-tabs v-model="tab" animated>
-  <block v-for="item in 4" :key="item">
-    <wd-tab :title="`标签${item}`">
-      <view class="content">内容{{ item }}</view>
-    </wd-tab>
-  </block>
+    <block v-for="item in 4" :key="item">
+        <wd-tab :title="`标签${item}`">
+            <view class="content">内容{{ item }}</view>
+        </wd-tab>
+    </block>
 </wd-tabs>
 ```
 
@@ -193,11 +193,11 @@ const tab = ref('Design')
 
 ```html
 <wd-tabs v-model="tab" slidable="always">
-  <block v-for="item in 5" :key="item">
-    <wd-tab :title="`超大标签${item}`">
-      <view class="content">内容{{ item }}</view>
-    </wd-tab>
-  </block>
+    <block v-for="item in 5" :key="item">
+        <wd-tab :title="`超大标签${item}`">
+            <view class="content">内容{{ item }}</view>
+        </wd-tab>
+    </block>
 </wd-tabs>
 ```
 
@@ -212,12 +212,12 @@ const tab = ref('Design')
 ```html
 <wd-button @click="handleClick">打开弹窗</wd-button>
 <wd-popup v-model="showPopup" position="bottom" @after-enter="handlePopupShow" closable custom-style="height: 200px;padding: 0 24rpx;">
-  <view class="title">在弹出框中使用</view>
-  <wd-tabs v-model="tab" ref="tabsRef">
-    <wd-tab v-for="item in tabs" :key="item" :title="`${item}`" :name="item">
-      <view class="content">内容{{ tab }}</view>
-    </wd-tab>
-  </wd-tabs>
+    <view class="title">在弹出框中使用</view>
+    <wd-tabs v-model="tab" ref="tabsRef">
+        <wd-tab v-for="item in tabs" :key="item" :title="`${item}`" :name="item">
+            <view class="content">内容{{ tab }}</view>
+        </wd-tab>
+    </wd-tabs>
 </wd-popup>
 ```
 
@@ -231,23 +231,23 @@ const tabsRef = ref<TabsInstance>() // 获取分段器实例
  * 点击按钮打开popup
  */
 function handleOpenClick() {
-  showPopup.value = true
+    showPopup.value = true
 }
 /**
  * popup打开后更新分段器样式
  */
 function handlePopupShow() {
-  tabsRef.value?.updateLineStyle(false)
+    tabsRef.value?.updateLineStyle(false)
 }
 ```
 
 ```css
 .title {
-  display: flex;
-  font-size: 32rpx;
-  align-items: center;
-  justify-content: center;
-  padding: 24rpx 0;
+    display: flex;
+    font-size: 32rpx;
+    align-items: center;
+    justify-content: center;
+    padding: 24rpx 0;
 }
 ```
 
@@ -270,6 +270,7 @@ function handlePopupShow() {
 | animated      | 是否开启切换标签内容时的转场动画                                                         | boolean         | -        | false  | -        |
 | duration      | 切换动画过渡时间，单位毫秒                                                               | number          | -        | 300    | -        |
 | slidable      | 是否开启滚动导航                                                                         | TabsSlidable    | `always` | `auto` | 1.4.0    |
+| showScrollbar | 标签可滑动时是否显示滚动条                                                               | boolean         | -        | false  | $LOWEST_VERSION$ |
 | badge-props   | 自定义徽标的属性，传入的对象会被透传给 [Badge 组件的 props](/component/badge#attributes) | BadgeProps      | -        | -      | 1.4.0    |
 
 ## Tab Attributes
