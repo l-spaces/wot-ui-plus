@@ -34,7 +34,7 @@
     <demo-block :title="$t('shi-yong-cha-cao')" transparent>
       <wd-navbar :title="$t('biaoTi-0')" @click-left="handleClickLeft">
         <template #left>
-          <wd-icon name="arrow-left" size="24px" class="wd-navbar__arrow" />
+          <wd-icon name="left" size="24px" class="wd-navbar__arrow" />
         </template>
         <template #right>
           <wd-icon name="search" size="18" />

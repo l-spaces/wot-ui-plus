@@ -8,11 +8,11 @@
         <template v-else-if="isVideo(file)">
           <view class="wd-upload__video" v-if="file.thumb" @click="onPreviewVideo(file)">
             <image :src="file.thumb" :mode="imageMode" class="wd-upload__picture" />
-            <wd-icon name="play-circle-filled" custom-class="wd-upload__video-paly"></wd-icon>
+            <wd-icon name="play-circle" custom-class="wd-upload__video-paly"></wd-icon>
           </view>
           <view v-else class="wd-upload__video" @click="onPreviewVideo(file)">
             <!-- #ifdef APP-PLUS || MP-DINGTALK -->
-            <wd-icon custom-class="wd-upload__video-icon" name="video"></wd-icon>
+            <wd-icon custom-class="wd-upload__video-icon" name="video-box"></wd-icon>
             <!-- #endif -->
             <!-- #ifndef APP-PLUS -->
             <!-- #ifndef MP-DINGTALK -->
@@ -33,14 +33,14 @@
               :enableNative="true"
               class="wd-upload__video"
             ></video>
-            <wd-icon name="play-circle-filled" custom-class="wd-upload__video-paly"></wd-icon>
+            <wd-icon name="play-circle" custom-class="wd-upload__video-paly"></wd-icon>
             <!-- #endif -->
             <!-- #endif -->
           </view>
         </template>
 
         <view v-else class="wd-upload__file" @click="onPreviewFile(file)">
-          <wd-icon name="file" custom-class="wd-upload__file-icon"></wd-icon>
+          <wd-icon name="seo-folder" custom-class="wd-upload__file-icon"></wd-icon>
           <view class="wd-upload__file-name">{{ file.name || file.url }}</view>
         </view>
       </view>
@@ -53,14 +53,14 @@
         </view>
         <!-- 失败时展示失败图标以及失败信息 -->
         <view v-if="file[props.statusKey] === 'fail'" class="wd-upload__status-content">
-          <wd-icon name="close-outline" custom-class="wd-upload__icon"></wd-icon>
+          <wd-icon name="close-circle" custom-class="wd-upload__icon"></wd-icon>
           <text class="wd-upload__progress-txt">{{ file.error || translate('error') }}</text>
         </view>
       </view>
       <!-- 上传状态为上传中时不展示移除按钮 -->
       <wd-icon
         v-if="file[props.statusKey] !== 'loading' && !disabled"
-        name="error-fill"
+        name="close-circle-filled"
         custom-class="wd-upload__close"
         @click="removeFile(index)"
       ></wd-icon>
@@ -75,7 +75,7 @@
       <!-- 唤起项 -->
       <view v-else @click="onEvokeClick" :class="['wd-upload__evoke', disabled ? 'is-disabled' : '', customEvokeClass]">
         <!-- 唤起项图标 -->
-        <wd-icon class="wd-upload__evoke-icon" name="fill-camera"></wd-icon>
+        <wd-icon class="wd-upload__evoke-icon" name="camera-filled"></wd-icon>
         <!-- 有限制个数时确认是否展示限制个数 -->
         <view v-if="limit && showLimitNum" class="wd-upload__evoke-num">（{{ uploadFiles.length }}/{{ limit }}）</view>
       </view>

@@ -17,7 +17,7 @@ export type ImageMode =
   | 'bottom left'
   | 'bottom right'
 
-export type SexMode = 'gender-male' | 'gender-female'
+export type SexMode = 'male' | 'female'
 
 /**
  * 头像组件属性定义

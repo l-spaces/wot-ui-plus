@@ -7,7 +7,7 @@
       @touchstart="handleTouchStart('sub')"
       @touchend.stop="handleTouchEnd"
     >
-      <wd-icon name="decrease" custom-class="wd-input-number__action-icon"></wd-icon>
+      <wd-icon name="minus" custom-class="wd-input-number__action-icon"></wd-icon>
     </view>
     <!-- 输入框 -->
     <view v-if="!withoutInput" class="wd-input-number__inner" @click.stop="">

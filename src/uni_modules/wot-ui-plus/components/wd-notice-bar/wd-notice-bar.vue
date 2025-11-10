@@ -11,7 +11,7 @@
         <slot v-else>{{ currentText }}</slot>
       </view>
     </view>
-    <wd-icon v-if="closable" custom-class="wd-notice-bar__suffix" name="close-bold" @click="handleClose"></wd-icon>
+    <wd-icon v-if="closable" custom-class="wd-notice-bar__suffix" name="close" @click="handleClose"></wd-icon>
     <slot v-else name="suffix"></slot>
   </view>
 </template>

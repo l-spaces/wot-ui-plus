@@ -19,7 +19,7 @@
 
     <demo-block :title="$t('zi-ding-yi-xuan-ran-nei-rong')" transparent>
       <wd-divider>
-        <wd-icon name="arrow-down" size="20" />
+        <wd-icon name="down" size="20" />
       </wd-divider>
     </demo-block>
 

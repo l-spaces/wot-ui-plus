@@ -24,7 +24,7 @@
           :maxlength="maxlength"
           :focus="isFocused"
         />
-        <wd-icon v-if="inputValue" custom-class="wd-search__clear wd-search__clear-icon" name="error-fill" @click="handleClear" />
+        <wd-icon v-if="inputValue" custom-class="wd-search__clear wd-search__clear-icon" name="close-circle-filled" @click="handleClear" />
       </view>
     </view>
 

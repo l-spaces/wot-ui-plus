@@ -26,7 +26,7 @@
       </wd-cell-group>
     </demo-block>
     <wd-notify selector="visible" type="success" v-model:visible="visible">
-      <wd-icon name="check-outline" size="inherit" color="inherit" />
+      <wd-icon name="check-circle" size="inherit" color="inherit" />
       {{ $t('cheng-gong-tong-zhi-0') }}
     </wd-notify>
   </page-wraper>

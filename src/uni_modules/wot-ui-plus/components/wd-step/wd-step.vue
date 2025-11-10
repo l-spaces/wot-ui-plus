@@ -12,8 +12,8 @@
         <slot v-else-if="$slots.icon" name="icon" />
         <wd-icon v-else-if="icon" custom-class="wd-step__icon-inner" :name="icon" />
         <view v-else class="wd-step__icon-outer">
-          <wd-icon v-if="currentStatus === 'finished'" name="check-bold" />
-          <wd-icon v-else-if="currentStatus === 'error'" name="close-bold" />
+          <wd-icon v-if="currentStatus === 'finished'" name="check" />
+          <wd-icon v-else-if="currentStatus === 'error'" name="check" />
           <text v-else>{{ index + 1 }}</text>
         </view>
       </view>

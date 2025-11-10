@@ -5,8 +5,8 @@
         {{ title }}
       </view>
       <view :class="`wd-sort-button__right ${modelValue !== 0 ? 'is-active' : ''}`">
-        <wd-icon v-if="modelValue !== 1" name="arrow-up" custom-class="wd-sort-button__icon-up" />
-        <wd-icon v-if="modelValue !== -1" name="arrow-down" custom-class="wd-sort-button__icon-down" />
+        <wd-icon v-if="modelValue !== 1" name="up" custom-class="wd-sort-button__icon-up" />
+        <wd-icon v-if="modelValue !== -1" name="down" custom-class="wd-sort-button__icon-down" />
       </view>
     </view>
   </view>

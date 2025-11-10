@@ -25,7 +25,7 @@
             <wd-popover mode="menu" :content="menu" @menuclick="changeSearchType">
               <view class="search-type">
                 <text>{{ searchType }}</text>
-                <wd-icon class="icon-arrow" name="fill-arrow-down"></wd-icon>
+                <wd-icon class="icon-arrow" name="down-box-filled"></wd-icon>
               </view>
             </wd-popover>
           </template>

@@ -57,7 +57,7 @@
           <wd-tag custom-class="space" mark use-icon-slot>
             <text>{{ $t('cha-cao') }}</text>
             <template #icon>
-              <wd-icon name="dong" />
+              <wd-icon name="message-emoji" />
             </template>
           </wd-tag>
         </view>

@@ -22,7 +22,7 @@
         <wd-icon :name="sexIcon" :size="addUnit(Number(size) / 3)" />
       </view>
       <view v-if="showLevel" class="wd-avatar__level" :style="uLevelStyle">
-        <wd-icon name="heart-filled" :size="addUnit(Number(size) / 3)" />
+        <wd-icon name="vip-filled" :size="addUnit(Number(size) / 3)" />
       </view>
     </slot>
   </view>

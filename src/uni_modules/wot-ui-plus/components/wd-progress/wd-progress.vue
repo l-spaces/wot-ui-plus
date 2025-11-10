@@ -50,13 +50,13 @@ const iconName = computed(() => {
   let icon: string = ''
   switch (props.status) {
     case 'danger':
-      icon = 'close-outline'
+      icon = 'close-circle'
       break
     case 'success':
-      icon = 'check-outline'
+      icon = 'check-circle'
       break
     case 'warning':
-      icon = 'warn-bold'
+      icon = 'attention'
       break
     default:
       break

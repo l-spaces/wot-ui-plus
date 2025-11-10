@@ -33,7 +33,7 @@
             <view class="wd-tabs__map" v-if="mapNum < children.length && mapNum !== 0">
               <view :class="`wd-tabs__map-btn  ${state.animating ? 'is-open' : ''}`" @click="toggleMap">
                 <view :class="`wd-tabs__map-arrow  ${state.animating ? 'is-open' : ''}`">
-                  <wd-icon name="arrow-down" />
+                  <wd-icon name="down" />
                 </view>
               </view>
               <view class="wd-tabs__map-header" :style="`${state.mapShow ? '' : 'display:none;'}  ${state.animating ? 'opacity:1;' : ''}`">
@@ -106,7 +106,7 @@
         <view class="wd-tabs__map" v-if="mapNum < children.length && mapNum !== 0">
           <view class="wd-tabs__map-btn" @click="toggleMap">
             <view :class="`wd-tabs__map-arrow ${state.animating ? 'is-open' : ''}`">
-              <wd-icon name="arrow-down" />
+              <wd-icon name="down" />
             </view>
           </view>
           <view class="wd-tabs__map-header" :style="`${state.mapShow ? '' : 'display:none;'}  ${state.animating ? 'opacity:1;' : ''}`">

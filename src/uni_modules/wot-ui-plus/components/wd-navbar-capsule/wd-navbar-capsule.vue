@@ -1,6 +1,6 @@
 <template>
   <view :class="`wd-navbar-capsule ${customClass}`" :style="customStyle">
-    <wd-icon @click="handleBack" name="chevron-left" custom-class="wd-navbar-capsule__icon" />
+    <wd-icon @click="handleBack" name="left" custom-class="wd-navbar-capsule__icon" />
     <wd-icon @click="handleBackHome" name="home" custom-class="wd-navbar-capsule__icon" />
   </view>
 </template>

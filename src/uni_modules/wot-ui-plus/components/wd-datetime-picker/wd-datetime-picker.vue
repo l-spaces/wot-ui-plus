@@ -42,9 +42,9 @@
         </view>
       </template>
       <template #right-icon>
-        <wd-icon v-if="showArrow" custom-class="wd-datetime-picker__arrow" name="arrow-right" />
+        <wd-icon v-if="showArrow" custom-class="wd-datetime-picker__arrow" name="right" />
         <view v-else-if="showClear" @click.stop="handleClear">
-          <wd-icon custom-class="wd-datetime-picker__clear" name="error-fill" />
+          <wd-icon custom-class="wd-datetime-picker__clear" name="close-circle-filled" />
         </view>
       </template>
     </wd-cell>

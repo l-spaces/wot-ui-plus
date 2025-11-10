@@ -8,7 +8,7 @@
     >
       <slot name="title" :expanded="expanded" :disabled="disabled" :isFirst="isFirst">
         <text class="wd-collapse-item__title">{{ title }}</text>
-        <wd-icon name="arrow-down" :custom-class="`wd-collapse-item__arrow ${expanded ? 'is-retract' : ''}`" />
+        <wd-icon name="down" :custom-class="`wd-collapse-item__arrow ${expanded ? 'is-retract' : ''}`" />
       </slot>
     </view>
     <view class="wd-collapse-item__wrapper" :style="contentStyle" @transitionend="handleTransitionEnd">

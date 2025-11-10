@@ -1,0 +1,76 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+	$wd-code-input-cursor-width: 1px;
+	$wd-code-input-cursor-height: 20px;
+	$wd-code-input-cursor-animation-duration: 1s;
+	$wd-code-input-cursor-animation-name: wd-cursor-flicker;
+
+	@include b(code-input) {
+		display: flex;
+    flex-direction: row;
+		position: relative;
+		overflow: hidden;
+
+			@include e(item) {
+			display: flex;
+      flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+
+			@include e(text) {
+				font-size: 15px;
+				color: #606266;
+			}
+
+			@include e(dot) {
+				width: 7px;
+				height: 7px;
+				border-radius: 100px;
+				background-color: #606266;
+			}
+
+			@include e(line) {
+				position: absolute;
+				bottom: 0;
+				height: 4px;
+				border-radius: 100px;
+				width: 40px;
+				background-color: #606266;
+			}
+			@include e(cursor) {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				opacity: 1;
+				transform: translate(-50%,-50%);
+				width: $wd-code-input-cursor-width;
+				height: $wd-code-input-cursor-height;
+				animation: $wd-code-input-cursor-animation-duration wd-cursor-flicker infinite;
+			}
+		}
+
+		@include e(input) {
+			// 之所以需要input输入框，是因为有它才能唤起键盘
+			// 这里将它设置为两倍的屏幕宽度，再将左边的一半移出屏幕，为了不让用户看到输入的内容
+			position: absolute;
+			left: -750rpx;
+			width: 1500rpx;
+			top: 0;
+			background-color: transparent;
+			text-align: left;
+		}
+	}
+	
+	@keyframes wd-cursor-flicker {
+		0% {
+		    opacity: 0;
+		}
+		50% {
+		    opacity: 1;
+		}
+		100% {
+		    opacity: 0;
+		}
+	}

@@ -47,7 +47,7 @@
     <demo-block :title="$t('cha-cao-zi-ding-yi-tu-pian-nei-rong')">
       <wd-status-tip :tip="$t('cha-cao-zi-ding-yi-tu-pian-nei-rong')">
         <template #image>
-          <wd-icon name="ie-filled" size="100px"></wd-icon>
+          <wd-icon name="logo-tw" size="100px"></wd-icon>
         </template>
       </wd-status-tip>
     </demo-block>

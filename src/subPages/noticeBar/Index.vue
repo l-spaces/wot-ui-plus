@@ -37,7 +37,7 @@
       <demo-block :title="$t('cha-cao')">
         <wd-notice-bar :scrollable="false">
           <template #prefix>
-            <wd-icon custom-class="prefix" name="warn-bold">{{ $t('zhan-wei-fu') }}</wd-icon>
+            <wd-icon custom-class="prefix" name="attention">{{ $t('zhan-wei-fu') }}</wd-icon>
           </template>
           {{ $t('tong-zhi-bei-jin-huo-shi-duan-nei-xiao-xi-ping-bi-ke-neng-zao-cheng-xiao') }}
           <template #suffix>

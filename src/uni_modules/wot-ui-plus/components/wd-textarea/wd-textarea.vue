@@ -51,7 +51,7 @@
 
       <view v-if="props.readonly" class="wd-textarea__readonly-mask" />
       <view class="wd-textarea__suffix">
-        <wd-icon v-if="showClear" custom-class="wd-textarea__clear" name="error-fill" @click="handleClear" />
+        <wd-icon v-if="showClear" custom-class="wd-textarea__clear" name="close-circle-filled" @click="handleClear" />
         <view v-if="showWordCount" class="wd-textarea__count">
           <text :class="countClass">
             {{ currentLength }}

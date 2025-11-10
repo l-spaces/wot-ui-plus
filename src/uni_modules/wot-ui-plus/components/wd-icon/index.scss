@@ -2,22 +2,22 @@
 @import '../common/abstracts/mixin';
 
 @font-face {
-  font-family: 'wd-icons';  /* Project id 5060882 */
-  src: url('//at.alicdn.com/t/c/font_5061229_2wgii0sd4ql.woff2?t=1762718781119') format('woff2'),
-       url('//at.alicdn.com/t/c/font_5061229_2wgii0sd4ql.woff?t=1762718781119') format('woff'),
-       url('//at.alicdn.com/t/c/font_5061229_2wgii0sd4ql.ttf?t=1762718781119') format('truetype');
+  font-family: 'wd-icons';  /* Project id 5061229 */
+  src: url('//at.alicdn.com/t/c/font_5061229_toovr05blle.woff2?t=1762777795179') format('woff2'),
+       url('//at.alicdn.com/t/c/font_5061229_toovr05blle.woff?t=1762777795179') format('woff'),
+       url('//at.alicdn.com/t/c/font_5061229_toovr05blle.ttf?t=1762777795179') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 /*  #ifdef  APP-PLUS || H5  */
-@font-face {
-  font-family: 'wd-icons';
-  src:
-    url('./wd-icons.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+// @font-face {
+//   font-family: 'wd-icons';
+//   src:
+//     url('./wd-icons.ttf') format('truetype');
+//   font-weight: normal;
+//   font-style: normal;
+// }
 
 /*  #endif  */
 

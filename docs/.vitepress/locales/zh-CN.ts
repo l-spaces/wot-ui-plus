@@ -18,43 +18,43 @@ export default defineConfig({
         items: [
           {
             text: '介绍',
-            link: '/guide/introduction',
+            link: '/guide/introduction'
           },
           {
             text: '快速上手',
-            link: '/guide/quick-use',
+            link: '/guide/quick-use'
           },
           {
             text: '脚手架与模板',
-            link: '/guide/cli-templates',
+            link: '/guide/cli-templates'
           },
           {
             text: '咨询服务',
-            link: '/guide/consultation',
+            link: '/guide/consultation'
           },
           {
             text: '定制主题',
-            link: '/guide/custom-theme',
+            link: '/guide/custom-theme'
           },
           {
             text: '常见问题',
-            link: '/guide/common-problems',
+            link: '/guide/common-problems'
           },
           {
             text: '国际化',
-            link: '/guide/locale',
+            link: '/guide/locale'
           },
           {
             text: '更新日志',
-            link: '/guide/changelog',
+            link: '/guide/changelog'
           },
           {
             text: '⭐ 案例',
-            link: '/guide/cases',
+            link: '/guide/cases'
           },
           {
             text: '加群沟通',
-            link: '/guide/join-group',
+            link: '/guide/join-group'
           }
         ]
       },
@@ -64,103 +64,113 @@ export default defineConfig({
         items: [
           {
             text: '基础组件',
-            link: '/component/button',
+            link: '/component/button'
           },
           {
             text: '导航组件',
-            link: '/component/pagination',
+            link: '/component/pagination'
           },
           {
             text: '数据输入',
-            link: '/component/calendar',
+            link: '/component/calendar'
           },
           {
             text: '反馈组件',
-            link: '/component/action-sheet',
+            link: '/component/action-sheet'
           },
           {
             text: '数据展示',
-            link: '/component/badge',
+            link: '/component/badge'
           }
         ]
       },
       { text: '🥤一杯咖啡', link: '/reward/reward', activeMatch: '/reward/' },
       { text: '博客', link: 'https://blog.wot-ui.cn/' },
       {
-        text: '模板', items: [
+        text: '模板',
+        items: [
           { text: '快速上手模板 wot-starter', link: 'https://starter.wot-ui.cn/' },
           { text: 'vitesse-uni-app', link: 'https://vitesse-docs.netlify.app/' },
           { text: 'wot-starter-retail', link: 'https://github.com/wot-ui/wot-starter-retail' },
-          { text: 'unibest', link: 'https://unibest.tech/' },
+          { text: 'unibest', link: 'https://unibest.tech/' }
         ]
       },
       {
-        text: '资源', items: [
+        text: '资源',
+        items: [
           { text: '快速上手模板', link: 'https://starter.wot-ui.cn/' },
           { text: 'VS Code 代码提示插件', link: 'https://marketplace.visualstudio.com/items?itemName=wot-ui.wot-ui-intellisense' },
           { text: 'Vue3 uni-app路由库', link: 'https://moonofweisheng.github.io/uni-mini-router/' },
           { text: '多平台小程序CI工具', link: 'https://github.com/Moonofweisheng/uni-mini-ci' },
           { text: 'Uni Helper', link: 'https://uni-helper.js.org/' },
-          { text: 'uni-ku', link: 'https://github.com/uni-ku' },
+          { text: 'uni-ku', link: 'https://github.com/uni-ku' }
         ]
-      },
+      }
     ],
     sidebar: {
       '/guide/': [
         {
           text: '介绍',
-          link: '/guide/introduction',
+          link: '/guide/introduction'
         },
         {
           text: '快速上手',
-          link: '/guide/quick-use',
+          link: '/guide/quick-use'
         },
         {
           text: '脚手架与模板',
-          link: '/guide/cli-templates',
+          link: '/guide/cli-templates'
         },
         {
           text: '咨询服务',
-          link: '/guide/consultation',
+          link: '/guide/consultation'
         },
         {
           text: '定制主题',
-          link: '/guide/custom-theme',
+          link: '/guide/custom-theme'
         },
         {
           text: '国际化',
-          link: '/guide/locale',
+          link: '/guide/locale'
         },
         {
           text: '常见问题',
-          link: '/guide/common-problems',
+          link: '/guide/common-problems'
+        },
+        {
+          text: '🔍 Vue3+Uniapp组合式API',
+          link: '/guide/api-list'
+        },
+        {
+          text: '📖 Vue3与Uniapp的API对比',
+          link: '/guide/api-contrast'
         },
         {
           text: '更新日志',
-          link: '/guide/changelog',
+          link: '/guide/changelog'
         },
         {
           text: '⭐ 案例',
-          link: '/guide/cases',
+          link: '/guide/cases'
         },
         {
           text: '加群沟通',
-          link: '/guide/join-group',
+          link: '/guide/join-group'
         }
       ],
       '/reward/': [
         {
           text: '🥤一杯咖啡',
-          link: '/reward/reward',
+          link: '/reward/reward'
         },
         {
           text: '榜上有名',
-          link: '/reward/donor',
+          link: '/reward/donor'
         },
         {
           text: '成为赞助者',
-          link: '/reward/sponsor',
-        },
+          link: '/reward/sponsor'
+        }
       ],
       '/component/': [
         {

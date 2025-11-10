@@ -24,7 +24,7 @@
         <slot name="label"></slot>
       </template>
       <template #right-icon>
-        <wd-icon v-if="showArrow" custom-class="wd-col-picker__arrow" name="arrow-right" />
+        <wd-icon v-if="showArrow" custom-class="wd-col-picker__arrow" name="right" />
       </template>
     </wd-cell>
     <view v-else @click="showPicker">

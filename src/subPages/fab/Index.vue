@@ -64,17 +64,17 @@
         @click="showToast('我被点了')"
       >
         <wd-button @click="showToast('一键三连')" :disabled="disabled" custom-class="custom-button" type="primary" round>
-          <wd-icon name="github-filled" size="22px"></wd-icon>
+          <wd-icon name="logo-github-o" size="22px"></wd-icon>
         </wd-button>
         <wd-button @click="showToast('我要收藏')" :disabled="disabled" custom-class="custom-button" type="success" round>
           <wd-icon name="star" size="22px"></wd-icon>
         </wd-button>
 
         <wd-button @click="showToast('我要投币')" :disabled="disabled" custom-class="custom-button" type="error" round>
-          <wd-icon name="money-circle" size="22px"></wd-icon>
+          <wd-icon name="finance" size="22px"></wd-icon>
         </wd-button>
         <wd-button @click="showToast('我要点赞')" :disabled="disabled" custom-class="custom-button" type="warning" round>
-          <wd-icon name="thumb-up" size="22px"></wd-icon>
+          <wd-icon name="good" size="22px"></wd-icon>
         </wd-button>
       </wd-fab>
 

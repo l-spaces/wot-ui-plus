@@ -23,7 +23,7 @@
       </demo-block>
       <demo-block :title="$t('zhanShiXiaoXiShuLiang')">
         <wd-badge custom-class="badge" :modelValue="12">
-          <wd-icon name="star-on" size="22px"></wd-icon>
+          <wd-icon name="star-filled" size="22px"></wd-icon>
         </wd-badge>
         <wd-badge :is-dot="false" :modelValue="12"></wd-badge>
       </demo-block>

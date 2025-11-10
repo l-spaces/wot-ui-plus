@@ -49,9 +49,9 @@ export const treeProps = {
   // 是否显示展开/收缩按钮
   showSwitcher: makeBooleanProp(true),
   // 展开图标
-  expandIcon: makeStringProp('arrow-right'),
+  expandIcon: makeStringProp('right-box-filled'),
   // 收缩图标
-  collapseIcon: makeStringProp('arrow-down'),
+  collapseIcon: makeStringProp('down-box-filled'),
   // loading的颜色
   loadingColor: makeStringProp(''),
   // checkebox选中颜色

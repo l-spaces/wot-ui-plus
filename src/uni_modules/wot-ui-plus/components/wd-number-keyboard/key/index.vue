@@ -6,13 +6,13 @@
         <template v-if="text">
           {{ text }}
         </template>
-        <wd-icon v-else custom-class="wd-key__icon" name="keyboard-delete" size="22px"></wd-icon>
+        <wd-icon v-else custom-class="wd-key__icon" name="delete-box" size="22px"></wd-icon>
       </template>
       <template v-else-if="type === 'extra'">
         <template v-if="text">
           {{ text }}
         </template>
-        <wd-icon v-else custom-class="wd-key__icon" name="keyboard-collapse" size="22px"></wd-icon>
+        <wd-icon v-else custom-class="wd-key__icon" name="keyboard" size="22px"></wd-icon>
       </template>
       <template v-else>{{ text }}</template>
     </view>

@@ -154,6 +154,8 @@ export const list = [
   'topic',
   'topic-filled',
 
+  'backtop',
+  'backtop-circle',
   'export',
   'upload-one',
   'go-on',
@@ -390,10 +392,11 @@ export const list = [
 
   'list',
   'list-view',
-
   'send',
-
   'setting-config',
+  'keyboard',
+  'keywords-circle',
+
   'logo-android',
   'logo-android-o',
   'logo-baidu',

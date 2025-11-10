@@ -78,9 +78,9 @@ const isChecked = computed(() => {
 const elIcon = computed(() => {
   console.log(props.indeterminate)
   if (props.indeterminate) {
-    return 'decrease'
+    return 'minus'
   } else {
-    return 'check-bold'
+    return 'check'
   }
 })
 

@@ -22,7 +22,8 @@
                   <image class="kind-list__img" :src="page.icon" @click="handleClick(`/subPages/${page.id}/Index`)" />
                 </template>
                 <template #text>
-                  <text class="kind-list__text">{{ page.name }}</text>
+                  <text class="kind-list__text">{{ splitSrc(page.name).englishWords }}</text>
+                  <text class="kind-list__text">{{ splitSrc(page.name).chineseChars }}</text>
                 </template>
               </wd-grid-item>
             </wd-grid>
@@ -41,6 +42,26 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
 const imgModules: any = import.meta.glob(['../images/*.png', '../images/example/*.png'], { eager: true })
+
+/**
+ * 分割中英文字符串
+ * @param text 包含中英文的字符串
+ * @returns 包含英文和中文字符的对象
+ */
+function splitSrc(text: string): { englishWords: string; chineseChars: string } {
+  if (!text || typeof text !== 'string') {
+    return { englishWords: '', chineseChars: '' }
+  }
+
+  const englishPattern = /[a-zA-Z0-9\s\p{P}]/gu
+  const chinesePattern = /[\u4e00-\u9fa5]/gu
+
+  // 过滤并连接匹配的字符
+  const englishWords = Array.from(text.match(englishPattern) || []).join('')
+  const chineseChars = Array.from(text.match(chinesePattern) || []).join('')
+
+  return { englishWords, chineseChars }
+}
 
 // 使用computed使list响应语言变化
 const list = computed(() => [

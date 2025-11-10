@@ -62,16 +62,16 @@ export const rateProps = {
   /**
    * 未选中的图标类名
    * 类型: string
-   * 默认值: 'star-on'
+   * 默认值: 'star-filled'
    */
-  icon: makeStringProp('star-on'),
+  icon: makeStringProp('star-filled'),
 
   /**
    * 选中的图标类名
    * 类型: string
-   * 默认值: 'star-on'
+   * 默认值: 'star-filled'
    */
-  activeIcon: makeStringProp('star-on'),
+  activeIcon: makeStringProp('star-filled'),
 
   /**
    * 是否禁用

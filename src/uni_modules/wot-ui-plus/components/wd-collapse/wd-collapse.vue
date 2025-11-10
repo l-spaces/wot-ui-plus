@@ -21,7 +21,7 @@
         <block v-else>
           <span class="wd-collapse__more-txt">{{ !modelValue ? translate('expand') : translate('retract') }}</span>
           <view :class="`wd-collapse__arrow ${modelValue ? 'is-retract' : ''}`">
-            <wd-icon name="arrow-down"></wd-icon>
+            <wd-icon name="down"></wd-icon>
           </view>
         </block>
       </view>

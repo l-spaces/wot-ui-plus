@@ -183,6 +183,8 @@ const icons = ref<Array<string>>([
   'topic',
   'topic-filled',
 
+  'backtop',
+  'backtop-circle',
   'export',
   'upload-one',
   'go-on',
@@ -419,10 +421,11 @@ const icons = ref<Array<string>>([
 
   'list',
   'list-view',
-
   'send',
-
   'setting-config',
+  'keyboard',
+  'keywords-circle',
+
   'logo-android',
   'logo-android-o',
   'logo-baidu',

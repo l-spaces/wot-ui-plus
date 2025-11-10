@@ -14,7 +14,7 @@
       ></wd-img-cropper>
       <view class="profile">
         <view v-if="!imgSrc" class="img" @click="upload">
-          <wd-icon name="fill-camera" custom-class="img-icon"></wd-icon>
+          <wd-icon name="camera-filled" custom-class="img-icon"></wd-icon>
         </view>
         <wd-img v-if="imgSrc" round width="200px" height="200px" :src="imgSrc" mode="aspectFit" custom-class="profile-img" @click="upload" />
         <view style="font-size: 14px">{{ $t('dian-ji-shang-chuan-tou-xiang') }}</view>
@@ -32,7 +32,7 @@
             @cancel="handleCustomCancel"
           ></wd-img-cropper>
           <view v-if="!imgSrcCustom[index]" class="img" @click="uploadCustom(index)">
-            <wd-icon name="fill-camera" custom-class="img-icon"></wd-icon>
+            <wd-icon name="camera-filled" custom-class="img-icon"></wd-icon>
           </view>
           <wd-img
             v-if="imgSrcCustom[index]"
@@ -52,7 +52,7 @@
       <wd-img-cropper v-model="showUpload" :img-src="srcUpload" @confirm="handleConfirmUpload" @cancel="handleCancel"></wd-img-cropper>
       <view class="profile">
         <view v-if="!imgSrcUpload" class="img" @click="uploadWithCrop">
-          <wd-icon name="fill-camera" custom-class="img-icon"></wd-icon>
+          <wd-icon name="camera-filled" custom-class="img-icon"></wd-icon>
         </view>
         <wd-img
           v-if="imgSrcUpload"

@@ -28,7 +28,7 @@
     <wd-fab v-model:active="fabActive" draggable type="error" :gap="{ bottom: 58 }" direction="left" v-if="enableRewardFab">
       <wd-button type="error" round @click="goToReward">
         <view style="display: flex; align-items: center">
-          <wd-icon name="thumb-up" size="22px"></wd-icon>
+          <wd-icon name="good" size="22px"></wd-icon>
           <text>{{ $t('kan-shi-pin-mian-guang-gao') }}</text>
         </view>
       </wd-button>

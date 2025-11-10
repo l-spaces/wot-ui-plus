@@ -56,7 +56,7 @@
             <view class="title">
               <view>{{ $t('20200203-fu-wu-dao-qi') }}</view>
               <view class="title-tip">
-                <wd-icon name="warning" size="14px" custom-style="vertical-align: bottom" />
+                <wd-icon name="attention" size="14px" custom-style="vertical-align: bottom" />
                 {{ $t('nin-ke-yi-qu-dian-nao-shang-shi-yong-gai-fu-wu') }}
               </view>
             </view>
@@ -110,7 +110,7 @@
             <view class="title">
               <view>{{ $t('20200203-fu-wu-dao-qi-1') }}</view>
               <view class="title-tip">
-                <wd-icon name="warning" size="14px" custom-style="vertical-align: bottom" />
+                <wd-icon name="attention" size="14px" custom-style="vertical-align: bottom" />
                 {{ $t('nin-ke-yi-qu-dian-nao-shang-shi-yong-gai-fu-wu') }}
               </view>
             </view>

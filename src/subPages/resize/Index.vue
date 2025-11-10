@@ -7,37 +7,37 @@
       <view class="tip-item">
         <view class="tip-label">width:</view>
         {{ lastWidth }}
-        <wd-icon name="arrow-thin-up" custom-class="icon"></wd-icon>
+        <wd-icon name="arrow-up" custom-class="icon"></wd-icon>
         {{ sizeWidth }}
       </view>
       <view class="tip-item">
         <view class="tip-label">height:</view>
         {{ lastHeight }}
-        <wd-icon name="arrow-thin-up" custom-class="icon"></wd-icon>
+        <wd-icon name="arrow-up" custom-class="icon"></wd-icon>
         {{ sizeHeight }}
       </view>
       <view class="tip-item">
         <view class="tip-label">top:</view>
         {{ lastTop }}
-        <wd-icon name="arrow-thin-up" custom-class="icon"></wd-icon>
+        <wd-icon name="arrow-up" custom-class="icon"></wd-icon>
         {{ sizeTop }}
       </view>
       <view class="tip-item">
         <view class="tip-label">right:</view>
         {{ lastRight }}
-        <wd-icon name="arrow-thin-up" custom-class="icon"></wd-icon>
+        <wd-icon name="arrow-up" custom-class="icon"></wd-icon>
         {{ sizeRight }}
       </view>
       <view class="tip-item">
         <view class="tip-label">bottom:</view>
         {{ lastBottom }}
-        <wd-icon name="arrow-thin-up" custom-class="icon"></wd-icon>
+        <wd-icon name="arrow-up" custom-class="icon"></wd-icon>
         {{ sizeBottom }}
       </view>
       <view class="tip-item">
         <view class="tip-label">left:</view>
         {{ lastLeft }}
-        <wd-icon name="arrow-thin-up" custom-class="icon"></wd-icon>
+        <wd-icon name="arrow-up" custom-class="icon"></wd-icon>
         {{ sizeLeft }}
       </view>
     </demo-block>

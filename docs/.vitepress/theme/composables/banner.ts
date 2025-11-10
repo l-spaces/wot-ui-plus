@@ -39,8 +39,8 @@ export type BannerData = {
  */
 const data = ref<BannerData[]>([
   {
-    title: '我们正在参加 Gitee 2025',
-    action: '为 Wot UI Plus投票',
+    title: 'uniapp 组件库文档网站',
+    action: 'Wot UI Plus',
     link: 'https://gitee.com'
   }
 ])

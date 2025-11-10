@@ -31,7 +31,7 @@
         ></image>
         <slot name="close">
           <wd-icon
-            name="close-outline"
+            name="close-circle"
             :custom-class="`wd-curtain__content-close ${closePosition} ${customCloseClass}`"
             :custom-style="customCloseStyle"
             @click="close"
