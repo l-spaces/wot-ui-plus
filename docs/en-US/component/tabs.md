@@ -12,11 +12,11 @@ When `v-model` is of type `number`, `wd-tab` does not need to set `name`. Also, 
 
 ```html
 <wd-tabs v-model="tab">
-    <block v-for="item in 4" :key="item">
-        <wd-tab :title="`Tab ${item}`">
-            <view class="content">Content {{ item }}</view>
-        </wd-tab>
-    </block>
+  <block v-for="item in 4" :key="item">
+    <wd-tab :title="`Tab ${item}`">
+      <view class="content">Content {{ item }}</view>
+    </wd-tab>
+  </block>
 </wd-tabs>
 ```
 
@@ -37,11 +37,11 @@ Set `name` for `wd-tab` as a unique identifier.
 
 ```html
 <wd-tabs v-model="tab">
-    <block v-for="item in tabs" :key="item">
-        <wd-tab :title="`${item}`" :name="item">
-            <view class="content">Content {{ item }}</view>
-        </wd-tab>
-    </block>
+  <block v-for="item in tabs" :key="item">
+    <wd-tab :title="`${item}`" :name="item">
+      <view class="content">Content {{ item }}</view>
+    </wd-tab>
+  </block>
 </wd-tabs>
 ```
 

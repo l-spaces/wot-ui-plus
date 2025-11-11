@@ -97,6 +97,7 @@ declare module 'vue' {
     WdRootPortal: typeof import('./components/wd-root-portal/wd-root-portal.vue')['default']
     WdTree: typeof import('./components/wd-tree/wd-tree.vue')['default']
     WdWaterfall: typeof import('./components/wd-waterfall/wd-waterfall.vue')['default']
+    WdTour: typeof import('./components/wd-tour/wd-tour.vue')['default']
   }
 }
 

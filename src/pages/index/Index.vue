@@ -202,6 +202,10 @@ const list = computed(() => [
         id: 'indexBar',
         icon: imgModules['../images/example/indexList.png'].default,
         name: t('indexbar-suo-yin-lan')
+      },
+      {
+        id: 'tour',
+        name: t('tour-title')
       }
     ]
   },

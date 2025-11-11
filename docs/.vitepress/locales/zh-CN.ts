@@ -258,6 +258,9 @@ export default defineConfig({
             {
               link: '/component/index-bar',
               text: 'IndexBar 索引栏'
+            },{
+              link:'/component/tour',
+              text: 'Tour 漫游'
             }
           ]
         },
