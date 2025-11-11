@@ -207,7 +207,18 @@ export const monthPanelProps = {
    * 与月视图交互：影响日期选择的响应时机和用户体验
    * 版本支持：1.2.25版本起提供，仅微信小程序和支付宝小程序支持
    */
-  immediateChange: makeBooleanProp(false)
+  immediateChange: makeBooleanProp(false),
+
+  /**
+   * 是否显示农历
+   * 功能：控制是否在月面板中显示农历日期
+   * 类型：布尔值
+   * 默认值：false
+   * 必要性：可选
+   * 业务场景：根据用户需求选择是否显示农历日期，如中国用户可能需要查看农历日期
+   * 与月视图关系：影响月面板中日期项的显示内容，增加了日期的可读性
+   */
+  showLunar: makeBooleanProp(false)
 }
 
 /**

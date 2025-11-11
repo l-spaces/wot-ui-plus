@@ -3,6 +3,7 @@
     <wd-toast selector="wd-month" />
     <view class="month">
       <view class="wd-month">
+        <!-- 日历列表标题 -->
         <view class="wd-month__title" v-if="showTitle">{{ monthTitle(date) }}</view>
         <view class="wd-month__days">
           <view
@@ -15,11 +16,14 @@
             @click="handleDateClick(index)"
           >
             <view class="wd-month__day-container">
-              <view class="wd-month__day-top">{{ item.topInfo }}</view>
+              <!-- 日期顶部信息 -->
+              <view class="wd-month__day-top" :style="{ color: item.topColor }">{{ item.topInfo }}</view>
+              <!-- 日期文本 -->
               <view class="wd-month__day-text">
                 {{ item.text }}
               </view>
-              <view class="wd-month__day-bottom">{{ item.bottomInfo }}</view>
+              <!-- 日期底部信息 -->
+              <view class="wd-month__day-bottom" :style="{ color: item.bottomColor }">{{ item.bottomInfo }}</view>
             </view>
           </view>
         </view>
@@ -41,6 +45,8 @@ export default {
 <script lang="ts" setup>
 import wdToast from '../../wd-toast/wd-toast.vue'
 import { computed, ref, watch, type CSSProperties } from 'vue'
+import lunisolar from 'lunisolar'
+
 import {
   compareDate,
   formatMonthTitle,
@@ -129,6 +135,11 @@ function setDays() {
       type = 'current'
     }
     const dayObj = getFormatterDate(date, day, type)
+    // 加入农历日期
+    if (!dayObj.bottomInfo && props.showLunar) {
+      const lunar = lunisolar(date).lunar.day == 1 ? lunisolar(date).lunar.getMonthName() : lunisolar(date).lunar.getDayName()
+      dayObj.bottomInfo = lunar
+    }
     dayList.push(dayObj)
   }
   days.value = dayList
@@ -369,7 +380,9 @@ function getFormatterDate(date: number, day: string | number, type?: CalendarDay
     date: date,
     text: day,
     topInfo: '',
+    topColor: '#4d80f0',
     bottomInfo: '',
+    bottomColor: '',
     type,
     disabled: compareDate(date, props.minDate) === -1 || compareDate(date, props.maxDate) === 1,
     isLastRow: isLastRow(date)

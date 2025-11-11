@@ -24,6 +24,7 @@
       :min-date="minDate"
       :max-date="maxDate"
       :first-day-of-week="firstDayOfWeek"
+      :show-lunar="showLunar"
       :formatter="formatter"
       :max-range="maxRange"
       :range-prompt="rangePrompt"

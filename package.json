@@ -87,6 +87,7 @@
     "@dcloudio/uni-quickapp-webview": "3.0.0-4070620250821001",
     "dayjs": "^1.11.19",
     "element-plus": "^2.11.2",
+    "lunisolar": "^2.6.0",
     "vite-plugin-compression": "^0.5.1",
     "vitepress": "^1.6.3",
     "vue": "^3.4.38",

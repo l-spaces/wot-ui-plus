@@ -153,7 +153,18 @@ export const monthProps = {
    * 业务场景：根据UI设计需求决定是否显示标题
    * 与月视图关系：控制月视图顶部标题栏的显示状态
    */
-  showTitle: makeBooleanProp(true)
+  showTitle: makeBooleanProp(true),
+
+  /**
+   * 是否显示农历
+   * 功能：控制是否在月视图中显示农历日期
+   * 类型：布尔值
+   * 默认值：false
+   * 必要性：可选
+   * 业务场景：根据用户需求选择是否显示农历日期，如中国用户可能需要查看农历日期
+   * 与月视图关系：影响月视图中日期项的显示内容，增加了日期的可读性
+   */
+  showLunar: makeBooleanProp(false)
 }
 
 /**

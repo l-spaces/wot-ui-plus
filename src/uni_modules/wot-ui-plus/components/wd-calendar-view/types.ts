@@ -9,7 +9,7 @@ import dayjs from 'dayjs'
  * 取值逻辑：当前日期的当天开始时间，向前推6个月
  * 类型：时间戳（毫秒）
  */
-const defaultMinDate = dayjs().startOf('day').subtract(6, 'month').valueOf()
+const defaultMinDate = dayjs().startOf('day').subtract(12, 'month').valueOf()
 
 /**
  * 默认最大可选日期常量
@@ -17,7 +17,7 @@ const defaultMinDate = dayjs().startOf('day').subtract(6, 'month').valueOf()
  * 取值逻辑：当前日期向后推6个月，并且是该月的最后一天结束时间
  * 类型：时间戳（毫秒）
  */
-const defaultMaxDate = dayjs().add(6, 'month').endOf('day').valueOf()
+const defaultMaxDate = dayjs().add(12, 'month').endOf('day').valueOf()
 
 /**
  * 日历选择类型枚举
@@ -161,7 +161,15 @@ export const calendarViewProps = {
    * 交互逻辑：若为true，在手指松开时立即触发；否则在滚动动画结束后触发
    * 平台兼容性：仅微信小程序和支付宝小程序支持
    */
-  immediateChange: makeBooleanProp(false)
+  immediateChange: makeBooleanProp(false),
+  /**
+   * 是否显示农历
+   * 功能：控制是否在日期项中显示农历日期
+   * 类型：布尔值
+   * 默认值：false
+   * 业务场景：如需要展示中国传统的日期表示方式
+   */
+  showLunar: makeBooleanProp(false)
 }
 
 /**
@@ -199,13 +207,13 @@ export type CalendarDayType = '' | 'start' | 'middle' | 'end' | 'selected' | 'sa
  */
 export type CalendarDayItem = {
   /**
-   * 日期时间戳
+   * 日期时间戳 (默认当前时间戳)
    * 功能：唯一标识日期，用于计算和比较
    * 类型：数字（13位时间戳）
    */
   date: number
   /**
-   * 显示的日期文本
+   * 显示的日期文本 (默认日期的天数)
    * 功能：自定义日期的显示文本
    * 类型：数字或字符串
    * 默认值：日期的天数（如1, 2, 3...）
@@ -219,12 +227,26 @@ export type CalendarDayItem = {
    */
   topInfo?: string
   /**
+   * 日期顶部信息的颜色
+   * 功能：自定义日期顶部信息的显示颜色
+   * 类型：字符串（CSS颜色值）
+   * 默认值：根据主题自动调整
+   */
+  topColor?: string
+  /**
    * 日期底部显示的信息
    * 功能：在日期下方显示额外信息
    * 类型：字符串
    * 使用场景：显示农历、价格、状态等
    */
   bottomInfo?: string
+  /**
+   * 日期底部信息的颜色
+   * 功能：自定义日期底部信息的显示颜色
+   * 类型：字符串（CSS颜色值）
+   * 默认值：根据主题自动调整
+   */
+  bottomColor?: string
   /**
    * 日期类型
    * 功能：控制日期的选中状态样式
