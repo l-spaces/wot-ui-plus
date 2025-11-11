@@ -129,3 +129,5 @@ export function useLockScroll(shouldLock: () => boolean) {
     unlock
   }
 }
+
+export default useLockScroll
