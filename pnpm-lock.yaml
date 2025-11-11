@@ -56,6 +56,9 @@ importers:
       '@dcloudio/uni-quickapp-webview':
         specifier: 3.0.0-4070620250821001
         version: 3.0.0-4070620250821001(@vueuse/core@12.0.0(typescript@5.5.4))(postcss@8.5.3)(rollup@3.29.5)(ts-node@10.9.2(@types/node@18.15.3)(typescript@5.5.4))(vue@3.4.38(typescript@5.5.4))
+      dayjs:
+        specifier: ^1.11.19
+        version: 1.11.19
       element-plus:
         specifier: ^2.11.2
         version: 2.11.2(vue@3.4.38(typescript@5.5.4))
@@ -3579,8 +3582,8 @@ packages:
   dateformat@3.0.3:
     resolution: {integrity: sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==}
 
-  dayjs@1.11.18:
-    resolution: {integrity: sha512-zFBQ7WFRvVRhKcWoUh+ZA1g2HVgUbsZm9sbddh8EC5iv93sui8DVVz1Npvz+r6meo9VKfa8NyLWBsQK1VvIKPA==}
+  dayjs@1.11.19:
+    resolution: {integrity: sha512-t5EcLVS6QPBNqM2z8fakk/NKel+Xzshgt8FFKAn+qwlD1pzZWxh0nVCrvFK7ZDb6XucZeF9z8C7CBWTRIVApAw==}
 
   de-indent@1.0.2:
     resolution: {integrity: sha512-e/1zu3xH5MQryN2zdVaF0OrdNLUbvWxzMbi+iNA6Bky7l1RoP8a2fIbRocyHclXt/arDrrR6lL3TqFD9pMQTsg==}
@@ -12066,7 +12069,7 @@ snapshots:
 
   dateformat@3.0.3: {}
 
-  dayjs@1.11.18: {}
+  dayjs@1.11.19: {}
 
   de-indent@1.0.2: {}
 
@@ -12200,7 +12203,7 @@ snapshots:
       '@types/lodash-es': 4.17.8
       '@vueuse/core': 9.13.0(vue@3.4.38(typescript@5.5.4))
       async-validator: 4.2.5
-      dayjs: 1.11.18
+      dayjs: 1.11.19
       escape-html: 1.0.3
       lodash: 4.17.21
       lodash-es: 4.17.21

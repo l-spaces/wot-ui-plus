@@ -1,11 +1,10 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { makeBooleanProp, makeNumberProp, makeStringProp } from '../../common/props'
 import type { CalendarFormatter, CalendarTimeFilter, CalendarType } from '../types'
+import dayjs from 'dayjs'
 
-const now = new Date()
-const defaultMinDate = new Date(now.getFullYear(), now.getMonth() - 6, now.getDate()).getTime()
-const defaultMaxDate = new Date(now.getFullYear(), now.getMonth() + 6, now.getDate(), 23, 59, 59).getTime()
-
+const defaultMinDate = dayjs().startOf('day').subtract(6, 'month').valueOf()
+const defaultMaxDate = dayjs().add(6, 'month').endOf('day').valueOf()
 /**
  * 月份信息
  */

@@ -1,9 +1,10 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp } from '../common/props'
 
-const now = new Date()
-const defaultMinDate = new Date(now.getFullYear(), now.getMonth() - 6, now.getDate()).getTime()
-const defaultMaxDate = new Date(now.getFullYear(), now.getMonth() + 6, now.getDate(), 23, 59, 59).getTime()
+import dayjs from 'dayjs'
+
+const defaultMinDate = dayjs().startOf('day').subtract(6, 'month').valueOf()
+const defaultMaxDate = dayjs().add(6, 'month').endOf('day').valueOf()
 
 export type CalendarType = 'date' | 'dates' | 'datetime' | 'week' | 'month' | 'daterange' | 'datetimerange' | 'weekrange' | 'monthrange'
 

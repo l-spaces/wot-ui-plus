@@ -70,7 +70,7 @@
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-ui-plus'
-import { dayjs } from '@/uni_modules/wot-ui-plus'
+import dayjs from 'dayjs'
 import type { CalendarDayItem, CalendarFormatter } from '@/uni_modules/wot-ui-plus/components/wd-calendar-view/types'
 import type { CalendarInstance, CalendarOnShortcutsClickOption } from '@/uni_modules/wot-ui-plus/components/wd-calendar/types'
 import { ref } from 'vue'

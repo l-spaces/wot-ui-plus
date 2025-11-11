@@ -85,6 +85,7 @@
     "@dcloudio/uni-mp-weixin": "3.0.0-4070620250821001",
     "@dcloudio/uni-mp-xhs": "3.0.0-4070620250821001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4070620250821001",
+    "dayjs": "^1.11.19",
     "element-plus": "^2.11.2",
     "vite-plugin-compression": "^0.5.1",
     "vitepress": "^1.6.3",

@@ -173,7 +173,7 @@ import { deepClone, isArray, isDef, isEqual, isFunction, padZero } from '../comm
 import { type DatetimePickerViewInstance, type DatetimePickerViewColumnType, type DatetimePickerViewExpose } from '../wd-datetime-picker-view/types'
 import { useTranslate } from '../composables/useTranslate'
 import { datetimePickerProps, type DatetimePickerExpose } from './types'
-import dayjs from '../../dayjs'
+import dayjs from 'dayjs'
 import { getPickerValue } from '../wd-datetime-picker-view/util'
 
 const props = defineProps(datetimePickerProps)

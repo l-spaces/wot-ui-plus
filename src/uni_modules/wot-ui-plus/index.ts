@@ -81,7 +81,7 @@ export * from './components/wd-notify'
  * const formattedDate = dayjs().format('YYYY-MM-DD') // 当前日期
  * const tomorrow = dayjs().add(1, 'day') // 明天
  */
-export { default as dayjs } from './dayjs'
+export { default as dayjs } from 'dayjs'
 
 /**
  * 通用工具类，提供各种辅助方法
