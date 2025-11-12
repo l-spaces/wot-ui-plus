@@ -15,7 +15,7 @@
           <wd-radio value="monthrange">月范围</wd-radio>
         </wd-radio-group>
       </view>
-      <wd-calendar-view :type="type1" v-model="value2" :formatter="formatter" @change="handleChange1"></wd-calendar-view>
+      <wd-calendar-view :type="type1" v-model="value1" :formatter="formatter" @change="handleChange1"></wd-calendar-view>
     </demo-block>
   </page-wraper>
 </template>
@@ -26,12 +26,12 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 import dayjs from 'dayjs'
 
-const type1 = ref<any>('datetime')
+const type1 = ref<any>('weekrange')
 const type2 = ref<any>('daterange')
 const minDate = ref(Date.now())
-const value1 = ref([dayjs('2025-11-24').valueOf()])
+const value1 = ref(dayjs('2025-10-12').valueOf())
 const value2 = ref(null)
-const value3 = ref([dayjs('2025-11-24').valueOf()])
+const value3 = ref([dayjs('2025-11-12').valueOf(), dayjs('2025-11-1').valueOf()])
 const value4 = ref(Date.now())
 const value5 = ref([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now() - 24 * 60 * 60 * 1000])
 const value6 = ref([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now() - 24 * 60 * 60 * 1000])
@@ -97,11 +97,21 @@ function handleTypeChange2({ value }: any) {
   type2.value = value
 }
 function handleChange1({ value }: any) {
-  if (Array.isArray(value)) {
-    // 使用 dayjs 格式化数组中的日期
-    console.log(value.map((v) => dayjs(v).format('YYYY-MM-DD HH:mm:ss')))
+  console.log(value)
+  if (type1.value === 'month') {
+    if (Array.isArray(value)) {
+      // 使用 dayjs 格式化数组中的日期
+      console.log(value.map((v) => dayjs(v).format('YYYY-MM')))
+    } else {
+      console.log(dayjs(value).format('YYYY-MM'))
+    }
   } else {
-    console.log(dayjs(value).format('YYYY-MM-DD HH:mm:ss'))
+    if (Array.isArray(value)) {
+      // 使用 dayjs 格式化数组中的日期
+      console.log(value.map((v) => dayjs(v).format('YYYY-MM-DD HH:mm:ss')))
+    } else {
+      console.log(dayjs(value).format('YYYY-MM-DD HH:mm:ss'))
+    }
   }
 }
 function handleChange2({ value }: any) {

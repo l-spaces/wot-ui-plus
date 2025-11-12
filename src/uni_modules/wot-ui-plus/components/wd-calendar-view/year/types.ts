@@ -57,10 +57,10 @@ export const yearProps = {
    * 功能：绑定组件的选中状态，支持双向绑定
    * 类型：数字（单选）或数组（多选/范围选择）或null（未选择）
    * 必要性：必填
-   * 业务场景：存储用户在年视图中选择的日期数据
+   * 业务场景：存储用户在年视图中选择的日期数据，支持单选、多选和范围选择
    * 与月视图交互：当在年视图中选择年份后，会传递给月视图显示具体月份
    */
-  value: makeRequiredProp([Number, Array] as PropType<number | (number | null)[] | null>),
+  value: makeRequiredProp([Number, Array, null] as PropType<number | (number | null)[] | null>),
 
   /**
    * 最小可选日期

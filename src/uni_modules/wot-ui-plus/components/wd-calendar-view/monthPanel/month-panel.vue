@@ -226,7 +226,7 @@ async function scrollIntoView() {
   if (top > 0) {
     await pause()
     // 如果不是第一个月才加45
-    scrollTop.value = top - (activeMonthIndex > 0 ? props.panelHeight / 4 : 0)
+    scrollTop.value = top - (activeMonthIndex > 0 ? props.panelHeight / 2 : 0)
   }
 }
 /**

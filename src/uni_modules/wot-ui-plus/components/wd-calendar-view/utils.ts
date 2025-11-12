@@ -416,14 +416,36 @@ export function getWeekNumber(date: number | Date) {
   return 1 + Math.round(((date.getTime() - week.getTime()) / 86400000 - 3 + ((week.getDay() + 6) % 7)) / 7)
 }
 
+/**
+ * 根据月份类型、值和日历类型生成日历项的 class 字符串
+ * @param {CalendarDayType} monthType - 月份类型（如当前月、上月、下月）
+ * @param {number | null | (number | null)[]} value - 当前值，单选为 number 或 null，范围选为数组
+ * @param {CalendarType} type - 日历选择类型（如 date、daterange）
+ * @returns {string} 拼接后的 class 字符串
+ */
 export function getItemClass(monthType: CalendarDayType, value: number | null | (number | null)[], type: CalendarType) {
+  // 初始 classList，包含月份类型
   const classList = ['is-' + monthType]
 
+  // 如果是范围选择且 value 是数组
   if (type.indexOf('range') > -1 && isArray(value)) {
+    // 如果 value 不存在或没有结束日期，添加无结束标识
     if (!value || !value[1]) {
       classList.push('is-without-end')
     }
   }
 
   return classList.join(' ')
+}
+
+/**
+ * 时间戳数组升序排序（从小到大，对应时间从早到晚）
+ * @param timeStamps - 待排序的时间戳数组（
+ * @returns 升序排列的有效时间戳数组（保留原单位，过滤无效值）
+ */
+export const sortTimeStampsAsc = (timeStamps: (number | null | undefined)[]): number[] => {
+  // 过滤null和undefined，然后直接按数值大小升序排序
+  return timeStamps
+    .filter((ts): ts is number => ts !== null && ts !== undefined && !isNaN(ts)) // 过滤null、undefined和NaN
+    .sort((a, b) => a - b) // 直接按数值升序排序
 }

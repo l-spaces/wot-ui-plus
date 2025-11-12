@@ -93,7 +93,7 @@ export const monthPanelProps = {
    * 业务场景：满足不同国家/地区的周起始习惯
    * 与月视图交互：影响月视图中日期的排列方式
    */
-  firstDayOfWeek: makeNumberProp(0),
+  firstDayOfWeek: makeNumberProp(1),
 
   /**
    * 日期格式化函数

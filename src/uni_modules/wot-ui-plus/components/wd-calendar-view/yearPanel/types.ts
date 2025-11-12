@@ -50,7 +50,7 @@ export const yearPanelProps = {
    * 必要性：必填
    * 业务场景：根据不同的CalendarType，存储和显示对应的选中年份
    */
-  value: makeRequiredProp([Number, Array] as PropType<number | (number | null)[] | null>),
+  value: makeRequiredProp([Number, Array, null] as PropType<number | (number | null)[] | null>),
   /**
    * 最小日期
    * 功能：限制可选年份的起始范围

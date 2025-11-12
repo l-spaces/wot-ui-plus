@@ -9,7 +9,7 @@ import dayjs from 'dayjs'
  * 取值逻辑：当前日期的当天开始时间，向前推6个月
  * 类型：时间戳（毫秒）
  */
-export const defaultMinDate = dayjs().startOf('day').subtract(3, 'month').valueOf()
+export const defaultMinDate = dayjs().startOf('day').subtract(12, 'month').valueOf()
 
 /**
  * 默认最大可选日期常量
@@ -17,7 +17,7 @@ export const defaultMinDate = dayjs().startOf('day').subtract(3, 'month').valueO
  * 取值逻辑：当前日期向后推6个月，并且是该月的最后一天结束时间
  * 类型：时间戳（毫秒）
  */
-export const defaultMaxDate = dayjs().add(3, 'month').endOf('day').valueOf()
+export const defaultMaxDate = dayjs().add(12, 'month').endOf('day').valueOf()
 
 /**
  * 日历选择类型枚举
@@ -81,7 +81,7 @@ export const calendarViewProps = {
    * 默认值：0（周日）
    * 业务场景：满足不同国家/地区的周起始习惯
    */
-  firstDayOfWeek: makeNumberProp(0),
+  firstDayOfWeek: makeNumberProp(1),
   /**
    * 日期格式化函数
    * 功能：自定义日期项的显示和样式
