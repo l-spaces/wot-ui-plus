@@ -169,7 +169,7 @@ export const calendarViewProps = {
    * 默认值：false
    * 业务场景：如需要展示中国传统的日期表示方式
    */
-  showLunar: makeBooleanProp(false)
+  showLunar: makeBooleanProp(true)
 }
 
 /**

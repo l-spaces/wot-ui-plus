@@ -92,7 +92,7 @@ const dayTypeClass = computed(() => {
 
 const monthTitle = computed(() => {
   return (date: number) => {
-    return dayjs(date).format('YYYY-MM-DD')
+    return dayjs(date).format('YYYY-MM')
   }
 })
 

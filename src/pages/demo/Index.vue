@@ -15,7 +15,7 @@
           <wd-radio value="monthrange">月范围</wd-radio>
         </wd-radio-group>
       </view>
-      <wd-calendar-view :type="type1" v-model="value1" showLunar :formatter="formatter" @change="handleChange1"></wd-calendar-view>
+      <wd-calendar-view :type="type1" v-model="value1" :formatter="formatter" @change="handleChange1"></wd-calendar-view>
     </demo-block>
   </page-wraper>
 </template>
