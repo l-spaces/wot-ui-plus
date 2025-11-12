@@ -9,25 +9,9 @@ import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 // 从公共属性工具导入常用属性构造函数
 import { makeBooleanProp, makeNumberProp, makeStringProp } from '../../common/props'
 // 从日历共享类型导入格式化器、时间过滤器和日历类型定义
-import type { CalendarFormatter, CalendarTimeFilter, CalendarType } from '../types'
+import { defaultMaxDate, defaultMinDate, type CalendarFormatter, type CalendarTimeFilter, type CalendarType } from '../types'
 // 导入dayjs日期处理库，用于日期计算和格式化
 import dayjs from 'dayjs'
-
-/**
- * 默认最小可选日期常量
- * 业务背景：设置月面板可选择的最早时间，防止用户选择过于久远的日期
- * 取值逻辑：当前日期的当天开始时间，向前推6个月
- * 类型：时间戳（毫秒）
- */
-const defaultMinDate = dayjs().startOf('day').subtract(6, 'month').valueOf()
-
-/**
- * 默认最大可选日期常量
- * 业务背景：设置月面板可选择的最晚时间，防止用户选择过于未来的日期
- * 取值逻辑：当前日期向后推6个月，并且是该月的最后一天结束时间
- * 类型：时间戳（毫秒）
- */
-const defaultMaxDate = dayjs().add(6, 'month').endOf('day').valueOf()
 
 /**
  * 月份信息接口
@@ -213,12 +197,20 @@ export const monthPanelProps = {
    * 是否显示农历
    * 功能：控制是否在月面板中显示农历日期
    * 类型：布尔值
-   * 默认值：false
+   * 默认值：true
    * 必要性：可选
    * 业务场景：根据用户需求选择是否显示农历日期，如中国用户可能需要查看农历日期
    * 与月视图关系：影响月面板中日期项的显示内容，增加了日期的可读性
    */
-  showLunar: makeBooleanProp(false)
+  showLunar: makeBooleanProp(true),
+  /**
+   * 是否显示月份背景
+   * 功能：控制是否在日期项中显示特殊标记（月份背景）
+   * 类型：布尔值
+   * 默认值：true
+   * 业务场景：如需要突出显示月份背景
+   */
+  showMark: makeBooleanProp(true)
 }
 
 /**

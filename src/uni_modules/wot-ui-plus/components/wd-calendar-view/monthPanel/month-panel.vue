@@ -1,8 +1,6 @@
 <template>
   <view class="wd-month-panel">
-    <view v-if="showPanelTitle" class="wd-month-panel__title">
-      {{ title }}
-    </view>
+    <view v-if="showPanelTitle" class="wd-month-panel__title">{{ title }}</view>
     <view class="wd-month-panel__weeks">
       <!-- 星期 -->
       <view v-for="item in 7" :key="item" class="wd-month-panel__week">{{ weekLabel(item + firstDayOfWeek) }}</view>
@@ -23,6 +21,7 @@
           :max-date="maxDate"
           :first-day-of-week="firstDayOfWeek"
           :show-lunar="showLunar"
+          :show-mark="showMark"
           :formatter="formatter"
           :max-range="maxRange"
           :range-prompt="rangePrompt"
@@ -35,7 +34,7 @@
     </scroll-view>
     <view v-if="timeType" class="wd-month-panel__time">
       <view v-if="type === 'datetimerange'" class="wd-month-panel__time-label">
-        <!-- 日期时间标签 -->
+        <!-- 时间标签 -->
         <view class="wd-month-panel__time-text">{{ timeType === 'start' ? translate('startTime') : translate('endTime') }}</view>
       </view>
       <view class="wd-month-panel__time-picker">
@@ -227,7 +226,7 @@ async function scrollIntoView() {
   if (top > 0) {
     await pause()
     // 如果不是第一个月才加45
-    scrollTop.value = top + (activeMonthIndex > 0 ? 45 : 0)
+    scrollTop.value = top - (activeMonthIndex > 0 ? props.panelHeight / 4 : 0)
   }
 }
 /**

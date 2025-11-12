@@ -9,7 +9,7 @@ import dayjs from 'dayjs'
  * 取值逻辑：当前日期的当天开始时间，向前推6个月
  * 类型：时间戳（毫秒）
  */
-const defaultMinDate = dayjs().startOf('day').subtract(12, 'month').valueOf()
+export const defaultMinDate = dayjs().startOf('day').subtract(3, 'month').valueOf()
 
 /**
  * 默认最大可选日期常量
@@ -17,7 +17,7 @@ const defaultMinDate = dayjs().startOf('day').subtract(12, 'month').valueOf()
  * 取值逻辑：当前日期向后推6个月，并且是该月的最后一天结束时间
  * 类型：时间戳（毫秒）
  */
-const defaultMaxDate = dayjs().add(12, 'month').endOf('day').valueOf()
+export const defaultMaxDate = dayjs().add(3, 'month').endOf('day').valueOf()
 
 /**
  * 日历选择类型枚举
@@ -169,7 +169,15 @@ export const calendarViewProps = {
    * 默认值：false
    * 业务场景：如需要展示中国传统的日期表示方式
    */
-  showLunar: makeBooleanProp(true)
+  showLunar: makeBooleanProp(true),
+  /**
+   * 是否显示月份背景
+   * 功能：控制是否在日期项中显示特殊标记（月份背景）
+   * 类型：布尔值
+   * 默认值：true
+   * 业务场景：如需要突出显示月份背景
+   */
+  showMark: makeBooleanProp(true)
 }
 
 /**

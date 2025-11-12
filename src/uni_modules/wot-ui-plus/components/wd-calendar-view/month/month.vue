@@ -6,7 +6,7 @@
         <!-- 日历列表标题 -->
         <view class="wd-month__title" v-if="showTitle">{{ monthTitle(date) }}</view>
         <view class="wd-month__days">
-          <view class="wd-month__back">
+          <view v-if="showMark" class="wd-month__back">
             <text class="wd-month__back__text">{{ monthBack(date) }}</text>
           </view>
           <view
@@ -53,7 +53,6 @@ import Calendar from '../../common/calendar.js'
 
 import {
   compareDate,
-  formatMonthTitle,
   getDateByDefaultTime,
   getDayByOffset,
   getDayOffset,
