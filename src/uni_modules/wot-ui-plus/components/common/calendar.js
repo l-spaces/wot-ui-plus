@@ -2981,3 +2981,4 @@ var calendar = (function () {
   return calendar
 })()
 //# sourceMappingURL=js-calendar-converter.js.map
+export default calendar

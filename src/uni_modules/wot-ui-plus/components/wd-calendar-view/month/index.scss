@@ -34,8 +34,21 @@
   @include e(days) {
     display: flex;
     flex-wrap: wrap;
+    position: relative;
     font-size: $-calendar-day-fs;
     color: $-calendar-day-color;
+  }
+
+  @include e(back) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    @include e(text) {
+      font-size: 155px;
+      color: rgba(231, 232, 234, 0.83);
+    }
   }
 
   @include e(day) {
@@ -126,7 +139,7 @@
       }
     }
 
-    @include when(last-row){
+    @include when(last-row) {
       margin-bottom: 0;
     }
   }

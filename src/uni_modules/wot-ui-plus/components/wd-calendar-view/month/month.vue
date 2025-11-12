@@ -6,6 +6,9 @@
         <!-- 日历列表标题 -->
         <view class="wd-month__title" v-if="showTitle">{{ monthTitle(date) }}</view>
         <view class="wd-month__days">
+          <view class="wd-month__back">
+            <text class="wd-month__back__text">{{ monthBack(date) }}</text>
+          </view>
           <view
             v-for="(item, index) in days"
             :key="index"
@@ -45,7 +48,8 @@ export default {
 <script lang="ts" setup>
 import wdToast from '../../wd-toast/wd-toast.vue'
 import { computed, ref, watch, type CSSProperties } from 'vue'
-import lunisolar from 'lunisolar'
+import dayjs from 'dayjs'
+import Calendar from '../../common/calendar.js'
 
 import {
   compareDate,
@@ -88,7 +92,13 @@ const dayTypeClass = computed(() => {
 
 const monthTitle = computed(() => {
   return (date: number) => {
-    return formatMonthTitle(date)
+    return dayjs(date).format('YYYY-MM-DD')
+  }
+})
+
+const monthBack = computed(() => {
+  return (date: number) => {
+    return dayjs(date).format('MM')
   }
 })
 
@@ -137,8 +147,8 @@ function setDays() {
     const dayObj = getFormatterDate(date, day, type)
     // 加入农历日期
     if (!dayObj.bottomInfo && props.showLunar) {
-      const lunar = lunisolar(date).lunar.day == 1 ? lunisolar(date).lunar.getMonthName() : lunisolar(date).lunar.getDayName()
-      dayObj.bottomInfo = lunar
+      const lunar = getLunar(year, month + 1, day)
+      dayObj.bottomInfo = lunar || ''
     }
     dayList.push(dayObj)
   }
@@ -168,7 +178,14 @@ function getDateType(date: number): CalendarDayType {
   }
   return ''
 }
-
+/**
+ * 获取农历
+ */
+function getLunar(year: string | number, month: string | number, day: string | number) {
+  const lunar = Calendar.solar2lunar(year, month, day)
+  // 优先展示节日，其次月初，最后普通农历日
+  return lunar.lunarFestival || (lunar.lDay === 1 ? lunar.IMonthCn : lunar.IDayCn)
+}
 function getDatesType(date: number): CalendarDayType {
   const { value } = props
   let type: CalendarDayType = ''
@@ -391,7 +408,7 @@ function getFormatterDate(date: number, day: string | number, type?: CalendarDay
     if (isFunction(props.formatter)) {
       dayObj = props.formatter(dayObj)
     } else {
-      console.error('[wot-design] error(wd-calendar-view): the formatter prop of wd-calendar-view should be a function')
+      console.error('(wd-calendar-view): the `formatter` prop of wd-calendar-view should be a function')
     }
   }
   return dayObj
