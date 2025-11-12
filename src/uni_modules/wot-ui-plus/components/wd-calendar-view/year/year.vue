@@ -33,7 +33,7 @@ export default {
 import wdToast from '../../wd-toast/wd-toast.vue'
 import { computed, ref, watch } from 'vue'
 import { deepClone, isArray, isFunction } from '../../common/util'
-import { compareMonth, formatYearTitle, getDateByDefaultTime, getItemClass, getMonthByOffset, getMonthOffset } from '../utils'
+import { compareMonth, formatYearTitle, getDateByDefaultTime, getItemClass, getMonthByOffset, getMonthOffset, sortTimeStampsAsc } from '../utils'
 import { useToast } from '../../wd-toast'
 import { useTranslate } from '../../composables/useTranslate'
 import dayjs from 'dayjs'
@@ -77,17 +77,17 @@ function getMonthLabel(date: number) {
 
 function setMonths() {
   const monthList: CalendarDayItem[] = []
-  const date = new Date(props.date)
-  const year = date.getFullYear()
+  const date = dayjs(props.date)
+  const year = date.year()
   const value = props.value
 
   if (props.type.indexOf('range') > -1 && value && !isArray(value)) {
-    console.error('[wot-design] value should be array when type is range')
+    console.error('value should be array when type is range')
     return
   }
 
   for (let month = 0; month < 12; month++) {
-    const date = new Date(year, month, 1).getTime()
+    const date = dayjs(new Date(year, month, 1)).valueOf()
     let type: CalendarDayType = getMonthType(date)
     if (!type && compareMonth(date, Date.now()) === 0) {
       type = 'current'
@@ -100,7 +100,7 @@ function setMonths() {
 }
 function getMonthType(date: number) {
   if (props.type === 'monthrange' && isArray(props.value)) {
-    const [startDate, endDate] = props.value || []
+    const [startDate, endDate] = sortTimeStampsAsc(props.value) || []
 
     if (startDate && compareMonth(date, startDate) === 0) {
       if (endDate && compareMonth(startDate, endDate) === 0) {
@@ -170,7 +170,7 @@ function handleMonthRangeChange(date: CalendarDayItem) {
     value = [getDate(date.date), null]
   }
   emit('change', {
-    value
+    value: sortTimeStampsAsc(value)
   })
 }
 
@@ -189,7 +189,7 @@ function getFormatterDate(date: number, month: number, type?: CalendarDayType) {
     if (isFunction(props.formatter)) {
       monthObj = props.formatter(monthObj)
     } else {
-      console.error('[wot-design] error(wd-calendar-view): the formatter prop of wd-calendar-view should be a function')
+      console.error('error(wd-calendar-view): the formatter prop of wd-calendar-view should be a function')
     }
   }
 

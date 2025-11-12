@@ -197,7 +197,7 @@ function setDays() {
   // 遍历当月的每一天
   for (let day = 1; day <= totalDay; day++) {
     // 生成日期时间戳
-    const date = new Date(year, month, day).getTime()
+    const date = dayjs(new Date(year, month, day)).valueOf()
     // 获取日期类型（如选中、当前日期等）
     let type: CalendarDayType = getDayType(date, value as number | number[] | null)
     // 如果不是特殊类型且是今天，则标记为当前日期
@@ -580,7 +580,7 @@ function handleDateRangeChange(date: CalendarDayItem) {
   let value: (number | null)[] = []
   let type: CalendarDayType = ''
   // 获取当前已选中的日期范围并创建深拷贝
-  const [startDate, endDate] = deepClone(isArray(props.value) ? sortTimeStampsAsc(props.value) : [])
+  const [startDate, endDate] = deepClone(isArray(props.value) ? props.value : [])
   // 比较当前点击日期与开始日期的关系
   const compare = compareDate(date.date, startDate || 0)
 
