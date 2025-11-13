@@ -3,6 +3,8 @@
   "compilerOptions": {
     "verbatimModuleSyntax": false,
     "ignoreDeprecations": "5.0",
+    "importsNotUsedAsValues": "remove",
+    "preserveValueImports": false,
     "lib": [
       "ESNext",
       "DOM",

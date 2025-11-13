@@ -1,4 +1,60 @@
-import { createFilter, FilterPattern } from '@rollup/pluginutils'
+/**
+ * @fileoverview uni-app 条件编译 Vite 插件
+ * @description
+ * 本文件是 wot-ui-plus 项目中的核心构建工具插件，实现了 uni-app 条件编译语法的 Vite 插件版本。
+ * 该插件在构建时处理多平台差异化代码，是实现"一套代码，多端运行"的核心技术支撑。
+ *
+ * 技术栈：TypeScript + Vite Plugin API + 正则表达式处理
+ *
+ * 核心设计思路：
+ * 1. 构建时代码转换：在 Vite 构建过程中识别并处理条件编译语法，根据目标平台保留或移除相应代码块
+ * 2. 多文件类型支持：统一处理 Vue、JavaScript/TypeScript、CSS/SCSS 等不同文件类型的条件编译
+ * 3. 正则表达式引擎：使用精确的正则表达式匹配各种条件编译语法格式
+ * 4. 平台匹配算法：实现灵活的平台条件匹配，支持完全匹配、部分匹配和逻辑表达式
+ * 5. 测试环境适配：为单元测试和集成测试提供特殊的条件编译处理机制
+ *
+ * 主要功能：
+ * - 处理 HTML 注释形式条件编译：使用 HTML 注释包裹的条件块
+ * - 处理 JS 注释形式条件编译：使用单行或多行注释包裹的条件块
+ * - 处理 CSS 注释形式条件编译：使用 CSS 注释包裹的条件块
+ * - 处理 Vue 编译后条件编译：处理 Vue 编译生成的注释节点
+ * - 支持逻辑表达式：逻辑与、逻辑或、逻辑非等操作符
+ * - 支持平台匹配：H5、MP-WEIXIN、APP-PLUS 等平台标识
+ *
+ * 主要对外接口：
+ * - 插件函数：vitePluginUniConditionalCompile(options: ConditionalCompileOptions): Plugin
+ * - 配置选项：ConditionalCompileOptions 接口
+ *   - include: FilterPattern - 包含的文件类型（默认：.vue, .js, .ts, .css, .scss）
+ *   - exclude: FilterPattern - 排除的文件类型
+ *   - platform: string - 目标平台（默认：'h5'）
+ *   - isTest: boolean - 是否测试环境（自动检测 NODE_ENV 和 VITEST）
+ *
+ * 使用场景：
+ * - 多端应用开发：一套代码适配 H5、微信小程序、App 等多个平台
+ * - 组件库构建：为 wot-ui-plus 组件库提供跨端适配能力
+ * - CI/CD 流程：在自动化构建中生成不同平台的构建产物
+ * - 开发环境调试：本地开发时根据目标平台实时处理条件编译
+ * - 单元测试：为测试环境提供特殊的条件编译处理
+ *
+ * 使用注意事项：
+ * 1. 条件编译语法必须严格遵循 uni-app 规范，否则可能无法正确识别
+ * 2. 插件在构建时处理，运行时无法动态改变平台条件
+ * 3. 正则表达式匹配可能受代码格式影响，建议保持标准格式
+ * 4. 测试环境下的特殊处理主要用于单元测试，生产构建时需明确指定平台
+ * 5. 错误处理采用容错机制，构建出错时返回原始代码避免阻塞流程
+ * 6. 平台匹配支持大小写不敏感，但建议使用标准的平台标识符
+ * 7. 复杂的逻辑表达式可能影响构建性能，建议保持简洁
+ * 8. 条件注释是 uniapp 特有语法，插件会正确处理这些注释，不会被误删
+ *
+ * 性能优化：
+ * - 使用 createFilter 进行文件过滤，避免处理无关文件
+ * - 正则表达式预编译，减少重复编译开销
+ * - 错误容错机制，避免单个文件错误影响整体构建
+ * - 条件判断优化，优先处理简单条件再处理复杂表达式
+ *
+ */
+
+import { createFilter, type FilterPattern } from '@rollup/pluginutils'
 import type { Plugin, TransformResult } from 'vite'
 
 interface ConditionalCompileOptions {

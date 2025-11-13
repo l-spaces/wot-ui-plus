@@ -1,3 +1,11 @@
+/**
+ * @fileoverview 图标一致性对比脚本
+ * @description
+ * 本文件是 wot-ui-plus 项目中的构建辅助脚本，用于验证组件库图标在不同文件间定义的一致性。
+ * 该脚本通过对比图标文档文件和类型定义文件中的图标名称，确保文档与实现的同步性。
+ *
+ */
+
 const fs = require('fs')
 const path = require('path')
 
