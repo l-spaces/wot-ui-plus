@@ -11,14 +11,13 @@
 }
 
 /*  #ifdef  APP-PLUS || H5  */
-// @font-face {
-//   font-family: 'wd-icons';
-//   src:
-//     url('./wd-icons.ttf') format('truetype');
-//   font-weight: normal;
-//   font-style: normal;
-// }
-
+@font-face {
+  font-family: 'wd-icons';
+  src:
+    url('./wd-icons.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 /*  #endif  */
 
 @include b(icon) {
