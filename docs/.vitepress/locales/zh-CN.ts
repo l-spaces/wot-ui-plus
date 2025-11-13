@@ -5,7 +5,7 @@ export default defineConfig({
   description: '一个参照wot-design打造的uni-app组件库',
   themeConfig: {
     lastUpdated: {
-      text: '更新时间111'
+      text: '更新时间'
     },
     editLink: {
       pattern: 'https://github.com/Moonofweisheng/wot-ui-plus/edit/master/docs/:path',
@@ -85,7 +85,7 @@ export default defineConfig({
         ]
       },
       { text: '捐赠', link: '/reward/reward', activeMatch: '/reward/' },
-      { text: '博客', link: 'https://blog.wot-ui.cn/' },
+      { text: 'Gitee', link: 'https://gitee.com/my_spaces/' },
       {
         text: '模板',
         items: [

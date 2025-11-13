@@ -1,7 +1,7 @@
 ---
 layout: home
 
-title: Wot UI Plus
+title: Wot UI 
 titleTemplate: 多平台快速开发的UI框架。
 
 hero:
@@ -9,7 +9,7 @@ hero:
   text: 高颜值、轻量化的uni-app多平台快速开发的UI框架
   tagline: 基于Vue3+TS开发，提供70+高质量组件，支持暗黑模式、国际化和自定义主题。
   image:
-    src: /uniapp.png
+    src: /logo.svg
     alt: Wot uniapp
   actions:
     - theme: brand

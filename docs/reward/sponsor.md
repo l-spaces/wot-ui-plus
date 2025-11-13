@@ -10,10 +10,9 @@ wot-ui 是采用 MIT 许可的开源项目，使用完全免费。
 
 <p style="display: flex;">
 <a href="https://afdian.com/a/weisheng233" style="margin-right: 20px;">
-<img width="200" src="https://pic1.afdiancdn.com/static/img/welcome/button-sponsorme.png" alt="">
 </a >
 
-<img src="/weixinQrcode.jpg" alt="weixinQrcode.png" style="max-width: 200px;" />
+<img src="/avatar.jpg" alt="avatar.jpg" style="max-width: 200px;" />
 </p>
 
 
@@ -21,13 +20,13 @@ wot-ui 是采用 MIT 许可的开源项目，使用完全免费。
 1. wot-ui 首屏无需滚动可见的 logo 展示位：
 
 
-<img src="/assets/sponsor-1.png" alt="sponsor-1.png" style="max-width: 688px;" />
+<img src="/avatar.jpg" alt="avatar.jpg" style="max-width: 688px;" />
 
 2. 所有内容页面的侧边栏上的明显的 logo 展示位：
 
-   <img src="/assets/sponsor-2.png" alt="sponsor-2.png" style="max-width: 688px;" />
+   <img src="/avatar.jpg" alt="avatar.jpg" style="max-width: 688px;" />
 
 ### 黄金赞助商权益
 1. 所有内容页面的侧边栏上的明显的 logo 展示位：
 
-   <img src="/assets/sponsor-2.png" alt="sponsor-2.png" style="max-width: 688px;" />
+   <img src="/avatar.jpg" alt="avatar.jpg" style="max-width: 688px;" />
