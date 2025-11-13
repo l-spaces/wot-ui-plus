@@ -11,10 +11,10 @@ import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp } from '../common/props'
 import type { CalendarFormatter, CalendarTimeFilter, CalendarType } from '../wd-calendar-view/types'
 import type { FormItemRule } from '../wd-form/types'
+import dayjs from 'dayjs'
 
-const now = new Date()
-const defaultMinDate = new Date(now.getFullYear(), now.getMonth() - 6, now.getDate()).getTime()
-const defaultMaxDate = new Date(now.getFullYear(), now.getMonth() + 6, now.getDate(), 23, 59, 59).getTime()
+const defaultMinDate = dayjs().startOf('day').subtract(12, 'month').valueOf()
+const defaultMaxDate = dayjs().add(12, 'month').endOf('day').valueOf()
 
 export const calendarProps = {
   ...baseProps,
