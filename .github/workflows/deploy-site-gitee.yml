@@ -3,7 +3,7 @@ name: Deploy VitePress site to Gitee Pages
 on:
   push:
     branches:
-      - release
+      - dev
 
 jobs:
   deploy-and-sync:

@@ -96,7 +96,7 @@
 | custom-class | 根节点样式 | - |
 
 
-<style>
+<style module>
   @import url('//at.alicdn.com/t/c/font_5061229_ipmsgxkkb5.css');
   
   /* 网格容器：控制整体布局（8列等宽分布） */

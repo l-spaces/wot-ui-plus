@@ -3,7 +3,7 @@
  * -------------------------------------------------------------------------- */
 
 :root {
-  --vp-c-brand: #4d80f0;
+  --vp-c-brand: #000000;
   /* 20 */
   --vp-c-brand-light: #7199f3;
   /* 30 */
@@ -37,7 +37,7 @@
  * Component: Home
  * -------------------------------------------------------------------------- */
 
-:root {
+/* :root {
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: -webkit-linear-gradient(120deg,
       #4d80f0 30%,
@@ -59,7 +59,7 @@
   :root {
     --vp-home-hero-image-filter: blur(72px);
   }
-}
+} */
 
 /**
  * Component: Custom Block

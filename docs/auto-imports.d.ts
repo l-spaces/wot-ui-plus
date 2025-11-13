@@ -1,3 +1,47 @@
+/**
+ * @fileoverview Vue 自动导入全局变量类型声明文件
+ * @description 由 unplugin-auto-import 自动生成的 TypeScript 声明文件，为 Vue 3 应用提供自动导入 API 的类型支持
+ *
+ * 核心功能：
+ * - 声明全局可用的 API 和组件变量，无需显式导入即可使用
+ * - 提供 TypeScript 类型检查和 IDE 智能提示支持
+ * - 确保自动导入的 API 在编译时具有正确的类型推断
+ * - 支持第三方库 API 的全局访问能力
+ *
+ * 设计思路：
+ * - 使用 declare global 语法在全局作用域中声明变量类型
+ * - 通过 typeof 导入表达式获取第三方库 API 的准确类型信息
+ * - 配合 unplugin-auto-import 插件实现 API 按需自动导入和类型生成
+ * - 采用全局变量声明方式，避免手动 import 语句的冗余代码
+ *
+ * 架构定位：
+ * - 层级位置：文档构建层的类型声明文件，位于 docs 目录下
+ * - 依赖关系：依赖 element-plus 等第三方库的类型定义
+ * - 数据交互：作为类型声明文件，不涉及运行时数据交互，仅影响编译时类型检查
+ * - 功能边界：专注于自动导入 API 的类型声明，不包含 API 实现逻辑
+ *
+ * 对外接口：
+ * - 全局变量声明：在 global 作用域中声明的全局变量
+ *   - ElMessageBox: Element Plus UI 库的消息框组件 API 类型
+ *
+ * 使用场景：
+ * 1. 开发阶段：在组件中直接使用 ElMessageBox 等 API，无需手动导入
+ * 2. 编译阶段：TypeScript 编译器验证全局 API 的类型正确性
+ * 3. 构建阶段：配合 Vite 构建工具实现 API 按需自动导入优化
+ * 4. 运行阶段：通过插件注入机制使 API 在全局作用域中可用
+ *
+ * 使用注意事项：
+ * - 此文件由 unplugin-auto-import 自动生成，手动修改可能被覆盖
+ * - 修改自动导入配置后需要重新运行构建命令更新类型声明
+ * - 确保 element-plus 等依赖库的类型包已正确安装
+ * - 全局变量命名可能与其他库冲突，需注意命名空间管理
+ * - 自动导入的 API 在模板和脚本中均可直接使用，无需显式导入
+ * - 类型声明变更会影响整个项目的类型检查，需谨慎处理
+ * - 禁用 ESLint 和 Prettier 以避免格式化工具破坏自动生成的代码结构
+ * - 使用 @ts-nocheck 跳过类型检查，避免自动生成代码的类型警告
+ * - noinspection JSUnusedGlobalSymbols 抑制未使用全局符号的警告
+ */
+
 /* eslint-disable */
 /* prettier-ignore */
 // @ts-nocheck

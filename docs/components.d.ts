@@ -1,3 +1,45 @@
+/**
+ * @fileoverview Vue 全局组件类型声明文件
+ * @description 由 unplugin-vue-components 自动生成的 TypeScript 声明文件，为 Vue 3 应用提供全局组件的类型支持
+ *
+ * 核心功能：
+ * - 扩展 Vue 模块的 GlobalComponents 接口，提供全局组件的 TypeScript 类型声明
+ * - 支持组件自动导入功能的类型检查和 IDE 智能提示
+ * - 确保在模板中使用的全局组件具有正确的类型推断
+ *
+ * 设计思路：
+ * - 利用 TypeScript 模块声明扩展机制，在 vue 模块中添加 GlobalComponents 接口
+ * - 通过 typeof 导入表达式获取组件库组件的准确类型信息
+ * - 采用声明合并（Declaration Merging）技术，扩展 Vue 原生类型系统
+ * - 配合 unplugin-vue-components 插件实现组件按需自动导入和类型生成
+ *
+ * 架构定位：
+ * - 层级位置：文档构建层的类型声明文件，位于 docs 目录下
+ * - 依赖关系：依赖 vue、element-plus、vue-router 等外部库的类型定义
+ * - 数据交互：作为类型声明文件，不涉及运行时数据交互，仅影响编译时类型检查
+ * - 功能边界：专注于全局组件的类型声明，不包含组件实现逻辑
+ *
+ * 对外接口：
+ * - GlobalComponents 接口：扩展 Vue 全局组件类型声明
+ *   - ElTag: Element Plus UI 库的标签组件类型
+ *   - RouterLink: Vue Router 的路由链接组件类型
+ *   - RouterView: Vue Router 的路由视图组件类型
+ *
+ * 使用场景：
+ * 1. 开发阶段：IDE 中使用全局组件时提供智能提示和类型检查
+ * 2. 编译阶段：TypeScript 编译器进行类型验证和错误检测
+ * 3. 构建阶段：配合 Vite 构建工具实现组件按需导入优化
+ *
+ * 使用注意事项：
+ * - 此文件由 unplugin-vue-components 自动生成，手动修改可能被覆盖
+ * - 修改全局组件配置后需要重新运行构建命令更新类型声明
+ * - 确保 element-plus 和 vue-router 的类型包已正确安装
+ * - 在模板中使用声明的全局组件时无需显式导入
+ * - 类型声明变更会影响整个项目的类型检查，需谨慎处理
+ * - 禁用 ESLint 和 Prettier 以避免格式化工具破坏自动生成的代码结构
+ * - 使用 @ts-nocheck 跳过类型检查，避免自动生成代码的类型警告
+ */
+
 /* eslint-disable */
 /* prettier-ignore */
 // @ts-nocheck

@@ -6,6 +6,7 @@ import { computed, onMounted, ref } from 'vue'
 import VPLocalNavOutlineDropdown from 'vitepress/dist/client/theme-default/components/VPLocalNavOutlineDropdown.vue'
 import { useData } from 'vitepress';
 import { useLocalNav, useSidebar } from 'vitepress/theme';
+// @ts-ignore
 import { getHeaders } from 'vitepress/dist/client/theme-default/composables/outline.js'
 
 defineProps<{

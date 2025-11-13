@@ -1,28 +1,28 @@
 ---
 layout: home
 
-title: Wot UI
-titleTemplate: 一个基于Vue3+TS开发的uni-app组件库，提供70+高质量组件，支持暗黑模式、国际化和自定义主题。
+title: Wot UI Plus
+titleTemplate: 多平台快速开发的UI框架。
 
 hero:
-  name: Wot UI
-  text: 高颜值、轻量化的uni-app组件库
+  name: Wot UI Plus
+  text: 高颜值、轻量化的uni-app多平台快速开发的UI框架
   tagline: 基于Vue3+TS开发，提供70+高质量组件，支持暗黑模式、国际化和自定义主题。
   image:
-    src: /logo.png
-    alt: Wot Design
+    src: /uniapp.png
+    alt: Wot uniapp
   actions:
     - theme: brand
       text: 起步 🚀
       link: /guide/introduction
-    - theme: alt
+    - theme: brand
       text: 常见问题
       link: /guide/common-problems
     - theme: alt
       text: 组件列表
       link: /component/button
     - theme: brand
-      text: 🥤一杯咖啡
+      text: 🥤发电
       link: /reward/reward
     - theme: brand
       text: ✨上手模板

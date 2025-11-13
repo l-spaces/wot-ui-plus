@@ -12,15 +12,14 @@ export function MarkdownTransform(): Plugin {
       if (!id.includes('/component')) return
       if (id.includes('/use-')) return
 
-      const GITHUB_URL = 'https://github.com/Moonofweisheng/wot-ui-plus/tree/master'
+      const GITHUB_URL = 'https://gitee.com/'
       const componentId = path.basename(id, '.md')
       const componentName = `wd-${componentId}`
       const camelComponentId = camelCase(componentId)
       const demoUrl = `${GITHUB_URL}/src/subPages/${camelComponentId}`
       const componentUrl = `${GITHUB_URL}/src/uni_modules/wot-ui-plus/components/${componentName}`
       
-      // 根据文件路径判断当前语言
-      const lang = id.includes('/en-US/') ? 'en-US' : 'zh-CN'
+      const lang = 'zh-CN'
       const { sourceCode, document, component } = i18n[lang]
 
       return {

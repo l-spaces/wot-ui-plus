@@ -113,66 +113,66 @@ export default {
     app.use(ElementPlus)
     
     // 站点迁移检测功能
-    if (typeof window !== 'undefined') {
-      /**
-       * 检查站点迁移状态
-       * 当用户访问旧域名时，提示用户跳转到新域名
-       * 
-       * @async
-       * @function checkSiteMigration
-       * @returns {Promise<void>}
-       */
-      const checkSiteMigration = async () => {
-        // 检测是否为旧域名
-        if (window.location.hostname === 'wot-ui-plus.pages.dev') {
-          try {
-            // 使用Element Plus的MessageBox弹出确认对话框
-            await ElMessageBox.confirm(
-              '站点已迁移至新域名，为了获得更好的访问体验，建议您跳转到新站点。',
-              '站点迁移通知',
-              {
-                confirmButtonText: '立即跳转',
-                cancelButtonText: '稍后再说',
-                type: 'warning',
-                center: true
-              }
-            )
-            // 用户点击确认后，保持当前路径跳转到新域名
-            const newUrl = `https://wot-ui.cn${window.location.pathname}${window.location.search}${window.location.hash}`
-            window.location.href = newUrl
-          } catch {
-            // 用户点击取消或关闭对话框，不做任何操作
-          }
-        }
-      }
+    // if (typeof window !== 'undefined') {
+    //   /**
+    //    * 检查站点迁移状态
+    //    * 当用户访问旧域名时，提示用户跳转到新域名
+    //    * 
+    //    * @async
+    //    * @function checkSiteMigration
+    //    * @returns {Promise<void>}
+    //    */
+    //   const checkSiteMigration = async () => {
+    //     // 检测是否为旧域名
+    //     if (window.location.hostname === 'wot-ui-plus.pages.dev') {
+    //       try {
+    //         // 使用Element Plus的MessageBox弹出确认对话框
+    //         await ElMessageBox.confirm(
+    //           '站点已迁移至新域名，为了获得更好的访问体验，建议您跳转到新站点。',
+    //           '站点迁移通知',
+    //           {
+    //             confirmButtonText: '立即跳转',
+    //             cancelButtonText: '稍后再说',
+    //             type: 'warning',
+    //             center: true
+    //           }
+    //         )
+    //         // 用户点击确认后，保持当前路径跳转到新域名
+    //         const newUrl = `https://wot-ui.cn${window.location.pathname}${window.location.search}${window.location.hash}`
+    //         window.location.href = newUrl
+    //       } catch {
+    //         // 用户点击取消或关闭对话框，不做任何操作
+    //       }
+    //     }
+    //   }
       
-      // 页面加载完成后执行迁移检测
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', checkSiteMigration)
-      } else {
-        checkSiteMigration()
-      }
+    //   // 页面加载完成后执行迁移检测
+    //   if (document.readyState === 'loading') {
+    //     document.addEventListener('DOMContentLoaded', checkSiteMigration)
+    //   } else {
+    //     checkSiteMigration()
+    //   }
       
-      /**
-       * 百度统计页面访问跟踪函数
-       * 调用百度统计的_trackPageview方法记录页面访问
-       * 
-       * @function trackPageView
-       * @param {string} path - 要跟踪的页面路径
-       */
-      const trackPageView = (path: string) => {
-        if (window._hmt) {
-          window._hmt.push(['_trackPageview', path])
-        }
-      }
+    //   /**
+    //    * 百度统计页面访问跟踪函数
+    //    * 调用百度统计的_trackPageview方法记录页面访问
+    //    * 
+    //    * @function trackPageView
+    //    * @param {string} path - 要跟踪的页面路径
+    //    */
+    //   // const trackPageView = (path: string) => {
+    //   //   if (window._hmt) {
+    //   //     window._hmt.push(['_trackPageview', path])
+    //   //   }
+    //   // }
       
-      // 监听路由变化，实现单页应用的页面访问统计
-      router.onAfterRouteChanged = (to: string) => {
-        // 延迟执行，确保页面已完全加载
-        setTimeout(() => {
-          trackPageView(to)
-        }, 100)
-      }
-    }
+    //   // 监听路由变化，实现单页应用的页面访问统计
+    //   router.onAfterRouteChanged = (to: string) => {
+    //     // 延迟执行，确保页面已完全加载
+    //     setTimeout(() => {
+    //       //  trackPageView(to)
+    //     }, 100)
+    //   }
+    // }
   },
 }

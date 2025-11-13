@@ -9,25 +9,15 @@
 ## 扫码体验
 
 <div style="display:flex;gap:24px">
-<div style="display: inline-block;">
-  <img style="width: 150px; height: 150px;" :src="WxQrcode" />
-  <div style="text-align: center;">微信扫码</div>
-</div>
+  <div style="display: inline-block;">
+    <img style="width: 150px; height: 150px;" :src="WxQrcode" />
+    <div style="text-align: center;">微信扫码</div>
+  </div>
 
-<div style="display: inline-block;">
-  <img style="width: 150px; height: 150px;" :src="AlipayQrcode" />
-  <div style="text-align: center;">支付宝扫码</div>
-</div>
-
-<div style="display: inline-block;">
-  <img style="width: 150px; height: 150px;" :src="H5Qrcode" />
-  <div style="text-align: center;">浏览器扫码</div>
-</div>
-
-<div style="display: inline-block;">
-  <img style="width: 150px; height: 150px;" :src="AndroidQrcode" />
-  <div style="text-align: center;">浏览器扫码</div>
-</div>
+  <!-- <div style="display: inline-block;">
+    <img style="width: 150px; height: 150px;" :src="H5Qrcode" />
+    <div style="text-align: center;">浏览器扫码</div>
+  </div> -->
 </div>
 
 ## ✨ 特性
@@ -57,19 +47,9 @@
 
 ## 生态推荐
 
-| 项目                                                                                                        | 描述                                                 |
-| ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| [awesome-uni-app](https://github.com/uni-helper/awesome-uni-app)                                            | 多端统一开发框架 uni-app 优秀开发资源汇总            |
-| [create-uni](https://github.com/uni-helper/create-uni)                                                      | 快速创建 uni-app 项目                                |
-| [wot-starter](https://github.com/wot-ui/wot-starter)                  | 基于 [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) 的 wot-ui 快速起手项目     |
-| [wot-starter-retail](https://github.com/Moonofweisheng/wot-starter-retail)                                  | 基于 wot-ui-plus 的 uni-app 零售行业模板          |
-| [wot-ui-intellisense](https://github.com/wot-ui/wot-ui-intellisense)                                        | wot-ui vscode 代码提示插件                           |
-| [Wot UI Snippets](https://marketplace.visualstudio.com/items?itemName=kiko.wot-ui-plus-snippets) | Wot UI 代码块提示                            |
-| [uni-mini-ci](https://github.com/Moonofweisheng/uni-mini-ci)                                                | 一个 uni-app 小程序端构建后支持 CI（持续集成）的插件 |
-| [uni-mini-router](https://github.com/Moonofweisheng/uni-mini-router)                                        | 一个基于 vue3 和 Typescript 的轻量级 uni-app 路由库  |
-| [unibest](https://github.com/unibest-tech/unibest)                                                              | 基于 wot-ui-plus 的 uni-app 模板                  |
-| [wot-ui-plus AI 助手](https://www.coze.cn/store/bot/7347916532258701363)                                 | 一个能回答你关于 wot-ui-plus 组件库问题的智能助手 |
-| [uni-ku-root](https://github.com/uni-ku/root)                                                               | 一个模拟 App.vue 原有能力的根组件插件                |
+| 项目        |      描述      |  作者 |
+| ------------- | :-----------: | ----: |
+
 
 ## 鸣谢
 
@@ -82,8 +62,6 @@
 本项目基于 [MIT](https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89) 协议，请自由地享受和参与开源。
 
 <script setup>
-import WxQrcode from '/wx.jpg'
-import AlipayQrcode from '/alipay.png'
-import H5Qrcode from '/h5.png'
-import AndroidQrcode from '/android.png'
+import WxQrcode from '/avatar.jpg'
+import AlipayQrcode from '/avatar.jpg'
 </script>
