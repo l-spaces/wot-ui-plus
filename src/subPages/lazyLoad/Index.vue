@@ -22,7 +22,7 @@ import { ref } from 'vue'
 import { onLoad, onReachBottom } from '@dcloudio/uni-app'
 
 const list = ref<any[]>([])
-const status = ref('loading')
+const status = ref<any>('loading')
 const data = ref([
   {
     src: 'https://gtd.alicdn.com/sns_logo/i1/TB124_3NXXXXXasXVXXSutbFXXX.jpg_240x240xz.jpg'

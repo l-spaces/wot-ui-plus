@@ -113,7 +113,8 @@ uni.setLocale(i18n.global.locale.value)
  * 2. 根据参数类型和数量进行智能路由处理
  * 3. 提供模板插值功能增强翻译灵活性
  */
-const originalT = i18n.global.t
+const originalT = i18n.global.t as (key: string | number, ...args: any[]) => string
+
 i18n.global.t = ((key: string | number, ...args: any[]) => {
   /**
    * 替换字符串中的占位符

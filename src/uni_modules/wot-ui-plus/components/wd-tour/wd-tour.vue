@@ -69,8 +69,8 @@ interface ElementRect {
   left: number
   width: number
   height: number
-  bottom?: number
-  right?: number
+  bottom: number
+  right: number
 }
 const props = defineProps(tourProps)
 const emit = defineEmits(['update:modelValue', 'update:current', 'change', 'prev', 'next', 'finish', 'skip', 'error'])
@@ -84,7 +84,9 @@ const elementInfo = ref({
   top: 0,
   left: 0,
   width: 0,
-  height: 0
+  height: 0,
+  bottom: 0,
+  right: 0
 })
 const windowHeight = ref(0)
 const windowTop = ref(0)
@@ -264,7 +266,7 @@ function checkScrollNeeds(res: ElementRect, boundaries: { top: number; bottom: n
 }
 
 // 处理滚动逻辑
-function handleScrolling(res: ElementRect, scrollNeeds, boundaries: { top: number; bottom: number }) {
+function handleScrolling(res: ElementRect, scrollNeeds: { up: any; down: any }, boundaries: { top: number; bottom: number }) {
   if (scrollNeeds.up) {
     // 元素被顶部遮挡，需要提示框往上走，页面往下走
     scrollUp(res, boundaries)
