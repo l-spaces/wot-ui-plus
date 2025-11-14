@@ -201,7 +201,7 @@ function setDays() {
     // 获取日期类型（如选中、当前日期等）
     let type: CalendarDayType = getDayType(date, value as number | number[] | null)
     // 如果不是特殊类型且是今天，则标记为当前日期
-    if (!type && compareDate(date, Date.now()) === 0) {
+    if (!type && compareDate(date, dayjs().valueOf()) === 0) {
       type = 'current'
     }
     // 格式化日期对象
