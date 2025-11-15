@@ -7,6 +7,10 @@
     "url": "https://github.com/Moonofweisheng/wot-design-uni.git"
   },
   "scripts": {
+    "outdated": "pnpm outdated",
+    "ncu": "ncu -i",
+    "ncu:dev": "ncu -i -d",
+    "ncu:check": "ncu -u",
     "dev:app": "uni -p app",
     "dev:app-android": "uni -p app-android",
     "dev:app-ios": "uni -p app-ios",
@@ -184,5 +188,9 @@
   "files": [
     "lib"
   ],
-  "packageManager": "pnpm@9.2.0"
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@10.22.0"
 }

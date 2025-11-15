@@ -1,52 +1,9 @@
 <template>
-  <page-wraper>
-    <demo-block :title="$t('jiBenYongFa')">
-      <wd-img :width="100" :height="100" :src="joy" />
-      <!-- 以组件位置为定位原点 -->
-      <wd-img :width="100" :height="100" :src="img" custom-class="border" />
-    </demo-block>
-
-    <demo-block :title="$t('cha-cao-yong-fa')">
-      <wd-img :width="100" :height="100" src="https://www.123.com/a.jpg">
-        <template #error>
-          <view class="error-wrap">{{ $t('jia-zai-shi-bai') }}</view>
-        </template>
-        <template #loading>
-          <view class="loading-wrap">
-            <wd-loading />
-          </view>
-        </template>
-      </wd-img>
-    </demo-block>
-
-    <demo-block :title="$t('tian-chong')">
-      <view class="col" v-for="(mode, index) in modes" :key="index">
-        <wd-img width="100%" height="27vw" :src="joy" :mode="mode" />
-        <view class="center">{{ mode }}</view>
-      </view>
-    </demo-block>
-    <demo-block :title="$t('yuan-xing')">
-      <view class="col" v-for="(mode, index) in modes" :key="index">
-        <wd-img round width="100%" height="27vw" :src="joy" :mode="mode" />
-        <view class="center">{{ mode }}</view>
-      </view>
-    </demo-block>
-    <demo-block :title="$t('yuan-jiao')">
-      <view class="col" v-for="(mode, index) in modes" :key="index">
-        <wd-img width="100%" height="27vw" :radius="5" :src="joy" :mode="mode" />
-        <view class="center">{{ mode }}</view>
-      </view>
-    </demo-block>
-
-    <demo-block :title="$t('ke-yu-lan')">
-      <view class="col">
-        <wd-img :width="100" :height="100" :src="joy" :enable-preview="true" />
-      </view>
-      <view class="col">
-        <wd-img :width="100" :height="100" :src="joy" :preview-src="img" :enable-preview="true" />
-      </view>
-    </demo-block>
-  </page-wraper>
+  <view>
+    <wd-img :width="100" :height="100" :src="joy" />
+    <!-- 以组件位置为定位原点 -->
+    <wd-img :width="100" :height="100" :src="img" custom-class="border" />
+  </view>
 </template>
 <script lang="ts" setup>
 import { joy } from '../../pages/images/joy'

@@ -1,26 +1,18 @@
 <template>
   <view>
-    <page-wraper>
-      <view class="icon">
-        <view style="position: sticky; top: 0; z-index: 2">
-          <wd-search hide-cancel :placeholder="$t('cha-zhao-tu-biao')" light v-model="keyword" @search="handleSearch" @clear="handleClear" />
-        </view>
-        <view class="icon-list">
-          <view v-for="(icon, index) in showIcons" :key="index" class="icon-item" @click="handleClick(icon)">
-            <view><wd-icon :name="icon" size="22px" custom-class="icon-item-class" /></view>
-            <view class="icon-item-name">{{ icon }}</view>
-          </view>
-          <wd-status-tip v-if="!showIcons.length" image="search" :tip="$t('dang-qian-wu-xiang-guan-tu-biao')" />
+    <view class="icon">
+      <view class="icon-list">
+        <view v-for="(icon, index) in showIcons" :key="index" class="icon-item">
+          <view><wd-icon :name="icon" size="22px" custom-class="icon-item-class" /></view>
+          <view class="icon-item-name">{{ icon }}</view>
         </view>
       </view>
-    </page-wraper>
+    </view>
   </view>
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { useNotify } from '@/uni_modules/wot-design-uni'
 import { useI18n } from 'vue-i18n'
-const { showNotify } = useNotify()
 
 const { t } = useI18n()
 const keyword = ref<string>('')
@@ -336,23 +328,6 @@ function handleSearch() {
 function handleClear() {
   keyword.value = ''
   showIcons.value = icons.value
-}
-
-function handleClick(icon: string) {
-  // #ifdef H5
-  uni.setClipboardData({
-    data: `<wd-icon name="${icon}" size="22px"></wd-icon>`,
-    showToast: false,
-    success: () => {
-      showNotify({
-        type: 'success',
-        duration: 1500,
-        message: t('fu-zhi-cheng-gong') + `<wd-icon name="${icon}" size="22px"></wd-icon>`
-      })
-    }
-  })
-
-  // #endif
 }
 </script>
 <style lang="scss" scoped>
