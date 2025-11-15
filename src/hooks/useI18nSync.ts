@@ -45,7 +45,7 @@ function setLocale(locale: string, syncComponentLib: boolean = true) {
   uni.setLocale(locale)
 
   // 设置应用语言 - 使用类型断言确保类型安全
-  i18n.global.locale.value = locale as 'zh-CN' | 'en-US'
+  i18n.global.locale.value = locale
 
   uni.setStorageSync('currentLang', locale)
 
