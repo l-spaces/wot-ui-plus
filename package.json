@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/my_spaces/wd-ui"
+    "url": "https://github.com/l-spaces/wot-ui-plus"
   },
   "scripts": {
     "outdated": "pnpm outdated",
@@ -206,7 +206,7 @@
   },
   "author": "",
   "bugs": {
-    "url": "https://gitee.com/my_spaces/wd-ui/issues"
+    "url": "https://github.com/l-spaces/wot-ui-plus/issues"
   },
-  "homepage": "https://gitee.com/my_spaces/wd-ui"
+  "homepage": "https://github.com/l-spaces/wot-ui-plus#readme"
 }

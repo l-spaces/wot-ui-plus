@@ -12,7 +12,7 @@
 <p align="center">
   🚀 <a href="https://l-spaces.github.io/wot-ui-plus.github.io/" target="_blank">文档网站</a>&nbsp;
   📦 <a href="https://www.npmjs.com/package/wot-ui-plus" target="_blank">npm 包</a>&nbsp;
-  🔗 <a href="https://gitee.com/my_spaces/wd-ui" target="_blank">Git 仓库</a>&nbsp;
+  🔗 <a href="https://github.com/l-spaces/wot-ui-plus" target="_blank">Git 仓库</a>&nbsp;
 </p>
 
 ## ✨ 特性

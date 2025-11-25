@@ -17,7 +17,7 @@
   "main": "index.ts",
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/my_spaces/wd-ui"
+    "url": "https://github.com/l-spaces/wot-ui-plus"
   },
   "engines": {
     "HBuilderX": "^3.8.7"

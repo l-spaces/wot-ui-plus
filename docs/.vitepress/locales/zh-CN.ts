@@ -8,7 +8,7 @@ export default defineConfig({
       text: '更新时间'
     },
     editLink: {
-      pattern: 'https://gitee.com/my_spaces/wd-ui',
+      pattern: 'https://github.com/l-spaces/wot-ui-plus',
       text: '为此页提供修改建议'
     },
     nav: [
@@ -89,7 +89,7 @@ export default defineConfig({
         ]
       },
       { text: '捐赠', link: '/reward/reward', activeMatch: '/reward/' },
-      { text: 'Gitee', link: 'https://gitee.com/my_spaces/' }
+      { text: 'GitHub', link: 'https://github.com/l-spaces/wot-ui-plus' }
       // {
       //   text: '模板',
       //   items: [
