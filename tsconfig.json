@@ -1,0 +1,34 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.json",
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/**/*.d.ts",
+    "src/**/*.js",
+    "src/**/*.jsx",
+    "*.ts",
+    "*.tsx",
+    "*.vue",
+    "*.js",
+    "*.jsx"
+, "eslint.config.mjs"  ],
+  "compilerOptions": {
+    "verbatimModuleSyntax": false,
+    "ignoreDeprecations": "5.0",
+    "importsNotUsedAsValues": "remove",
+    "preserveValueImports": false,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": ["node", "@dcloudio/types", "mini-types", "@uni-helper/uni-types", "miniprogram-api-typings", "@types/node", "vitest/jsdom"],
+    "sourceMap": true,
+    "module": "ESNext"
+  },
+  "vueCompilerOptions": {
+    "plugins": ["@uni-helper/uni-types/volar-plugin"]
+  },
+  "exclude": ["node_modules", "unpackage", "src/**/*.nvue", "components.d.ts", "vitest.config.ts"]
+}

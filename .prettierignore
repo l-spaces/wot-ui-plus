@@ -1,0 +1,33 @@
+# .prettierignore 示例内容（和 .gitignore 语法一致）
+# 忽略依赖目录
+node_modules/
+# 忽略构建输出目录
+dist/
+build/
+# 忽略配置文件（避免格式化破坏语法）
+.eslintrc.js
+.eslintignore
+vite.config.ts
+tsconfig.json
+components.d.ts
+global.d.ts
+auto-imports.d.ts
+# 忽略压缩文件、日志、临时文件
+*.min.js
+*.log
+*.tmp
+# 忽略敏感文件
+.env
+.env.*
+# 忽略特定类型文件
+*.min.js       # 忽略压缩后的 JS 文件
+*.json         # 忽略 JSON 文件（如需检查可删除此行）
+*.md           # 忽略 Markdown 文件
+# 忽略特定文件
+.github
+.husky
+.trae
+.vitepress
+.vscode
+pnpm-lock.yaml
+# 忽略第三方代码目录

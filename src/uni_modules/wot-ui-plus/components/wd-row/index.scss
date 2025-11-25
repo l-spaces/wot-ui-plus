@@ -1,0 +1,14 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(row) {
+  &::after {
+    display: table;
+    clear: both;
+    content: '';
+  }
+}
+
+.wd-row {
+  @include flex;
+}

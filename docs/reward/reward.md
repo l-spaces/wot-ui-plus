@@ -1,0 +1,33 @@
+# 捐赠
+
+如果您认为本项目对你的工作起到了帮助，可以通过以下方式捐助组件库的研发工作，使本项目持续发展下去，捐赠后你的头像、昵称和主页将会被展示在 `wot-ui-plus` 文档的捐赠榜单上。
+
+:::tip 提醒
+捐赠后，可以发送邮件到1054595856@qq.com或者通过 gitee、微信群等社交平台告知要展示的捐赠者名称、留言、链接 (链接可以是您的博客、gitee、个人网站、公司产品等)，如果可以，请务必留下你的 gitee 用户名。
+:::
+
+### 爱发电捐赠
+
+### 扫码捐赠
+
+<div style="display: inline-block; margin-right: 120px;">
+  <img style="width: 250px; height: 250px;" :src="avatar" />
+  <div style="text-align: center;">微信</div>
+</div>
+
+<div style="display: inline-block;">
+  <img style="width: 250px; height: 250px;" :src="avatar" />
+  <div style="text-align: center;">支付宝</div>
+</div>
+
+<script>
+import avatar from '/avatar.jpg'
+
+export default {
+  data () {
+    return {
+      avatar
+    }
+  }
+}
+</script>

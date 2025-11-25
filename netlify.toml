@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "https://wot-ui-plus.netlify.app/*"
+  to = "https://wot-ui-plus.cn/:splat"
+  status = 301
+  force = true

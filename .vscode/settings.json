@@ -1,0 +1,95 @@
+{
+  "workbench.settings.useSplitJSON": true,
+  // vscode默认启用了根据文件类型自动设置tabsize的选项
+  "editor.detectIndentation": false,
+  // 重新设定tabsize
+  "editor.tabSize": 2,
+  // #每次保存的时候自动格式化
+  // "editor.formatOnSave": true,
+  // #每次保存的时候将代码按eslint格式进行修复
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  // 添加 vue 支持
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "vue"
+  ],
+  //  #去掉代码结尾的分号
+  "prettier.semi": true,
+  //  #使用单引号替代双引号
+  "prettier.singleQuote": true,
+  //  #让函数(名)和后面的括号之间加个空格
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "i18n-ally.keystyle": "flat",
+  "i18n-ally.sourceLanguage": "zh-CN",
+  "i18n-ally.displayLanguage": "zh-CN",
+  "i18n-ally.sortKeys": true,
+  "i18n-ally.namespace": true,
+  "i18n-ally.keepFulfilled": true,
+  "i18n-ally.enabledParsers": [
+    "ts",
+    "js",
+    "json"
+  ],
+  "i18n-ally.enabledFrameworks": [
+    "vue",
+    "vue-sfc"
+  ],
+  "i18n-ally.extract.autoDetect": true,
+  "i18n-ally.refactor.templates": [
+    {
+      "source": "html-inline",
+      "template": "{{ $t('{key}'{args}) }}"  // 不带参数的情况
+    },
+    {
+      "source": "html-attribute",
+      "template": "$t('{key}'{args})",
+    },
+    {
+      "source": "js-string",
+      "template": "t('{key}'{args})"
+    },
+    {
+      "source": "js-template",
+      "template": "t('{key}'{args})"
+    },
+  ],
+  "i18n-ally.extract.parsers.html": {
+    "attributes": ["text", "title", "alt", "placeholder", "label", "aria-label", "cancel-text", "close-text", "left-text", "right-text", "value"],
+    "ignoredTags": ["script", "style"],
+    "vBind": true,
+    "inlineText": true
+  },
+  "i18n-ally.keysInUse": [
+    "zh-CN",
+    "en-US"
+  ],
+  "common-intellisense.ui": [],
+  "i18n-ally.localesPaths": [
+    "src/locale"
+  ],
+  "i18n-ally.extract.ignored": [
+    "<wd-icon name=\"${icon}\" size=\"22px\"></wd-icon>",
+    "top left",
+    "top right",
+    "bottom left",
+    "bottom left",
+    "bottom right",
+    "bottom right",
+    "@{{ packageConfig.version }}",
+    "span: 24",
+    "span: 12",
+    "span: 8",
+    "span: 4",
+    "span: 8 offset: 4",
+    "span: 6",
+    "`${item}`"
+  ],
+  "i18n-ally.extract.ignoredByFiles": {
+  },
+  "cssrem.wxss": true,
+}

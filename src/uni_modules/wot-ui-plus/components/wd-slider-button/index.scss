@@ -1,0 +1,70 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+
+ /* 平台特定样式适配 */
+  /* #ifdef H5 */
+  .wd-slider-button {
+    cursor: pointer;
+
+    &__thumb {
+      &:hover {
+        transform: scale(1.05);
+        transition: transform 0.2s ease;
+      }
+    }
+  }
+  /* #endif */
+
+  /* #ifdef MP-WEIXIN */
+  .wd-slider-button {
+    /* 小程序特定样式优化 */
+    &__thumb {
+      /* 优化小程序触摸体验 */
+      -webkit-tap-highlight-color: transparent;
+    }
+  }
+  /* #endif */
+
+@include b('slider-button') {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include e('rail') {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  @include e('text') {
+    position: relative;
+    z-index: 5;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  @include e('thumb') {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1000;
+
+    @include m('inner') {
+      background-color: #ffffff;
+      border-radius: 100px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

@@ -1,0 +1,965 @@
+@import './function';
+
+/**
+ * UI规范基础变量
+ */
+/*----------------------------------------- Theme color. start ----------------------------------------*/
+/* 主题颜色 */
+$-color-theme: var(--wot-color-theme, $default-theme) !default; // 主题色
+$-color-white: var(--wot-color-white, rgb(255, 255, 255)) !default; // 用于mix的白色
+$-color-black: var(--wot-color-black, rgb(0, 0, 0)) !default; // 用于mix的黑色
+
+/* 辅助色 */
+$-color-success: var(--wot-color-success, #19be6b) !default; // 成功色  34d19d
+$-color-warning: var(--wot-color-warning, #ff9900) !default; // 警告色  f0883a
+$-color-danger: var(--wot-color-danger, #fa4350) !default; // 危险出错色  fa4350
+$-color-info: var(--wot-color-info, #909399) !default; // 信息色  909399
+
+$-color-blue: var(--wot-color-blue, #2979ff) !default; // 蓝色  2bb3ed
+$-color-purple: var(--wot-color-purple, #8268de) !default; // 紫色  8268de
+$-color-yellow: var(--wot-color-yellow, #f0cd1d) !default; // 黄色  f0cd1d
+
+$-color-gray-1: var(--wot-color-gray-1, #f7f8fa) !default;
+$-color-gray-2: var(--wot-color-gray-2, #f2f3f5) !default;
+$-color-gray-3: var(--wot-color-gray-3, #ebedf0) !default;
+$-color-gray-4: var(--wot-color-gray-4, #dcdee0) !default;
+$-color-gray-5: var(--wot-color-gray-5, #c8c9cc) !default;
+$-color-gray-6: var(--wot-color-gray-6, #969799) !default;
+$-color-gray-7: var(--wot-color-gray-7, #646566) !default;
+$-color-gray-8: var(--wot-color-gray-8, #323233) !default;
+
+$-font-gray-1: var(--wot-font-gray-1, rgba(0, 0, 0, 0.9));
+$-font-gray-2: var(--wot-font-gray-2, rgba(0, 0, 0, 0.6));
+$-font-gray-3: var(--wot-font-gray-3, rgba(0, 0, 0, 0.4));
+$-font-gray-4: var(--wot-font-gray-4, rgba(0, 0, 0, 0.26));
+
+$-font-white-1: var(--wot-font-white-1, rgba(255, 255, 255, 1));
+$-font-white-2: var(--wot-font-white-2, rgba(255, 255, 255, 0.55));
+$-font-white-3: var(--wot-font-white-3, rgba(255, 255, 255, 0.35));
+$-font-white-4: var(--wot-font-white-4, rgba(255, 255, 255, 0.22));
+
+/* 文字颜色（默认浅色背景下 */
+$-color-title: var(--wot-color-title, $-color-black) !default; // 模块标题/重要正文 000000
+$-color-content: var(--wot-color-content, #262626) !default; // 普通正文 262626
+$-color-secondary: var(--wot-color-secondary, #595959) !default; // 次要信息，注释/补充/正文 595959
+$-color-aid: var(--wot-color-aid, #a8abb2) !default; // 辅助文字字号，弱化信息，引导性/不可点文字 8c8c8c
+$-color-tip: var(--wot-color-tip, #c0c4cc) !default; // 失效、默认提示文字 bfbfbf
+
+$-color-border: var(--wot-color-border, #d9d9d9) !default; // 控件边框线 d9d9d9
+$-color-border-light: var(--wot-color-border-light, #e8e8e8) !default; // 分割线颜色 e8e8e8
+$-color-bg: var(--wot-color-bg, #f5f5f5) !default; // 背景色、禁用填充色 f5f5f5
+
+/* 暗黑模式 */
+$-dark-background: var(--wot-dark-background, #131313) !default;
+$-dark-background2: var(--wot-dark-background2, #1b1b1b) !default;
+$-dark-background3: var(--wot-dark-background3, #141414) !default;
+$-dark-background4: var(--wot-dark-background4, #323233) !default;
+$-dark-background5: var(--wot-dark-background5, #646566) !default;
+$-dark-background6: var(--wot-dark-background6, #380e08) !default;
+$-dark-background7: var(--wot-dark-background7, #707070) !default;
+$-dark-color: var(--wot-dark-color, $-color-white) !default;
+$-dark-color2: var(--wot-dark-color2, #f2270c) !default;
+$-dark-color3: var(--wot-dark-color3, rgba(232, 230, 227, 0.8)) !default;
+$-dark-color-gray: var(--wot-dark-color-gray, $-color-secondary) !default;
+$-dark-border-color: var(--wot-dark-border-color, #3a3a3c) !default;
+
+/* 图形颜色 */
+$-color-icon: var(--wot-color-icon, #d9d9d9) !default; // icon颜色  d9d9d9
+$-color-icon-active: var(--wot-color-icon-active, #eee) !default; // icon颜色hover  eee
+$-color-icon-disabled: var(--wot-color-icon-disabled, #a7a7a7) !default; // icon颜色disabled  a7a7a7
+
+/*----------------------------------------- Theme color. end -------------------------------------------*/
+
+/*-------------------------------- Theme color application size.  start --------------------------------*/
+
+/* 文字字号 */
+$-fs-big: var(--wot-fs-big, 24px) !default; // 大型标题 (24px)
+$-fs-important: var(--wot-fs-important, 19px) !default; // 重要数据 (19px)
+$-fs-title: var(--wot-fs-title, 16px) !default; // 标题字号/重要正文字号 (16px)
+$-fs-content: var(--wot-fs-content, 14px) !default; // 普通正文 (14px)
+$-fs-secondary: var(--wot-fs-secondary, 12px) !default; // 次要信息，注释/补充/正文 (12px)
+$-fs-aid: var(--wot-fs-aid, 10px) !default; // 辅助文字字号，弱化信息，引导性/不可点文字 (10px)
+
+/* 文字字重 */
+$-fw-medium: var(--wot-fw-medium, 500) !default; // PingFangSC-Medium 500
+$-fw-semibold: var(--wot-fw-semibold, 600) !default; // PingFangSC-Semibold 600
+
+/* 尺寸 */
+$-size-side-padding: var(--wot-size-side-padding, 15px) !default; // 屏幕两边留白 (15px)
+$-size-side-padding-small: var(--wot-size-side-padding-small, 6px) !default; // 屏幕两边留白小值 (6px)
+
+/*-------------------------------- Theme color application size.  end --------------------------------*/
+
+/* component var */
+
+/* action-sheet */
+$-action-sheet-weight: var(--wot-action-sheet-weight, 500) !default; // 面板字重 (500)
+$-action-sheet-radius: var(--wot-action-sheet-radius, 16px) !default; // 面板圆角大小 (16px)
+$-action-sheet-loading-size: var(--wot-action-sheet-loading-size, 20px) !default; // loading动画尺寸 (20px)
+$-action-sheet-action-height: var(--wot-action-sheet-action-height, 48px) !default; // 单条菜单高度 (48px)
+$-action-sheet-color: var(--wot-action-sheet-color, rgba(0, 0, 0, 0.85)) !default; // 选项名称颜色 (000000)
+$-action-sheet-fs: var(--wot-action-sheet-fs, $-fs-title) !default; // 选项名称字号 (16px)
+$-action-sheet-active-color: var(--wot-action-sheet-active-color, $-color-bg) !default; // 点击高亮颜色 (f5f5f5)
+$-action-sheet-subname-fs: var(--wot-action-sheet-subname-fs, $-fs-secondary) !default; // 描述信息字号 (12px)
+$-action-sheet-subname-color: var(--wot-action-sheet-subname-color, rgba(0, 0, 0, 0.45)) !default; // 描述信息颜色 (666666)
+$-action-sheet-disabled-color: var(--wot-action-sheet-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 禁用颜色 (444444)
+$-action-sheet-bg: var(--wot-action-sheet-bg, $-color-white) !default; // 菜单容器颜色（取消按钮上方的颜色） (ffffff)
+$-action-sheet-title-height: var(--wot-action-sheet-title-height, 64px) !default; // 标题高度 (64px)
+$-action-sheet-title-fs: var(--wot-action-sheet-title-fs, $-fs-title) !default; // 标题字号 (16px)
+$-action-sheet-close-fs: var(--wot-action-sheet-close-fs, $-fs-title) !default; // 关闭按钮大小 (16px)
+$-action-sheet-close-color: var(--wot-action-sheet-close-color, rgba(0, 0, 0, 0.65)) !default; // 关闭按钮颜色 (666666)
+$-action-sheet-close-top: var(--wot-action-sheet-close-top, 25px) !default; // 关闭按钮距离标题顶部距离 (25px)
+$-action-sheet-close-right: var(--wot-action-sheet-close-right, 15px) !default; // 关闭按钮距离标题右侧距离 (15px)
+$-action-sheet-cancel-color: var(--wot-action-sheet-cancel-color, #131415) !default; // 取消按钮颜色 (131415)
+$-action-sheet-cancel-height: var(--wot-action-sheet-cancel-height, 44px) !default; // 取消按钮高度 (44px)
+$-action-sheet-cancel-bg: var(--wot-action-sheet-cancel-bg, rgba(240, 240, 240, 1)) !default; // 取消按钮背景色 (f0f0f0)
+$-action-sheet-cancel-radius: var(--wot-action-sheet-cancel-radius, 22px) !default; // 取消按钮圆角大小 (22px)
+$-action-sheet-panel-padding: var(--wot-action-sheet-panel-padding, 12px 0 11px) !default; // 自定义面板内边距大小 (12px 0 11px)
+$-action-sheet-panel-img-fs: var(--wot-action-sheet-panel-img-fs, 40px) !default; // 自定义面板图片大小 (40px)
+$-action-sheet-panel-img-radius: var(--wot-action-sheet-panel-img-radius, 4px) !default; // 自定义面板图片圆角大小 (4px)
+
+/* badge */
+$-badge-bg: var(--wot-badge-bg, $-color-danger) !default; // 背景填充颜色 (f2270c)
+$-badge-color: var(--wot-badge-color, #fff) !default; // 文字颜色 (ffffff)
+$-badge-fs: var(--wot-badge-fs, 12px) !default; // 文字字号 (12px)
+$-badge-padding: var(--wot-badge-padding, 0 5px) !default; // padding (0 5px)
+$-badge-height: var(--wot-badge-height, 16px) !default; // 高度 (16px)
+$-badge-primary: var(--wot-badge-primary, $-color-theme) !default; // 主要颜色 (f2270c)
+$-badge-success: var(--wot-badge-success, $-color-success) !default; // 成功颜色 (43b02a)
+$-badge-warning: var(--wot-badge-warning, $-color-warning) !default; // 警告颜色 (f7a600)
+$-badge-danger: var(--wot-badge-danger, $-color-danger) !default; // 危险颜色 (f2270c)
+$-badge-info: var(--wot-badge-info, $-color-info) !default; // 信息颜色 (43b02a)
+$-badge-dot-size: var(--wot-badge-dot-size, 6px) !default; // dot 类型大小 (6px)
+$-badge-border: var(--wot-badge-border, 2px solid $-badge-color) !default; // 边框样式 (2px solid fffffff)
+
+/* button */
+$-button-disabled-opacity: var(--wot-button-disabled-opacity, 0.6) !default; // button禁用透明度 (0.6)
+$-button-small-height: var(--wot-button-small-height, 28px) !default; // 小型按钮高度 (28px)
+$-button-small-padding: var(--wot-button-small-padding, 0 12px) !default; // 小型按钮padding (0 12px)
+$-button-small-fs: var(--wot-button-small-fs, $-fs-secondary) !default; // 小型按钮字号 (12px)
+$-button-small-radius: var(--wot-button-small-radius, 2px) !default; // 小型按钮圆角大小 (2px)
+$-button-small-loading: var(--wot-button-small-loading, 14px) !default; // 小型按钮loading图标大小 (14px)
+$-button-medium-height: var(--wot-button-medium-height, 36px) !default; // 中型按钮高度 (36px)
+$-button-medium-padding: var(--wot-button-medium-padding, 0 16px) !default; // 中型按钮padding (0 16px)
+$-button-medium-fs: var(--wot-button-medium-fs, $-fs-content) !default; // 中型按钮字号 (14px)
+$-button-medium-radius: var(--wot-button-medium-radius, 4px) !default; // 中型按钮圆角大小 (4px)
+$-button-medium-loading: var(--wot-button-medium-loading, 18px) !default; // 中型按钮loading图标大小 (18px)
+$-button-medium-box-shadow-size: var(--wot-button-medium-box-shadow-size, 0px 2px 4px 0px) !default; // 中尺寸阴影尺寸 (0px 2px 4px 0px)
+$-button-large-height: var(--wot-button-large-height, 44px) !default; // 大型按钮高度 (44px)
+$-button-large-padding: var(--wot-button-large-padding, 0 36px) !default; // 大型按钮padding (0 36px)
+$-button-large-fs: var(--wot-button-large-fs, $-fs-title) !default; // 大型按钮字号 (16px)
+$-button-large-radius: var(--wot-button-large-radius, 8px) !default; // 大型按钮圆角大小 (8px)
+$-button-large-loading: var(--wot-button-large-loading, 24px) !default; // 大型按钮loading图标大小 (24px)
+$-button-large-box-shadow-size: var(--wot-button-large-box-shadow-size, 0px 4px 8px 0px) !default; // 大尺寸阴影尺寸 (0px 4px 8px 0px)
+$-button-icon-fs: var(--wot-button-icon-fs, 18px) !default; // 带图标的按钮的图标大小 (18px)
+$-button-icon-size: var(--wot-button-icon-size, 40px) !default; // icon 类型按钮尺寸 (40px)
+$-button-icon-color: var(--wot-button-icon-color, rgba(0, 0, 0, 0.65)) !default; // icon 类型按钮颜色 (666666)
+$-button-icon-disabled-color: var(--wot-button-icon-disabled-color, $-color-icon-disabled) !default; // icon 类型按钮禁用颜色 (999999)
+$-button-normal-color: var(--wot-button-normal-color, $-color-title) !default; // 文字颜色 (131415)
+$-button-normal-disabled-color: var(--wot-button-normal-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 默认按钮禁用文字色 (444444)
+$-button-plain-bg-color: var(--wot-button-plain-bg-color, $-color-white) !default; // 幽灵按钮背景色 (ffffff)
+$-button-primary-color: var(--wot-button-primary-color, $-color-white) !default; // 主要按钮颜色 (ffffff)
+$-button-primary-bg-color: var(--wot-button-primary-bg-color, $-color-theme) !default; // 主要按钮背景颜色 (f2270c)
+$-button-success-color: var(--wot-button-success-color, $-color-white) !default; // 成功按钮文字颜色 (ffffff)
+$-button-success-bg-color: var(--wot-button-success-bg-color, $-color-success) !default; // 成功按钮颜色 (43b02a)
+$-button-info-color: var(--wot-button-info-color, $-color-title) !default; // 信息按钮颜色 (131415)
+$-button-info-bg-color: var(--wot-button-info-bg-color, #f0f0f0) !default; // 信息按钮背景颜色 (f0f0f0)
+$-button-info-plain-border-color: var(--wot-button-info-plain-border-color, rgba(0, 0, 0, 0.45)) !default; // 信息按钮禁用颜色 (666666)
+$-button-info-plain-normal-color: var(--wot-button-info-plain-normal-color, rgba(0, 0, 0, 0.85)) !default; // 信息幽灵按钮默认颜色 (444444) 
+$-button-warning-color: var(--wot-button-warning-color, $-color-white) !default; // 警告按钮字体颜色 (ffffff)
+$-button-warning-bg-color: var(--wot-button-warning-bg-color, $-color-warning) !default; // 警告按钮背景颜色 (f7a600)
+$-button-error-color: var(--wot-button-error-color, $-color-white) !default; // 错误按钮字体颜色 (ffffff)
+$-button-error-bg-color: var(--wot-button-error-bg-color, $-color-danger) !default; // 错误按钮背景颜色 (f2270c)
+$-button-text-hover-opacity: var(--wot-button-text-hover-opacity, 0.7) !default; // 文字button激活时透明度 (0.7)
+
+/* cell */
+$-cell-padding: var(--wot-cell-padding, $-size-side-padding) !default; // cell 左右padding距离 (15px)
+$-cell-line-height: var(--wot-cell-line-height, 24px) !default; // 行高 (24px)
+
+$-cell-group-title-fs: var(--wot-cell-group-title-fs, $-fs-title) !default; // 组标题字号 (16px)
+$-cell-group-padding: var(--wot-cell-group-padding, 13px $-cell-padding) !default; // 组padding (13px 15px)
+$-cell-group-title-color: var(--wot-cell-group-title-color, rgba(0, 0, 0, 0.85)) !default; // 组标题文字颜色 (131415)
+$-cell-group-value-fs: var(--wot-cell-group-value-fs, $-fs-content) !default; // 组值字号 (14px)
+$-cell-group-value-color: var(--wot-cell-group-value-color, $-color-content) !default; // 组值文字颜色 (131415)
+
+$-cell-wrapper-padding: var(--wot-cell-wrapper-padding, 10px) !default; // cell 容器padding (10px)
+$-cell-wrapper-padding-large: var(--wot-cell-wrapper-padding-large, 12px) !default; // large类型cell容器padding (12px)
+
+$-cell-wrapper-padding-with-label: var(--wot-cell-wrapper-padding-with-label, 16px) !default; // cell 容器上下padding（有label情况下） (16px)
+$-cell-icon-right: var(--wot-cell-icon-right, 4px) !default; // 图标距离右边缘 (4px)
+$-cell-icon-size: var(--wot-cell-icon-size, 16px) !default; // 图标大小 (16px)
+$-cell-title-fs: var(--wot-cell-title-fs, $-fs-content) !default; // 标题字号 (14px)
+$-cell-title-color: var(--wot-cell-title-color, rgba(0, 0, 0, 0.85)) !default; // 标题文字颜色 (131415)
+$-cell-label-fs: var(--wot-cell-label-fs, 12px) !default; // 描述信息字号 (12px)
+$-cell-label-color: var(--wot-cell-label-color, rgba(0, 0, 0, 0.45)) !default; // 描述信息文字颜色 (666666)
+$-cell-value-fs: var(--wot-cell-value-fs, 14px) !default; // 右侧内容字号 (14px)
+$-cell-value-fs-large: var(--wot-cell-value-fs-large, 16px) !default; // 大尺寸右侧内容字号 (16px)
+$-cell-value-color: var(--wot-cell-value-color, rgba(0, 0, 0, 0.85)) !default; // 右侧内容文字颜色 (131415)
+$-cell-arrow-size: var(--wot-cell-arrow-size, 18px) !default; // 右箭头大小 (18px)
+$-cell-arrow-color: var(--wot-cell-arrow-color, rgba(0, 0, 0, 0.25)) !default; // 右箭头颜色 (666666)
+$-cell-clear-color: var(--wot-cell-clear-color, #585858) !default; // 清空按钮颜色 (585858)
+$-cell-tap-bg: var(--wot-cell-tap-bg, rgba(0, 0, 0, 0.06)) !default; // 点击态背景色 (060606)
+
+$-cell-title-fs-large: var(--wot-cell-title-fs-large, 16px) !default; // 大尺寸标题字号 (16px)
+$-cell-label-fs-large: var(--wot-cell-label-fs-large, 14px) !default; // 大尺寸描述信息字号 (14px)
+$-cell-icon-size-large: var(--wot-cell-icon-size-large, 18px) !default; // 大尺寸图标大小 (18px)
+
+$-cell-required-color: var(--wot-cell-required-color, $-color-danger) !default; // 要求必填*颜色 (f2270c)
+$-cell-required-size: var(--wot-cell-required-size, 18px) !default; // 必填*字号 (18px)
+$-cell-required-margin: var(--wot-cell-required-margin, 4px) !default; // 必填*间距 (4px)
+$-cell-vertical-top: var(--wot-cell-vertical-top, 16px) !default; // 表单类型-上下结构的间距 (16px)
+
+/* calendar */
+$-calendar-fs: var(--wot-calendar-fs, 16px) !default; // 日历字号 (16px)
+$-calendar-panel-padding: var(--wot-calendar-panel-padding, 0 12px) !default; // 面板padding (0 12px)
+$-calendar-panel-title-fs: var(--wot-calendar-panel-title-fs, 14px) !default; // 面板标题字号 (14px)
+$-calendar-panel-title-color: var(--wot-calendar-panel-title-color, rgba(0, 0, 0, 0.85)) !default; // 面板标题文字颜色 (131415)
+$-calendar-week-color: var(--wot-calendar-week-color, rgba(0, 0, 0, 0.85)) !default; // 星期文字颜色 (131415)
+$-calendar-week-height: var(--wot-calendar-week-height, 36px) !default; // 星期高度 (36px)
+$-calendar-week-fs: var(--wot-calendar-week-fs, 12px) !default; // 星期字号 (12px)
+$-calendar-day-fs: var(--wot-calendar-day-fs, 16px) !default; // 日期字号 (16px)
+$-calendar-day-color: var(--wot-calendar-day-color, rgba(0, 0, 0, 0.85)) !default; // 日期文字颜色 (131415)
+$-calendar-day-fw: var(--wot-calendar-day-fw, 500) !default; // 日期字体粗细 (500)
+$-calendar-day-height: var(--wot-calendar-day-height, 64px) !default; // 日期高度 (64px)
+$-calendar-month-width: var(--wot-calendar-month-width, 50px) !default; // 月份宽度 (50px)
+$-calendar-active-color: var(--wot-calendar-active-color, $-color-theme) !default; // 选中颜色
+$-calendar-selected-color: var(--wot-calendar-selected-color, $-color-white) !default; // 选中文字颜色 (ffffff)
+$-calendar-disabled-color: var(--wot-calendar-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 禁用文字颜色 (666666)
+$-calendar-range-color: var(--wot-calendar-range-color, rgba(#4d80f0, 0.3)) !default; // 选中范围颜色 (4d80f0)
+$-calendar-active-border: var(--wot-calendar-active-border, 10px) !default; // 选中边框宽度 (10px)
+$-calendar-info-fs: var(--wot-calendar-info-fs, 10px) !default; // 月份文字字号 (10px)
+$-calendar-item-margin-bottom: var(--wot-calendar-item-margin-bottom, 4px) !default; // 月份文字间距 (4px)
+
+/* checkbox */
+$-checkbox-margin: var(--wot-checkbox-margin, 10px) !default; // 多个复选框距离 (10px)
+$-checkbox-bg: var(--wot-checkbox-bg, $-color-white) !default; // 多个复选框背景颜色 (ffffff)
+$-checkbox-label-margin: var(--wot-checkbox-label-margin, 9px) !default; // 右侧文字与左侧图标距离 (9px)
+$-checkbox-size: var(--wot-checkbox-size, 16px) !default; // 左侧图标尺寸 (16px)
+$-checkbox-icon-size: var(--wot-checkbox-icon-size, 14px) !default; // 左侧图标尺寸 (14px)
+$-checkbox-border-color: var(--wot-checkbox-border-color, #dcdcdc) !default; // 左侧图标边框颜色
+$-checkbox-check-color: var(--wot-checkbox-check-color, $-color-white) !default; // 左侧图标边框颜色 (ffffff)
+$-checkbox-label-fs: var(--wot-checkbox-label-fs, 14px) !default; // 右侧文字字号 (14px)
+$-checkbox-label-color: var(--wot-checkbox-label-color, rgba(0, 0, 0, 0.85)) !default; // 右侧文字颜色 (131415)
+$-checkbox-checked-color: var(--wot-checkbox-checked-color, $-color-theme) !default; // 选中颜色  (4d80f0)
+
+$-checkbox-disabled-color: var(--wot-checkbox-disabled-color, rgba(0, 0, 0, 0.04)) !default; // 禁用背景颜色  (040404)
+$-checkbox-disabled-label-color: var(--wot-checkbox-disabled-label-color, rgba(0, 0, 0, 0.25)) !default; // 禁用文字颜色 (666666)
+$-checkbox-disabled-check-color: var(--wot-checkbox-disabled-check-color, rgba(0, 0, 0, 0.15)) !default; // 禁用图标颜色 (151515)
+$-checkbox-disabled-check-bg: var(--wot-checkbox-disabled-check-bg, rgba(0, 0, 0, 0.15)) !default; // 禁用边框背景颜色 (151515)
+$-checkbox-square-radius: var(--wot-checkbox-square-radius, 4px) !default; // 方型圆角大小 (4px)
+
+$-checkbox-large-size: var(--wot-checkbox-large-size, 18px) !default; // 左侧图标尺寸 (18px)
+$-checkbox-large-label-fs: var(--wot-checkbox-large-label-fs, 16px) !default; // 右侧文字字号 (16px)
+
+$-checkbox-button-height: var(--wot-checkbox-button-height, 32px) !default; // 按钮模式复选框高度 (32px)
+$-checkbox-button-min-width: var(--wot-checkbox-button-min-width, 78px) !default; // 按钮模式最小宽 (78px)
+$-checkbox-button-radius: var(--wot-checkbox-button-radius, 16px) !default; // 按钮圆角大小 (16px)
+$-checkbox-button-bg: var(--wot-checkbox-button-bg, rgba(0, 0, 0, 0.04)) !default; // 按钮模式背景颜色 (040404)
+$-checkbox-button-font-size: var(--wot-checkbox-button-font-size, 14px) !default; // 按钮模式字号 (14px)
+$-checkbox-button-border: var(--wot-checkbox-button-border, #f5f5f5) !default; // 按钮边框颜色 (f5f5f5)
+$-checkbox-button-disabled-border: var(--wot-checkbox-button-disabled-border, rgba(0, 0, 0, 0.15)) !default; // 按钮禁用边框颜色 (151515)
+
+/* collapse */
+$-collapse-side-padding: var(--wot-collapse-side-padding, $-size-side-padding) !default; // 左右间距 (12px)
+$-collapse-body-padding: var(--wot-collapse-body-padding, 14px $-size-side-padding) !default; // body padding (14px 12px)
+$-collapse-header-padding: var(--wot-collapse-header-padding, 13px $-size-side-padding) !default; // 头部padding (13px 12px)
+$-collapse-title-color: var(--wot-collapse-title-color, rgba(0, 0, 0, 0.85)) !default; // 标题颜色 (131415)
+$-collapse-title-fs: var(--wot-collapse-title-fs, 16px) !default; // 标题字号 (16px)
+$-collapse-arrow-size: var(--wot-collapse-arrow-size, 18px) !default; // 箭头大小 (18px)
+$-collapse-arrow-color: var(--wot-collapse-arrow-color, #d8d8d8) !default; // 箭头颜色 (d8d8d8)
+$-collapse-body-fs: var(--wot-collapse-body-fs, 14px) !default; // 内容字号 (14px)
+$-collapse-body-color: var(--wot-collapse-body-color, rgba(0, 0, 0, 0.65)) !default; // 内容颜色 (666666)
+$-collapse-disabled-color: var(--wot-collapse-disabled-color, rgba(0, 0, 0, 0.15)) !default; // 禁用颜色 (151515)
+$-collapse-retract-fs: var(--wot-collapse-retract-fs, 14px) !default; // 更多 字号 (14px)
+$-collapse-more-color: var(--wot-collapse-more-color, $-color-theme) !default; // 更多 颜色 (4d80f0)
+
+/* divider */
+$-divider-padding: var(--wot-divider-padding, 0 $-size-side-padding) !default; // 两边间距 (12px)
+$-divider-margin: var(--wot-divider-margin, 16px 0) !default; // 上下间距 (16px)
+$-divider-color: var(--wot-divider-color, rgba(0, 0, 0, 0.45)) !default; // 字体颜色 (666666)
+$-divider-line-color: var(--wot-divider-line-color, currentColor) !default; // 线条颜色 (666666)
+$-divider-line-height: var(--wot-divider-line-height, 1px) !default; // 线条高度 (1px)
+$-divider-fs: var(--wot-divider-fs, 14px) !default; // 字体大小 (14px)
+$-divider-content-left-width: var(--wot-divider-content-left-width, 10%) !default; // 左侧内容宽度 (10%)
+$-divider-content-left-margin: var(--wot-divider-content-left-margin, 12px) !default; // 左侧内容距离线距离 (12px)
+$-divider-content-right-margin: var(--wot-divider-content-right-margin, 12px) !default; // 右侧内容距离线距离 (12px)
+$-divider-content-right-width: var(--wot-divider-content-right-width, 10%) !default; // 右侧内容宽度 (10%)
+$-divider-vertical-height: var(--wot-divider-vertical-height, 16px) !default; // 垂直分割线高度 (16px)
+$-divider-vertical-content-margin: var(--wot-divider-vertical-content-margin, 0 8px) !default; // 垂直分割线内容间距 (0 8px)
+$-divider-vertical-line-width: var(--wot-divider-vertical-line-width, 1px) !default; // 线条高度 (1px)
+
+/* drop-menu */
+$-drop-menu-height: var(--wot-drop-menu-height, 48px) !default; // 展示选中项的高度 (48px)
+$-drop-menu-color: var(--wot-drop-menu-color, $-color-content) !default; // 展示选中项的颜色 (131415)
+$-drop-menu-fs: var(--wot-drop-menu-fs, $-fs-content) !default; // 展示选中项的字号 (14px)
+$-drop-menu-arrow-fs: var(--wot-drop-menu-arrow-fs, $-fs-secondary) !default; // 箭头图标大小 (18px)
+
+$-drop-menu-side-padding: var(--wot-drop-menu-side-padding, $-size-side-padding) !default; // 两边留白间距 (12px)
+$-drop-menu-disabled-color: var(--wot-drop-menu-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 禁用颜色 (252525)
+$-drop-menu-item-height: var(--wot-drop-menu-item-height, 48px) !default; // 选项高度 (48px)
+$-drop-menu-item-color: var(--wot-drop-menu-item-color, $-color-content) !default; // 选项颜色 (131415)
+$-drop-menu-item-fs: var(--wot-drop-menu-item-fs, $-fs-content) !default; // 选项字号 (14px)
+$-drop-menu-item-color-active: var(--wot-drop-menu-item-color-active, $-color-theme) !default; // 选中颜色 (4d80f0)
+$-drop-menu-item-color-tip: var(--wot-drop-menu-item-color-tip, rgba(0, 0, 0, 0.45)) !default; // 提示文字颜色 (666666)
+$-drop-menu-item-fs-tip: var(--wot-drop-menu-item-fs-tip, $-fs-secondary) !default; // 提示文字字号 (12px)
+$-drop-menu-option-check-size: var(--wot-drop-menu-option-check-size, 20px) !default; // check 图标大小 (20px)
+$-drop-menu-line-color: var(--wot-drop-menu-line-color, $-color-theme) !default; // 下划线颜色 (4d80f0)
+$-drop-menu-line-height: var(--wot-drop-menu-line-height, 3px) !default; // 下划线高度 (3px)
+
+/* input-number */
+$-input-number-color: var(--wot-input-number-color, #262626) !default; // 文字颜色 (262626)
+$-input-number-border-color: var(--wot-input-number-border-color, #e8e8e8) !default; // 边框颜色 (e8e8e8)
+$-input-number-disabled-color: var(--wot-input-number-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 禁用颜色 (252525)
+$-input-number-height: var(--wot-input-number-height, 24px) !default; // 加减号按钮高度 (24px)
+$-input-number-btn-width: var(--wot-input-number-btn-width, 26px) !default; // 加减号按钮宽度 (26px)
+$-input-number-input-width: var(--wot-input-number-input-width, 36px) !default; // 输入框宽度 (36px)
+$-input-number-radius: var(--wot-input-number-radius, 4px) !default; // 加减号按钮圆角大小 (4px)
+$-input-number-fs: var(--wot-input-number-fs, 12px) !default; // 输入框字号 (12px)
+$-input-number-icon-size: var(--wot-input-number-icon-size, 14px) !default; // 加减号图标大小 (14px)
+$-input-number-icon-color: var(--wot-input-number-icon-color, rgba(0, 0, 0, 0.65)) !default; // icon颜色 (666666)
+
+/* input */
+$-input-padding: var(--wot-input-padding, $-size-side-padding) !default; // input 左右padding距离 (12px)
+$-input-border-color: var(--wot-input-border-color, #dadada) !default; // 无label边框颜色 (dadada)
+$-input-not-empty-border-color: var(--wot-input-not-empty-border-color, #262626) !default; // 输入框有值时 无label边框颜色 (262626)
+$-input-fs: var(--wot-input-fs, $-cell-title-fs) !default; // 字号 (14px)
+$-input-fs-large: var(--wot-input-fs-large, $-cell-title-fs-large) !default; // 大尺寸字号 (16px)
+$-input-icon-margin: var(--wot-input-icon-margin, 8px) !default; // 图标距离 (8px)
+$-input-color: var(--wot-input-color, #262626) !default; // 文字颜色 (262626)
+$-input-placeholder-color: var(--wot-input-placeholder-color, #bfbfbf) !default; // 占位符颜色 (bfbfbf)
+$-input-disabled-color: var(--wot-input-disabled-color, #d9d9d9) !default; // 输入框禁用颜色 (d9d9d9)
+$-input-error-color: var(--wot-input-error-color, $-color-danger) !default; // 输入框错误颜色 (f5222d)
+$-input-icon-color: var(--wot-input-icon-color, #bfbfbf) !default; // 图标颜色 (bfbfbf)
+$-input-clear-color: var(--wot-input-clear-color, #585858) !default; // 关闭按钮颜色 (585858)
+$-input-count-color: var(--wot-input-count-color, #bfbfbf) !default; // 计数文字颜色 (bfbfbf)
+$-input-count-current-color: var(--wot-input-count-current-color, #262626) !default; // 当前长度颜色 (262626)
+$-input-bg: var(--wot-input-bg, $-color-white) !default; // 默认背景颜色 (ffffff)
+
+$-input-cell-bg: var(--wot-input-cell-bg, $-color-white) !default; // cell 类型背景色 (ffffff)
+$-input-cell-border-color: var(--wot-input-cell-border-color, $-color-border-light) !default; // cell 类型边框颜色 (e8e8e8)
+$-input-cell-padding: var(--wot-input-cell-padding, 10px) !default; // cell 容器padding (10px)
+$-input-cell-padding-large: var(--wot-input-cell-padding-large, 12px) !default; // large类型cell容器padding (12px)
+$-input-cell-height: var(--wot-input-cell-height, 24px) !default; // cell 高度 (24px)
+$-input-cell-label-width: var(--wot-input-cell-label-width, 33%) !default; // cell 下 label 的宽度 (33%)
+$-input-inner-height: var(--wot-input-inner-height, 34px) !default; // 非cell和textarea下的高度 (34px)
+$-input-inner-height-no-border: var(--wot-input-inner-height-no-border, 24px) !default; // 无边框下的高度 (24px)
+$-input-count-fs: var(--wot-input-count-fs, 14px) !default; // 计数字号 (14px)
+$-input-count-fs-large: var(--wot-input-count-fs-large, 14px) !default; // 大尺寸计数字号 (14px)
+$-input-icon-size: var(--wot-input-icon-size, 16px) !default; // 图标大小 (16px)
+$-input-icon-size-large: var(--wot-input-icon-size-large, 18px) !default; // 大尺寸图标大小 (18px)
+
+/* textarea */
+$-textarea-padding: var(--wot-textarea-padding, $-size-side-padding) !default; // textarea 左右padding距离 (12px)
+$-textarea-border-color: var(--wot-textarea-border-color, #dadada) !default; // 无label边框颜色 (dadada)
+$-textarea-not-empty-border-color: var(--wot-textarea-not-empty-border-color, #262626) !default; // 输入框有值时 无label边框颜色 (262626)
+$-textarea-fs: var(--wot-textarea-fs, $-cell-title-fs) !default; // 字号 (14px)
+$-textarea-fs-large: var(--wot-textarea-fs-large, $-cell-title-fs-large) !default; // 大尺寸字号 (16px)
+$-textarea-icon-margin: var(--wot-textarea-icon-margin, 8px) !default; // 图标距离 (8px)
+$-textarea-color: var(--wot-textarea-color, #262626) !default; // 文字颜色 (262626)
+$-textarea-icon-color: var(--wot-textarea-icon-color, #bfbfbf) !default; // 图标颜色 (bfbfbf)
+$-textarea-clear-color: var(--wot-textarea-clear-color, #585858) !default; // 关闭按钮颜色 (585858)
+$-textarea-count-color: var(--wot-textarea-count-color, #bfbfbf) !default; // 计数文字颜色 (bfbfbf)
+$-textarea-count-current-color: var(--wot-textarea-count-current-color, #262626) !default; // 当前长度颜色 (262626)
+$-textarea-bg: var(--wot-textarea-bg, $-color-white) !default; // 默认背景颜色
+$-textarea-cell-border-color: var(--wot-textarea-cell-border-color, $-color-border-light) !default; // cell 类型边框颜色 (e8e8e8)
+$-textarea-cell-padding: var(--wot-textarea-cell-padding, 10px) !default; // cell 容器padding (10px)
+$-textarea-cell-padding-large: var(--wot-textarea-cell-padding-large, 12px) !default; // large类型cell容器padding (12px)
+$-textarea-cell-height: var(--wot-textarea-cell-height, 24px) !default; // cell 高度 (24px)
+$-textarea-count-fs: var(--wot-textarea-count-fs, 14px) !default; // 计数字号 (14px)
+$-textarea-count-fs-large: var(--wot-textarea-count-fs-large, 14px) !default; // 大尺寸计数字号 (14px)
+$-textarea-icon-size: var(--wot-textarea-icon-size, 16px) !default; // 图标大小 (16px)
+$-textarea-icon-size-large: var(--wot-textarea-icon-size-large, 18px) !default; // 大尺寸图标大小 (18px)
+
+/* loadmore */
+$-loadmore-height: var(--wot-loadmore-height, 48px) !default; // 高度 (48px)
+$-loadmore-color: var(--wot-loadmore-color, rgba(0, 0, 0, 0.45)) !default; // 颜色 (rgba(0, 0, 0, 0.45))
+$-loadmore-fs: var(--wot-loadmore-fs, 14px) !default; // 字号 (14px)
+$-loadmore-error-color: var(--wot-loadmore-error-color, $-color-theme) !default; // 点击重试颜色 ($-color-theme)
+$-loadmore-refresh-fs: var(--wot-loadmore-refresh-fs, $-fs-title) !default; // refresh图标字号 (16px)
+$-loadmore-loading-size: var(--wot-loadmore-loading-size, $-fs-title) !default; // loading尺寸 (16px)
+
+/* message-box */
+$-message-box-width: var(--wot-message-box-width, 300px) !default; // 宽度 (300px)
+$-message-box-bg: var(--wot-message-box-bg, $-color-white) !default; // 默认背景颜色 (ffffff)
+$-message-box-radius: var(--wot-message-box-radius, 16px) !default; // 圆角大小 (16px)
+$-message-box-padding: var(--wot-message-box-padding, 25px 24px 0) !default; // 主体内容padding (25px 24px 0)
+$-message-box-title-fs: var(--wot-message-box-title-fs, 16px) !default; // 标题字号 (16px)
+$-message-box-title-color: var(--wot-message-box-title-color, rgba(0, 0, 0, 0.85)) !default; // 标题颜色 (rgba(0, 0, 0, 0.85))
+$-message-box-content-fs: var(--wot-message-box-content-fs, 14px) !default; // 内容字号 (14px)
+$-message-box-content-color: var(--wot-message-box-content-color, #666666) !default; // 内容颜色 (666666)
+$-message-box-content-max-height: var(--wot-message-box-content-max-height, 264px) !default; // 内容最大高度 (264px)
+$-message-box-content-scrollbar-width: var(--wot-message-box-content-scrollbar-width, 4px) !default; // 内容滚动条宽度 (4px)
+$-message-box-content-scrollbar-color: var(--wot-message-box-content-scrollbar-color, rgba(0, 0, 0, 0.1)) !default; // 内容滚动条颜色 (rgba(0, 0, 0, 0.1))
+$-message-box-input-error-color: var(--wot-message-box-input-error-color, $-input-error-color) !default; // 输入框错误颜色
+
+/* notice-bar */
+$-notice-bar-fs: var(--wot-notice-bar-fs, 12px) !default; // 字号 (12px)
+$-notice-bar-line-height: var(--wot-notice-bar-line-height, 18px) !default; // 行高 (18px)
+$-notice-bar-border-radius: var(--wot-notice-bar-border-radius, 8px) !default; // 圆角 (8px)
+$-notice-bar-padding: var(--wot-notice-bar-padding, 9px 20px 9px 15px) !default; // 非换行下的padding (9px 20px 9px 15px)
+$-notice-bar-warning-bg: var(--wot-notice-bar-warning-bg, #fff6c8) !default; // 背景色 (fff6c8)
+$-notice-bar-info-bg: var(--wot-notice-bar-info-bg, #f4f9ff) !default; // 背景色
+$-notice-bar-danger-bg: var(--wot-notice-bar-danger-bg, #feeced) !default; // 背景色
+$-notice-bar-warning-color: var(--wot-notice-bar-warning-color, $-color-warning) !default; // 文字和图标颜色
+$-notice-bar-info-color: var(--wot-notice-bar-info-color, $-color-theme) !default; // 文字和图标颜色
+$-notice-bar-danger-color: var(--wot-notice-bar-danger-color, $-color-danger) !default; // 文字和图标颜色 (ff4d4f)
+$-notice-bar-prefix-size: var(--wot-notice-bar-prefix-size, 18px) !default; // 图标大小 (18px)
+$-notice-bar-close-bg: var(--wot-notice-bar-close-bg, rgba(0, 0, 0, 0.15)) !default; // 右侧关闭按钮背景颜色 (rgba(0, 0, 0, 0.15))
+$-notice-bar-close-size: var(--wot-notice-bar-close-size, 18px) !default; // 右侧关闭按钮背景颜色 (18px)
+$-notice-bar-close-color: var(--wot-notice-bar-close-color, $-color-white) !default; // 右侧关闭按钮颜色 (ffffff)
+$-notice-bar-wrap-padding: var(--wot-notice-bar-wrap-padding, 14px $-size-side-padding) !default; // 换行下的padding (14px 24px)
+
+/* pagination */
+$-pagination-content-padding: var(--wot-pagination-content-padding, 10px 15px) !default; // 分页内容padding (10px 15px)
+$-pagination-message-padding: var(--wot-pagination-message-padding, 1px 0 16px 0) !default; // 分页信息padding (1px 0 16px 0)
+$-pagination-message-fs: var(--wot-pagination-message-fs, 12px) !default; // 分页信息字号 (12px)
+$-pagination-message-color: var(--wot-pagination-message-color, rgba(0, 0, 0, 0.69)) !default; // 分页信息颜色 (rgba(0, 0, 0, 0.69))
+$-pagination-nav-border: var(--wot-pagination-nav-border, 1px solid rgba(0, 0, 0, 0.45)) !default; // 分页导航边框 (1px solid rgba(0, 0, 0, 0.45))
+$-pagination-nav-border-radius: var(--wot-pagination-nav-border-radius, 16px) !default; // 分页导航圆角 (16px)
+$-pagination-nav-fs: var(--wot-pagination-nav-fs, 12px) !default; // 分页导航字号 (12px)
+$-pagination-nav-width: var(--wot-pagination-nav-width, 60px) !default; // 分页导航宽度 (60px)
+$-pagination-nav-color: var(--wot-pagination-nav-color, rgba(0, 0, 0, 0.85)) !default; // 分页导航颜色 (rgba(0, 0, 0, 0.85))
+$-pagination-nav-content-fs: var(--wot-pagination-nav-content-fs, 12px) !default; // 分页导航内容字号 (12px)
+$-pagination-nav-sepatator-padding: var(--wot-pagination-nav-sepatator-padding, 0 4px) !default; // 分页导航分隔符padding (0 4px)
+$-pagination-nav-current-color: var(--wot-pagination-nav-current-color, $-color-theme) !default; // 分页导航当前页颜色 ($-color-theme)
+$-pagination-icon-size: var(--wot-pagination-icon-size, $-fs-content) !default; // 分页导航图标大小 ($-fs-content)
+
+/* picker */
+$-picker-toolbar-height: var(--wot-picker-toolbar-height, 54px) !default; // toolbar 操作条的高度 (54px)
+$-picker-action-height: var(--wot-picker-action-height, 16px) !default; // toolbar 操作条的高度 (16px)
+$-picker-toolbar-finish-color: var(--wot-picker-toolbar-finish-color, $-color-theme) !default; // toolbar 操作条完成按钮的颜色 ($-color-theme)
+$-picker-toolbar-cancel-color: var(--wot-picker-toolbar-cancel-color, #666666) !default; // toolbar 操作条的边框颜色 (666666)
+$-picker-toolbar-fs: var(--wot-picker-toolbar-fs, $-fs-title) !default; // toolbar 操作条的字号 ($-fs-title)
+$-picker-toolbar-title-color: var(--wot-picker-toolbar-title-color, rgba(0, 0, 0, 0.85)) !default; // toolbar 操作台的标题颜色 (rgba(0, 0, 0, 0.85))
+$-picker-column-fs: var(--wot-picker-column-fs, 16px) !default; // 选择器选项的字号 (16px)
+$-picker-bg: var(--wot-picker-bg, $-color-white) !default; // 选择器选项的字号 ($-color-white)
+$-picker-column-active-fs: var(--wot-picker-column-active-fs, 18px) !default; // 选择器选项被选中的字号 (18px)
+$-picker-column-color: var(--wot-picker-column-color, rgba(0, 0, 0, 0.85)) !default; // 选择器选项的颜色 (rgba(0, 0, 0, 0.85))
+$-picker-column-height: var(--wot-picker-column-height, 210px) !default; // 列高 滚筒外部的高度 (210px)
+$-picker-column-item-height: var(--wot-picker-column-item-height, 35px) !default; // 列高 滚筒外部的高度 (35px)
+$-picker-column-select-bg: var(--wot-picker-column-select-bg, #f5f5f5) !default; // 选择器选项被选中的背景颜色 (f5f5f5)
+$-picker-loading-button-color: var(--wot-picker-loading-button-color, rgba(0, 0, 0, 0.25)) !default; // loading 背景颜色 (rgba(0, 0, 0, 0.25))
+$-picker-column-padding: var(--wot-picker-column-padding, 0 $-size-side-padding-small) !default; // 选项内间距 (0 12px)
+
+$-picker-column-disabled-color: var(--wot-picker-column-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 选择器选项禁用的颜色 (rgba(0, 0, 0, 0.25))
+$-picker-mask: var(--wot-picker-mask, linear-gradient(180deg, hsla(0, 0%, 100%, 0.9), hsla(0, 0%, 100%, 0.25)))
+  linear-gradient(0deg, hsla(0, 0%, 100%, 0.9), hsla(0, 0%, 100%, 0.25)) !default; // 上下阴影
+$-picker-loading-bg: var(--wot-picker-loading-bg, rgba($-color-white, 0.8)) !default; // loading 背景颜色
+$-picker-region-separator-color: var(--wot-picker-region-separator-color, rgba(0, 0, 0, 0.65)) !default; // 区域选择文字颜色
+$-picker-cell-arrow-size-large: var(--wot-picker-cell-arrow-size-large, $-cell-icon-size) !default; // cell 类型的大尺寸 右侧icon尺寸
+
+$-picker-region-color: var(--wot-picker-region-color, rgba(0, 0, 0, 0.45)) !default; // 区域选择文字颜色
+$-picker-region-bg-active-color: var(--wot-picker-region-bg-active-color, $-color-theme) !default; // 区域选择激活选中背景颜色
+
+$-picker-region-fs: var(--wot-picker-region-fs, 14px) !default; // 区域选择文字字号 (14px)
+
+/* col-picker */
+$-col-picker-selected-height: var(--wot-col-picker-selected-height, 44px) !default; // 弹框顶部值高度 (44px)
+$-col-picker-selected-padding: var(--wot-col-picker-selected-padding, 0 16px) !default; // 弹框顶部值左右间距 (0 16px)
+$-col-picker-selected-fs: var(--wot-col-picker-selected-fs, 14px) !default; // 弹框顶部值字号 (14px)
+$-col-picker-selected-color: var(--wot-col-picker-selected-color, rgba(0, 0, 0, 0.85)) !default; // 弹框顶部值文字颜色 (rgba(0, 0, 0, 0.85))
+$-col-picker-selected-fw: var(--wot-col-picker-selected-fw, 700) !default; // 弹框顶部值高亮字重 (700)
+$-col-picker-line-width: var(--wot-col-picker-line-width, 16px) !default; // 弹框顶部值高亮线条宽度 (16px)
+$-col-picker-line-height: var(--wot-col-picker-line-height, 3px) !default; // 弹框顶部值高亮线条高度 (3px)
+$-col-picker-line-color: var(--wot-col-picker-line-color, linear-gradient(315deg, rgba(81, 124, 240, 1), rgba(118, 158, 245, 1))) !default; // 弹框顶部值高亮线条颜色
+$-col-picker-line-box-shadow: var(--wot-col-picker-line-box-shadow, 0px 1px 2px 0px rgba(1, 87, 255, 0.2)) !default; // 弹框顶部值高亮线条阴影 (0px 1px 2px 0px rgba(1, 87, 255, 0.2))
+$-col-picker-list-height: var(--wot-col-picker-list-height, 53vh) !default; // 弹框列表高度 (53vh)
+$-col-picker-list-padding-bottom: var(--wot-col-picker-list-padding-bottom, 30px) !default; // 弹框列表底部间距 (30px)
+$-col-picker-list-color: var(--wot-col-picker-list-color, rgba(0, 0, 0, 0.85)) !default; // 弹框列表文字颜色 (rgba(0, 0, 0, 0.85))
+$-col-picker-list-color-disabled: var(--wot-col-picker-list-color-disabled, rgba(0, 0, 0, 0.15)) !default; // 弹框列表文字禁用颜色
+$-col-picker-list-color-tip: var(--wot-col-picker-list-color-tip, rgba(0, 0, 0, 0.45)) !default; // 弹框列表提示文字颜色 (rgba(0, 0, 0, 0.45))
+$-col-picker-list-fs: var(--wot-col-picker-list-fs, 14px) !default; // 弹框列表文字字号 (14px)
+$-col-picker-list-fs-tip: var(--wot-col-picker-list-fs-tip, 12px) !default; // 弹框列表提示文字字号 (12px)
+$-col-picker-list-item-padding: var(--wot-col-picker-list-item-padding, 12px 15px) !default; // 弹框列表选项间距 (12px 15px)
+$-col-picker-list-checked-icon-size: var(--wot-col-picker-list-checked-icon-size, 18px) !default; // 弹框列表选中箭头大小 (18px)
+$-col-picker-list-color-checked: var(--wot-col-picker-list-color-checked, $-color-theme) !default; // 弹框列表选中选项颜色 ($-color-theme)
+
+/* overlay */
+$-overlay-bg: var(--wot-overlay-bg, rgba(0, 0, 0, 0.65)) !default;
+$-overlay-bg-dark: var(--wot-overlay-bg-dark, rgba(0, 0, 0, 0.75)) !default;
+
+/* popup */
+$-popup-close-size: var(--wot-popup-close-size, 24px) !default; // 关闭按钮尺寸 (24px)
+$-popup-close-color: var(--wot-popup-close-color, #666) !default; // 关闭按钮颜色 (666)
+
+/* progress */
+$-progress-padding: var(--wot-progress-padding, 9px 0 8px) !default; // 进度条内边距 (9px 0 8px)
+$-progress-bg: var(--wot-progress-bg, rgba(229, 229, 229, 1)) !default; // 进度条底色 (rgba(229, 229, 229, 1))
+$-progress-danger-color: var(--wot-progress-danger-color, $-color-danger) !default; // 进度条danger颜色
+$-progress-success-color: var(--wot-progress-success-color, $-color-success) !default; // 进度条success进度条颜色
+$-progress-warning-color: var(--wot-progress-warning-color, $-color-warning) !default; // 进度条warning进度条颜色
+
+$-progress-color: var(--wot-progress-color, $-color-theme) !default; // 进度条颜色 ($-color-theme)
+$-progress-height: var(--wot-progress-height, 3px) !default; // 进度条高度 (3px)
+$-progress-label-color: var(--wot-progress-label-color, #333) !default; // 文字颜色 (333)
+$-progress-label-fs: var(--wot-progress-label-fs, 14px) !default; // 文字字号 (14px)
+$-progress-icon-fs: var(--wot-progress-icon-fs, 18px) !default; // 图标字号 (18px)
+
+/* radio */
+$-radio-margin: var(--wot-radio-margin, $-checkbox-margin) !default; // 多个单选框距离
+$-radio-label-margin: var(--wot-radio-label-margin, $-checkbox-label-margin) !default; // 右侧文字与左侧图标距离 (12px)
+$-radio-size: var(--wot-radio-size, 16px) !default; // 左侧图标尺寸 (16px)
+$-radio-bg: var(--wot-radio-bg, $-color-white) !default; // 左侧图标尺寸 (rgba(255, 255, 255, 1))
+$-radio-label-fs: var(--wot-radio-label-fs, $-checkbox-label-fs) !default; // 右侧文字字号 (14px)
+$-radio-label-color: var(--wot-radio-label-color, $-checkbox-label-color) !default; // 右侧文字颜色 (rgba(0, 0, 0, 0.85))
+$-radio-checked-color: var(--wot-radio-checked-color, $-checkbox-checked-color) !default; // 选中颜色
+$-radio-disabled-color: var(--wot-radio-disabled-color, $-checkbox-disabled-color) !default; // 禁用颜色
+$-radio-disabled-label-color: var(--wot-radio-disabled-label-color, $-checkbox-disabled-label-color) !default; // 禁用文字颜色
+
+$-radio-large-size: var(--wot-radio-large-size, $-checkbox-large-size) !default; // 左侧图标尺寸 (24px)
+$-radio-large-label-fs: var(--wot-radio-large-label-fs, $-checkbox-large-label-fs) !default; // 右侧文字字号 (16px)
+
+$-radio-button-height: var(--wot-radio-button-height, $-checkbox-button-height) !default; // 按钮模式复选框高 (40px)
+$-radio-button-min-width: var(--wot-radio-button-min-width, 60px) !default; // 按钮模式最小宽 (60px)
+$-radio-button-max-width: var(--wot-radio-button-max-width, 144px) !default; // 按钮模式最大宽 (144px)
+$-radio-button-radius: var(--wot-radio-button-radius, $-checkbox-button-radius) !default; // 按钮圆角大小 (15px)
+$-radio-button-bg: var(--wot-radio-button-bg, $-checkbox-button-bg) !default; // 按钮模式背景颜色 (rgba(255, 255, 255, 1))
+$-radio-button-fs: var(--wot-radio-button-fs, $-checkbox-button-font-size) !default; // 按钮模式字号 (14px)
+$-radio-button-border: var(--wot-radio-button-border, $-checkbox-button-border) !default; // 按钮边框颜色 (rgba(0, 0, 0, 0.2))
+$-radio-button-disabled-border: var(--wot-radio-button-disabled-border, $-checkbox-button-disabled-border) !default; // 按钮禁用边框颜色
+
+$-radio-dot-size: var(--wot-radio-dot-size, 8px) !default; // 单选dot模式圆点尺寸 (8px)
+$-radio-dot-large-size: var(--wot-radio-dot-large-size, 10px) !default; // 单选dot模式大尺寸圆点尺寸 (10px)
+$-radio-dot-checked-bg: var(--wot-radio-dot-checked-bg, $-color-theme) !default; // 单选dot模式选中背景色 ($-color-theme)
+$-radio-dot-checked-border-color: var(--wot-radio-dot-checked-border-color, $-color-theme) !default; // 单选dot模式选中边框色 ($-color-theme)
+$-radio-dot-border-color: var(--wot-radio-dot-border-color, #dcdcdc) !default; // 单选dot模式边框色
+$-radio-dot-disabled-border: var(--wot-radio-dot-disabled-border, #d9d9d9) !default; // 单选dot模式禁用边框颜色
+$-radio-dot-disabled-bg: var(--wot-radio-dot-disabled-bg, #d9d9d9) !default; // 单选dot模式禁用背景颜色
+
+/* search */
+$-search-side-padding: var(--wot-search-side-padding, $-size-side-padding) !default; // 左右间距 (12px)
+$-search-padding: var(--wot-search-padding, 10px 0 10px $-search-side-padding) !default; // 不包含取消按钮的间距 (10px 0 10px 12px)
+$-search-input-radius: var(--wot-search-input-radius, 15px) !default; // 输入框圆角大小 (15px)
+$-search-input-bg: var(--wot-search-input-bg, $-color-bg) !default; // 输入框背景色 (rgba(247, 247, 247, 1))
+$-search-input-height: var(--wot-search-input-height, 30px) !default; // 输入框高度 (30px)
+$-search-input-padding: var(--wot-search-input-padding, 0 32px 0 42px) !default; // 输入框间距 (0 32px 0 42px)
+$-search-input-fs: var(--wot-search-input-fs, $-fs-content) !default; // 输入框字号 (14px)
+$-search-input-color: var(--wot-search-input-color, #262626) !default; // 输入框文字颜色 (262626)
+$-search-icon-color: var(--wot-search-icon-color, $-color-icon) !default; // 图标颜色 ($-color-icon)
+$-search-icon-size: var(--wot-search-icon-size, 18px) !default; // 图标大小 (18px)
+$-search-clear-icon-size: var(--wot-search-clear-icon-size, $-fs-title) !default; // 清除图标大小 (16px)
+$-search-placeholder-color: var(--wot-search-placeholder-color, #bfbfbf) !default; // placeholder 颜色 (bfbfbf)
+$-search-cancel-padding: var(--wot-search-cancel-padding, 0 $-search-side-padding 0 10px) !default; // 取消按钮间距 (0 12px 0 10px)
+$-search-cancel-fs: var(--wot-search-cancel-fs, $-fs-title) !default; // 取消按钮字号 (16px)
+$-search-cancel-color: var(--wot-search-cancel-color, rgba(0, 0, 0, 0.65)) !default; // 取消按钮颜色 (rgba(0, 0, 0, 0.65))
+$-search-light-bg: var(--wot-search-light-bg, $-color-bg) !default; // light 类型的容器背景色 (rgba(247, 247, 247, 1))
+
+/* slider */
+$-slider-fs: var(--wot-slider-fs, $-fs-content) !default; // 字体大小 (14px)
+$-slider-handle-radius: var(--wot-slider-handle-radius, 12px) !default; // 滑块半径 (12px)
+$-slider-handle-bg: var(--wot-slider-handle-bg, resultColor(139deg, $-color-theme, 'dark' 'light', #ffffff #f7f7f7, 0% 100%)) !default; // 滑块背景 (rgba(255, 255, 255, 1))
+$-slider-axie-height: var(--wot-slider-axie-height, 3px) !default; // 滑轴高度 (3px)
+$-slider-color: var(--wot-slider-color, #333) !default; // 字体颜色 (333)
+$-slider-axie-bg: var(--wot-slider-axie-bg, #e5e5e5) !default; // 滑轴的默认背景色 (e5e5e5)
+$-slider-line-color: var(
+  --wot-slider-line-color,
+  resultColor(315deg, $-color-theme, 'dark' 'light', #517cf0 #769ef5, 0% 100%)
+) !default; // 进度条颜色
+$-slider-disabled-color: var(--wot-slider-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 禁用状态下字体颜色
+
+/* sort-button */
+$-sort-button-fs: var(--wot-sort-button-fs, $-fs-content) !default; // 字号 (14px)
+$-sort-button-color: var(--wot-sort-button-color, $-color-content) !default; // 颜色 ($-color-content)
+$-sort-button-height: var(--wot-sort-button-height, 48px) !default; // 高度 (48px)
+$-sort-button-line-height: var(--wot-sort-button-line-height, 3px) !default; // 下划线高度 (3px)
+$-sort-button-line-color: var(--wot-sort-button-line-color, $-color-theme) !default; // 下划线颜色 ($-color-theme)
+
+/* steps */
+$-steps-icon-size: var(--wot-steps-icon-size, 22px) !default; // 图标尺寸 (22px)
+$-steps-inactive-color: var(--wot-steps-inactive-color, rgba(0, 0, 0, 0.25)) !default; // 等待状态文字颜色
+$-steps-finished-color: var(--wot-steps-finished-color, $-color-theme) !default; // 完成文字颜色
+$-steps-icon-text-fs: var(--wot-steps-icon-text-fs, $-fs-content) !default; // 数字图标文字字号 (14px)
+$-steps-error-color: var(--wot-steps-error-color, $-color-danger) !default; // 异常颜色 ($-color-danger)
+$-steps-title-fs: var(--wot-steps-title-fs, $-fs-content) !default; // 标题字号 (14px)
+$-steps-title-fw: var(--wot-steps-title-fw, $-fw-medium) !default; // 标题字重 ($-fw-medium)
+$-steps-label-fs: var(--wot-steps-label-fs, $-fs-secondary) !default; // 描述信息字号 (12px)
+$-steps-description-color: var(--wot-steps-description-color, rgba(0, 0, 0, 0.45)) !default; // 描述信息颜色 (rgba(0, 0, 0, 0.45))
+$-steps-is-icon-width: var(--wot-steps-is-icon-width, 30px) !default; // 自定义图标的宽度，给左右留白 (30px)
+$-steps-line-color: var(--wot-steps-line-color, rgba(0, 0, 0, 0.15)) !default; // 线条颜色 (rgba(0, 0, 0, 0.15))
+$-steps-dot-size: var(--wot-steps-dot-size, 7px) !default; // 点状大小 (7px)
+$-steps-dot-active-size: var(--wot-steps-dot-active-size, 9px) !default; // 点状高亮大小 (9px)
+
+/* switch */
+$-switch-size: var(--wot-switch-size, 28px) !default; // switch大小 (28px)
+$-switch-width: var(--wot-switch-width, calc(1.8em + 4px)) !default; // 宽度 (calc(1.8em + 4px))
+$-switch-height: var(--wot-switch-height, calc(1em + 4px)) !default; // 高度 (calc(1em + 4px))
+$-switch-circle-size: var(--wot-switch-circle-size, 1em) !default; // 圆点大小 (1em)
+$-switch-border-color: var(--wot-switch-border-color, #e5e5e5) !default; // 边框颜色选中状态背景颜色
+$-switch-active-color: var(--wot-switch-active-color, $-color-theme) !default; // 选中状态背景 ($-color-theme)
+$-switch-active-shadow-color: var(--wot-switch-active-shadow-color, rgba(0, 83, 162, 0.5)) !default; // 选中状态shadow颜色
+$-switch-inactive-color: var(--wot-switch-inactive-color, #eaeaea) !default; // 非选中背景颜色
+$-switch-inactive-shadow-color: var(--wot-switch-inactive-shadow-color, rgba(155, 155, 155, 0.5)) !default; // 非选中状态shadow颜色
+
+/* tabs */
+$-tabs-nav-arrow-fs: var(--wot-tabs-nav-arrow-fs, 18px) !default; // 全部Icon字号 (18px)
+$-tabs-nav-arrow-open-fs: var(--wot-tabs-nav-arrow-open-fs, 14px) !default; // 展开Icon字号 (14px)
+$-tabs-nav-width: var(--wot-tabs-nav-width, 100vw) !default; // tabs 头部切换宽度 (100vw)
+$-tabs-nav-height: var(--wot-tabs-nav-height, 42px) !default; // 头部切换高度 (42px)
+$-tabs-nav-fs: var(--wot-tabs-nav-fs, $-fs-content) !default; // 头部切换文字大小 (14px)
+$-tabs-nav-color: var(--wot-tabs-nav-color, rgba(0, 0, 0, 0.85)) !default; // 头部切换文字颜色 (rgba(0, 0, 0, 0.85))
+$-tabs-nav-bg: var(--wot-tabs-nav-bg, $-color-white) !default; // 背景颜色 ($-color-white)
+$-tabs-nav-active-color: var(--wot-tabs-nav-active-color, $-color-theme) !default; // 头部高亮颜色 ($-color-theme)
+$-tabs-nav-disabled-color: var(--wot-tabs-nav-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 头部禁用颜色 (rgba(0, 0, 0, 0.25))
+$-tabs-nav-line-height: var(--wot-tabs-nav-line-height, 3px) !default; // 高亮边框高度 (3px)
+$-tabs-nav-line-width: var(--wot-tabs-nav-line-width, 19px) !default; // 高亮边框宽度 (19px)
+$-tabs-nav-line-bg-color: var(--wot-tabs-nav-line-bg-color, $-color-theme) !default; // 底部条颜色 ($-color-theme)
+$-tabs-nav-map-fs: var(--wot-tabs-nav-map-fs, $-fs-content) !default; // map 类型按钮字号 (14px)
+$-tabs-nav-map-color: var(--wot-tabs-nav-map-color, rgba(0, 0, 0, 0.85)) !default; // map 类型按钮文字颜色
+$-tabs-nav-map-arrow-color: var(--wot-tabs-nav-map-arrow-color, rgba(0, 0, 0, 0.65)) !default; // map 类型箭头颜色
+$-tabs-nav-map-btn-before-bg: var(
+  --wot-tabs-nav-map-btn-before-bg,
+  linear-gradient(270deg, rgba(255, 255, 255, 1) 1%, rgba(255, 255, 255, 0) 100%)
+) !default; // 左侧map遮罩阴影
+$-tabs-nav-map-button-back-color: var(--wot-tabs-nav-map-button-back-color, rgba(0, 0, 0, 0.04)) !default; // map 类型按钮边框颜色
+$-tabs-nav-map-button-radius: var(--wot-tabs-nav-map-button-radius, 16px) !default; // map 类型按钮圆角大小 (16px)
+$-tabs-nav-map-modal-bg: var(--wot-tabs-nav-map-modal-bg, $-overlay-bg) !default; // map 类型蒙层背景色
+
+/* tag */
+$-tag-fs: var(--wot-tag-fs, $-fs-secondary) !default; // 字号 (12px)
+$-tag-color: var(--wot-tag-color, $-color-white) !default; // 字体颜色
+$-tag-small-fs: var(--wot-tag-small-fs, $-fs-aid) !default; // 小尺寸字号 (10px)
+$-tag-info-color: var(--wot-tag-info-color, #585858) !default; // info 颜色
+$-tag-primary-color: var(--wot-tag-primary-color, $-color-theme) !default; // 主颜色
+$-tag-danger-color: var(--wot-tag-danger-color, $-color-danger) !default; // danger 颜色
+$-tag-warning-color: var(--wot-tag-warning-color, $-color-warning) !default; // warning 颜色
+$-tag-success-color: var(--wot-tag-success-color, $-color-success) !default; // success 颜色
+$-tag-info-bg: var(--wot-tag-info-bg, resultColor(49deg, $-color-black, 'dark' 'light', #808080 #999999, 0% 100%)) !default; // info 背景颜色
+$-tag-primary-bg: var(--wot-tag-primary-bg, $-color-theme) !default; // 主背景颜色
+$-tag-danger-bg: var(--wot-tag-danger-bg, $-color-danger) !default; // danger 背景颜色
+$-tag-warning-bg: var(--wot-tag-warning-bg, $-color-warning) !default; // warning 背景颜色
+$-tag-success-bg: var(--wot-tag-success-bg, $-color-success) !default; // success 背景颜色
+$-tag-round-color: var(--wot-tag-round-color, rgba(102, 102, 102, 1)) !default; // round 字体颜色
+$-tag-round-border-color: var(--wot-tag-round-border-color, rgba(225, 225, 225, 1)) !default; // round 边框颜色 (rgba(225, 225, 225, 1))
+$-tag-round-radius: var(--wot-tag-round-radius, 12px) !default; // round 圆角大小 (12px)
+$-tag-mark-radius: var(--wot-tag-mark-radius, 6px 2px 6px 2px) !default; // mark 圆角大小 (6px 2px 6px 2px)
+$-tag-close-size: var(--wot-tag-close-size, 14px) !default; // 关闭按钮字号 (14px)
+$-tag-close-color: var(--wot-tag-close-color, $-tag-info-color) !default; // 关闭按钮颜色
+$-tag-close-active-color: var(--wot-tag-close-active-color, rgba(0, 0, 0, 0.45)) !default; // 关闭按钮 active 颜色
+
+/* toast */
+$-toast-color: var(--wot-toast-color, $-color-white) !default; // 文字颜色
+$-toast-padding: var(--wot-toast-padding, 16px 24px) !default; // padding (16px 24px)
+$-toast-max-width: var(--wot-toast-max-width, 300px) !default; // 最大宽度 (300px)
+$-toast-radius: var(--wot-toast-radius, 8px) !default; // 圆角大小 (8px)
+$-toast-bg: var(--wot-toast-bg, $-overlay-bg) !default; // 背景色 ($-overlay-bg)
+$-toast-fs: var(--wot-toast-fs, $-fs-content) !default; // 字号 (14px)
+$-toast-line-height: var(--wot-toast-line-height, 20px) !default; // 行高 (20px)
+$-toast-with-icon-min-width: var(--wot-toast-with-icon-min-width, 150px) !default; // 有图标的情况下最小宽度 (150px)
+$-toast-icon-size: var(--wot-toast-icon-size, 32px) !default; // 图标大小 (32px)
+$-toast-msg-margin-left: var(--wot-toast-msg-margin-left, 12px) !default; // 消息内容左边距 (12px)
+$-toast-icon-margin-bottom: var(--wot-toast-icon-margin-bottom, 12px) !default; // 图标下边距 (12px)
+$-toast-loading-padding: var(--wot-toast-loading-padding, 10px) !default; // loading状态下的padding (10px)
+$-toast-loading-margin-bottom: var(--wot-toast-loading-margin-bottom, 16px) !default; // loading动画的margin-bottom (16px)
+$-toast-box-shadow: var(--wot-toast-box-shadow, 0px 6px 16px 0px rgba(0, 0, 0, 0.08)) !default; // 外部阴影
+
+/* loading */
+$-loading-size: var(--wot-loading-size, 32px) !default; // loading 大小 (32px)
+
+/* tooltip */
+$-tooltip-bg: var(--wot-tooltip-bg, rgba(38, 39, 40, 0.8)) !default; // 背景色
+$-tooltip-color: var(--wot-tooltip-color, $-color-white) !default; // 文字颜色
+$-tooltip-radius: var(--wot-tooltip-radius, 8px) !default; // 圆角大小 (8px)
+$-tooltip-arrow-size: var(--wot-tooltip-arrow-size, 5px) !default; // 箭头大小 (5px)
+$-tooltip-fs: var(--wot-tooltip-fs, $-fs-content) !default; // 字号 (14px)
+$-tooltip-blur: var(--wot-tooltip-blur, 10px) !default; // 背景高斯模糊效果 (10px)
+$-tooltip-padding: var(--wot-tooltip-padding, 9px 20px) !default; // 间距 (9px 20px)
+$-tooltip-close-size: var(--wot-tooltip-close-size, 6px) !default; // 关闭按钮大小 (6px)
+$-tooltip-z-index: var(--wot-tooltip-z-index, 500) !default; // z-index (500)
+$-tooltip-line-height: var(--wot-tooltip-line-height, 18px) !default; // 行高 (18px)
+
+/* popover */
+$-popover-bg: var(--wot-popover-bg, $-color-white) !default; // 背景色
+$-popover-color: var(--wot-popover-color, rgba(0, 0, 0, 0.85)) !default; // 文字颜色
+$-popover-box-shadow: var(--wot-popover-box-shadow, 0px 2px 10px 0px rgba(0, 0, 0, 0.1)) !default; // 阴影颜色 (0px 2px 10px 0px rgba(0, 0, 0, 0.1))
+$-popover-arrow-box-shadow: var(--wot-popover-arrow-box-shadow, 0px 2px 10px 0px rgba(0, 0, 0, 0.2)) !default; // 阴影颜色 (0px 2px 10px 0px rgba(0, 0, 0, 0.2))
+$-popover-border-color: var(--wot-popover-border-color, rgba(0, 0, 0, 0.09)) !default; // 边框颜色 (rgba(0, 0, 0, 0.09))
+$-popover-radius: var(--wot-popover-radius, 4px) !default; // 圆角大小 (4px)
+$-popover-arrow-size: var(--wot-popover-arrow-size, 6px) !default; // 箭头大小 (6px)
+$-popover-fs: var(--wot-popover-fs, $-fs-content) !default; // 字号 (14px)
+$-popover-padding: var(--wot-popover-padding, 15px) !default; // 间距 (15px)
+$-popover-line-height: var(--wot-popover-line-height, 18px) !default; // 行高 (18px)
+$-popover-z-index: var(--wot-popover-z-index, $-tooltip-z-index) !default; // z-index (500)
+
+/* grid-item */
+$-grid-item-fs: var(--wot-grid-item-fs, 12px) !default; // 字号 (12px)
+$-grid-item-bg: var(--wot-grid-item-bg, $-color-white) !default; // 背景色 ($-color-white)
+$-grid-item-padding: var(--wot-grid-item-padding, 14px 0px) !default; // 内容的 padding (14px 0px)
+$-grid-item-border-color: var(--wot-grid-item-border-color, $-color-border-light) !default; // 边框颜色 (rgba(0, 0, 0, 0.09))
+$-grid-item-hover-bg: var(--wot-grid-item-hover-bg, $-color-gray-3) !default; // hover背景色 ($-color-gray-3)
+$-grid-item-hover-bg-dark: var(--wot-grid-item-hover-bg-dark, $-color-gray-7) !default; // 暗黑模式hover背景色 ($-color-gray-7)
+
+/* statustip */
+$-statustip-fs: var(--wot-statustip-fs, $-fs-content) !default; // 字号 (14px)
+$-statustip-color: var(--wot-statustip-color, rgba(0, 0, 0, 0.45)) !default; // 文字颜色 (rgba(0, 0, 0, 0.45))
+$-statustip-line-height: var(--wot-statustip-line-height, 16px) !default; // 文字行高 (16px)
+$-statustip-padding: var(--wot-statustip-padding, 5px 10px) !default; // 间距 (5px 10px)
+
+/* card */
+$-card-bg: var(--wot-card-bg, $-color-white) !default; // 背景色 ($-color-white)
+$-card-fs: var(--wot-card-fs, $-fs-content) !default; // 卡片字号 (14px)
+$-card-padding: var(--wot-card-padding, 0 $-size-side-padding) !default; // 内边距 (0 16px)
+$-card-footer-padding: var(--wot-card-footer-padding, 12px 0 16px) !default; // 底部内边距 (12px 0 16px)
+$-card-shadow-color: var(--wot-card-shadow-color, 0px 4px 8px 0px rgba(0, 0, 0, 0.02)) !default; // 阴影 (0px 4px 8px 0px rgba(0, 0, 0, 0.02))
+$-card-radius: var(--wot-card-radius, 8px) !default; // 圆角大小 (8px)
+$-card-line-height: var(--wot-card-line-height, 1.1) !default; // 行高 (1.1)
+$-card-margin: var(--wot-card-margin, 0 $-size-side-padding) !default; // 外边距 (0 16px)
+$-card-title-color: var(--wot-card-title-color, rgba(0, 0, 0, 0.85)) !default; // 标题颜色 (rgba(0, 0, 0, 0.85))
+$-card-title-fs: var(--wot-card-title-fs, $-fs-title) !default; //  矩形卡片标题字号 (20px)
+$-card-content-border-color: var(--wot-card-content-border-color, rgba(0, 0, 0, 0.09)) !default; // 内容边框 (rgba(0, 0, 0, 0.09))
+$-card-rectangle-title-padding: var(--wot-card-rectangle-title-padding, 15px 15px 12px) !default; // 矩形卡片头部内边距 (15px 15px 12px)
+$-card-rectangle-content-padding: var(--wot-card-rectangle-content-padding, 16px 0) !default; // 矩形卡片内容内边距 (16px 0)
+$-card-rectangle-footer-padding: var(--wot-card-rectangle-footer-padding, 12px 0) !default; // 矩形卡片底部内边距 (12px 0)
+$-card-content-color: var(--wot-card-content-color, rgba(0, 0, 0, 0.45)) !default; // 文本内容颜色 (rgba(0, 0, 0, 0.45))
+$-card-content-line-height: var(--wot-card-content-line-height, 1.428) !default; // 文本内容行高 (1.428)
+$-card-content-margin: var(--wot-card-content-margin, 13px 0 12px) !default; // 内容外边距 (13px 0 12px)
+$-card-content-rectangle-margin: var(--wot-card-content-rectangle-margin, 14px 0 12px) !default; // 矩形卡片内容外边距 (14px 0 12px)
+
+/* upload */
+$-upload-size: var(--wot-upload-size, 80px) !default; // upload的外边框默认尺寸 (80px)
+$-upload-evoke-icon-size: var(--wot-upload-evoke-icon-size, 32px) !default; // 唤起项的图标大小 (32px)
+$-upload-evoke-bg: var(--wot-upload-evoke-bg, rgba(0, 0, 0, 0.04)) !default; // 唤起项的背景色 (rgba(0, 0, 0, 0.04))
+$-upload-evoke-color: var(--wot-upload-evoke-color, rgba(0, 0, 0, 0.25)) !default; // 唤起项的图标颜色 (rgba(0, 0, 0, 0.25))
+$-upload-evoke-disabled-color: var(--wot-upload-evoke-disabled-color, rgba(0, 0, 0, 0.09)) !default; // 唤起项禁用颜色 (rgba(0, 0, 0, 0.09))
+$-upload-close-icon-size: var(--wot-upload-close-icon-size, 16px) !default; // 移除按钮尺寸 (16px)
+$-upload-close-icon-color: var(--wot-upload-close-icon-color, rgba(0, 0, 0, 0.65)) !default; // 移除按钮颜色 (rgba(0, 0, 0, 0.65))
+$-upload-progress-fs: var(--wot-upload-progress-fs, 14px) !default; // 进度文字字号 (14px)
+$-upload-file-fs: var(--wot-upload-file-fs, 12px) !default; // 文件名字号 (12px)
+$-upload-file-color: var(--wot-upload-file-color, $-color-secondary) !default; // 文件名字颜色 ($-color-secondary)
+$-upload-preview-name-fs: var(--wot-upload-preview-name-fs, 12px) !default; // 预览图片名字号 (12px)
+$-upload-preview-icon-size: var(--wot-upload-preview-icon-size, 24px) !default; // 预览内部图标尺寸 (24px)
+$-upload-preview-name-bg: var(--wot-upload-preview-name-bg, rgba(0, 0, 0, 0.6)) !default; // 预览文件名背景色 (rgba(0, 0, 0, 0.6))
+$-upload-preview-name-height: var(--wot-upload-preview-name-height, 22px) !default; // 预览文件名背景高度 (22px)
+$-upload-cover-icon-size: var(--wot-upload-cover-icon-size, 22px) !default; // 视频/文件图标尺寸 (22px)
+
+/* curtain */
+$-curtain-content-radius: var(--wot-curtain-content-radius, 24px) !default; // 内容圆角 (24px)
+$-curtain-content-close-color: var(--wot-curtain-content-close-color, $-color-white) !default; // 关闭按钮颜色 ($-color-white)
+$-curtain-content-close-fs: var(--wot-curtain-content-close-fs, $-fs-big) !default; // 关闭按钮大小 ($-fs-big)
+
+/* notify */
+$-notify-text-color: var(--wot-notify-text-color, $-color-white) !default; // 通知文字颜色 ($-color-white)
+$-notify-padding: var(--wot-notify-padding, 8px 16px) !default; // 通知内边距 (8px 16px)
+$-notify-font-size: var(--wot-notify-font-size, $-fs-content) !default; // 通知字号 (14px)
+$-notify-line-height: var(--wot-notify-line-height, 20px) !default; // 通知行高 (20px)
+$-notify-primary-background: var(--wot-notify-primary-background, $-color-theme) !default; // 通知主要背景颜色 ($-color-theme)
+$-notify-success-background: var(--wot-notify-success-background, $-color-success) !default; // 通知成功背景颜色 ($-color-success)
+$-notify-danger-background: var(--wot-notify-danger-background, $-color-danger) !default; // 通知危险背景颜色 ($-color-danger)
+$-notify-warning-background: var(--wot-notify-warning-background, $-color-warning) !default; // 通知警告背景颜色 ($-color-warning)
+
+/* skeleton */
+$-skeleton-background-color: var(--wot-skeleton-background-color, #eee) !default; // 骨架屏背景颜色 (#eee)
+$-skeleton-animation-gradient: var(--wot-skeleton-animation-gradient, rgba(0, 0, 0, 0.04)) !default; // 骨架屏动画渐变 (rgba(0, 0, 0, 0.04))
+$-skeleton-animation-flashed: var(--wot-skeleton-animation-flashed, rgba(230, 230, 230, 0.3)) !default; // 骨架屏动画闪烁 (rgba(230, 230, 230, 0.3))
+$-skeleton-text-height-default: var(--wot-skeleton-text-height-default, 16px) !default; // 骨架屏文本高度 (16px)
+$-skeleton-rect-height-default: var(--wot-skeleton-rect-height-default, 16px) !default; // 骨架屏矩形高度 (16px)
+$-skeleton-circle-height-default: var(--wot-skeleton-circle-height-default, 48px) !default; // 骨架屏圆形高度 (48px)
+$-skeleton-row-margin-bottom: var(--wot-skeleton-row-margin-bottom, 16px) !default; // 骨架屏行间距 (16px)
+$-skeleton-border-radius-text: var(--wot-skeleton-border-radius-text, 2px) !default; // 骨架屏文本圆角 (2px)
+$-skeleton-border-radius-rect: var(--wot-skeleton-border-radius-rect, 4px) !default; // 骨架屏矩形圆角 (4px)
+$-skeleton-border-radius-circle: var(--wot-skeleton-border-radius-circle, 50%) !default; // 骨架屏圆形圆角 (50%)
+
+/* circle */
+$-circle-text-color: var(--wot-circle-text-color, $-color-content) !default; // circle文字颜色 ($-color-content)
+
+/* swiper */
+$-swiper-radius: var(--wot-swiper-radius, 8px) !default; // swiper圆角 (8px)
+$-swiper-item-padding: var(--wot-swiper-item-padding, 0) !default; // swiper项内边距 (0)
+$-swiper-item-text-color: var(--wot-swiper-item-text-color, #ffffff) !default; // swiper项文字颜色 (#ffffff)
+$-swiper-item-text-fs: var(--wot-swiper-item-text-fs, $-fs-title) !default; // swiper项文字字号 ($-fs-title)
+
+/* swiper-nav */
+// dot & dots-bar
+$-swiper-nav-dot-color: var(--wot-swiper-nav-dot-color, $-font-white-2) !default; // swiper导航点颜色 ($-font-white-2)
+$-swiper-nav-dot-active-color: var(--wot-swiper-nav-dot-active-color, $-font-white-1) !default; // swiper导航点激活颜色 ($-font-white-1)
+$-swiper-nav-dot-size: var(--wot-swiper-nav-dot-size, 12rpx) !default; // swiper导航点大小 (12rpx)
+$-swiper-nav-dots-bar-active-width: var(--wot-swiper-nav-dots-bar-active-width, 40rpx) !default; // swiper导航条激活宽度 (40rpx)
+// fraction
+$-swiper-nav-fraction-color: var(--wot-swiper-nav-fraction-color, $-font-white-1) !default; // swiper导航项文字颜色 ($-font-white-1)
+$-swiper-nav-fraction-bg-color: var(--wot-swiper-nav-fraction-bg-color, $-font-gray-3) !default; // swiper导航项背景颜色 ($-font-gray-3)
+$-swiper-nav-fraction-height: var(--wot-swiper-nav-fraction-height, 48rpx) !default; // swiper导航项高度 (48rpx)
+$-swiper-nav-fraction-font-size: var(--wot-swiper-nav-fraction-font-size, 24rpx) !default; // swiper导航项文字大小 (24rpx)
+// button
+$-swiper-nav-btn-color: var(--wot-swiper-nav-btn-color, $-font-white-1) !default; // swiper导航按钮文字颜色 ($-font-white-1)
+$-swiper-nav-btn-bg-color: var(--wot-swiper-nav-btn-bg-color, $-font-gray-3) !default; // swiper导航按钮背景颜色 ($-font-gray-3)
+$-swiper-nav-btn-size: var(--wot-swiper-nav-btn-size, 48rpx) !default; // swiper导航按钮大小 (48rpx)
+
+/* segmented */
+$-segmented-padding: var(--wot-segmented-padding, 4px) !default; // 分段器padding (4px)
+$-segmented-item-bg-color: var(--wot-segmented-item-bg-color, #eeeeee) !default; // 分段器项背景颜色 (#eeeeee)
+$-segmented-item-color: var(--wot-segmented-item-color, rgba(0, 0, 0, 0.85)) !default; // 标题文字颜色 (rgba(0, 0, 0, 0.85))
+$-segmented-item-acitve-bg: var(--wot-segmented-item-acitve-bg, #ffffff) !default; // 标题文字颜色 (#ffffff)
+$-segmented-item-disabled-color: var(--wot-segmented-item-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 标题文字禁用颜色
+
+/* tabbar */
+$-tabbar-height: var(--wot-tabbar-height, 50px) !default; // tabbar高度 (50px)
+$-tabbar-box-shadow: var(
+  --wot-tabbar-box-shadow,
+  0 6px 30px 5px rgba(0, 0, 0, 0.05),
+  0 16px 24px 2px rgba(0, 0, 0, 0.04),
+  0 8px 10px -5px rgba(0, 0, 0, 0.08)
+) !default; // round类型tabbar阴影
+
+/* tabbar-item */
+$-tabbar-item-title-font-size: var(--wot-tabbar-item-title-font-size, 10px) !default; // tabbar选项文字大小 (10px)
+$-tabbar-item-title-line-height: var(--wot-tabbar-item-title-line-height, initial) !default; // tabbar选项标题文字行高
+$-tabbar-inactive-color: var(--wot-tabbar-inactive-color, $-color-title) !default; // 标题文字和图标颜色
+$-tabbar-active-color: var(--wot-tabbar-active-color, $-color-theme) !default; // 选中文字和图标颜色 ($-color-theme)
+$-tabbar-item-icon-size: var(--wot-tabbar-item-icon-size, 20px) !default; // tabbar选项图标大小 (20px)
+
+/* navbar */
+$-navbar-height: var(--wot-navbar-height, 44px) !default; // navbar高度 (44px)
+$-navbar-color: var(--wot-navbar-color, $-font-gray-1) !default; // navbar字体颜色 ($-font-gray-1)
+$-navbar-background: var(--wot-navbar-background, $-color-white) !default; // navbar背景颜色 ($-color-white)
+$-navbar-arrow-size: var(--wot-navbar-arrow-size, 24px) !default; // navbar左箭头图标大小 (24px)
+$-navbar-desc-font-size: var(--wot-navbar-desc-font-size, 16px) !default; // navbar 左箭头字体大小 (16px)
+$-navbar-desc-font-color: var(--wot-navbar-desc-font-color, $-font-gray-1) !default; // navbar左右两侧字体颜色 ($-font-gray-1)
+$-navbar-title-font-size: var(--wot-navbar-title-font-size, 18px) !default; // navbar title字体大小 (18px)
+$-navbar-title-font-weight: var(--wot-navbar-title-font-weight, 600) !default; // navbar title字重 (600)
+$-navbar-disabled-opacity: var(--wot-navbar-disabled-opacity, 0.6) !default; // navbar左右两侧字体禁用 (0.6)
+$-navbar-hover-color: var(--wot-navbar-hover-color, #eee) !default; // navbar hover样式 (#eee)
+
+/* navbar-capsule */
+$-navbar-capsule-border-color: var(--wot-navbar-capsule-border-color, #e7e7e7) !default; // navbar capsule边框颜色 (#e7e7e7)
+$-navbar-capsule-border-radius: var(--wot-navbar-capsule-border-radius, 16px) !default; // navbar capsule圆角 (16px)
+$-navbar-capsule-width: var(--wot-navbar-capsule-width, 88px) !default; // navbar capsule宽度 (88px)
+$-navbar-capsule-height: var(--wot-navbar-capsule-height, 32px) !default; // navbar capsule高度 (32px)
+$-navbar-capsule-icon-size: var(--wot-navbar-capsule-icon-size, 20px) !default; // navbar capsule图标大小 (20px)
+
+/* table */
+$-table-color: var(--wot-table-color, $-font-gray-1) !default; // 表格字体颜色 ($-font-gray-1)
+$-table-bg: var(--wot-table-bg, #ffffff) !default; // 表格背景颜色 ($-color-white)
+$-table-stripe-bg: var(--wot-table-stripe-bg, #f3f3f3) !default; // 表格背景颜色 ($-color-gray-2)
+$-table-border-color: var(--wot-table-border-color, #ececec) !default; // 表格边框颜色 ($-color-gray-3)
+$-table-font-size: var(--wot-table-font-size, 13px) !default; // 表格字体大小 (13px)
+
+/* sidebar */
+$-sidebar-bg: var(--wot-sidebar-bg, $-color-gray-1) !default; // 侧边栏背景色 ($-color-gray-1)
+$-sidebar-width: var(--wot-sidebar-width, 104px) !default; // 侧边栏宽度 (104px)
+$-sidebar-height: var(--wot-sidebar-height, 100%) !default; // 侧边栏高度 (100%)
+
+/* sidebar-item */
+$-sidebar-color: var(--wot-sidebar-color, $-font-gray-1) !default; // 侧边栏字体颜色 ($-font-gray-1)
+$-sidebar-item-height: var(--wot-sidebar-item-height, 56px) !default; // 侧边栏项高度 (56px)
+$-sidebar-item-line-height: var(--wot-sidebar-item-line-height, 24px) !default; // 侧边栏项文字行高 (24px)
+$-sidebar-disabled-color: var(--wot-side-bar-disabled-color, $-font-gray-4) !default; // 侧边栏禁用字体颜色 ($-font-gray-4)
+$-sidebar-active-color: var(--wot-sidebar-active-color, $-color-theme) !default; // 激活项字体颜色 ($-color-theme)
+$-sidebar-active-bg: var(--wot-sidebar-active-bg, $-color-white) !default; // 激活项背景颜色 ($-color-white)
+$-sidebar-hover-bg: var(--wot-sidebar-hover-bg, $-color-gray-2) !default; // 激活项点击背景颜色 ($-color-gray-2)
+$-sidebar-border-radius: var(--wot-sidebar-border-radius, 8px) !default; // 侧边栏圆角 (8px)
+$-sidebar-font-size: var(--wot-sidebar-font-size, 16px) !default; // 侧边栏字体大小 (16px)
+$-sidebar-icon-size: var(--wot-sidebar-icon-size, 20px) !default; // 侧边栏图标大小 (20px)
+$-sidebar-active-border-width: var(--wot-sidebar-active-border-width, 4px) !default; // 激活项边框宽度 (4px)
+$-sidebar-active-border-height: var(--wot-sidebar-active-border-height, 16px) !default; // 激活项边框高度 (16px)
+
+/* fab */
+$-fab-trigger-height: var(--wot-fab-trigger-height, 56px) !default; // FAB触发按钮高度 (56px)
+$-fab-trigger-width: var(--wot-fab-trigger-width, 56px) !default; // FAB触发按钮宽度 (56px)
+$-fab-actions-padding: var(--wot-actions-padding, 12px) !default; // FAB操作按钮内边距 (12px)
+$-fab-icon-fs: var(--wot-fab-icon-fs, 20px) !default; // FAB操作按钮图标大小 (20px)
+
+/* count-down */
+$-count-down-text-color: var(--wot-count-down-text-color, $-color-gray-8) !default; // 倒计时字体颜色 ($-color-gray-8)
+$-count-down-font-size: var(--wot-count-down-font-size, $-fs-content) !default; // 倒计时字体大小 ($-fs-content)
+$-count-down-line-height: var(--wot-count-down-line-height, 20px) !default; // 倒计时文字行高 (20px)
+
+/* keyboard */
+$-keyboard-key-height: var(--wot-keyboard-key-height, 48px) !default; // 键盘按键高度 (48px)
+$-keyboard-key-font-size: var(--wot-keyboard-key-font-size, 28px) !default; // 键盘按键字体大小 (28px)
+$-keyboard-key-background: var(--wot-keyboard-key-background, $-color-white) !default; // 键盘按键背景颜色 ($-color-white)
+$-keyboard-key-border-radius: var(--wot-keyboard-key-border-radius, 8px) !default; // 键盘按键圆角 (8px)
+$-keyboard-delete-font-size: var(--wot-keyboard-delete-font-size, 16px) !default; // 键盘删除键字体大小 (16px)
+$-keyboard-key-active-color: var(--wot-keyboard-key-active-color, $-color-gray-3) !default; // 键盘按键激活颜色 ($-color-gray-3)
+$-keyboard-button-text-color: var(--wot-keyboard-button-text-color, $-color-white) !default; // 键盘操作按钮字体颜色 ($-color-white)
+$-keyboard-button-background: var(--wot-keyboard--button-background, $-color-theme) !default; // 键盘操作按钮背景颜色 ($-color-theme)
+$-keyboard-button-active-opacity: var(--wot-keyboard-button-active-opacity, 0.6) !default; // 键盘操作按钮激活透明度 (0.6)
+$-keyboard-background: var(--wot-keyboard-background, $-color-gray-2) !default; // 键盘背景颜色 ($-color-gray-2)
+$-keyboard-title-height: var(--wot-keyboard-title-height, 34px) !default; // 键盘标题高度 (34px)
+$-keyboard-title-color: var(--wot-keyboard-title-color, $-color-gray-7) !default; // 键盘标题字体颜色 ($-color-gray-7)
+$-keyboard-title-font-size: var(--wot-keyboard-title-font-size, 16px) !default; // 键盘标题字体大小 (16px)
+$-keyboard-close-padding: var(--wot-keyboard-title-font-size, 0 16px) !default; // 键盘关闭按钮内边距 (0 16px)
+$-keyboard-close-color: var(--wot-keyboard-close-color, $-color-theme) !default; // 键盘关闭按钮字体颜色 ($-color-theme)
+$-keyboard-close-font-size: var(--wot-keyboard-close-font-size, 14px) !default; // 键盘关闭按钮字体大小 (14px)
+$-keyboard-icon-size: var(--wot-keyboard-icon-size, 22px) !default; // 键盘图标大小 (22px)
+
+/* number-keyboard */
+$-number-keyboard-key-height: var(--wot-number-keyboard-key-height, 48px) !default; // 数字键盘按键高度 (48px)
+$-number-keyboard-key-font-size: var(--wot-number-keyboard-key-font-size, 28px) !default; // 数字键盘按键字体大小 (28px)
+$-number-keyboard-key-background: var(--wot-number-keyboard-key-background, $-color-white) !default; // 数字键盘按键背景颜色 ($-color-white)
+$-number-keyboard-key-border-radius: var(--wot-number-keyboard-key-border-radius, 8px) !default; // 数字键盘按键圆角 (8px)
+$-number-keyboard-delete-font-size: var(--wot-number-keyboard-delete-font-size, 16px) !default; // 数字键盘删除键字体大小 (16px)
+$-number-keyboard-key-active-color: var(--wot-number-keyboard-key-active-color, $-color-gray-3) !default; // 数字键盘按键激活颜色 ($-color-gray-3)
+$-number-keyboard-button-text-color: var(--wot-number-keyboard-button-text-color, $-color-white) !default; // 数字键盘操作按钮字体颜色 ($-color-white)
+$-number-keyboard-button-background: var(--wot-number-keyboard--button-background, $-color-theme) !default; // 数字键盘操作按钮背景颜色 ($-color-theme)
+$-number-keyboard-button-active-opacity: var(--wot-number-keyboard-button-active-opacity, 0.6) !default; // 数字键盘操作按钮激活透明度 (0.6)
+$-number-keyboard-background: var(--wot-number-keyboard-background, $-color-gray-2) !default; // 数字键盘背景颜色 ($-color-gray-2)
+$-number-keyboard-title-height: var(--wot-number-keyboard-title-height, 34px) !default; // 数字键盘标题高度 (34px)
+$-number-keyboard-title-color: var(--wot-number-keyboard-title-color, $-color-gray-7) !default; // 数字键盘标题字体颜色 ($-color-gray-7)
+$-number-keyboard-title-font-size: var(--wot-number-keyboard-title-font-size, 16px) !default; // 数字键盘标题字体大小 (16px)
+$-number-keyboard-close-padding: var(--wot-number-keyboard-title-font-size, 0 16px) !default; // 数字键盘关闭按钮内边距 (0 16px)
+$-number-keyboard-close-color: var(--wot-number-keyboard-close-color, $-color-theme) !default; // 数字键盘关闭按钮字体颜色 ($-color-theme)
+$-number-keyboard-close-font-size: var(--wot-number-keyboard-close-font-size, 14px) !default; // 数字键盘关闭按钮字体大小 (14px)
+$-number-keyboard-icon-size: var(--wot-number-keyboard-icon-size, 22px) !default; // 数字键盘图标大小 (22px)
+
+/* passwod-input */
+$-password-input-height: var(--wot-password-input-height, 50px) !default; // 密码输入框高度 (50px)
+$-password-input-margin: var(--wot-password-input-margin, 16px) !default; // 密码输入框外边距 (16px)
+$-password-input-font-size: var(--wot-password-input-font-size, 20px) !default; // 密码输入框字体大小 (20px)
+$-password-input-radius: var(--wot-password-input-radius, 6px) !default; // 密码输入框圆角 (6px)
+$-password-input-background: var(--wot-password-input-background, #fff) !default; // 密码输入框背景颜色 (#fff)
+$-password-input-info-color: var(--wot-password-input-info-color, $-color-info) !default; // 密码输入框提示字体颜色 ($-color-info)
+$-password-input-info-font-size: var(--wot-password-input-info-font-size, $-fs-content) !default; // 密码输入框提示字体大小 ($-fs-content)
+$-password-input-border-color: var(--wot-password-border-color, #ebedf0) !default; // 密码输入框边框颜色 (#ebedf0)
+$-password-input-error-info-color: var(--wot-password-input-error-info-color, $-color-danger) !default; // 密码输入框错误提示字体颜色 ($-color-danger)
+$-password-input-dot-size: var(--wot-password-input-dot-size, 10px) !default; // 密码输入框密码点大小 (10px)
+$-password-input-dot-color: var(--wot-password-input-dot-color, $-color-gray-8) !default; // 密码输入框密码点颜色 ($-color-gray-8)
+$-password-input-text-color: var(--wot-password-input-text-color, $-color-gray-8) !default; // 密码输入框字体颜色 ($-color-gray-8)
+$-password-input-cursor-color: var(--wot-password-input-cursor-color, $-color-gray-8) !default; // 密码输入框光标颜色 ($-color-gray-8)
+$-password-input-cursor-width: var(--wot-password-input-cursor-width, 1px) !default; // 密码输入框光标宽度 (1px)
+$-password-input-cursor-height: var(--wot-password-input-cursor-height, 40%) !default; // 密码输入框光标高度 (40%)
+$-password-input-cursor-duration: var(--wot-password-input-cursor-duration, 1s) !default; // 密码输入框光标动画时间 (1s)
+
+/* form-item */
+$-form-item-error-message-color: var(--wot-form-item-error-message-color, $-color-danger) !default; // 表单项错误提示字体颜色 ($-color-danger)
+$-form-item-error-message-font-size: var(--wot-form-item-error-message-font-size, $-fs-secondary) !default; // 表单项错误提示字体大小 ($-fs-secondary)
+$-form-item-error-message-line-height: var(--wot-form-item-error-message-line-height, 24px) !default; // 表单项错误提示文字行高 (24px)
+
+/* backtop */
+$-backtop-bg: var(--wot-backtop-bg, #e1e1e1) !default; // 返回顶部按钮背景颜色 (#e1e1e1)
+$-backtop-icon-size: var(--wot-backtop-icon-size, 20px) !default; // 返回顶部按钮图标大小 (20px)
+
+/* index-bar */
+$-index-bar-index-font-size: var(--wot-index-bar-index-font-size, $-fs-aid) !default; // 索引栏字体大小 ($-fs-aid)
+
+/* text */
+$-text-info-color: var(--wot-text-info-color, $-color-info) !default; // 字体颜色 ($-color-info)
+$-text-primary-color: var(--wot-text-primary-color, $-color-theme) !default; // 字体颜色 ($-color-theme)
+$-text-error-color: var(--wot-text-error-color, $-color-danger) !default; // 字体颜色 ($-color-danger)
+$-text-warning-color: var(--wot-text-warning-color, $-color-warning) !default; // 字体颜色 ($-color-warning)
+$-text-success-color: var(--wot-text-success-color, $-color-success) !default; // 字体颜色 ($-color-success)
+
+/* video-preview */
+$-video-preview-bg: var(--wot-video-preview-bg, rgba(0, 0, 0, 0.8)) !default; // 背景色 (rgba(0, 0, 0, 0.8))
+$-video-preview-close-color: var(--wot-video-preview-close-color, #fff) !default; // 图标颜色 (#fff)
+$-video-preview-close-font-size: var(--wot-video-preview-close-font-size, 20px) !default; // 图标大小 (20px)
+
+/* img-cropper */
+$-img-cropper-icon-size: var(--wot-img-cropper-icon-size, $-fs-big) !default; // 图标大小 ($-fs-big)
+$-img-cropper-icon-color: var(--wot-img-cropper-icon-color, #fff) !default; // 图标颜色
+
+/* floating-panel */
+$-floating-panel-bg: var(--wot-floating-panel-bg, $-color-white) !default; // 背景色 ($-color-white)
+$-floating-panel-radius: var(--wot-floating-panel-radius, 16px) !default; // 圆角 (16px)
+$-floating-panel-z-index: var(--wot-floating-panel-z-index, 99) !default; // 层级 (99)
+$-floating-panel-header-height: var(--wot-floating-panel-header-height, 30px) !default; // 头部高度 (30px)
+$-floating-panel-bar-width: var(--wot-floating-panel-bar-width, 20px) !default; // bar 宽度 (20px)
+$-floating-panel-bar-height: var(--wot-floating-panel-bar-height, 3px) !default; // bar 高度 (3px)
+$-floating-panel-bar-bg: var(--wot-floating-panel-bar-bg, $-color-gray-5) !default; // bar 背景色 ($-color-gray-5)
+$-floating-panel-bar-radius: var(--wot-floating-panel-bar-radius, 4px) !default; // bar 圆角 (4px)
+$-floating-panel-content-bg: var(--wot-floating-panel-content-bg, $-color-white) !default; // 内容背景色 ($-color-white)
+
+/* signature */
+$-signature-bg: var(--wot-signature-bg, $-color-white) !default; // 背景色 ($-color-white)
+$-signature-radius: var(--wot-signature-radius, 4px) !default; // 圆角 (4px)
+$-signature-border: var(--wot-signature-border, 1px solid $-color-gray-5) !default; // 边框圆角 (1px solid $-color-gray-5)
+$-signature-footer-margin-top: var(--wot-signature-footer-margin-top, 8px) !default; // 底部按钮上边距 (8px)
+$-signature-button-margin-left: var(--wot-signature-button-margin-left, 8px) !default; // 底部按钮左边距 (8px)

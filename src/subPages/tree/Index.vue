@@ -1,0 +1,417 @@
+<template>
+  <view class="wd-page">
+    <demo-block title="基础用法">
+      <wd-tree :data="basicData" :default-expanded-keys="['1', '1-1']" expand-on-click checkable />
+    </demo-block>
+    <demo-block title="隐藏箭头">
+      <wd-tree :data="basicData" :default-expanded-keys="['1', '1-1']" :show-switcher="false" expand-on-click checkable />
+    </demo-block>
+
+    <demo-block title="自定义图标">
+      <wd-tree
+        :data="basicData"
+        :default-expanded-keys="['1', '1-1']"
+        expand-icon="unfold-more"
+        collapse-icon="unfold-less"
+        expand-on-click
+        selectable
+      />
+    </demo-block>
+
+    <demo-block title="自定义字段名">
+      <wd-tree :data="customFieldData" :default-expanded-keys="['1', '1-1']" key-field="key" label-field="name" children-field="items" selectable />
+    </demo-block>
+
+    <demo-block title="级联选择">
+      <wd-tree
+        :data="cascadeData"
+        cascade
+        :default-expanded-keys="['0', '0-0', '0-1', '0-2']"
+        :default-checked-keys="['0-0-0']"
+        @checked="updateCheckedKeys"
+        checkable
+      />
+      <view class="checked-info">
+        <text>已选中: {{ checkedKeys.join(', ') || '无' }}</text>
+      </view>
+    </demo-block>
+
+    <demo-block title="搜索过滤">
+      <wd-input v-model="searchPattern" placeholder="输入节点名称搜索" :clearable="true" />
+      <wd-tree :data="searchData" expand-on-click :pattern="searchPattern" :show-irrelevant-nodes="showIrrelevantNodes" />
+    </demo-block>
+
+    <demo-block title="异步加载">
+      <wd-tree :data="asyncData" :load-node="loadNodeData" />
+    </demo-block>
+  </view>
+</template>
+
+<script setup lang="ts">
+  import { ref } from 'vue'
+
+  /**
+   * 树节点基础接口 - 与 wd-tree 组件类型保持一致
+   */
+  interface TreeNode {
+    label: string
+    id: string
+    children?: TreeNode[]
+    isLeaf?: boolean
+    tag?: string
+  }
+
+  /**
+   * 自定义字段树节点接口 - 用于自定义字段名的场景
+   */
+  interface CustomTreeNode {
+    name: string
+    key: string
+    items?: CustomTreeNode[]
+  }
+
+  /**
+   * 树节点加载函数参数接口 - 用于异步加载场景
+   */
+  interface LoadNodeParams {
+    id: string
+    label: string
+    children?: TreeNode[]
+  }
+
+  // 基础用法数据
+  const basicData = ref<TreeNode[]>([
+    {
+      label: '技术部',
+      id: '1',
+      children: [
+        {
+          label: '前端组',
+          id: '1-1',
+          children: [
+            {
+              label: 'Vue开发',
+              id: '1-1-1',
+              children: [
+                {
+                  label: '组件库开发',
+                  id: '1-1-1-1'
+                },
+                {
+                  label: '页面开发',
+                  id: '1-1-1-2'
+                }
+              ]
+            },
+            {
+              label: 'React开发',
+              id: '1-1-2',
+              children: [
+                {
+                  label: 'Hooks开发',
+                  id: '1-1-2-1'
+                },
+                {
+                  label: '状态管理',
+                  id: '1-1-2-2'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          label: '后端组',
+          id: '1-2',
+          children: [
+            { label: 'Java开发', id: '1-2-1' },
+            { label: 'Python开发', id: '1-2-2' },
+            { label: '数据库设计', id: '1-2-3' }
+          ]
+        }
+      ]
+    }
+  ])
+
+  // 自定义字段数据
+  const customFieldData = ref<CustomTreeNode[]>([
+    {
+      name: '电子产品',
+      key: '1',
+      items: [
+        {
+          name: '手机数码',
+          key: '1-1',
+          items: [
+            {
+              name: '智能手机',
+              key: '1-1-1',
+              items: [
+                {
+                  name: 'iPhone系列',
+                  key: '1-1-1-1'
+                },
+                {
+                  name: 'Android系列',
+                  key: '1-1-1-2'
+                }
+              ]
+            },
+            {
+              name: '平板电脑',
+              key: '1-1-2',
+              items: [
+                { name: 'iPad', key: '1-1-2-1' },
+                {
+                  name: 'Android平板',
+                  key: '1-1-2-2'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          name: '电脑办公',
+          key: '1-2',
+          items: [
+            { name: '笔记本电脑', key: '1-2-1' },
+            { name: '台式电脑', key: '1-2-2' },
+            { name: '办公设备', key: '1-2-3' }
+          ]
+        }
+      ]
+    }
+  ])
+
+  // 级联选择数据
+  const cascadeData = ref<TreeNode[]>([
+    {
+      label: '文件系统',
+      id: '0',
+      children: [
+        {
+          label: '文档',
+          id: '0-0',
+          children: [
+            { label: '工作文档', id: '0-0-0' },
+            { label: '学习资料', id: '0-0-1' },
+            { label: '项目文件', id: '0-0-2' }
+          ]
+        },
+        {
+          label: '媒体',
+          id: '0-1',
+          children: [
+            { label: '图片', id: '0-1-0' },
+            { label: '视频', id: '0-1-1' },
+            { label: '音频', id: '0-1-2' }
+          ]
+        },
+        {
+          label: '应用程序',
+          id: '0-2',
+          children: [
+            { label: '系统工具', id: '0-2-0' },
+            { label: '办公软件', id: '0-2-1' },
+            { label: '娱乐软件', id: '0-2-2' }
+          ]
+        }
+      ]
+    }
+  ])
+
+  // 搜索数据
+  const searchData = ref<TreeNode[]>([
+    {
+      label: '项目管理',
+      id: '0',
+      children: [
+        {
+          label: '需求分析',
+          id: '0-0',
+          children: [
+            { label: '用户调研', id: '0-0-0' },
+            { label: '功能规划', id: '0-0-1' },
+            { label: '原型设计', id: '0-0-2' }
+          ]
+        },
+        {
+          label: '开发阶段',
+          id: '0-1',
+          children: [
+            { label: '前端开发', id: '0-1-0' },
+            { label: '后端开发', id: '0-1-1' },
+            { label: '测试调试', id: '0-1-2' }
+          ]
+        },
+        {
+          label: '部署上线',
+          id: '0-2',
+          children: [
+            { label: '环境配置', id: '0-2-0' },
+            { label: '数据迁移', id: '0-2-1' },
+            { label: '监控运维', id: '0-2-2' }
+          ]
+        }
+      ]
+    }
+  ])
+
+  // 异步加载数据
+  const asyncData = ref<TreeNode[]>([
+    {
+      label: '在线课程',
+      id: '1',
+      children: []
+    },
+    {
+      label: '技术文档',
+      id: '2',
+      children: []
+    },
+    {
+      label: '开源项目',
+      id: '3',
+      children: []
+    }
+  ])
+
+  // 插槽自定义数据
+  const slotData = ref<TreeNode[]>([
+    {
+      label: '前端框架',
+      id: '1',
+      tag: '热门',
+      children: [
+        {
+          label: 'Vue.js',
+          id: '1-1',
+          tag: '推荐',
+          children: [
+            {
+              label: 'Vue 3.0',
+              id: '1-1-1',
+              tag: '最新'
+            },
+            { label: 'Vue 2.0', id: '1-1-2' }
+          ]
+        },
+        {
+          label: 'React',
+          id: '1-2',
+          tag: '流行',
+          children: [
+            {
+              label: 'React 18',
+              id: '1-2-1',
+              tag: '最新'
+            },
+            { label: 'Next.js', id: '1-2-2' }
+          ]
+        }
+      ]
+    },
+    {
+      label: '后端技术',
+      id: '2',
+      tag: '稳定',
+      children: [
+        {
+          label: 'Node.js',
+          id: '2-1',
+          tag: '高效',
+          children: [
+            { label: 'Express', id: '2-1-1' },
+            { label: 'Koa', id: '2-1-2' }
+          ]
+        }
+      ]
+    }
+  ])
+
+  // 响应式数据
+  const checkedKeys = ref<string[]>([])
+  const searchPattern = ref<string>('')
+  const showIrrelevantNodes = ref<boolean>(false)
+
+  /**
+   * 级联选择回调函数
+   * @param keys - 选中的节点key数组
+   */
+  const updateCheckedKeys = (keys: string[]): void => {
+    checkedKeys.value = keys
+    console.log('选中的节点：', keys)
+  }
+
+  /**
+   * 异步加载节点数据
+   * @param node - 需要加载数据的节点
+   * @returns Promise<boolean> - 加载完成状态
+   */
+  const loadNodeData = (node: LoadNodeParams): Promise<boolean> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        // 根据节点key加载不同的子节点数据
+        const childrenMap: Record<string, TreeNode[]> = {
+          '1': [
+            { label: 'Vue.js 基础教程', id: '1-1', isLeaf: true },
+            { label: 'React 入门指南', id: '1-2', isLeaf: true },
+            { label: 'TypeScript 实战', id: '1-3', isLeaf: true }
+          ],
+          '2': [
+            { label: 'API 接口文档', id: '2-1' },
+            { label: '组件使用说明', id: '2-2' },
+            { label: '最佳实践指南', id: '2-3' }
+          ],
+          '3': [
+            { label: 'UI 组件库', id: '3-1' },
+            { label: '工具函数库', id: '3-2' },
+            { label: '示例项目', id: '3-3' }
+          ]
+        }
+
+        // 设置子节点数据
+        node.children = childrenMap[node.id] || []
+        resolve(true)
+      }, 1000)
+    })
+  }
+</script>
+
+<style lang="scss" scoped>
+  .checked-info {
+    margin-top: 20rpx;
+    padding: 20rpx;
+    background-color: #f8f9fa;
+    border-radius: 8rpx;
+    font-size: 28rpx;
+    color: #666;
+  }
+
+  .custom-switcher {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32rpx;
+    height: 32rpx;
+  }
+
+  .custom-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .custom-label {
+    font-size: 28rpx;
+    color: #333;
+  }
+
+  .custom-tag {
+    font-size: 20rpx;
+    color: #fff;
+    background-color: #f57c00;
+    padding: 4rpx 8rpx;
+    border-radius: 4rpx;
+  }
+</style>

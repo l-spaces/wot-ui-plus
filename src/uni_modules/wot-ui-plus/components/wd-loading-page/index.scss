@@ -1,0 +1,14 @@
+@import '../common/abstracts/_mixin.scss';
+@import '../common/abstracts/variable.scss';
+
+$text-color: rgb(200, 200, 200) !default;
+$text-size: 19px !default;
+$u-loading-icon-margin-bottom: 10px !default;
+
+@include b(loading-page) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+}
