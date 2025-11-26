@@ -26,7 +26,7 @@
     height: $-switch-circle-size;
     top: 2px;
     left: 2px;
-    background: #fff;
+    background: $-switch-active-circle-color;
     border-radius: 50%;
     transition: left 0.3s ease-out;
     box-shadow: 0 2px 4px 0 $-switch-inactive-shadow-color;
@@ -51,7 +51,17 @@
       left: calc($-switch-width - $-switch-circle-size - 2px);
       box-shadow: 0 2px 4px 0 $-switch-active-shadow-color;
     }
+    // @include when(inverse) {
+    //   .wd-switch__circle {
+    //     background: $-switch-active-circle-color;
+    //   }
+    // }
   }
+  // @include when(inverse) {
+  //   .wd-switch__circle {
+  //     background: $-switch-inactive-circle-color;
+  //   }
+  // }
   @include when(disabled) {
     opacity: 0.5;
   }

@@ -1,33 +1,26 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-06-13 11:47:12
- * @LastEditTime: 2025-04-02 21:24:38
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-ui-plus/src/pages/card/Index.vue
- * 记得注释
--->
 <template>
   <page-wraper>
     <view>
       <demo-block :title="$t('ji-ben-shi-yong')" transparent>
-        <wd-card :title="$t('jing-ying-fen-xi')">
-          {{
-            $t(
-              'yi-ban-de-jian-ju-nei-rong-you-cheng-ban-de-dang-de-wei-yuan-hui-huo-ji-lv-jian-cha-wei-yuan-hui-jiang-chu-li-yi-jian-huo-fu-yi-fu-cha-jie-lun-tong-shen-su-ren-jian-mian-ting-qu-qi-yi-jian-fu-yi-fu-cha-de-jie-lun-he-jue-ding-ying-jiao-gei-shen-su-ren-yi-fen'
-            )
-          }}
+        <wd-card title="《静夜思》">
+          {{ value1 }}
           <template #footer>
             <wd-button size="small" plain>{{ $t('cha-kan-xiang-qing') }}</wd-button>
           </template>
         </wd-card>
+        <wd-divider dashed />
+        <wd-card title="《静夜思》矩形卡片 type='rectangle'" type="rectangle">
+          {{ value1 }}
+          <template #footer>
+            <wd-button size="small" plain>{{ $t('cha-kan-xiang-qing') }}</wd-button>
+          </template>
+        </wd-card>
+
+        <wd-divider dashed />
+
         <wd-card :title="$t('xin-ding-dan')">
           <view class="content">
-            <image
-              src="https://img11.360buyimg.com/imagetools/jfs/t1/143248/37/5695/265818/5f3a8546E98d998a4/745897ca9c9e474b.jpg"
-              alt="joy"
-              style="width: 70px; height: 70px; border-radius: 4px; margin-right: 12px"
-            />
+            <image src="../../static/img/jd.png" alt="joy" style="width: 70px; height: 70px; border-radius: 4px; margin-right: 12px" />
             <view>
               <view>{{ $t('mi-zi-lan-mizland-xin-xi-lan-jin-kou-duo-hua-zhong') }}</view>
               <view>{{ $t('shu-liang-1-jian') }}</view>
@@ -40,18 +33,18 @@
           </template>
         </wd-card>
       </demo-block>
-      <demo-block :title="$t('qu-chu-footer')" transparent>
-        <wd-card :title="$t('wang-ming')" type="rectangle">
+
+      <demo-block title="去除footer" transparent>
+        <wd-card title="头像" type="rectangle">
           <view>
-            <image
-              src="https://avatars.githubusercontent.com/u/26426873?v=4"
-              alt="joy"
-              style="width: 40px; height: 40px; border-radius: 4px; margin-right: 12px"
-            />
-            {{ $t('da-jia-hao-wo-jiao-mo-yu') }}
+            <wd-avatar src="./../../static/img/a1.png" />
+            <text>你好，世界！</text>
           </view>
         </wd-card>
-        <wd-card type="rectangle">
+
+        <wd-divider dashed />
+
+        <wd-card>
           <template #title>
             <view class="title">
               <view>{{ $t('20200203-fu-wu-dao-qi') }}</view>
@@ -64,7 +57,7 @@
 
           <view style="height: 40px" class="content">
             <image
-              src="https://img11.360buyimg.com/imagetools/jfs/t1/143248/37/5695/265818/5f3a8546E98d998a4/745897ca9c9e474b.jpg"
+              src="../../static/img/jd.png"
               width="40"
               height="40"
               alt="joy"
@@ -83,11 +76,12 @@
           </template>
         </wd-card>
       </demo-block>
+
       <demo-block :title="$t('ju-xing-ka-pian')" transparent>
         <wd-card :title="$t('20200203-fu-wu-dao-qi-0')" type="rectangle">
           <view style="height: 40px" class="content">
             <image
-              src="https://img11.360buyimg.com/imagetools/jfs/t1/143248/37/5695/265818/5f3a8546E98d998a4/745897ca9c9e474b.jpg"
+              src="../../static/img/jd.png"
               width="40"
               height="40"
               alt="joy"
@@ -105,6 +99,9 @@
             </view>
           </template>
         </wd-card>
+
+        <wd-divider dashed />
+
         <wd-card type="rectangle">
           <template #title>
             <view class="title">
@@ -118,7 +115,7 @@
 
           <view style="height: 40px" class="content">
             <image
-              src="https://img11.360buyimg.com/imagetools/jfs/t1/143248/37/5695/265818/5f3a8546E98d998a4/745897ca9c9e474b.jpg"
+              src="../../static/img/jd.png"
               width="40"
               height="40"
               alt="joy"
@@ -140,7 +137,11 @@
     </view>
   </page-wraper>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+  import { ref } from 'vue'
+
+  const value1 = ref('床前明月光，疑是地上霜。举头望明月，低头思故乡。')
+</script>
 <style lang="scss" scoped>
   .wot-theme-dark {
     .title-tip {

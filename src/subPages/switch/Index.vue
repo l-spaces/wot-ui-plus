@@ -7,13 +7,15 @@
       </demo-block>
       <demo-block :title="$t('xiu-gai-zhi-activevalue-inactivevalue')">
         <view style="margin-bottom: 10px">{{ checked2 }}</view>
-        <wd-switch v-model="checked2" active-value="沃特" inactive-value="商家后台" @change="handleChange2" />
+        <wd-switch v-model="checked2" active-value="你好" inactive-value="世界" @change="handleChange2" />
       </demo-block>
       <demo-block :title="$t('zi-ding-yi-yan-se-activecolor-inactivecolor')">
-        <wd-switch v-model="checked3" active-color="#13ce66" inactive-color="#f00" @change="handleChange3" />
+        <wd-switch v-model="checked3" circle-color="#333333" active-color="#13ce66" inactive-color="#f00" @change="handleChange3" />
       </demo-block>
       <demo-block :title="$t('zi-ding-yi-da-xiao')">
         <wd-switch v-model="checked4" :size="24" @change="handleChange4" />
+        <wd-switch v-model="checked4" @change="handleChange4" />
+        <wd-switch v-model="checked4" :size="34" @change="handleChange4" />
       </demo-block>
       <demo-block :title="$t('xuan-zhong-jin-yong')">
         <wd-switch v-model="checked5" disabled />
@@ -36,7 +38,7 @@
   const { t } = useI18n()
 
   const checked1 = ref<boolean>(true)
-  const checked2 = ref<string>(t('wo-te'))
+  const checked2 = ref<string>('世界')
   const checked3 = ref<boolean>(true)
   const checked4 = ref<boolean>(true)
   const checked5 = ref<boolean>(true)

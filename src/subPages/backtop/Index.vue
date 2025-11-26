@@ -1,6 +1,6 @@
 <template>
   <page-wraper>
-    <demo-block>
+    <demo-block title="滚动到页面底部显示">
       <wd-checkbox shape="square" size="large" v-model="isSquare">{{ $t('xianShiFangXing') }}</wd-checkbox>
       <wd-checkbox shape="square" size="large" v-model="isCustomIcon">{{ $t('ziDingYiTuBiao') }}</wd-checkbox>
       <wd-checkbox shape="square" size="large" v-model="isTop">{{ $t('ziDingYiJuLi') }}</wd-checkbox>

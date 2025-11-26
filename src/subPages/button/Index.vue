@@ -20,6 +20,7 @@
         <wd-button type="info" disabled>{{ $t('xin-xi-an-niu') }}</wd-button>
         <wd-button type="warning" disabled>{{ $t('jing-gao-an-niu-0') }}</wd-button>
         <wd-button type="error" disabled>{{ $t('wei-xian-an-niu') }}</wd-button>
+        <wd-button :round="false" disabled>{{ $t('zhu-yao-an-niu') }}</wd-button>
       </demo-block>
       <demo-block :title="$t('you-ling-an-niu')">
         <wd-button plain>{{ $t('zhu-yao-an-niu') }}</wd-button>
@@ -27,6 +28,7 @@
         <wd-button type="info" plain>{{ $t('xin-xi-an-niu') }}</wd-button>
         <wd-button type="warning" plain>{{ $t('jing-gao-an-niu-0') }}</wd-button>
         <wd-button type="error" plain>{{ $t('wei-xian-an-niu') }}</wd-button>
+        <wd-button :round="false" plain>{{ $t('zhu-yao-an-niu') }}</wd-button>
       </demo-block>
       <demo-block :title="$t('xi-bian-kuang-you-ling-an-niu')">
         <wd-button plain hairline>{{ $t('zhu-yao-an-niu') }}</wd-button>
@@ -34,6 +36,7 @@
         <wd-button type="info" plain hairline>{{ $t('xin-xi-an-niu') }}</wd-button>
         <wd-button type="warning" plain hairline>{{ $t('jing-gao-an-niu-0') }}</wd-button>
         <wd-button type="error" plain hairline>{{ $t('wei-xian-an-niu') }}</wd-button>
+        <wd-button :round="false" plain hairline>{{ $t('zhu-yao-an-niu') }}</wd-button>
       </demo-block>
       <demo-block :title="$t('you-ling-an-niu-jin-yong-zhuang-tai')">
         <wd-button plain disabled>{{ $t('zhu-yao-an-niu') }}</wd-button>
@@ -41,11 +44,16 @@
         <wd-button type="info" plain disabled>{{ $t('xin-xi-an-niu') }}</wd-button>
         <wd-button type="warning" plain disabled>{{ $t('jing-gao-an-niu-0') }}</wd-button>
         <wd-button type="error" plain disabled>{{ $t('wei-xian-an-niu') }}</wd-button>
+        <wd-button :round="false" disabled>{{ $t('zhu-yao-an-niu') }}</wd-button>
       </demo-block>
       <demo-block :title="$t('an-niu-da-xiao')">
         <wd-button size="small">{{ $t('xiao-xing-an-niu') }}</wd-button>
         <wd-button size="medium">{{ $t('pu-tong-an-niu') }}</wd-button>
         <wd-button size="large">{{ $t('da-xing-an-niu') }}</wd-button>
+        <wd-divider />
+        <wd-button :round="false" size="small">{{ $t('xiao-xing-an-niu') }}</wd-button>
+        <wd-button :round="false" size="medium">{{ $t('pu-tong-an-niu') }}</wd-button>
+        <wd-button :round="false" size="large">{{ $t('da-xing-an-niu') }}</wd-button>
       </demo-block>
       <demo-block :title="$t('jia-zai-zhong-0')">
         <wd-button loading>{{ $t('jia-zai-zhong-0') }}</wd-button>
@@ -54,6 +62,7 @@
         <wd-button type="error" loading>{{ $t('jia-zai-zhong-0') }}</wd-button>
         <wd-button type="info" loading>{{ $t('jia-zai-zhong-0') }}</wd-button>
         <wd-button type="info" plain loading>{{ $t('jia-zai-zhong-0') }}</wd-button>
+        <wd-button :round="false" loading>{{ $t('jia-zai-zhong-0') }}</wd-button>
       </demo-block>
       <demo-block :title="$t('wen-zi-an-niu')">
         <wd-button type="text">{{ $t('an-niu-0') }}</wd-button>
@@ -62,7 +71,7 @@
       <demo-block :title="$t('tu-biao-an-niu')">
         <wd-button type="icon" plain icon="delete"></wd-button>
         <wd-button type="icon" icon="delete"></wd-button>
-        <wd-button type="icon" plain icon="add" disabled></wd-button>
+        <wd-button :round="false" type="icon" plain icon="add" disabled></wd-button>
         <wd-button type="icon" icon="add" disabled></wd-button>
       </demo-block>
       <demo-block :title="$t('dai-tu-biao-de-ji-ben-an-niu')">

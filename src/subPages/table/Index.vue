@@ -1,6 +1,13 @@
 <template>
   <page-wraper>
     <demo-block :title="$t('jiBenYongFa')">
+      <wd-table :data="emptyList" @sort-method="handleSort" :height="400" @row-click="handleRowClick">
+        <wd-table-col prop="name" :label="$t('xing-ming')" align="center" width="50%"></wd-table-col>
+        <wd-table-col prop="grade" :label="$t('fen-shu')" align="center" width="50%"></wd-table-col>
+      </wd-table>
+    </demo-block>
+
+    <demo-block :title="$t('jiBenYongFa')">
       <wd-table :data="dataList" @sort-method="handleSort" :height="400" @row-click="handleRowClick">
         <wd-table-col prop="name" :label="$t('xing-ming')" align="center" width="50%"></wd-table-col>
         <wd-table-col prop="grade" :label="$t('fen-shu')" align="center" width="50%"></wd-table-col>
@@ -252,6 +259,7 @@
       hobby: t('xing-han-tao-zei-ke-fu-zhong-yuan')
     }
   ])
+  const emptyList = ref<TableData[]>([])
   const page = ref<number>(1)
   const pageSize = ref<number>(10)
 

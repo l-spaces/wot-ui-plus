@@ -137,18 +137,18 @@ $-button-disabled-opacity: var(--wot-button-disabled-opacity, 0.6) !default; // 
 $-button-small-height: var(--wot-button-small-height, 28px) !default; // 小型按钮高度 (28px)
 $-button-small-padding: var(--wot-button-small-padding, 0 12px) !default; // 小型按钮padding (0 12px)
 $-button-small-fs: var(--wot-button-small-fs, $-fs-secondary) !default; // 小型按钮字号 (12px)
-$-button-small-radius: var(--wot-button-small-radius, 2px) !default; // 小型按钮圆角大小 (2px)
+$-button-small-radius: var(--wot-button-small-radius, 3px) !default; // 小型按钮圆角大小 (2px)
 $-button-small-loading: var(--wot-button-small-loading, 14px) !default; // 小型按钮loading图标大小 (14px)
-$-button-medium-height: var(--wot-button-medium-height, 36px) !default; // 中型按钮高度 (36px)
-$-button-medium-padding: var(--wot-button-medium-padding, 0 16px) !default; // 中型按钮padding (0 16px)
+$-button-medium-height: var(--wot-button-medium-height, 35px) !default; // 中型按钮高度 (36px)
+$-button-medium-padding: var(--wot-button-medium-padding, 0 15px) !default; // 中型按钮padding (0 16px)
 $-button-medium-fs: var(--wot-button-medium-fs, $-fs-content) !default; // 中型按钮字号 (14px)
 $-button-medium-radius: var(--wot-button-medium-radius, 4px) !default; // 中型按钮圆角大小 (4px)
 $-button-medium-loading: var(--wot-button-medium-loading, 18px) !default; // 中型按钮loading图标大小 (18px)
 $-button-medium-box-shadow-size: var(--wot-button-medium-box-shadow-size, 0px 2px 4px 0px) !default; // 中尺寸阴影尺寸 (0px 2px 4px 0px)
-$-button-large-height: var(--wot-button-large-height, 44px) !default; // 大型按钮高度 (44px)
-$-button-large-padding: var(--wot-button-large-padding, 0 36px) !default; // 大型按钮padding (0 36px)
+$-button-large-height: var(--wot-button-large-height, 42px) !default; // 大型按钮高度 (44px)
+$-button-large-padding: var(--wot-button-large-padding, 0 30px) !default; // 大型按钮padding (0 36px)
 $-button-large-fs: var(--wot-button-large-fs, $-fs-title) !default; // 大型按钮字号 (16px)
-$-button-large-radius: var(--wot-button-large-radius, 8px) !default; // 大型按钮圆角大小 (8px)
+$-button-large-radius: var(--wot-button-large-radius, 5px) !default; // 大型按钮圆角大小 (8px)
 $-button-large-loading: var(--wot-button-large-loading, 24px) !default; // 大型按钮loading图标大小 (24px)
 $-button-large-box-shadow-size: var(--wot-button-large-box-shadow-size, 0px 4px 8px 0px) !default; // 大尺寸阴影尺寸 (0px 4px 8px 0px)
 $-button-icon-fs: var(--wot-button-icon-fs, 18px) !default; // 带图标的按钮的图标大小 (18px)
@@ -540,7 +540,7 @@ $-search-icon-size: var(--wot-search-icon-size, 18px) !default; // 图标大小 
 $-search-clear-icon-size: var(--wot-search-clear-icon-size, $-fs-title) !default; // 清除图标大小 (16px)
 $-search-placeholder-color: var(--wot-search-placeholder-color, #bfbfbf) !default; // placeholder 颜色 (bfbfbf)
 $-search-cancel-padding: var(--wot-search-cancel-padding, 0 $-search-side-padding 0 10px) !default; // 取消按钮间距 (0 12px 0 10px)
-$-search-cancel-fs: var(--wot-search-cancel-fs, $-fs-title) !default; // 取消按钮字号 (16px)
+$-search-cancel-fs: var(--wot-search-cancel-fs, $-fs-content) !default; // 取消按钮字号 (16px)
 $-search-cancel-color: var(--wot-search-cancel-color, rgba(0, 0, 0, 0.65)) !default; // 取消按钮颜色 (rgba(0, 0, 0, 0.65))
 $-search-light-bg: var(--wot-search-light-bg, $-color-bg) !default; // light 类型的容器背景色 (rgba(247, 247, 247, 1))
 
@@ -560,7 +560,7 @@ $-slider-disabled-color: var(--wot-slider-disabled-color, rgba(0, 0, 0, 0.25)) !
 /* sort-button */
 $-sort-button-fs: var(--wot-sort-button-fs, $-fs-content) !default; // 字号 (14px)
 $-sort-button-color: var(--wot-sort-button-color, $-color-content) !default; // 颜色 ($-color-content)
-$-sort-button-height: var(--wot-sort-button-height, 48px) !default; // 高度 (48px)
+$-sort-button-height: var(--wot-sort-button-height, 35px) !default; // 高度 (48px)
 $-sort-button-line-height: var(--wot-sort-button-line-height, 3px) !default; // 下划线高度 (3px)
 $-sort-button-line-color: var(--wot-sort-button-line-color, $-color-theme) !default; // 下划线颜色 ($-color-theme)
 
@@ -581,13 +581,17 @@ $-steps-dot-active-size: var(--wot-steps-dot-active-size, 9px) !default; // 点�
 
 /* switch */
 $-switch-size: var(--wot-switch-size, 28px) !default; // switch大小 (28px)
-$-switch-width: var(--wot-switch-width, calc(1.8em + 4px)) !default; // 宽度 (calc(1.8em + 4px))
+$-switch-width: var(--wot-switch-width, calc(2em + 4px)) !default; // 宽度 (calc(1.8em + 4px))
 $-switch-height: var(--wot-switch-height, calc(1em + 4px)) !default; // 高度 (calc(1em + 4px))
 $-switch-circle-size: var(--wot-switch-circle-size, 1em) !default; // 圆点大小 (1em)
 $-switch-border-color: var(--wot-switch-border-color, #e5e5e5) !default; // 边框颜色选中状态背景颜色
 $-switch-active-color: var(--wot-switch-active-color, $-color-theme) !default; // 选中状态背景 ($-color-theme)
+$-switch-active-circle-color: var(--wot-switch-active-circle-color, #ffffff) !default;
+
 $-switch-active-shadow-color: var(--wot-switch-active-shadow-color, rgba(0, 83, 162, 0.5)) !default; // 选中状态shadow颜色
 $-switch-inactive-color: var(--wot-switch-inactive-color, #eaeaea) !default; // 非选中背景颜色
+$-switch-inactive-circle-color: var(--wot-switch-inactive-circle-color, $-color-theme) !default;
+
 $-switch-inactive-shadow-color: var(--wot-switch-inactive-shadow-color, rgba(155, 155, 155, 0.5)) !default; // 非选中状态shadow颜色
 
 /* tabs */
@@ -829,7 +833,7 @@ $-navbar-capsule-icon-size: var(--wot-navbar-capsule-icon-size, 20px) !default; 
 $-table-color: var(--wot-table-color, $-font-gray-1) !default; // 表格字体颜色 ($-font-gray-1)
 $-table-bg: var(--wot-table-bg, #ffffff) !default; // 表格背景颜色 ($-color-white)
 $-table-stripe-bg: var(--wot-table-stripe-bg, #f3f3f3) !default; // 表格背景颜色 ($-color-gray-2)
-$-table-border-color: var(--wot-table-border-color, #ececec) !default; // 表格边框颜色 ($-color-gray-3)
+$-table-border-color: var(--wot-table-border-color, #e4e7ed) !default; // 表格边框颜色 ($-color-gray-3)
 $-table-font-size: var(--wot-table-font-size, 13px) !default; // 表格字体大小 (13px)
 
 /* sidebar */
@@ -852,10 +856,10 @@ $-sidebar-active-border-width: var(--wot-sidebar-active-border-width, 4px) !defa
 $-sidebar-active-border-height: var(--wot-sidebar-active-border-height, 16px) !default; // 激活项边框高度 (16px)
 
 /* fab */
-$-fab-trigger-height: var(--wot-fab-trigger-height, 56px) !default; // FAB触发按钮高度 (56px)
-$-fab-trigger-width: var(--wot-fab-trigger-width, 56px) !default; // FAB触发按钮宽度 (56px)
+$-fab-trigger-height: var(--wot-fab-trigger-height, 50px) !default; // FAB触发按钮高度 (56px)
+$-fab-trigger-width: var(--wot-fab-trigger-width, 50px) !default; // FAB触发按钮宽度 (56px)
 $-fab-actions-padding: var(--wot-actions-padding, 12px) !default; // FAB操作按钮内边距 (12px)
-$-fab-icon-fs: var(--wot-fab-icon-fs, 20px) !default; // FAB操作按钮图标大小 (20px)
+$-fab-icon-fs: var(--wot-fab-icon-fs, 25px) !default; // FAB操作按钮图标大小 (20px)
 
 /* count-down */
 $-count-down-text-color: var(--wot-count-down-text-color, $-color-gray-8) !default; // 倒计时字体颜色 ($-color-gray-8)

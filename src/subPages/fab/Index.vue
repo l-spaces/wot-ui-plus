@@ -61,7 +61,7 @@
         :position="position"
         :direction="direction"
         :draggable="draggable"
-        @click="showToast('我被点了')"
+        @click="showToast('我被点击了')"
       >
         <wd-button @click="showToast('一键三连')" :disabled="disabled" custom-class="custom-button" type="primary" round>
           <wd-icon name="logo-github-o" size="22px"></wd-icon>

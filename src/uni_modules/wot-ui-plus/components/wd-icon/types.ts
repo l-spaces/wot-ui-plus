@@ -11,6 +11,10 @@ export const iconProps = {
    */
   round: makeBooleanProp(false),
   /**
+   * 图标是否加粗
+   */
+  bold: makeBooleanProp(false),
+  /**
    * 图标的颜色
    */
   color: String,

@@ -11,6 +11,7 @@
   <page-wraper>
     <demo-block :title="$t('jiBenYongFa')" transparent>
       <wd-divider></wd-divider>
+      <wd-divider :hairline="false"></wd-divider>
     </demo-block>
 
     <demo-block :title="$t('zhan-shi-wen-ben')" transparent>
@@ -30,6 +31,7 @@
     </demo-block>
 
     <demo-block :title="$t('xu-xian')" transparent>
+      <wd-divider dashed></wd-divider>
       <wd-divider dashed>{{ $t('xu-xian-fen-ge') }}</wd-divider>
     </demo-block>
 

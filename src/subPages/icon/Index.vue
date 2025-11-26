@@ -6,6 +6,7 @@
         <wd-icon name="leaves" round color="red" />
         <wd-icon name="leaves" color="red" />
         <wd-icon name="leaves" size="34px" />
+        <wd-icon name="leaves" bold size="34px" />
       </demo-block>
       <demo-block title="图标列表">
         <view class="icon">

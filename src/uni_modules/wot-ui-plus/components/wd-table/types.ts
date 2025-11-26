@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2024-03-15 11:36:12
- * @LastEditTime: 2024-12-08 23:22:26
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-ui-plus/src/uni_modules/wot-ui-plus/components/wd-table/types.ts
- * 记得注释
- */
 import type { CSSProperties, ExtractPropTypes, InjectionKey } from 'vue'
 import { baseProps, makeBooleanProp, makeNumericProp, makeRequiredProp, numericProp } from '../common/props'
 import type { TableColumnProps } from '../wd-table-col/types'
@@ -33,7 +24,7 @@ export const tableProps = {
   /**
    * 行高
    */
-  rowHeight: makeNumericProp(50),
+  rowHeight: makeNumericProp(40),
   /**
    * 是否显示表头
    */
@@ -49,7 +40,24 @@ export const tableProps = {
     type: [Object, Boolean] as PropType<boolean | Omit<Partial<TableColumnProps>, 'prop'>>,
     default: false
   },
-  fixedHeader: makeBooleanProp(true)
+  /**
+   * 是否固定表头
+   */
+  fixedHeader: makeBooleanProp(true),
+  /**
+   * 空数据时显示的文本
+   */
+  emptyText: {
+    type: String,
+    default: () => '暂无数据'
+  },
+  /**
+   * 空数据区域高度，单位为px
+   */
+  emptyHeight: {
+    type: [String, Number],
+    default: 100
+  }
 }
 
 export type TableProps = ExtractPropTypes<typeof tableProps>

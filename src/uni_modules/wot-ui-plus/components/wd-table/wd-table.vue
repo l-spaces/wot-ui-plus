@@ -41,20 +41,27 @@
         :scrollLeft="state.scrollLeft"
       >
         <view id="table-body" class="wd-table__content" :style="realWidthStyle">
-          <wd-table-col
-            v-if="index !== false"
-            :prop="indexColumn.prop"
-            :label="indexColumn.label"
-            :width="indexColumn.width"
-            :sortable="indexColumn.sortable"
-            :fixed="indexColumn.fixed"
-            :align="indexColumn.align"
-          >
-            <template #value="{ index }">
-              <text>{{ index + 1 }}</text>
-            </template>
-          </wd-table-col>
+          <view v-if="data && data.length > 0">
+            <wd-table-col
+              v-if="index !== false"
+              :prop="indexColumn.prop"
+              :label="indexColumn.label"
+              :width="indexColumn.width"
+              :sortable="indexColumn.sortable"
+              :fixed="indexColumn.fixed"
+              :align="indexColumn.align"
+            >
+              <template #value="{ index }">
+                <text>{{ index + 1 }}</text>
+              </template>
+            </wd-table-col>
+          </view>
           <slot></slot>
+        </view>
+        <view v-if="!data || data.length === 0" class="wd-table__empty">
+          <slot name="empty">
+            <text>{{ emptyText }}</text>
+          </slot>
         </view>
       </scroll-view>
     </template>
@@ -180,8 +187,10 @@
 
   const bodyStyle = computed(() => {
     const style: CSSProperties = {}
-    if (isDef(props.height)) {
-      style['height'] = isDef(props.rowHeight) ? `calc(${props.data.length} * ${addUnit(props.rowHeight)})` : `calc(${props.data.length} * 50px)`
+    if (!props.data || props.data.length === 0) {
+      style['height'] = addUnit(props.emptyHeight)
+    } else if (isDef(props.height)) {
+      style['height'] = isDef(props.rowHeight) ? `calc(${props.data.length} * ${addUnit(props.rowHeight)})` : `calc(${props.data.length} * 40px)`
     }
     return `${objToStyle(style)}`
   })

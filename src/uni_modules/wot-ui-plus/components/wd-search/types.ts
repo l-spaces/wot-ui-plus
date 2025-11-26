@@ -18,7 +18,12 @@ export const searchProps = {
    * 默认值: ''
    */
   modelValue: makeStringProp(''),
-
+  /**
+   * 是否显示清除按钮
+   * 类型: boolean
+   * 默认值: true
+   */
+  clearabled: makeBooleanProp(true),
   /**
    * 是否使用输入框右侧插槽
    * 类型: boolean

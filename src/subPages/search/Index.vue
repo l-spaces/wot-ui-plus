@@ -3,11 +3,11 @@
     <wd-toast />
     <page-wraper>
       <demo-block :title="$t('jiBenYongFa')" transparent>
-        <wd-search v-model="value1" @search="search" @change="change" @cancel="cancel" @clear="clear" />
+        <wd-search v-model="value1" hideCancel :clearabled="false" @search="search" @change="change" @cancel="cancel" @clear="clear" />
       </demo-block>
 
       <demo-block :title="$t('bai-se-shu-ru-kuang')" transparent>
-        <wd-search light />
+        <wd-search light cancelTxt="搜索" />
       </demo-block>
 
       <demo-block :title="$t('sou-suo-zhan-wei-fu-ju-zuo')" transparent>

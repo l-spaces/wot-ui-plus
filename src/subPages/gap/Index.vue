@@ -14,7 +14,7 @@
         <wd-gap custom-class="custom-gap"></wd-gap>
       </demo-block>
       <demo-block custom-class="custom-safe-area-bottom" :title="$t('di-bu-an-quan-qu')" transparent>
-        <wd-gap bg-color="#FFFFFF" safe-area-bottom height="120rpx"></wd-gap>
+        <wd-gap bg-color="#333333" safe-area-bottom height="220rpx"></wd-gap>
       </demo-block>
     </view>
   </page-wraper>

@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2024-03-15 20:40:34
- * @LastEditTime: 2024-11-30 00:01:23
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-ui-plus/src/uni_modules/wot-ui-plus/components/wd-progress/types.ts
- * 记得注释
- */
 import type { PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp } from '../common/props'
 

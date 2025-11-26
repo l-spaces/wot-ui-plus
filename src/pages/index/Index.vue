@@ -16,7 +16,7 @@
         <wd-card v-for="(item, index) in list" :key="index" :title="item.name + '(' + item.pages.length + ')'" type="rectangle">
           <view :id="item.id" @click="kindToggle(item.id)">
             <wd-grid square clickable :gutter="10" :column="4" bg-color="rgba(0, 0, 0, 0.02)">
-              <wd-grid-item v-for="(page, j) in item.pages" :key="j">
+              <wd-grid-item v-for="(page, j) in item.pages" :key="j" :isDot="page.open">
                 <template #icon>
                   <image class="kind-list__img" :src="`../../static/images/${page.icon}.png`" @click="handleClick(`/subPages/${page.id}/Index`)" />
                   <!-- <i :class="['kind-list__img', 'iconfont', 'docs-' + page.icon]"></i> -->

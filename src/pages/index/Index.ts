@@ -6,7 +6,6 @@ export const list = [
       {
         id: 'button',
         icon: 'button',
-        open: true,
         name: '按钮组件'
       },
       {
@@ -47,6 +46,7 @@ export const list = [
       {
         id: 'card',
         icon: 'card',
+        open: true,
         name: '卡片组件'
       },
       {
@@ -199,7 +199,7 @@ export const list = [
       {
         id: 'inputNumber',
         icon: 'inputNumber',
-        name: '数字输入框'
+        name: '计数器'
       },
       {
         id: 'passwordInput',

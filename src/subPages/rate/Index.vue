@@ -1,7 +1,7 @@
 <template>
   <page-wraper>
     <demo-block :title="$t('jiBenYongFa')">
-      <wd-rate v-model="value1" @change="changeValue1" />
+      <wd-rate v-model="value1" clearable @change="changeValue1" />
     </demo-block>
 
     <demo-block :title="$t('zhi-du-zhuang-tai-readonly')">

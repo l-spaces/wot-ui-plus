@@ -9,7 +9,7 @@
   >
     <view @click.stop="" :style="{ visibility: inited ? 'visible' : 'hidden' }" id="trigger">
       <slot name="trigger" v-if="$slots.trigger"></slot>
-      <wd-button v-else @click="handleClick" custom-class="wd-fab__trigger" round :type="type" :disabled="disabled">
+      <wd-button v-else @click="handleClick" :custom-style="triggerStyle" custom-class="wd-fab__trigger" round :type="type" :disabled="disabled">
         <wd-icon custom-class="wd-fab__icon" :name="isActive ? activeIcon : inactiveIcon"></wd-icon>
       </wd-button>
     </view>
@@ -43,8 +43,8 @@
   import wdButton from '../wd-button/wd-button.vue'
   import wdIcon from '../wd-icon/wd-icon.vue'
   import wdTransition from '../wd-transition/wd-transition.vue'
-  import { type CSSProperties, computed, ref, watch, inject, getCurrentInstance, onBeforeUnmount, onMounted, nextTick } from 'vue'
-  import { getRect, getSystemInfo, isDef, isH5, objToStyle } from '../common/util'
+  import { type CSSProperties, computed, ref, watch, inject, getCurrentInstance, onBeforeUnmount, onMounted } from 'vue'
+  import { addUnit, getRect, getSystemInfo, isDef, isH5, objToStyle } from '../common/util'
   import { type Queue, queueKey } from '../composables/useQueue'
   import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
   import { fabProps, type FabExpose } from './types'
@@ -94,7 +94,7 @@
   const top = ref<number>(0)
   const left = ref<number>(0)
   const screen = reactive({ width: 0, height: 0 })
-  const fabSize = reactive({ width: 56, height: 56 })
+  const fabSize = reactive({ width: 50, height: 50 })
   const bounding = reactive({
     minTop: 0,
     minLeft: 0,
@@ -102,17 +102,20 @@
     maxLeft: 0
   })
 
+  /**
+   * 获取FAB的边界信息和屏幕信息
+   */
   async function getBounding() {
     const sysInfo = getSystemInfo()
     try {
       const trigerInfo = await getRect('#trigger', false, proxy)
-      fabSize.width = trigerInfo.width || 56
-      fabSize.height = trigerInfo.height || 56
+      fabSize.width = trigerInfo.width || 50
+      fabSize.height = trigerInfo.height || 50
     } catch (error) {
       console.log(error)
     }
 
-    const { top = 16, left = 16, right = 16, bottom = 16 } = props.gap
+    const { top = 15, left = 15, right = 15, bottom = 15 } = props.gap
     screen.width = sysInfo.windowWidth
     screen.height = isH5 ? sysInfo.windowTop + sysInfo.windowHeight : sysInfo.windowHeight
     bounding.minTop = isH5 ? sysInfo.windowTop + top : top
@@ -121,6 +124,24 @@
     bounding.maxTop = screen.height - fabSize.height - bottom
   }
 
+  /**
+   * FAB触发器的自定义样式
+   */
+  const triggerStyle = computed(() => {
+    const style: CSSProperties = {}
+    // 边界检查：确保size是正数
+    const size = Math.max(0, Number(props.size) || 0)
+    if (size > 0) {
+      style['--wot-fab-trigger-width'] = addUnit(size)
+      style['--wot-fab-trigger-height'] = addUnit(size)
+      style['--wot-fab-icon-fs'] = addUnit(size / 2)
+    }
+    return `${objToStyle(style)}`
+  })
+
+  /**
+   * 初始化FAB的位置
+   */
   function initPosition() {
     const pos = props.position
     const { minLeft, minTop, maxLeft, maxTop } = bounding
@@ -166,6 +187,9 @@
   // 按下时坐标相对于元素的偏移量
   const touchOffset = reactive({ x: 0, y: 0 })
   const attractTransition = ref<boolean>(false)
+  /**
+   * 处理触摸开始事件
+   */
   function handleTouchStart(e: TouchEvent) {
     if (props.draggable === false) return
 
@@ -175,6 +199,9 @@
     attractTransition.value = false
   }
 
+  /**
+   * 处理触摸移动事件
+   */
   function handleTouchMove(e: TouchEvent) {
     if (props.draggable === false) return
 
@@ -183,6 +210,7 @@
     let x = touch.clientX - touchOffset.x
     let y = touch.clientY - touchOffset.y
 
+    // 限制在边界范围内
     if (x < minLeft) x = minLeft
     else if (x > maxLeft) x = maxLeft
 
@@ -193,12 +221,16 @@
     left.value = x
   }
 
+  /**
+   * 处理触摸结束事件
+   */
   function handleTouchEnd() {
     if (props.draggable === false) return
 
     const screenCenterX = screen.width / 2
     const fabCenterX = left.value + fabSize.width / 2
     attractTransition.value = true
+    // 根据FAB中心点与屏幕中心点的位置关系决定吸附到哪一侧
     if (fabCenterX < screenCenterX) {
       left.value = bounding.minLeft
       fabDirection.value = 'right'
@@ -208,6 +240,11 @@
     }
   }
 
+  /**
+   * 计算FAB的根样式
+   * @description 根据当前状态计算FAB的CSS样式，包括位置、过渡效果和z-index
+   * @returns {string} 计算后的样式字符串
+   */
   const rootStyle = computed(() => {
     const style: CSSProperties = {
       top: top.value + 'px',
@@ -220,13 +257,19 @@
     return `${objToStyle(style)}${props.customStyle}`
   })
 
+  /**
+   * 组件挂载时的生命周期钩子
+   * @description 将组件添加到队列中，并初始化位置信息
+   */
   onMounted(() => {
+    // 将组件添加到队列中，用于管理多个FAB的显示状态
     if (queue && queue.pushToQueue) {
       queue.pushToQueue(proxy)
     } else {
       pushToQueue(proxy)
     }
 
+    // 使用requestAnimationFrame确保在DOM更新后初始化位置
     const { start } = useRaf(async () => {
       await getBounding()
       initPosition()
@@ -235,7 +278,12 @@
     start()
   })
 
+  /**
+   * 组件卸载前的生命周期钩子
+   * @description 从队列中移除组件，清理相关资源
+   */
   onBeforeUnmount(() => {
+    // 从队列中移除组件
     if (queue && queue.removeFromQueue) {
       queue.removeFromQueue(proxy)
     } else {
@@ -243,6 +291,14 @@
     }
   })
 
+  /**
+   * 处理点击事件
+   * @description 根据组件配置执行不同的点击行为：
+   * - 禁用状态下不执行任何操作
+   * - 非可展开模式下触发click事件
+   * - 可展开模式下切换激活状态
+   * @returns {void} 无返回值
+   */
   function handleClick() {
     if (props.disabled) {
       return
@@ -255,11 +311,17 @@
     emit('update:active', isActive.value)
   }
 
+  /**
+   * 打开FAB（展开子菜单）
+   */
   function open() {
     isActive.value = true
     emit('update:active', true)
   }
 
+  /**
+   * 关闭FAB（收起子菜单）
+   */
   function close() {
     isActive.value = false
     emit('update:active', false)

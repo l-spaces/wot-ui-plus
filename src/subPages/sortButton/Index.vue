@@ -2,18 +2,24 @@
   <page-wraper>
     <demo-block :title="$t('ji-chu-yong-fa-0')">
       <wd-sort-button v-model="value1" :title="$t('jia-ge')" @change="handleChange1" />
+      <br />
+      <wd-sort-button v-model="value1" filled :title="$t('jia-ge')" @change="handleChange1" />
+    </demo-block>
+
+    <demo-block title="下划线颜色 line-color='red'">
+      <wd-sort-button v-model="value2" line-color="red" :title="$t('jia-ge')" @change="handleChange1" />
     </demo-block>
 
     <demo-block :title="$t('she-zhi-allowreset-yun-xu-zhong-zhi-an-niu')">
-      <wd-sort-button v-model="value2" :title="$t('jia-ge-0')" allow-reset @change="handleChange2" />
+      <wd-sort-button v-model="value3" :title="$t('jia-ge-0')" allow-reset @change="handleChange2" />
     </demo-block>
 
     <demo-block :title="$t('she-zhi-descfirst-you-xian-qie-huan-wei-jiang-xu')">
-      <wd-sort-button v-model="value3" :title="$t('jia-ge-1')" desc-first @change="handleChange3" />
+      <wd-sort-button v-model="value4" :title="$t('jia-ge-1')" desc-first @change="handleChange3" />
     </demo-block>
 
     <demo-block :title="$t('bu-zhan-shi-xia-hua-xian-dang-zhi-you-yi-ge-pai-xu-an-niu-shi-ying-qu-xiao-zhan-shi-xia-hua-xian')">
-      <wd-sort-button v-model="value4" :title="$t('jia-ge-2')" :line="false" @change="handleChange4" />
+      <wd-sort-button v-model="value5" :title="$t('jia-ge-2')" :line="false" @change="handleChange4" />
     </demo-block>
   </page-wraper>
 </template>
@@ -24,6 +30,7 @@
   const value2 = ref<number>(0)
   const value3 = ref<number>(0)
   const value4 = ref<number>(0)
+  const value5 = ref<number>(0)
 
   function handleChange1({ value }: any) {
     console.log(value)

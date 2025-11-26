@@ -4,36 +4,36 @@
     <page-wraper>
       <demo-block :title="$t('da-xing-fen-duan-qi')" transparent>
         <view class="section">
-          <wd-segmented :options="list" v-model:value="current" size="large" @change="handleChange"></wd-segmented>
+          <wd-segmented :list="list" v-model:value="current" size="large" @change="handleChange"></wd-segmented>
         </view>
       </demo-block>
       <demo-block :title="$t('mo-ren-fen-duan-qi')" transparent>
         <view class="section">
-          <wd-segmented :options="list" v-model:value="current1"></wd-segmented>
+          <wd-segmented :list="list" v-model:value="current1"></wd-segmented>
         </view>
       </demo-block>
 
       <demo-block :title="$t('xiao-xing-fen-duan-qi')" transparent>
         <view class="section">
-          <wd-segmented :options="list" v-model:value="current2" size="small"></wd-segmented>
+          <wd-segmented :list="list" v-model:value="current2" size="small"></wd-segmented>
         </view>
       </demo-block>
 
       <demo-block :title="$t('dai-zhen-dong-xiao-guo-de-fen-duan-qi')" transparent>
         <view class="section">
-          <wd-segmented :options="list" v-model:value="current3" :vibrate-short="true"></wd-segmented>
+          <wd-segmented :list="list" v-model:value="current3" :vibrate-short="true"></wd-segmented>
         </view>
       </demo-block>
 
       <demo-block :title="$t('jin-yong-fen-duan-qi')" transparent>
         <view class="section">
-          <wd-segmented :options="list" v-model:value="current5" disabled></wd-segmented>
+          <wd-segmented :list="list" v-model:value="current5" disabled></wd-segmented>
         </view>
       </demo-block>
 
       <demo-block :title="$t('zi-ding-yi-xuan-ran-fen-duan-qi-biao-qian')" transparent>
         <view class="section">
-          <wd-segmented :options="list1" v-model:value="current4" :vibrate-short="true" @change="handleChange">
+          <wd-segmented :list="list1" v-model:value="current4" :vibrate-short="true" @change="handleChange">
             <template #label="{ option }">
               <view class="section-slot">
                 <image style="border-radius: 50%; width: 32px; height: 32px" :src="option.payload.avatar" />
@@ -55,7 +55,7 @@
 
       <wd-popup v-model="showPopup" position="bottom" @after-enter="handlePopupShow" closable custom-style="height: 200px;padding: 0 24rpx;">
         <view class="title">{{ $t('zai-dan-chu-kuang-zhong-shi-yong-0') }}</view>
-        <wd-segmented :options="list" v-model:value="current6" @change="handleChange" ref="segmentedRef"></wd-segmented>
+        <wd-segmented :list="list" v-model:value="current6" @change="handleChange" ref="segmentedRef"></wd-segmented>
       </wd-popup>
     </page-wraper>
   </view>

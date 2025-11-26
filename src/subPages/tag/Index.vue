@@ -4,7 +4,7 @@
       <demo-block :title="$t('jiBenYongFa')">
         <view>
           <wd-tag custom-class="space">{{ $t('biao-qian') }}</wd-tag>
-          <wd-tag custom-class="space" type="primary">{{ $t('biao-qian-0') }}</wd-tag>
+          <wd-tag custom-class="space" type="primary">标签</wd-tag>
           <wd-tag custom-class="space" type="danger">{{ $t('biao-qian-6') }}</wd-tag>
           <wd-tag custom-class="space" type="warning">{{ $t('biao-qian-7') }}</wd-tag>
           <wd-tag custom-class="space" type="success">{{ $t('biao-qian-8') }}</wd-tag>
@@ -93,7 +93,7 @@
           <wd-tag custom-class="space" round dynamic @confirm="handleConfirm"></wd-tag>
           <wd-tag custom-class="space" round dynamic @confirm="handleConfirm">
             <template #add>
-              <wd-icon name="pin" size="12px"></wd-icon>
+              <wd-icon name="pin" size="16px"></wd-icon>
               <text style="margin-left: 4px">{{ $t('zi-ding-yi') }}</text>
             </template>
           </wd-tag>
