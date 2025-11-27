@@ -1,218 +1,144 @@
 <template>
-  <page-wraper show-dark-mode>
-    <demo-block title="主色调">
-      <view class="color-box">
-        <view class="color-item" style="background: #2979ff" @click="handleClick('#2979ff')">
-          <text class="color-title">Primary</text>
-          <text class="color-value">#2979ff</text>
-        </view>
-        <view class="color-item" style="background: #2b85e4" @click="handleClick('#2b85e4')">
-          <text class="color-title">Dark</text>
-          <text class="color-value">#2b85e4</text>
-        </view>
-        <view class="color-item" style="background: #a0cfff" @click="handleClick('#a0cfff')">
-          <text class="color-title">Disabled</text>
-          <text class="color-value">#a0cfff</text>
-        </view>
-        <view class="color-item" style="background: #ecf5ff; color: #909399" @click="handleClick('#ecf5ff')">
-          <text class="color-title">Light</text>
-          <text class="color-value">#ecf5ff</text>
-        </view>
+  <page-wraper>
+    <demo-block title="基础使用">
+      <wd-segmented :options="list" mode="box" :v-model="current1" @change="change1"></wd-segmented>
+    </demo-block>
+    <demo-block title="按钮模式">
+      <wd-segmented :options="list" mode="button" barColor="#fff" :v-model="current2" @change="change2"></wd-segmented>
+    </demo-block>
+    <demo-block title="圆角模式">
+      <wd-segmented :options="list" mode="box" shape="round" :v-model="current2" @change="change2"></wd-segmented>
+      <br />
+      <wd-segmented
+        :options="list"
+        mode="button"
+        shape="round"
+        barColor="#3c9cff"
+        activeColor="#fff"
+        :v-model="current2"
+        @change="change2"
+      ></wd-segmented>
+    </demo-block>
+    <demo-block title="更换主题">
+      <wd-segmented :options="list" mode="box" :v-model="current3" activeColor="#f56c6c" @change="change3"></wd-segmented>
+
+      <view style="margin-top: 10px">
+        <wd-segmented :options="list" mode="button" :v-model="current3" activeColor="#fff" barColor="#f56c6c" @change="change3"></wd-segmented>
+      </view>
+
+      <view style="margin-top: 10px">
+        <wd-segmented
+          :options="list"
+          mode="button"
+          shape="round"
+          :v-model="current3"
+          activeColor="#fff"
+          barColor="#f56c6c"
+          @change="change3"
+        ></wd-segmented>
       </view>
     </demo-block>
-
-    <demo-block title="成功色">
-      <view class="color-box">
-        <view class="color-item" style="background: #19be6b" @click="handleClick('#19be6b')">
-          <text class="color-title">Success</text>
-          <text class="color-value">#19be6b</text>
-        </view>
-        <view class="color-item" style="background: #18b566" @click="handleClick('#18b566')">
-          <text class="color-title">Dark</text>
-          <text class="color-value">#18b566</text>
-        </view>
-        <view class="color-item" style="background: #71d5a1" @click="handleClick('#71d5a1')">
-          <text class="color-title">Disabled</text>
-          <text class="color-value">#71d5a1</text>
-        </view>
-        <view class="color-item" style="background: #dbf1e1; color: #909399" @click="handleClick('#dbf1e1')">
-          <text class="color-title">Light</text>
-          <text class="color-value">#dbf1e1</text>
-        </view>
-      </view>
+    <demo-block title="默认位置">
+      <wd-segmented :options="list" mode="button" :v-model="current4" @change="change4"></wd-segmented>
     </demo-block>
 
-    <demo-block title="警告色">
-      <view class="color-box">
-        <view class="color-item" style="background: #ff9900" @click="handleClick('#ff9900')">
-          <text class="color-title">Warning</text>
-          <text class="color-value">#ff9900</text>
-        </view>
-        <view class="color-item" style="background: #f29100" @click="handleClick('#f29100')">
-          <text class="color-title">Dark</text>
-          <text class="color-value">#f29100</text>
-        </view>
-        <view class="color-item" style="background: #fcbd71" @click="handleClick('#fcbd71')">
-          <text class="color-title">Disabled</text>
-          <text class="color-value">#fcbd71</text>
-        </view>
-        <view class="color-item" style="background: #fdf6ec; color: #909399" @click="handleClick('#fdf6ec')">
-          <text class="color-title">Light</text>
-          <text class="color-value">#fdf6ec</text>
-        </view>
-      </view>
+    <demo-block title="禁用">
+      <wd-segmented :options="list2" mode="button" :v-model="current4" @change="change4"></wd-segmented>
     </demo-block>
 
-    <demo-block title="危险出错色">
-      <view class="color-box">
-        <view class="color-item" style="background: #fa3534" @click="handleClick('#fa3534')">
-          <text class="color-title">Error</text>
-          <text class="color-value">#fa3534</text>
-        </view>
-        <view class="color-item" style="background: #dd6161" @click="handleClick('#dd6161')">
-          <text class="color-title">Dark</text>
-          <text class="color-value">#dd6161</text>
-        </view>
-        <view class="color-item" style="background: #fab6b6" @click="handleClick('#fab6b6')">
-          <text class="color-title">Disabled</text>
-          <text class="color-value">#fab6b6</text>
-        </view>
-        <view class="color-item" style="background: #fef0f0; color: #909399" @click="handleClick('#fef0f0')">
-          <text class="color-title">Light</text>
-          <text class="color-value">#fef0f0</text>
-        </view>
-      </view>
-    </demo-block>
-
-    <demo-block title="信息色">
-      <view class="color-box">
-        <view class="color-item" style="background: #909399" @click="handleClick('#909399')">
-          <text class="color-title">Info</text>
-          <text class="color-value">#909399</text>
-        </view>
-        <view class="color-item" style="background: #82848a" @click="handleClick('#82848a')">
-          <text class="color-title">Dark</text>
-          <text class="color-value">#82848a</text>
-        </view>
-        <view class="color-item" style="background: #c8c9cc" @click="handleClick('#c8c9cc')">
-          <text class="color-title">Disabled</text>
-          <text class="color-value">#c8c9cc</text>
-        </view>
-        <view class="color-item" style="background: #f4f4f5; color: #909399" @click="handleClick('#f4f4f5')">
-          <text class="color-title">Light</text>
-          <text class="color-value">#f4f4f5</text>
-        </view>
-      </view>
-    </demo-block>
-
-    <demo-block title="文字颜色">
-      <view class="color-box">
-        <view class="color-item" style="background: #000000" @click="handleClick('#000000')">
-          <text class="color-title">主要文字</text>
-          <text class="color-value">#000000</text>
-        </view>
-        <view class="color-item" style="background: #262626" @click="handleClick('#262626')">
-          <text class="color-title">常规文字</text>
-          <text class="color-value">#262626</text>
-        </view>
-        <view class="color-item" style="background: #595959" @click="handleClick('#595959')">
-          <text class="color-title">次要文字</text>
-          <text class="color-value">#595959</text>
-        </view>
-        <view class="color-item" style="background: #8c8c8c" @click="handleClick('#8c8c8c')">
-          <text class="color-title">占位文字</text>
-          <text class="color-value">#8c8c8c</text>
-        </view>
-        <view class="color-item" style="background: #c0c4cc" @click="handleClick('#c0c4cc')">
-          <text class="color-title">禁用文字</text>
-          <text class="color-value">#c0c4cc</text>
-        </view>
-      </view>
-    </demo-block>
-
-    <demo-block title="边框颜色">
-      <view class="color-box">
-        <view class="color-item" style="background: #dcdfe6; color: #909399" @click="handleClick('#dcdfe6')">
-          <text class="color-title">一级边框</text>
-          <text class="color-value">#dcdfe6</text>
-        </view>
-        <view class="color-item" style="background: #e4e7ed; color: #909399" @click="handleClick('#e4e7ed')">
-          <text class="color-title">二级边框</text>
-          <text class="color-value">#e4e7ed</text>
-        </view>
-        <view class="color-item" style="background: #ebeef5; color: #909399" @click="handleClick('#ebeef5')">
-          <text class="color-title">三级边框</text>
-          <text class="color-value">#ebeef5</text>
-        </view>
-        <view class="color-item" style="background: #f2f6fc; color: #909399" @click="handleClick('#f2f6fc')">
-          <text class="color-title">四级边框</text>
-          <text class="color-value">#f2f6fc</text>
-        </view>
-      </view>
-    </demo-block>
-
-    <demo-block title="背景颜色">
-      <view class="color-box">
-        <view class="color-item" style="background: #f2f3f5; color: #909399" @click="handleClick('#f2f3f5')">
-          <text class="color-title">背景颜色</text>
-          <text class="color-value">#f2f3f5</text>
-        </view>
-        <view class="color-item" style="background: Transparent; color: #909399" @click="handleClick('Transparent')">
-          <text class="color-title">背景颜色</text>
-          <text class="color-value">Transparent</text>
-        </view>
+    <demo-block :title="$t('zi-ding-yi-xuan-ran-fen-duan-qi-biao-qian')" transparent>
+      <view class="section">
+        <wd-segmented :options="list1" v-model="current5" height="80px" @change="handleChange">
+          <template #label="{ option }">
+            <view class="section-slot">
+              <image style="border-radius: 50%; width: 32px; height: 32px" :src="(option as any).avatar" />
+              <view class="name">
+                {{ (option as any).value }}
+              </view>
+            </view>
+          </template>
+        </wd-segmented>
       </view>
     </demo-block>
   </page-wraper>
 </template>
 
-<script lang="ts" setup>
-  import { onMounted } from 'vue'
-  import { useToast } from '@/uni_modules/wot-ui-plus'
-  const toast = useToast()
+<script setup lang="ts">
+  import { computed, ref } from 'vue'
+  import { useI18n } from 'vue-i18n'
 
-  function handleClick(name: string) {
-    // #ifdef H5
-    uni.setClipboardData({
-      data: `${name}`,
-      showToast: false,
-      success: () => {
-        toast.show({
-          position: 'bottom',
-          msg: `${name}`
-        })
-      }
-    })
+  // 引入国际化
+  const { t } = useI18n()
 
-    // #endif
+  // 基础列表数据
+  const list = ['未付款', '待评价', '已付款']
+
+  // 带禁用状态的列表数据
+  const list2 = [{ name: '未付款', disabled: true }, { name: '待评价' }, { name: '已付款' }]
+
+  // 自定义渲染列表数据
+  const list1 = computed(() => [
+    {
+      value: '张三',
+      disabled: false,
+      avatar: '../../static/img/a1.png'
+    },
+    {
+      value: '李四',
+      disabled: false,
+      avatar: '../../static/img/a2.png'
+    },
+    {
+      value: '王五',
+      disabled: true,
+      avatar: '../../static/img/a3.png'
+    },
+    {
+      value: '赵六',
+      disabled: false,
+      avatar: '../../static/img/a4.png'
+    }
+  ])
+
+  // 各分段器的当前选中索引
+  const current1 = ref(0)
+  const current2 = ref(0)
+  const current3 = ref(0)
+  const current4 = ref(1)
+  const current5 = ref(t('han-mei-mei-0'))
+  // 事件处理函数
+  const change1 = (index: number, item: any) => {
+    current1.value = index
+    console.log('index', index, current1.value, item)
   }
 
-  onMounted(() => {})
+  const change2 = (index: number) => {
+    current2.value = index
+    console.log('index', index)
+  }
+
+  const change3 = (index: number) => {
+    current3.value = index
+    console.log('index', index)
+  }
+
+  const change4 = (index: number) => {
+    current4.value = index
+    console.log('index', index)
+  }
+
+  const handleChange = (index: number) => {
+    console.log('segmented change:', index)
+  }
 </script>
 
-<style lang="scss" scoped>
-  .color-box {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: #fff;
-    text-align: center;
-
-    .color-item {
-      display: flex;
-      flex: 1;
-      margin: 0 4px;
-      flex-direction: column;
-      border-radius: 5px;
-      padding: 5px 0;
-    }
-
-    .color-title {
-      font-size: 11px;
-    }
-
-    .color-value {
-      font-size: 10px;
+<style lang="scss">
+  .section {
+    width: 100%;
+    padding: 0 24rpx;
+    box-sizing: border-box;
+    &-slot {
+      padding: 4px;
     }
   }
 </style>
