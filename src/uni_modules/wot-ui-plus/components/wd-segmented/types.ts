@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeBooleanProp } from '../common/props'
 
-export const signatureProps = {
+export const segmentedProps = {
   ...baseProps,
 
   // 选项的数组
@@ -87,4 +87,4 @@ export const signatureProps = {
   vibrateShort: makeBooleanProp(false)
 }
 
-export type signatureProps = ExtractPropTypes<typeof signatureProps>
+export type segmentedProps = ExtractPropTypes<typeof segmentedProps>

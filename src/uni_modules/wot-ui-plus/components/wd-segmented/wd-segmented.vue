@@ -45,7 +45,7 @@
 
 <script lang="ts">
   export default {
-    name: 'wd-signature',
+    name: 'wd-segmented',
     options: {
       virtualHost: true,
       addGlobalClass: true,
@@ -57,9 +57,9 @@
 <script setup lang="ts">
   import { computed, nextTick, onMounted, onBeforeUnmount, watch, ref, type CSSProperties, getCurrentInstance } from 'vue'
   import { addUnit, isObj, getRect, uuid } from '../common/util'
-  import { signatureProps } from './types'
+  import { segmentedProps } from './types'
 
-  const props = defineProps(signatureProps)
+  const props = defineProps(segmentedProps)
 
   // 定义事件
   const emit = defineEmits(['change', 'update:value'])
