@@ -4,7 +4,7 @@
  * @LastEditTime: 2024-11-24 23:04:55
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: /wot-ui-plus/src/uni_modules/wot-ui-plus/components/wd-segmented/types.ts
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-segmented/types.ts
  * 记得注释
  */
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
