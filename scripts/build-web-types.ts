@@ -3,57 +3,6 @@
  *
  * @fileoverview wot-ui-plus 组件库的 IDE 智能提示支持文件生成工具
  *
- * @description
- * 本脚本是 wot-ui-plus 组件库构建系统的核心组成部分，专门负责从组件 Markdown 文档
- * 自动生成 WebTypes 格式的元数据文件。WebTypes 是一种标准化的 Web 组件描述格式，
- * 能够为现代 IDE（如 VS Code、WebStorm、IntelliJ IDEA 等）提供智能代码补全、
- * 属性提示、文档悬浮、类型检查等增强功能。
- *
- * 作为构建流程中的关键环节，该脚本确保了组件库文档与 IDE 支持的实时同步，
- * 极大提升了开发者的使用体验和开发效率。
- *
- * @tech-stack
- * - 运行环境：Node.js + TypeScript
- * - 核心依赖：components-helper（WebTypes 生成库）
- * - 文档格式：Markdown 表格规范
- * - 输出格式：WebTypes JSON Schema
- * - 平台兼容：Windows/macOS/Linux
- *
- * @design-philosophy
- * 1. 自动化优先：从文档自动提取，避免手动维护元数据
- * 2. 标准化处理：统一的命名规范和格式转换
- * 3. 类型安全：完整的 TypeScript 类型支持
- * 4. 跨平台兼容：支持不同操作系统的路径处理
- * 5. 可扩展性：模块化的处理函数设计
- *
- * @core-features
- * - 文档解析：从 Markdown 表格中提取组件属性、事件、插槽信息
- * - 名称转换：将中文标题转换为 wd- 前缀的标准组件名称
- * - 类型映射：TypeScript 类型到 WebTypes 格式的智能转换
- * - 属性处理：v-model 双向绑定等特殊属性的标准化
- * - URL 生成：组件文档在线链接的自动生成
- * - 跨平台：Windows/macOS 路径分隔符的兼容处理
- *
- * @processing-workflow
- * 1. 扫描 docs/component/ 目录下的所有 .md 文件
- * 2. 使用正则表达式匹配文档中的表格内容
- * 3. 提取 Attributes、Events、Slots 三类表格信息
- * 4. 对提取的信息进行清理和格式转换
- * 5. 生成符合 WebTypes 规范的 JSON 文件
- * 6. 输出到 src/uni_modules/wot-ui-plus/ 目录
- *
- * @input-format
- * 输入文件为标准的 Markdown 格式，包含以下类型的表格：
- * - Attributes 表格：描述组件的 props 属性
- * - Events 表格：描述组件的事件回调
- * - Slots 表格：描述组件的插槽内容
- *
- * @output-format
- * 输出为 WebTypes 格式的 JSON 文件，包含：
- * - 组件基本信息（名称、描述、文档链接）
- * - 属性定义（类型、默认值、描述）
- * - 事件定义（参数、回调说明）
- * - 插槽定义（名称、作用域、描述）
  *
  * @api-interface
  * 该脚本主要通过命令行调用，无对外 API 接口：
@@ -73,29 +22,6 @@
  * - CI/CD 集成：在持续集成中确保元数据的及时更新
  * - 包发布：确保 npm 包包含完整的 IDE 支持文件
  *
- * @performance-considerations
- * - 文件 I/O：使用同步操作确保处理顺序
- * - 正则表达式：优化匹配模式以提高解析效率
- * - 内存管理：逐文件处理，避免大量文件同时加载
- * - 缓存机制：可通过增量更新优化重复构建性能
- *
- * @error-handling
- * - 文件不存在：跳过无法读取的文档文件
- * - 格式错误：对不符合规范的表格内容进行容错处理
- * - 编码问题：统一使用 UTF-8 编码处理文本内容
- * - 路径问题：自动处理不同操作系统的路径分隔符
- *
- * @maintenance-notes
- * - 正则表达式：表格匹配模式需要与文档格式保持同步
- * - 类型映射：新增 TypeScript 类型时需要更新映射规则
- * - 文档规范：组件文档需要遵循统一的表格格式标准
- * - 版本兼容：WebTypes 格式更新时需要适配新版本
- *
- * @dependencies
- * - components-helper：WebTypes 生成的核心库
- * - path：Node.js 路径处理模块
- * - os：操作系统信息获取模块
- * - package.json：项目版本和名称信息
  *
  * @see
  * - WebTypes 规范：https://github.com/JetBrains/web-types
