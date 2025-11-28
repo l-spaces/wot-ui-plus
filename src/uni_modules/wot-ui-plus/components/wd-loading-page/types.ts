@@ -18,7 +18,7 @@ export const loadingProps = {
   /**
    * outline-圆形，ring-半圆形
    */
-  loadingMode: makeStringProp<LoadingType>('ring'),
+  type: makeStringProp<LoadingType>('ring'),
   /**
    * 是否显示加载动画
    */

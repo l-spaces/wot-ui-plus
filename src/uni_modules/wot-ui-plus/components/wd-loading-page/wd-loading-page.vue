@@ -22,7 +22,7 @@
               height: addUnit(iconSize)
             }"
           />
-          <wd-loading v-else :type="loadingMode" :size="addUnit(iconSize)" :color="loadingColor" />
+          <wd-loading v-else :type="type" :size="iconSize" :color="loadingColor" />
         </view>
         <slot>
           <text
