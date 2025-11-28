@@ -2,73 +2,44 @@
   <page-wraper>
     <demo-block transparent>
       <wd-cell-group border>
-        <wd-datetime-picker :label="$t('ri-qi-xuan-ze')" v-model="value1" @confirm="handleConfirm1" />
-        <wd-datetime-picker :label="$t('ri-qi-xuan-ze-dai-miao')" use-second v-model="value18" />
-        <wd-datetime-picker :label="$t('nian-yue-ri')" v-model="value2" type="date" @confirm="handleConfirm2" />
-        <wd-datetime-picker :label="$t('nian-yue')" v-model="value3" type="year-month" @confirm="handleConfirm3" />
-        <wd-datetime-picker :label="$t('nian')" v-model="value16" type="year" @confirm="handleConfirm16" />
-        <wd-datetime-picker :label="$t('shi-fen')" v-model="value4" type="time" @confirm="handleConfirm4" />
-        <wd-datetime-picker :label="$t('shi-jian-xuan-ze-dai-miao')" v-model="value19" type="time" use-second />
-        <wd-datetime-picker :label="$t('zhan-shi-ge-shi')" v-model="value5" :display-format="displayFormat" @confirm="handleConfirm5" />
-        <wd-datetime-picker :label="$t('nei-bu-ge-shi')" v-model="value6" :formatter="formatter" @confirm="handleConfirm6" />
-        <wd-datetime-picker :label="$t('guo-lv-xuan-xiang')" v-model="value7" :filter="filter" @confirm="handleConfirm7" />
+        <wd-datetime-picker label="日期选择" v-model="value1" @confirm="handleConfirm1" />
+        <wd-datetime-picker label="日期选择（带秒）" use-second v-model="value18" />
+        <wd-datetime-picker label="年月日" v-model="value2" type="date" @confirm="handleConfirm2" />
+        <wd-datetime-picker label="年月" v-model="value3" type="year-month" @confirm="handleConfirm3" />
+        <wd-datetime-picker label="年" v-model="value16" type="year" @confirm="handleConfirm16" />
+        <wd-datetime-picker label="时分" v-model="value4" type="time" @confirm="handleConfirm4" />
+        <wd-datetime-picker label="时间选择（带秒）" v-model="value19" type="time" use-second />
+        <wd-datetime-picker label="展示格式" v-model="value5" :display-format="displayFormat" @confirm="handleConfirm5" />
+        <wd-datetime-picker label="内部格式" v-model="value6" :formatter="formatter" @confirm="handleConfirm6" />
+        <wd-datetime-picker label="过滤选项" v-model="value7" :filter="filter" @confirm="handleConfirm7" />
         <wd-datetime-picker label="before-confirm" v-model="value8" :before-confirm="beforeConfirm" @confirm="handleConfirm8" />
-        <wd-datetime-picker :label="$t('cuo-wu')" v-model="value9" error @confirm="handleConfirm9" />
-        <wd-datetime-picker :label="$t('bi-tian')" v-model="value10" required @confirm="handleConfirm10" />
-        <wd-datetime-picker :label="$t('bi-tian-xing-hao-zai-you-ce')" v-model="value20" required marker-side="after" @confirm="handleConfirm20" />
-        <wd-datetime-picker :label="$t('mo-ren-ri-qi')" v-model="value2" :default-value="value2" />
-        <wd-datetime-picker
-          :label="$t('shi-jian-fan-wei-yi-nian')"
-          :minDate="minDate"
-          :maxDate="maxDate"
-          v-model="value17"
-          @confirm="handleConfirm1"
-        />
+        <wd-datetime-picker label="错误" v-model="value9" error @confirm="handleConfirm9" />
+        <wd-datetime-picker label="必填" v-model="value10" required @confirm="handleConfirm10" />
+        <wd-datetime-picker label="必填星号在右" v-model="value20" required marker-side="after" @confirm="handleConfirm20" />
+        <wd-datetime-picker label="默认日期" v-model="value2" :default-value="value2" />
+        <wd-datetime-picker label="时间范围一年" :minDate="minDate" :maxDate="maxDate" v-model="value17" @confirm="handleConfirm1" />
       </wd-cell-group>
     </demo-block>
-    <demo-block :title="$t('label-bu-chuan-0')" transparent>
+    <demo-block title="label 不传" transparent>
       <wd-datetime-picker v-model="value11" @confirm="handleConfirm11" />
     </demo-block>
-    <demo-block :title="$t('da-xiao')" transparent>
-      <wd-datetime-picker :label="$t('ri-qi-xuan-ze-0')" size="large" v-model="value12" @confirm="handleConfirm12" />
+    <demo-block title="大小" transparent>
+      <wd-datetime-picker label="日期选择" size="large" v-model="value12" @confirm="handleConfirm12" />
     </demo-block>
-    <demo-block :title="$t('ke-qing-kong')" transparent>
+    <demo-block title="可清空" transparent>
       <wd-cell-group border>
-        <wd-datetime-picker
-          :label="$t('ri-qi-xuan-ze-ke-qing-kong')"
-          v-model="valueClear1"
-          clearable
-          @clear="handleClear1"
-          @confirm="handleConfirmClear1"
-        />
-        <wd-datetime-picker
-          :label="$t('qu-yu-xuan-ze-ke-qing-kong')"
-          v-model="valueClear2"
-          clearable
-          @clear="handleClear2"
-          @confirm="handleConfirmClear2"
-        />
+        <wd-datetime-picker label="日期选择(可清空)" v-model="valueClear1" clearable @clear="handleClear1" @confirm="handleConfirmClear1" />
+        <wd-datetime-picker label="区域选择(可清空)" v-model="valueClear2" clearable @clear="handleClear2" @confirm="handleConfirmClear2" />
       </wd-cell-group>
     </demo-block>
-    <demo-block :title="$t('zhi-kao-you-zhan-shi')" transparent>
-      <wd-datetime-picker :label="$t('ri-qi-xuan-ze-1')" align-right v-model="value13" @confirm="handleConfirm13" />
+    <demo-block title="值靠右展示" transparent>
+      <wd-datetime-picker label="日期选择" align-right v-model="value13" @confirm="handleConfirm13" />
     </demo-block>
-    <demo-block :title="$t('qu-yu-xuan-ze')" transparent>
-      <wd-datetime-picker
-        :label="$t('ri-qi-xuan-ze-2')"
-        :title="$t('qing-xuan-ze-qu-jian')"
-        v-model="value14"
-        use-second
-        @confirm="handleConfirm14"
-      />
+    <demo-block title="区域选择" transparent>
+      <wd-datetime-picker label="日期选择" title="请选择区间" v-model="value14" use-second @confirm="handleConfirm14" />
     </demo-block>
-    <demo-block :title="$t('fan-wei-tab-zhan-shi-ge-shi')" transparent>
-      <wd-datetime-picker
-        :label="$t('ri-qi-xuan-ze-3')"
-        v-model="value15"
-        @confirm="handleConfirm15"
-        :display-format-tab-label="displayFormatTabLabel"
-      />
+    <demo-block title="范围tab展示格式" transparent>
+      <wd-datetime-picker label="日期选择" v-model="value15" @confirm="handleConfirm15" :display-format-tab-label="displayFormatTabLabel" />
     </demo-block>
     <demo-block title="超出隐藏" transparent>
       <wd-cell-group border>

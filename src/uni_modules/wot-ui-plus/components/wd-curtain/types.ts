@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2025-01-25 23:46:29
- * @LastEditTime: 2025-09-09 10:00:00
- * @LastEditors: rusheng
- * @Description:
- * @FilePath: /wot-ui-plus/src/uni_modules/wot-ui-plus/components/wd-curtain/types.ts
- * 记得注释
- */
 import type { ExtractPropTypes } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 

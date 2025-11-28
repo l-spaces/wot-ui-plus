@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2023-12-14 11:21:58
- * @LastEditTime: 2024-03-18 14:38:35
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: \wot-ui-plus\src\uni_modules\wot-ui-plus\components\wd-grid\types.ts
- * 记得注释
- */
 import { type ExtractPropTypes, type InjectionKey } from 'vue'
 import { baseProps, makeBooleanProp, makeStringProp } from '../common/props'
 

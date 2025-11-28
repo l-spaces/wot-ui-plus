@@ -9,7 +9,7 @@
         <wd-button @click="alert">alert</wd-button>
       </demo-block>
 
-      <demo-block :title="$t('xian-shi-biao-ti')">
+      <demo-block title="显示标题">
         <wd-button @click="alertWithTitle">alert</wd-button>
       </demo-block>
 
@@ -21,19 +21,19 @@
         <wd-button @click="prompt">prompt</wd-button>
       </demo-block>
 
-      <demo-block :title="$t('dang-wen-an-guo-chang-shi-dan-kuang-de-gao-du-bu-zai-zeng-jia-er-shi-jiang-wen-an-nei-rong-she-zhi-cheng-gun-dong')">
+      <demo-block title="当文案过长时，弹框的高度不再增加，而是将文案内容设置成滚动">
         <wd-button @click="alertWithLongChar">alert</wd-button>
       </demo-block>
 
-      <demo-block :title="$t('shi-yong-wdmessagebox-zu-jian-tong-guo-slot-cha-ru-qi-ta-zu-jian-nei-rong')">
+      <demo-block title="使用wd-message-box组件，通过slot插入其他组件内容">
         <wd-button @click="withSlot">custom</wd-button>
       </demo-block>
 
-      <demo-block :title="$t('shi-yong-beforeconfirm-gou-zi-zai-dan-kuang-que-ren-qian-ke-yi-jin-hang-yi-xie-cao-zuo')">
+      <demo-block title="使用beforeConfirm钩子，在弹框确认前，可以进行一些操作">
         <wd-button @click="beforeConfirm">beforeConfirm</wd-button>
       </demo-block>
 
-      <demo-block :title="$t('tong-guo-buttonprops-zi-ding-yi-an-niu')">
+      <demo-block title="通过button - props自定义按钮">
         <wd-button @click="withButtonProps">withButtonProps</wd-button>
       </demo-block>
     </page-wraper>

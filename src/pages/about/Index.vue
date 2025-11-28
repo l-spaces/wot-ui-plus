@@ -3,25 +3,19 @@
     <view class="page">
       <view class="page__bd">
         <view class="additional-links">
-          <view class="additional-links__title">{{ $t('gengDuoXinXi') }}</view>
+          <view class="additional-links__title">更多信息</view>
           <wd-cell-group border>
             <wd-cell
-              :title="$t('yuYanQieHuan')"
+              title="语言切换"
               title-width="200px"
-              :label="$t('dangQianYuYan') + ': ' + (currentLang === 'zh-CN' ? '中文' : 'English')"
+              :label="'当前语言' + ': ' + (currentLang === 'zh-CN' ? '中文' : 'English')"
               is-link
               @click="showLanguageSwitch = true"
             ></wd-cell>
           </wd-cell-group>
         </view>
       </view>
-      <wd-action-sheet
-        v-model="showLanguageSwitch"
-        :actions="languageActions"
-        :cancel-text="$t('qu-xiao')"
-        :title="$t('yuYanQieHuan')"
-        @select="handleLanguageSelect"
-      />
+      <wd-action-sheet v-model="showLanguageSwitch" :actions="languageActions" cancel-text="取消" title="语言切换" @select="handleLanguageSelect" />
     </view>
   </page-wraper>
 </template>

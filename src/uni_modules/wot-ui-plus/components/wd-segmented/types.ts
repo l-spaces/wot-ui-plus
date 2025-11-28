@@ -1,80 +1,90 @@
-/*
- * @Author: weisheng
- * @Date: 2024-03-18 11:22:03
- * @LastEditTime: 2024-11-24 23:04:55
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-ui-plus/src/uni_modules/wot-ui-plus/components/wd-segmented/types.ts
- * 记得注释
- */
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import { baseProps, makeBooleanProp, makeRequiredProp, makeStringProp } from '../common/props'
-
-export type SegmentedType = 'large' | 'middle' | 'small'
-
-export interface SegmentedOption {
-  value: string | number // 选中值
-  disabled?: boolean // 是否禁用
-  payload?: any // 更多数据
-}
+import type { ExtractPropTypes, PropType } from 'vue'
+import { baseProps, makeBooleanProp } from '../common/props'
 
 export const segmentedProps = {
   ...baseProps,
 
-  /**
-   * 当前选中的值
-   * 类型: string | number
-   * 最低版本: 0.1.23
-   */
-  value: makeRequiredProp([String, Number]),
-
-  /**
-   * 是否禁用分段器
-   * 类型: boolean
-   * 默认值: false
-   * 最低版本: 0.1.23
-   */
-  disabled: makeBooleanProp(false),
-
-  /**
-   * 控件尺寸
-   * 类型: string
-   * 可选值: 'large' | 'middle' | 'small'
-   * 默认值: 'middle'
-   * 最低版本: 0.1.23
-   */
-  size: makeStringProp<SegmentedType>('middle'),
-
-  /**
-   * 数据集合
-   * 类型: string[] | number[] | SegmentedOption[]
-   * 必需: 是
-   * 默认值: []
-   * 最低版本: 0.1.23
-   */
+  // 选项的数组
   options: {
-    type: Array as PropType<string[] | number[] | SegmentedOption[]>,
-    required: true,
+    type: Array,
     default: () => []
   },
-
+  // 初始化时默认选中的选项索引值
+  value: {
+    type: [String, Number],
+    default: 0
+  },
+  // 激活时的颜色
+  activeColor: {
+    type: String,
+    default: '#3c9cff' // #3c9cff
+  },
+  // 未激活的颜色
+  inactiveColor: {
+    type: String,
+    default: '#303133' // #
+  },
+  // 模式选择，mode=button为按钮形式，mode=box 时为分段模式
+  mode: {
+    type: String as PropType<'button' | 'box'>,
+    default: 'button'
+  },
+  // 字体大小
+  fontSize: {
+    type: [String, Number],
+    default: 12
+  },
+  // 激活选项的字体是否加粗
+  bold: {
+    type: Boolean,
+    default: true
+  },
+  // 组件背景颜色，mode为button时有效
+  bgColor: {
+    type: String,
+    default: '#eeeeef' // #
+  },
+  // 从list元素对象中读取的键名
+  keyName: {
+    type: String,
+    default: 'name'
+  },
+  // 选项的形状，可选值为 square 和 round
+  shape: {
+    type: String as PropType<'square' | 'round'>,
+    default: 'square'
+  },
+  // 选项的高度
+  height: {
+    type: [String, Number],
+    default: 35
+  },
+  // 选项的边框颜色，mode为button时有效
+  barColor: {
+    type: String,
+    default: ''
+  },
+  // 是否禁用选项
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  // 禁用选项的背景颜色
+  disabledBgColor: {
+    type: String,
+    default: '#c0c4cc' // #
+  },
+  // 禁用选项的字体颜色
+  disabledColor: {
+    type: String,
+    default: '#c0c4cc' // #
+  },
   /**
    * 切换选项时是否振动
    * 类型: boolean
    * 默认值: false
-   * 最低版本: 0.1.23
    */
   vibrateShort: makeBooleanProp(false)
 }
 
-export type SegmentedExpose = {
-  /**
-   * 更新滑块偏移量
-   * @param animation 是否开启动画，默认开启
-   */
-  updateActiveStyle: (animation?: boolean) => void
-}
-
-export type SegmentedProps = ExtractPropTypes<typeof segmentedProps>
-
-export type SegmentedInstance = ComponentPublicInstance<SegmentedProps, SegmentedExpose>
+export type segmentedProps = ExtractPropTypes<typeof segmentedProps>

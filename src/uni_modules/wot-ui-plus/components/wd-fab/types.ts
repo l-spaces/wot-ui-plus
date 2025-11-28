@@ -17,6 +17,10 @@ export const fabProps = {
    */
   type: makeStringProp<FabType>('primary'),
   /**
+   * 悬浮按钮大小，单位为像素
+   */
+  size: makeNumberProp(50),
+  /**
    * 悬浮按钮位置，可选值为 left-top right-top left-bottom right-bottom left-center right-center top-center bottom-center
    */
   position: makeStringProp<FabPosition>('right-bottom'),
@@ -44,6 +48,9 @@ export const fabProps = {
    * 是否可拖动
    */
   draggable: makeBooleanProp(false),
+  /**
+   * 自定义悬浮按钮菜单与按钮之间的间距，单位为像素。
+   */
   gap: {
     type: Object as PropType<FabGap>,
     default: () => ({})

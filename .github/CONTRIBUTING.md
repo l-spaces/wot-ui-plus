@@ -204,7 +204,7 @@ type：commit message
 
 ```bash
 # 添加主仓库到 remote
-git remote add upstream https://github.com/Moonofweisheng/wot-ui-plus.git
+git remote add upstream https://gitee.com/my_spaces/wot-ui-plus.git
 
 # 拉取主仓库最新代码
 git fetch upstream

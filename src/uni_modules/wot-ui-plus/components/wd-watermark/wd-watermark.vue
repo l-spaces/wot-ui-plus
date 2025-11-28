@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-04-05 21:32:56
- * @LastEditTime: 2025-10-31 13:46:23
- * @LastEditors: weisheng
- * @Description: 水印组件
- * @FilePath: /wot-ui-plus/src/uni_modules/wot-ui-plus/components/wd-watermark/wd-watermark.vue
- * 记得注释
--->
 <template>
   <view :class="rootClass" :style="rootStyle">
     <canvas

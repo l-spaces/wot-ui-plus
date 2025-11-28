@@ -2,20 +2,20 @@
   <page-wraper>
     <demo-block transparent>
       <wd-cell-group border>
-        <wd-picker :label="$t('dan-lie-xuan-xiang')" v-model="value0" :columns="columns0" />
-        <wd-picker :label="$t('jinYong')" disabled v-model="value1" :columns="columns1" />
-        <wd-picker :label="$t('zhi-du')" readonly v-model="value2" :columns="columns2" />
+        <wd-picker label="单列选项" v-model="value0" :columns="columns0" />
+        <wd-picker label="禁用" disabled v-model="value1" :columns="columns1" />
+        <wd-picker label="只读" readonly v-model="value2" :columns="columns2" />
         <wd-picker label="loading" v-model="value3" loading :columns="columns3" />
-        <wd-picker :label="$t('duo-lie')" v-model="value4" :columns="columns4" />
-        <wd-picker :label="$t('duo-ji-lian-dong')" v-model="value5" :columns="columns5" :column-change="onChangeDistrict" />
-        <wd-picker :label="$t('fen-ge-fu')" v-model="value6" :columns="columns6" :display-format="displayFormat" />
-        <wd-picker :label="$t('biaoTi-0')" v-model="value9" :columns="columns7" :title="$t('wen-an-biao-ti')" />
+        <wd-picker label="多列" v-model="value4" :columns="columns4" />
+        <wd-picker label="多级联动" v-model="value5" :columns="columns5" :column-change="onChangeDistrict" />
+        <wd-picker label="分隔符" v-model="value6" :columns="columns6" :display-format="displayFormat" />
+        <wd-picker label="标题" v-model="value9" :columns="columns7" title="文案标题" />
         <wd-picker label="before-confirm" :columns="columns0" v-model="value7" :before-confirm="beforeConfirm" />
-        <wd-picker :label="$t('cuo-wu')" v-model="value10" error :columns="columns0" />
-        <wd-picker :label="$t('bi-tian')" v-model="value11" :columns="columns0" required />
-        <wd-picker :label="$t('bi-tian-xing-hao-zai-you-ce')" v-model="value16" :columns="columns0" required marker-side="after" />
+        <wd-picker label="错误" v-model="value10" error :columns="columns0" />
+        <wd-picker label="必填" v-model="value11" :columns="columns0" required />
+        <wd-picker label="必填星号在右" v-model="value16" :columns="columns0" required marker-side="after" />
         <wd-picker
-          :label="$t('duo-ji-lian-dong-ke-qing-kong')"
+          label="多级联动(可清空)"
           clearable
           v-model="value15"
           :columns="columns5"
@@ -25,23 +25,23 @@
         />
       </wd-cell-group>
     </demo-block>
-    <demo-block :title="$t('label-bu-chuan-0')" transparent>
+    <demo-block title="label 不传" transparent>
       <wd-picker :columns="columns0" v-model="value12" />
     </demo-block>
-    <demo-block :title="$t('da-xiao')" transparent>
-      <wd-picker :label="$t('dan-lie-xuan-xiang')" v-model="value13" size="large" :columns="columns0" />
+    <demo-block title="大小" transparent>
+      <wd-picker label="单列选项" v-model="value13" size="large" :columns="columns0" />
     </demo-block>
-    <demo-block :title="$t('zhi-kao-you-xian-shi')" transparent>
-      <wd-picker :label="$t('dan-lie-xuan-xiang')" v-model="value14" align-right :columns="columns0" />
+    <demo-block title="值靠右显示" transparent>
+      <wd-picker label="单列选项" v-model="value14" align-right :columns="columns0" />
     </demo-block>
-    <demo-block :title="$t('mo-ren-cha-cao')" transparent>
+    <demo-block title="默认插槽" transparent>
       <view class="default-slot">
         <view class="default-slot-txt">
-          {{ $t('xuan-zhong-zhi') }}
+          选中值：
           <text style="color: #34d19d">{{ value8 }}</text>
         </view>
         <wd-picker :columns="columns0" v-model="value8" use-default-slot @confirm="handleConfirm">
-          <wd-button>{{ $t('cha-cao-huan-qi') }}</wd-button>
+          <wd-button>插槽唤起</wd-button>
         </wd-picker>
       </view>
     </demo-block>

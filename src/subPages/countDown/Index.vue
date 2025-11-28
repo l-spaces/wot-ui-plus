@@ -1,18 +1,18 @@
 <template>
   <page-wraper>
-    <demo-block :title="$t('jiBenYongFa')">
+    <demo-block title="基本用法">
       <wd-count-down :time="time" />
     </demo-block>
 
-    <demo-block :title="$t('zi-ding-yi-ge-shi')">
+    <demo-block title="自定义格式">
       <wd-count-down :time="time" format="DD 天 HH 时 mm 分 ss 秒" />
     </demo-block>
 
-    <demo-block :title="$t('hao-miao-ji-xuan-ran')">
+    <demo-block title="毫秒级渲染">
       <wd-count-down :time="time" millisecond format="HH:mm:ss:SS" />
     </demo-block>
 
-    <demo-block :title="$t('ziDingYiYangShi')">
+    <demo-block title="自定义样式">
       <wd-count-down :time="time">
         <template #default="{ current }">
           <span class="custom-count-down">{{ current.hours }}</span>
@@ -24,12 +24,12 @@
       </wd-count-down>
     </demo-block>
 
-    <demo-block :title="$t('shou-dong-kong-zhi')">
+    <demo-block title="手动控制">
       <wd-count-down ref="countDown" :time="3000" millisecond :auto-start="false" format="ss:SSS" @finish="onFinish"></wd-count-down>
       <wd-grid clickable border>
-        <wd-grid-item :text="$t('kai-shi')" icon="play-circle-stroke" @itemclick="start" />
-        <wd-grid-item :text="$t('zan-ting')" icon="pause-circle" @itemclick="pause" />
-        <wd-grid-item :text="$t('zhong-zhi')" icon="refresh" @itemclick="reset" />
+        <wd-grid-item text="开始" icon="play-circle-stroke" @itemclick="start" />
+        <wd-grid-item text="暂停" icon="pause-circle" @itemclick="pause" />
+        <wd-grid-item text="重置" icon="refresh" @itemclick="reset" />
       </wd-grid>
     </demo-block>
     <wd-toast></wd-toast>

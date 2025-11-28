@@ -1,12 +1,12 @@
 <template>
   <view :class="`wd-sort-button ${line ? 'wd-sort-button--line' : ''} ${customClass}`" :style="customStyle" @click="handleClick">
     <view class="wd-sort-button__wrapper">
-      <view :class="`wd-sort-button__left ${modelValue !== 0 ? 'is-active' : ''}`">
+      <view :class="`wd-sort-button__left ${modelValue !== 0 ? 'is-active' : ''}`" :style="{ '--wot-sort-button-line-color': lineColor }">
         {{ title }}
       </view>
       <view :class="`wd-sort-button__right ${modelValue !== 0 ? 'is-active' : ''}`">
-        <wd-icon v-if="modelValue !== 1" name="up" custom-class="wd-sort-button__icon-up" />
-        <wd-icon v-if="modelValue !== -1" name="down" custom-class="wd-sort-button__icon-down" />
+        <wd-icon v-if="modelValue !== 1" :name="filled ? 'up-box-filled' : 'up'" bold custom-class="wd-sort-button__icon-up" />
+        <wd-icon v-if="modelValue !== -1" :name="filled ? 'down-box-filled' : 'down'" bold custom-class="wd-sort-button__icon-down" />
       </view>
     </view>
   </view>

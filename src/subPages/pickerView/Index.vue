@@ -1,26 +1,26 @@
 <template>
   <page-wraper>
-    <demo-block :title="$t('ji-ben-yong-fa-shu-zhi-value1') + value1">
+    <demo-block title="基本用法，数值:  + {{value1}}">
       <wd-picker-view v-model="value1" :columns="columns1" />
     </demo-block>
 
-    <demo-block :title="$t('jin-yong-xuan-xiang-shu-zhi-value2') + value2">
+    <demo-block title="禁用选项，数值:  + {{value2}}">
       <wd-picker-view v-model="value2" :columns="columns2" />
     </demo-block>
 
-    <demo-block :title="$t('li-ji-chu-fa-change-shu-zhi-value6') + value6">
+    <demo-block title="立即触发 change，数值:  + {{value6}}">
       <wd-picker-view v-model="value6" :immediate-change="true" :columns="columns2" />
     </demo-block>
 
-    <demo-block :title="$t('jia-zai-zhong-shu-zhi-value3') + value3">
+    <demo-block title="加载中，数值:  + {{value3}}">
       <wd-picker-view v-model="value3" :columns="columns3" loading />
     </demo-block>
 
-    <demo-block :title="$t('duo-lie-shu-zhi-value4') + `[${value4}]`">
+    <demo-block title="多列，数值:  + `[${value4}]`">
       <wd-picker-view v-model="value4" :columns="columns4" />
     </demo-block>
 
-    <demo-block :title="$t('duo-ji-lian-dong-shu-zhi-value5') + `[${value5}]`">
+    <demo-block title="多级联动，数值:  + `[${value5}]`">
       <wd-picker-view v-model="value5" :columns="columns5" :column-change="onChangeDistrict" />
     </demo-block>
   </page-wraper>

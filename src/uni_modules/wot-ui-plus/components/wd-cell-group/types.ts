@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2023-12-14 11:21:58
- * @LastEditTime: 2024-03-18 13:57:14
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: \wot-ui-plus\src\uni_modules\wot-ui-plus\components\wd-cell-group\types.ts
- * 记得注释
- */
 import { type ExtractPropTypes, type InjectionKey } from 'vue'
 import { baseProps, makeBooleanProp } from '../common/props'
 

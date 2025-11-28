@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2024-09-01 15:42:04
- * @LastEditTime: 2024-09-21 15:36:09
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: \wot-ui-plus\src\uni_modules\wot-ui-plus\components\wd-search\types.ts
- * 记得注释
- */
 import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp } from '../common/props'
 
 export const searchProps = {
@@ -18,7 +9,12 @@ export const searchProps = {
    * 默认值: ''
    */
   modelValue: makeStringProp(''),
-
+  /**
+   * 是否显示清除按钮
+   * 类型: boolean
+   * 默认值: true
+   */
+  clearabled: makeBooleanProp(true),
   /**
    * 是否使用输入框右侧插槽
    * 类型: boolean

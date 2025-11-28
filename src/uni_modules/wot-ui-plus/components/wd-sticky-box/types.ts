@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2024-04-08 22:34:01
- * @LastEditTime: 2024-06-01 16:04:56
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-ui-plus/src/uni_modules/wot-ui-plus/components/wd-sticky-box/types.ts
- * 记得注释
- */
 import type { ComponentInternalInstance, InjectionKey } from 'vue'
 
 export type stickyBoxProvide = {

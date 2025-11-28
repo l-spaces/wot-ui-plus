@@ -15,7 +15,7 @@
     box-sizing: border-box;
     width: $-fab-trigger-width !important;
     height: $-fab-trigger-height !important;
-    border-radius: calc($-fab-trigger-height / 2) !important;
+    border-radius: 100% !important;
   }
 
   :deep() {

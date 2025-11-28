@@ -38,10 +38,13 @@
   })
 
   const circleStyle = computed(() => {
-    const circleStyle: string =
+    let circleStyle: string =
       (props.modelValue === props.activeValue && props.activeColor) || (props.modelValue !== props.activeValue && props.inactiveColor)
         ? 'box-shadow: none;'
         : ''
+    if (props.circleColor) {
+      circleStyle += `background: ${props.circleColor};`
+    }
     return circleStyle
   })
 

@@ -492,7 +492,9 @@ export function getRect<T extends boolean>(selector: string, all: T, scope?: any
       } else if (!all && rect) {
         resolve(rect as RectResultType<T>)
       } else {
-        reject(new Error('No nodes found'))
+        //  reject(new Error('No nodes found'))
+        // 找不到节点时返回默认值，避免抛出错误
+        resolve((all ? [] : { width: 0, height: 0 }) as RectResultType<T>)
       }
     }
 

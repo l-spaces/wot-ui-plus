@@ -1,132 +1,138 @@
 <template>
-  <view>
-    <wd-toast />
-    <page-wraper>
-      <demo-block :title="$t('da-xing-fen-duan-qi')" transparent>
-        <view class="section">
-          <wd-segmented :options="list" v-model:value="current" size="large" @change="handleChange"></wd-segmented>
-        </view>
-      </demo-block>
-      <demo-block :title="$t('mo-ren-fen-duan-qi')" transparent>
-        <view class="section">
-          <wd-segmented :options="list" v-model:value="current1"></wd-segmented>
-        </view>
-      </demo-block>
+  <page-wraper>
+    <demo-block title="基础使用">
+      <wd-segmented :options="list" mode="box" :v-model="current1" @change="change1"></wd-segmented>
+    </demo-block>
+    <demo-block title="按钮模式">
+      <wd-segmented :options="list" mode="button" barColor="#fff" :v-model="current2" @change="change2"></wd-segmented>
+    </demo-block>
+    <demo-block title="圆角模式">
+      <wd-segmented :options="list" mode="box" shape="round" :v-model="current2" @change="change2"></wd-segmented>
+      <br />
+      <wd-segmented
+        :options="list"
+        mode="button"
+        shape="round"
+        barColor="#3c9cff"
+        activeColor="#fff"
+        :v-model="current2"
+        @change="change2"
+      ></wd-segmented>
+    </demo-block>
+    <demo-block title="更换主题">
+      <wd-segmented :options="list" mode="box" :v-model="current3" activeColor="#f56c6c" @change="change3"></wd-segmented>
 
-      <demo-block :title="$t('xiao-xing-fen-duan-qi')" transparent>
-        <view class="section">
-          <wd-segmented :options="list" v-model:value="current2" size="small"></wd-segmented>
-        </view>
-      </demo-block>
+      <view style="margin-top: 10px">
+        <wd-segmented :options="list" mode="button" :v-model="current3" activeColor="#fff" barColor="#f56c6c" @change="change3"></wd-segmented>
+      </view>
 
-      <demo-block :title="$t('dai-zhen-dong-xiao-guo-de-fen-duan-qi')" transparent>
-        <view class="section">
-          <wd-segmented :options="list" v-model:value="current3" :vibrate-short="true"></wd-segmented>
-        </view>
-      </demo-block>
+      <view style="margin-top: 10px">
+        <wd-segmented
+          :options="list"
+          mode="button"
+          shape="round"
+          :v-model="current3"
+          activeColor="#fff"
+          barColor="#f56c6c"
+          @change="change3"
+        ></wd-segmented>
+      </view>
+    </demo-block>
+    <demo-block title="默认位置">
+      <wd-segmented :options="list" mode="button" :v-model="current4" @change="change4"></wd-segmented>
+    </demo-block>
 
-      <demo-block :title="$t('jin-yong-fen-duan-qi')" transparent>
-        <view class="section">
-          <wd-segmented :options="list" v-model:value="current5" disabled></wd-segmented>
-        </view>
-      </demo-block>
+    <demo-block title="禁用">
+      <wd-segmented :options="list2" mode="button" :v-model="current4" @change="change4"></wd-segmented>
+    </demo-block>
 
-      <demo-block :title="$t('zi-ding-yi-xuan-ran-fen-duan-qi-biao-qian')" transparent>
-        <view class="section">
-          <wd-segmented :options="list1" v-model:value="current4" :vibrate-short="true" @change="handleChange">
-            <template #label="{ option }">
-              <view class="section-slot">
-                <image style="border-radius: 50%; width: 32px; height: 32px" :src="option.payload.avatar" />
-
-                <view class="name">
-                  {{ option.value }}
-                </view>
+    <demo-block title="自定义渲染分段器标签" transparent>
+      <view class="section">
+        <wd-segmented :options="list1" v-model="current5" height="80px" @change="handleChange">
+          <template #label="{ option }">
+            <view class="section-slot">
+              <image style="border-radius: 50%; width: 32px; height: 32px" :src="(option as any).avatar" />
+              <view class="name">
+                {{ (option as any).value }}
               </view>
-            </template>
-          </wd-segmented>
-        </view>
-      </demo-block>
-
-      <demo-block :title="$t('zai-dan-chu-kuang-zhong-shi-yong')" transparent>
-        <view class="section">
-          <wd-button @click="handleClick">{{ $t('da-kai-dan-chuang') }}</wd-button>
-        </view>
-      </demo-block>
-
-      <wd-popup v-model="showPopup" position="bottom" @after-enter="handlePopupShow" closable custom-style="height: 200px;padding: 0 24rpx;">
-        <view class="title">{{ $t('zai-dan-chu-kuang-zhong-shi-yong-0') }}</view>
-        <wd-segmented :options="list" v-model:value="current6" @change="handleChange" ref="segmentedRef"></wd-segmented>
-      </wd-popup>
-    </page-wraper>
-  </view>
+            </view>
+          </template>
+        </wd-segmented>
+      </view>
+    </demo-block>
+  </page-wraper>
 </template>
-<script lang="ts" setup>
-  import type { SegmentedInstance, SegmentedOption } from '@/uni_modules/wot-ui-plus/components/wd-segmented/types'
+
+<script setup lang="ts">
   import { computed, ref } from 'vue'
   import { useI18n } from 'vue-i18n'
 
+  // 引入国际化
   const { t } = useI18n()
 
-  const list = computed(() => [t('pingLun'), t('dian-zan'), t('gong-xian'), t('da-shang')])
+  // 基础列表数据
+  const list = ['未付款', '待评价', '已付款']
 
+  // 带禁用状态的列表数据
+  const list2 = [{ name: '未付款', disabled: true }, { name: '待评价' }, { name: '已付款' }]
+
+  // 自定义渲染列表数据
   const list1 = computed(() => [
     {
-      value: t('li-lei'),
+      value: '张三',
       disabled: false,
-      payload: {
-        avatar: 'https://wot-ui.cn/assets/redpanda.jpg'
-      }
+      avatar: '../../static/img/a1.png'
     },
     {
-      value: t('han-mei-mei'),
+      value: '李四',
       disabled: false,
-      payload: {
-        avatar: 'https://wot-ui.cn/assets/capybara.jpg'
-      }
+      avatar: '../../static/img/a2.png'
     },
     {
-      value: t('lin-tao'),
+      value: '王五',
       disabled: true,
-      payload: {
-        avatar: 'https://wot-ui.cn/assets/panda.jpg'
-      }
+      avatar: '../../static/img/a3.png'
     },
     {
-      value: t('tom'),
+      value: '赵六',
       disabled: false,
-      payload: {
-        avatar: 'https://wot-ui.cn/assets/meng.jpg'
-      }
+      avatar: '../../static/img/a4.png'
     }
   ])
 
-  const current = ref(t('jian-jie'))
-
-  const current1 = ref(t('xiang-qing'))
-
-  const current2 = ref(t('pingLun'))
-
-  const current3 = ref(t('da-shang-0'))
-
-  const current4 = ref(t('han-mei-mei-0'))
-
-  const current5 = ref(t('pingLun'))
-
-  function handleChange(option: SegmentedOption) {
-    console.log(option)
+  // 各分段器的当前选中索引
+  const current1 = ref(0)
+  const current2 = ref(0)
+  const current3 = ref(0)
+  const current4 = ref(1)
+  const current5 = ref(t('han-mei-mei-0'))
+  // 事件处理函数
+  const change1 = (index: number, item: any) => {
+    current1.value = index
+    console.log('index', index, current1.value, item)
   }
 
-  const current6 = ref(t('dian-zan'))
-  const segmentedRef = ref<SegmentedInstance>()
-  const showPopup = ref(false)
-  function handleClick() {
-    showPopup.value = true
+  const change2 = (index: number) => {
+    current2.value = index
+    console.log('index', index)
   }
-  function handlePopupShow() {
-    segmentedRef.value?.updateActiveStyle()
+
+  const change3 = (index: number) => {
+    current3.value = index
+    console.log('index', index)
+  }
+
+  const change4 = (index: number) => {
+    current4.value = index
+    console.log('index', index)
+  }
+
+  const handleChange = (index: number) => {
+    console.log('segmented change:', index)
   }
 </script>
-<style lang="scss" scoped>
+
+<style lang="scss">
   .section {
     width: 100%;
     padding: 0 24rpx;
@@ -134,12 +140,5 @@
     &-slot {
       padding: 4px;
     }
-  }
-  .title {
-    display: flex;
-    font-size: 32rpx;
-    align-items: center;
-    justify-content: center;
-    padding: 24rpx 0;
   }
 </style>

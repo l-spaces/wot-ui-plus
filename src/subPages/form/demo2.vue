@@ -1,53 +1,44 @@
-<!--
- * @Author: weisheng
- * @Date: 2024-11-09 12:35:25
- * @LastEditTime: 2025-03-30 20:47:41
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-ui-plus/src/pages/form/demo2.vue
- * 记得注释
--->
 <template>
   <page-wraper>
     <wd-form ref="form" :model="model" :reset-on-change="false">
       <wd-cell-group border>
         <wd-input
-          :label="$t('wai-bi-ba-bu')"
+          label="歪比巴卜"
           label-width="100px"
           prop="name"
           clearable
           v-model="model.name"
-          :placeholder="$t('qing-shu-ru-wai-bi-ba-bu')"
+          placeholder="请输入歪比巴卜"
           @blur="handleBlur('name')"
-          :rules="[{ required: true, message: $t('qing-shu-ru-wai-bi-ba-bu') }]"
+          :rules="[{ required: true, message: '请输入歪比巴卜' }]"
         />
         <wd-input
-          :label="$t('ma-ka-ba-ka-dan-hao-0')"
+          label="玛卡巴卡单号"
           prop="phoneNumber"
           label-width="100px"
           clearable
           @blur="handleBlur('phoneNumber')"
           v-model="model.phoneNumber"
-          :placeholder="$t('ma-ka-ba-ka-dan-hao')"
-          :rules="[{ required: true, message: $t('ma-ka-ba-ka-dan-hao') }]"
+          placeholder="请填写玛卡巴卡单号"
+          :rules="[{ required: true, message: '请填写玛卡巴卡单号' }]"
         />
 
         <wd-input
-          :label="$t('ma-ka-ba-ka-id')"
+          label="玛卡巴卡id"
           prop="id"
           label-width="100px"
           clearable
           @blur="handleBlur('id')"
           v-model="model.id"
-          :placeholder="$t('qing-tian-xie-ma-ka-ba-ka-id')"
-          :rules="[{ required: true, message: $t('qing-tian-xie-ma-ka-ba-ka-id') }]"
+          placeholder="请填写玛卡巴卡id"
+          :rules="[{ required: true, message: '请填写玛卡巴卡id' }]"
         />
       </wd-cell-group>
     </wd-form>
 
     <view class="footer">
-      <wd-button type="primary" @click="handleSubmit">{{ $t('ti-jiao') }}</wd-button>
-      <wd-button type="primary" @click="handleValidate">{{ $t('xiao-yan-dan-hao-he-id') }}</wd-button>
+      <wd-button type="primary" @click="handleSubmit">提交</wd-button>
+      <wd-button type="primary" @click="handleValidate">校验单号和ID</wd-button>
     </view>
   </page-wraper>
 </template>

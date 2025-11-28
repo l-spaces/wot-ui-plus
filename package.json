@@ -1,12 +1,12 @@
 {
   "name": "wot-ui-plus",
-  "version": "3.0.2",
+  "version": "3.0.5",
   "releaseDate": "2025-11-14",
   "description": "一个基于Vue3+TS开发的uni-app组件库，提供87+高质量组件，支持暗黑模式、国际化和自定义主题。",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/my_spaces/wd-ui"
+    "url": "https://github.com/l-spaces/wot-ui-plus"
   },
   "scripts": {
     "outdated": "pnpm outdated",
@@ -206,7 +206,7 @@
   },
   "author": "",
   "bugs": {
-    "url": "https://gitee.com/my_spaces/wd-ui/issues"
+    "url": "https://github.com/l-spaces/wot-ui-plus/issues"
   },
-  "homepage": "https://gitee.com/my_spaces/wd-ui"
+  "homepage": "https://github.com/l-spaces/wot-ui-plus#readme"
 }

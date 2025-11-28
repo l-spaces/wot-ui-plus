@@ -1,10 +1,10 @@
 <template>
   <wd-config-provider :theme="theme" :theme-vars="isRed ? themeVars : {}">
     <view class="page-wraper" @click="closeOutside">
-      <wd-cell :title="$t('qie-huan-an-hei')" title-width="240px" center v-if="showDarkMode">
+      <wd-cell title="切换暗黑模式" title-width="240px" center v-if="showDarkMode">
         <wd-switch v-model="isDark" />
       </wd-cell>
-      <wd-cell :title="$t('qie-huan-zhu-ti-se')" title-width="240px" center v-if="showDarkMode">
+      <wd-cell title="切换主题色" title-width="240px" center v-if="showDarkMode">
         <wd-switch v-model="isRed" />
       </wd-cell>
       <slot />
@@ -29,7 +29,7 @@
       <wd-button type="error" round @click="goToReward">
         <view style="display: flex; align-items: center">
           <wd-icon name="good" size="22px"></wd-icon>
-          <text>{{ $t('kan-shi-pin-mian-guang-gao') }}</text>
+          <text>激励一下</text>
         </view>
       </wd-button>
     </wd-fab>

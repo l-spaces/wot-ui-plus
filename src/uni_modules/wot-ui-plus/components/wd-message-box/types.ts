@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2024-04-08 22:34:01
- * @LastEditTime: 2024-12-05 13:26:50
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: \wot-ui-plus\src\uni_modules\wot-ui-plus\components\wd-message-box\types.ts
- * 记得注释
- */
 import { baseProps, makeStringProp, makeBooleanProp } from '../common/props'
 import type { ButtonProps } from '../wd-button/types'
 import { type InputSize, type InputType } from '../wd-input/types'

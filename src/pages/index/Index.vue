@@ -8,15 +8,13 @@
             <text class="version">@{{ packageConfig.version }}</text>
           </view>
         </view>
-        <view class="page__desc">
-          {{ $t('wot-ui-plus-info') }}
-        </view>
+        <view class="page__desc">Wot UI Plus 是一个基于Vue3+TS开发的uni-app组件库，提供87+高质量组件，支持暗黑模式、国际化和自定义主题。</view>
       </view>
       <view class="page__bd">
         <wd-card v-for="(item, index) in list" :key="index" :title="item.name + '(' + item.pages.length + ')'" type="rectangle">
           <view :id="item.id" @click="kindToggle(item.id)">
             <wd-grid square clickable :gutter="10" :column="4" bg-color="rgba(0, 0, 0, 0.02)">
-              <wd-grid-item v-for="(page, j) in item.pages" :key="j">
+              <wd-grid-item v-for="(page, j) in item.pages" :key="j" :isDot="page.open">
                 <template #icon>
                   <image class="kind-list__img" :src="`../../static/images/${page.icon}.png`" @click="handleClick(`/subPages/${page.id}/Index`)" />
                   <!-- <i :class="['kind-list__img', 'iconfont', 'docs-' + page.icon]"></i> -->

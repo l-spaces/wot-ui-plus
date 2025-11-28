@@ -86,35 +86,6 @@ export const useTranslate = (name?: string) => {
   // 如果未提供组件名称，则使用空前缀（全局翻译）
   const prefix = name ? camelCase(name) + '.' : ''
 
-  /**
-   * 翻译函数 - 核心消息查找和格式化逻辑
-   * @description 根据翻译键查找对应的消息，支持函数式消息格式化
-   *
-   * 实现思路：
-   * 1. 获取当前语言环境的全部消息对象
-   * 2. 使用路径查找算法定位目标消息
-   * 3. 根据消息类型进行不同处理：
-   *    - 函数类型：执行函数并传递参数（支持动态格式化）
-   *    - 已定义值：直接返回值（静态文本）
-   *    - 未定义值：返回原始键（优雅降级）
-   *
-   * @param {string} key - 翻译键，用于在消息对象中查找对应翻译
-   * @param {...unknown[]} args - 可变参数，用于函数式消息的格式化
-   * @returns {string} 翻译后的消息文本或原始键（未找到时）
-   *
-   * @example
-   * // 静态消息查找
-   * translate('loading') // 返回 '加载中...'
-   *
-   * // 函数式消息格式化
-   * translate('greeting', 'John') // 返回 '你好，John！'
-   *
-   * // 未找到翻译时的优雅降级
-   * translate('unknown.key') // 返回 'unknown.key'
-   *
-   * @see {@link ../locale/index.ts#Locale.messages Locale.messages 方法}
-   * @see {@link ../common/util.ts#getPropByPath getPropByPath 工具函数}
-   */
   const translate = (key: string, ...args: unknown[]) => {
     // 关键逻辑：获取当前语言环境的全部消息对象
     // 支持动态语言切换，每次调用都获取最新的消息配置

@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2024-03-15 11:36:12
- * @LastEditTime: 2024-04-01 20:24:22
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-ui-plus/src/uni_modules/wot-ui-plus/components/wd-skeleton/wd-skeleton.vue
- * 记得注释
--->
 <template>
   <view :class="`wd-skeleton ${customClass}`" :style="customStyle">
     <view class="wd-skeleton__content" v-if="show">

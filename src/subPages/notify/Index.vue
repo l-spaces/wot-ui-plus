@@ -1,33 +1,33 @@
 <template>
   <page-wraper>
-    <demo-block :title="$t('jiBenYongFa')" transparent>
+    <demo-block title="基本用法" transparent>
       <wd-cell-group>
-        <wd-cell :title="$t('ji-chu-yong-fa-0')" is-link @click="showBasicNotify" />
+        <wd-cell title="基础用法" is-link @click="showBasicNotify" />
       </wd-cell-group>
     </demo-block>
-    <demo-block :title="$t('tong-zhi-lei-xing')" transparent>
+    <demo-block title="通知类型" transparent>
       <wd-cell-group>
-        <wd-cell :title="$t('zhu-yao-tong-zhi')" is-link @click="showType('primary')" />
-        <wd-cell :title="$t('cheng-gong-tong-zhi')" is-link @click="showType('success')" />
-        <wd-cell :title="$t('wei-xian-tong-zhi')" is-link @click="showType('danger')" />
-        <wd-cell :title="$t('jing-gao-tong-zhi')" is-link @click="showType('warning')" />
+        <wd-cell title="主要通知" is-link @click="showType('primary')" />
+        <wd-cell title="成功通知" is-link @click="showType('success')" />
+        <wd-cell title="危险通知" is-link @click="showType('danger')" />
+        <wd-cell title="警告通知" is-link @click="showType('warning')" />
       </wd-cell-group>
     </demo-block>
-    <demo-block :title="$t('zi-ding-yi-pei-zhi')" transparent>
+    <demo-block title="自定义配置" transparent>
       <wd-cell-group>
-        <wd-cell :title="$t('zi-ding-yi-yan-se-0')" is-link @click="showCustomColor" />
-        <wd-cell :title="$t('zi-ding-yi-wei-zhi')" is-link @click="showCustomPosition" />
-        <wd-cell :title="$t('zi-ding-yi-shi-chang')" is-link @click="showCustomDuration" />
+        <wd-cell title="自定义颜色" is-link @click="showCustomColor" />
+        <wd-cell title="自定义位置" is-link @click="showCustomPosition" />
+        <wd-cell title="自定义时长" is-link @click="showCustomDuration" />
       </wd-cell-group>
     </demo-block>
-    <demo-block :title="$t('shi-yong-notify-zu-jian')" transparent>
+    <demo-block title="使用 Notify 组件" transparent>
       <wd-cell-group>
-        <wd-cell :title="$t('shi-yong-notify-zu-jian-0')" is-link @click="showNotifyComponent" />
+        <wd-cell title="使用 Notify 组件" is-link @click="showNotifyComponent" />
       </wd-cell-group>
     </demo-block>
     <wd-notify selector="visible" type="success" v-model:visible="visible">
       <wd-icon name="check-circle" size="inherit" color="inherit" />
-      {{ $t('cheng-gong-tong-zhi-0') }}
+      成功通知
     </wd-notify>
   </page-wraper>
 </template>

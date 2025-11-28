@@ -1,30 +1,29 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
+/* 平台特定样式适配 */
+/* #ifdef H5 */
+.wd-slider-button {
+  cursor: pointer;
 
- /* 平台特定样式适配 */
-  /* #ifdef H5 */
-  .wd-slider-button {
-    cursor: pointer;
-
-    &__thumb {
-      &:hover {
-        transform: scale(1.05);
-        transition: transform 0.2s ease;
-      }
+  &__thumb {
+    &:hover {
+      transform: scale(1.05);
+      transition: transform 0.2s ease;
     }
   }
-  /* #endif */
+}
+/* #endif */
 
-  /* #ifdef MP-WEIXIN */
-  .wd-slider-button {
-    /* 小程序特定样式优化 */
-    &__thumb {
-      /* 优化小程序触摸体验 */
-      -webkit-tap-highlight-color: transparent;
-    }
+/* #ifdef MP-WEIXIN */
+.wd-slider-button {
+  /* 小程序特定样式优化 */
+  &__thumb {
+    /* 优化小程序触摸体验 */
+    -webkit-tap-highlight-color: transparent;
   }
-  /* #endif */
+}
+/* #endif */
 
 @include b('slider-button') {
   position: relative;

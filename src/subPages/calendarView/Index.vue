@@ -1,8 +1,8 @@
 <template>
   <page-wraper>
-    <demo-block :title="$t('dan-ge-ri-qi-xuan-ze')" :hor="0">
+    <demo-block title="单个日期选择" :hor="0">
       <view style="margin: 0 15px 10px">
-        <view style="margin-bottom: 10px; font-size: 13px">{{ $t('qie-huan-lei-xing') }}</view>
+        <view style="margin-bottom: 10px; font-size: 13px">切换类型：</view>
         <wd-radio-group v-model="type1" shape="button">
           <wd-radio value="date">date</wd-radio>
           <wd-radio value="week">week</wd-radio>
@@ -11,12 +11,12 @@
       </view>
       <wd-calendar-view :type="type1" v-model="value1" @change="handleChange1"></wd-calendar-view>
     </demo-block>
-    <demo-block :title="$t('duo-ge-ri-qi-xuan-ze')" :hor="0">
+    <demo-block title="多个日期选择" :hor="0">
       <wd-calendar-view type="dates" v-model="value2" @change="handleChange2"></wd-calendar-view>
     </demo-block>
-    <demo-block :title="$t('ri-qi-fan-wei-xuan-ze')" :hor="0">
+    <demo-block title="日期范围选择" :hor="0">
       <view style="margin: 0 24rpx 20rpx">
-        <view style="margin-bottom: 20rpx; font-size: 26rpx">{{ $t('qie-huan-lei-xing-0') }}</view>
+        <view style="margin-bottom: 20rpx; font-size: 26rpx">切换类型：</view>
         <wd-radio-group v-model="type2" shape="button" @change="handleTypeChange2">
           <wd-radio value="daterange">daterange</wd-radio>
           <wd-radio value="weekrange">weekrange</wd-radio>
@@ -25,19 +25,19 @@
       </view>
       <wd-calendar-view :type="type2" allow-same-day v-model="value3" @change="handleChange3"></wd-calendar-view>
     </demo-block>
-    <demo-block :title="$t('shi-jian-lei-xing')" :hor="0">
+    <demo-block title="时间类型" :hor="0">
       <wd-calendar-view type="datetime" v-model="value4" :time-filter="timeFilter"></wd-calendar-view>
     </demo-block>
-    <demo-block :title="$t('shi-jian-fan-wei-lei-xing')" :hor="0">
+    <demo-block title="时间范围类型" :hor="0">
       <wd-calendar-view type="datetimerange" v-model="value5"></wd-calendar-view>
     </demo-block>
-    <demo-block :title="$t('xian-zhi-zui-da-xuan-ze-fan-wei')" :hor="0">
+    <demo-block title="限制最大选择范围" :hor="0">
       <wd-calendar-view type="daterange" :max-range="3" v-model="value7"></wd-calendar-view>
     </demo-block>
-    <demo-block :title="$t('zi-ding-yi-ri-qi')" :hor="0">
+    <demo-block title="自定义日期" :hor="0">
       <wd-calendar-view type="daterange" allow-same-day v-model="value6" :formatter="formatter"></wd-calendar-view>
     </demo-block>
-    <demo-block :title="$t('she-zhi-zhou-qi-shi-ri')" :hor="0">
+    <demo-block title="设置周起始日" :hor="0">
       <wd-calendar-view :first-day-of-week="1" v-model="value8"></wd-calendar-view>
     </demo-block>
   </page-wraper>

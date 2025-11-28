@@ -87,16 +87,16 @@ export default defineConfig({
     },
     // 编辑链接 配置
     editLink: {
-      pattern: 'https://gitee.com/my_spaces/:path',
+      pattern: 'https://github.com/l-spaces/wot-ui-plus/:path',
       text: '为此页提供修改建议'
     },
     // 社交链接 配置
     socialLinks: [
-      { icon: 'github', link: 'https://gitee.com/my_spaces/wot-ui-plus' },
+      { icon: 'github', link: 'https://github.com/l-spaces/wot-ui-plus' },
       {
-        icon: 'gitee',
-        link: 'https://gitee.com/my_spaces/wot-ui-plus',
-        ariaLabel: 'Gitee'
+        icon: 'github',
+        link: 'https://github.com/l-spaces/wot-ui-plus',
+        ariaLabel: 'GitHub'
       }
     ],
     // 搜索框 配置

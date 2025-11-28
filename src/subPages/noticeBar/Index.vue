@@ -1,14 +1,11 @@
 <template>
   <page-wraper>
     <view>
-      <demo-block :title="$t('jiBenYongFa')">
-        <wd-notice-bar
-          :text="$t('zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi')"
-          prefix="warn-bold"
-        />
+      <demo-block title="基本用法">
+        <wd-notice-bar text="这是一条消息提示信息这是一条消息提示信息这是一条消息提示信息" prefix="warn-bold" />
       </demo-block>
 
-      <demo-block :title="$t('lei-xing-xiu-gai')">
+      <demo-block title="类型修改">
         <wd-notice-bar
           type="danger"
           :text="
@@ -30,31 +27,27 @@
         />
       </demo-block>
 
-      <demo-block :title="$t('jin-zhi-gun-dong')">
-        <wd-notice-bar :scrollable="false" :text="$t('yu-mai-gui-hua-tong-zai-jiu-zhong-bu-si-shao-nian-you')" prefix="warn-bold"></wd-notice-bar>
+      <demo-block title="禁止滚动">
+        <wd-notice-bar :scrollable="false" text="欲买桂花同载酒，终不似少年游…" prefix="warn-bold"></wd-notice-bar>
       </demo-block>
 
-      <demo-block :title="$t('cha-cao')">
+      <demo-block title="插槽">
         <wd-notice-bar :scrollable="false">
           <template #prefix>
-            <wd-icon custom-class="prefix" name="attention">{{ $t('zhan-wei-fu') }}</wd-icon>
+            <wd-icon custom-class="prefix" name="attention">占位符</wd-icon>
           </template>
-          {{ $t('tong-zhi-bei-jin-huo-shi-duan-nei-xiao-xi-ping-bi-ke-neng-zao-cheng-xiao') }}
+          通知被禁或时段内消息屏蔽可能造成消…
           <template #suffix>
-            <div style="color: #4d80f0">{{ $t('cha-kan') }}</div>
+            <div style="color: #4d80f0">查看</div>
           </template>
         </wd-notice-bar>
       </demo-block>
 
-      <demo-block :title="$t('ke-guan-bi-de')">
-        <wd-notice-bar
-          :text="$t('zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-0')"
-          closable
-          prefix="warn-bold"
-        />
+      <demo-block title="可关闭的">
+        <wd-notice-bar text="这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息。" closable prefix="warn-bold" />
       </demo-block>
 
-      <demo-block :title="$t('duo-hang-zhan-shi')">
+      <demo-block title="多行展示">
         <wd-notice-bar
           :text="
             $t(
@@ -66,35 +59,28 @@
         />
       </demo-block>
 
-      <demo-block :title="$t('zi-ding-yi-yan-se-0')">
+      <demo-block title="自定义颜色">
         <wd-notice-bar
-          :text="$t('zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-1')"
+          text="这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息"
           prefix="check-outline"
           color="#34D19D"
           background-color="#f0f9eb"
         ></wd-notice-bar>
       </demo-block>
 
-      <demo-block :title="$t('duo-wen-ben-lun-bo')">
+      <demo-block title="多文本轮播">
         <wd-notice-bar @click="handleClick" :text="textArray" prefix="check-outline" @next="onNext" />
       </demo-block>
 
-      <demo-block :title="$t('chui-zhi-gun-dong')">
+      <demo-block title="垂直滚动">
         <wd-notice-bar @click="handleClick" prefix="warn-bold" direction="vertical" :text="textArray" :delay="3" custom-class="space" />
-        <wd-notice-bar
-          @click="handleClick"
-          prefix="warn-bold"
-          direction="vertical"
-          :text="$t('zhi-you-yi-tiao-xiao-xi-bu-hui-gun-dong')"
-          :delay="3"
-          custom-class="space"
-        />
+        <wd-notice-bar @click="handleClick" prefix="warn-bold" direction="vertical" text="只有一条消息不会滚动" :delay="3" custom-class="space" />
       </demo-block>
 
-      <demo-block :title="$t('zhong-zhi-bo-fang-dong-hua')">
+      <demo-block title="重置播放动画">
         <wd-notice-bar ref="notice" prefix="warn-bold" direction="vertical" :text="textArray" :delay="3" custom-class="space" />
 
-        <wd-button @click="handleReset">{{ $t('zhong-zhi-bo-fang-dong-hua-0') }}</wd-button>
+        <wd-button @click="handleReset">重置播放动画</wd-button>
       </demo-block>
     </view>
   </page-wraper>

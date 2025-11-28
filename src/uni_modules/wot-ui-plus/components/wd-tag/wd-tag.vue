@@ -8,7 +8,7 @@
       <slot />
     </view>
     <view class="wd-tag__close" v-if="closable && round" @click.stop="handleClose">
-      <wd-icon name="close-circle-filled" />
+      <wd-icon name="close-circle" />
     </view>
     <input
       v-if="dynamicInput && dynamic"

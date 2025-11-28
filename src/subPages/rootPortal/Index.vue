@@ -1,13 +1,13 @@
 <template>
   <view class="root-portal-demo">
-    <demo-block :title="$t('ji-chu-yong-fa')">
-      <wd-button type="primary" @click="showBasic = true">{{ $t('xian-shi-ji-ben-tan-chuang') }}</wd-button>
+    <demo-block title="基本用法">
+      <wd-button type="primary" @click="showBasic = true">显示基本弹窗</wd-button>
       <wd-root-portal v-if="showBasic">
         <view class="basic-modal">
           <view class="basic-modal-content">
-            <text class="basic-modal-title">{{ $t('ji-ben-tan-chuang') }}</text>
-            <text class="basic-modal-text">{{ $t('zhe-shi-yi-ge-shi-yong-root-portal-de-ji-ben-tan-chuang-shi-li') }}</text>
-            <wd-button type="primary" @click="showBasic = false">{{ $t('guan-bi') }}</wd-button>
+            <text class="basic-modal-title">基本弹窗</text>
+            <text class="basic-modal-text">这是一个使用 root-portal 的基本弹窗示例</text>
+            <wd-button type="primary" @click="showBasic = false">关闭</wd-button>
           </view>
         </view>
       </wd-root-portal>

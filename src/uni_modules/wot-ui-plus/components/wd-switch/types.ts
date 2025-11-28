@@ -45,6 +45,10 @@ export const switchProps = {
    */
   inactiveColor: String,
   /**
+   * 圆点颜色
+   */
+  circleColor: String,
+  /**
    * 大小
    */
   size: {

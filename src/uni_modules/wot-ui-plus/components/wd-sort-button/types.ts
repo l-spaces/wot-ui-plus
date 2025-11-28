@@ -19,6 +19,13 @@ export const sortButtonProps = {
   title: makeStringProp(''),
 
   /**
+   * 是否展示填充箭头。
+   * 类型: boolean
+   * 默认值: false
+   */
+  filled: makeBooleanProp(false),
+
+  /**
    * 当展示双箭头时，是否允许手动重置按钮。
    * 类型: boolean
    * 默认值: false
@@ -37,7 +44,13 @@ export const sortButtonProps = {
    * 类型: boolean
    * 默认值: true
    */
-  line: makeBooleanProp(true)
+  line: makeBooleanProp(true),
+  /**
+   * 自定义下划线颜色。
+   * 类型: string
+   * 默认值: $-sort-button-line-color
+   */
+  lineColor: String
 }
 
 export type SortButtonProps = ExtractPropTypes<typeof sortButtonProps>

@@ -1,25 +1,16 @@
-/*
- * @Author: weisheng
- * @Date: 2024-03-15 20:40:34
- * @LastEditTime: 2024-07-18 22:09:12
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-ui-plus/src/uni_modules/wot-ui-plus/components/wd-loading/types.ts
- * 记得注释
- */
 import type { ExtractPropTypes } from 'vue'
 import { baseProps, makeBooleanProp, makeNumericProp, makeStringProp } from '../common/props'
 
 // 加载动画的模式，outline-圆形，ring-半圆形
 export type LoadingType = 'outline' | 'ring'
 
-export const loadingProps = {
+export const loadingPageProps = {
   ...baseProps,
 
   /**
    * 提示内容
    */
-  loadingText: makeStringProp('加载中'),
+  text: makeStringProp('加载中'),
   /**
    * 自定义加载图标
    */
@@ -27,7 +18,7 @@ export const loadingProps = {
   /**
    * outline-圆形，ring-半圆形
    */
-  loadingMode: makeStringProp<LoadingType>('ring'),
+  type: makeStringProp<LoadingType>('ring'),
   /**
    * 是否显示加载动画
    */
@@ -58,4 +49,4 @@ export const loadingProps = {
   zIndex: makeNumericProp(10)
 }
 
-export type LoadingProps = ExtractPropTypes<typeof loadingProps>
+export type loadingPageProps = ExtractPropTypes<typeof loadingPageProps>

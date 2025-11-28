@@ -1,11 +1,3 @@
-/*
- * @Author: 810505339
- * @Date: 2025-01-10 20:03:57
- * @LastEditors: weisheng
- * @LastEditTime: 2025-03-23 16:35:14
- * @FilePath: /wot-ui-plus/src/uni_modules/wot-ui-plus/components/wd-signature/types.ts
- * 记得注释
- */
 import type { ComponentPublicInstance, ExtractPropTypes } from 'vue'
 import { baseProps, numericProp } from '../common/props'
 

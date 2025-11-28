@@ -40,6 +40,9 @@
     if (props.size) {
       style['font-size'] = addUnit(props.size)
     }
+    if (props.bold) {
+      style['font-weight'] = 'bold'
+    }
     return `${objToStyle(style)} ${props.customStyle}`
   })
 

@@ -1,6 +1,6 @@
 <template>
   <page-wraper>
-    <wd-search hide-cancel :placeholder="$t('wo-yao-qu-na-li')" v-model="keyword" @search="handleSearch" @clear="handleClear" />
+    <wd-search hide-cancel placeholder="我要去哪里？" v-model="keyword" @search="handleSearch" @clear="handleClear" />
     <view class="wraper">
       <wd-index-bar sticky v-if="showList.length">
         <view v-for="item in showList" :key="item.index">

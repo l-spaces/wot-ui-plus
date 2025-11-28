@@ -2,30 +2,30 @@
   <page-wraper>
     <wd-toast />
     <view>
-      <demo-block :title="$t('jiBenYongFa')">
-        <wd-button @click="showActions1">{{ $t('danChuCaiDan') }}</wd-button>
+      <demo-block title="基本用法">
+        <wd-button @click="showActions1">弹出菜单</wd-button>
         <wd-action-sheet v-model="show" :actions="actions" />
       </demo-block>
-      <demo-block :title="$t('xuanXiangZhuangTai')">
-        <wd-button @click="showActions2">{{ $t('danChuCaiDan') }}</wd-button>
+      <demo-block title="选项状态">
+        <wd-button @click="showActions2">弹出菜单</wd-button>
       </demo-block>
-      <demo-block :title="$t('quXiaoAnNiu')">
-        <wd-button @click="showActions3">{{ $t('danChuCaiDan') }}</wd-button>
-        <wd-action-sheet v-model="show1" :actions="actions" :cancel-text="$t('qu-xiao')" @close="close1" />
+      <demo-block title="取消按钮">
+        <wd-button @click="showActions3">弹出菜单</wd-button>
+        <wd-action-sheet v-model="show1" :actions="actions" cancel-text="取消" @close="close1" />
       </demo-block>
-      <demo-block :title="$t('ziDingYiMianBanDanHang')">
-        <wd-button @click="showActions4">{{ $t('danChuCaiDan') }}</wd-button>
-        <wd-action-sheet v-model="show2" :panels="panels" :cancel-text="$t('qu-xiao')" @close="close2" @select="select" />
+      <demo-block title="自定义面板单行">
+        <wd-button @click="showActions4">弹出菜单</wd-button>
+        <wd-action-sheet v-model="show2" :panels="panels" cancel-text="取消" @close="close2" @select="select" />
       </demo-block>
-      <demo-block :title="$t('ziDingYiMianBanDuoHang')">
-        <wd-button @click="showActions5">{{ $t('danChuCaiDan') }}</wd-button>
-        <wd-action-sheet v-model="show3" :panels="panels" :cancel-text="$t('qu-xiao')" @close="close3" @select="select1" />
+      <demo-block title="自定义面板多行">
+        <wd-button @click="showActions5">弹出菜单</wd-button>
+        <wd-action-sheet v-model="show3" :panels="panels" cancel-text="取消" @close="close3" @select="select1" />
       </demo-block>
-      <demo-block :title="$t('biaoTi-0')">
-        <wd-button @click="showActions6">{{ $t('danChuCaiDan') }}</wd-button>
+      <demo-block title="标题">
+        <wd-button @click="showActions6">弹出菜单</wd-button>
       </demo-block>
-      <wd-action-sheet v-model="show4" :title="$t('biaoTi-0')" @close="close4" :cancelText="cancelText">
-        <view style="padding: 15px 15px 150px 15px">{{ $t('neiRong') }}</view>
+      <wd-action-sheet v-model="show4" title="标题" @close="close4" :cancelText="cancelText">
+        <view style="padding: 15px 15px 150px 15px">内容</view>
       </wd-action-sheet>
     </view>
   </page-wraper>

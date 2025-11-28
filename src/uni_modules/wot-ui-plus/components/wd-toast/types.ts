@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2023-06-19 12:47:57
- * @LastEditTime: 2025-02-16 15:52:17
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-ui-plus/src/uni_modules/wot-ui-plus/components/wd-toast/types.ts
- * 记得注释
- */
 import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeStringProp } from '../common/props'
 import type { LoadingType } from '../wd-loading/types'
