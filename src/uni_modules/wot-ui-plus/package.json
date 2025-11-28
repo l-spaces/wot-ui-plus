@@ -17,7 +17,7 @@
   "main": "index.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/l-spaces/wot-ui-plus"
+    "url": "https://github.com/l-spaces/wot-ui-plus.git"
   },
   "engines": {
     "HBuilderX": "^3.8.7"
@@ -99,5 +99,8 @@
   },
   "peerDependencies": {
     "vue": ">=3.2.47"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
