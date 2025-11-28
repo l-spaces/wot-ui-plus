@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2024-03-15 13:49:00
- * @LastEditTime: 2024-09-19 14:45:29
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: \wot-ui-plus\src\uni_modules\wot-ui-plus\components\wd-status-tip\types.ts
- * 记得注释
- */
 import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeStringProp } from '../common/props'
 import type { ImageMode } from '../wd-img/types'

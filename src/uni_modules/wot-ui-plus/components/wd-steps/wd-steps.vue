@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-06-12 18:40:58
- * @LastEditTime: 2024-03-15 13:42:55
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: \wot-ui-plus\src\uni_modules\wot-ui-plus\components\wd-steps\wd-steps.vue
- * 记得注释
--->
 <template>
   <view :class="`wd-steps ${customClass} ${vertical ? 'is-vertical' : ''}`" :style="customStyle">
     <slot />

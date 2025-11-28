@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2024-11-09 12:35:25
- * @LastEditTime: 2024-11-09 15:01:32
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-ui-plus/src/uni_modules/wot-ui-plus/components/wd-loadmore/wd-loadmore.vue
- * 记得注释
--->
 <template>
   <view :class="['wd-loadmore', customClass]" :style="customStyle" @click="reload">
     <wd-divider v-if="state === 'finished'">{{ finishedText || translate('finished') }}</wd-divider>

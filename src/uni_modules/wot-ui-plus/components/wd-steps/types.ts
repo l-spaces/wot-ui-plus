@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2024-01-09 11:46:46
- * @LastEditTime: 2024-03-18 17:23:06
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: \wot-ui-plus\src\uni_modules\wot-ui-plus\components\wd-steps\types.ts
- * 记得注释
- */
 import { type ExtractPropTypes, type InjectionKey } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp } from '../common/props'
 

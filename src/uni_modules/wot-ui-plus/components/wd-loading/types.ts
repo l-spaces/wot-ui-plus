@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2024-03-15 20:40:34
- * @LastEditTime: 2024-07-18 22:09:12
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-ui-plus/src/uni_modules/wot-ui-plus/components/wd-loading/types.ts
- * 记得注释
- */
 import type { ExtractPropTypes } from 'vue'
 import { baseProps, makeNumericProp, makeStringProp } from '../common/props'
 

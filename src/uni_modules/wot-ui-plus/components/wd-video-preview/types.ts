@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2024-06-30 23:09:08
- * @LastEditTime: 2024-07-01 21:47:34
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-ui-plus/src/uni_modules/wot-ui-plus/components/wd-video-preview/types.ts
- * 记得注释
- */
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps } from '../common/props'
 

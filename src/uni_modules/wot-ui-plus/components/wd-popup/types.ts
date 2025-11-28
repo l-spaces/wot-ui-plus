@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2024-03-18 11:22:03
- * @LastEditTime: 2025-07-06 21:00:04
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-ui-plus/src/uni_modules/wot-ui-plus/components/wd-popup/types.ts
- * 记得注释
- */
 import type { PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 import type { TransitionName } from '../wd-transition/types'
