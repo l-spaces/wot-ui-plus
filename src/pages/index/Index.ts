@@ -410,11 +410,6 @@ export const list = [
         name: '键盘组件'
       },
       {
-        id: 'numberKeyboard',
-        icon: 'numberKeyboard',
-        name: '数字键盘'
-      },
-      {
         id: 'signature',
         icon: 'signature',
         name: '签名板'
