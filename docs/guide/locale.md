@@ -73,4 +73,4 @@ Locale.add(messages)
 | 土耳其语         | tr-TR  | `v1.3.12` |
 | 俄语             | ru-RU  | `v1.3.12` |
 
-如果你需要使用其他的语言，欢迎在原框架贡献 [PR](https://github.com/Moonofweisheng/wot-ui-plus/pulls)，只需在[这里](https://github.com/Moonofweisheng/wot-ui-plus/tree/master/src/uni_modules/wot-ui-plus/locale/lang)添加一个语言配置文件即可。
+如果你需要使用其他的语言，欢迎在原框架贡献 [PR](https://gitee.com/my_spaces/wot-ui-plus/pulls)，只需在[这里](https://gitee.com/my_spaces/wot-ui-plus/tree/main/src/uni_modules/wot-ui-plus/locale/lang)添加一个语言配置文件即可。

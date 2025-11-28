@@ -1,18 +1,18 @@
 <template>
   <page-wraper>
-    <demo-block :title="$t('jiBenYongFa')">
+    <demo-block title="基本用法">
       <wd-input-number v-model="value1" @change="handleChange1" />
     </demo-block>
-    <demo-block :title="$t('she-zhi-bu-chang')">
+    <demo-block title="设置步长">
       <wd-input-number v-model="value2" @change="handleChange2" :step="2" />
     </demo-block>
-    <demo-block :title="$t('xian-zhi-zui-da-zui-xiao-zhi')">
+    <demo-block title="限制最大最小值">
       <wd-input-number v-model="value3" @change="handleChange3" :min="3" :max="10" />
     </demo-block>
-    <demo-block :title="$t('jinYong')">
+    <demo-block title="禁用">
       <wd-input-number v-model="value4" @change="handleChange4" disabled />
     </demo-block>
-    <demo-block :title="$t('jin-yong-shu-ru-kuang')">
+    <demo-block title="禁用输入框">
       <wd-input-number v-model="value10" @change="handleChange4" disable-input />
     </demo-block>
     <demo-block title="禁用减号按钮">
@@ -21,16 +21,16 @@
     <demo-block title="禁用加号按钮">
       <wd-input-number v-model="value14" @change="handleChange14" disable-plus />
     </demo-block>
-    <demo-block :title="$t('wu-shu-ru-kuang')">
+    <demo-block title="无输入框">
       <view class="flex">
-        <view>{{ $t('shu-liang-value5') }}{{ value5 }}</view>
+        <view>数量：{{ value5 }}</view>
         <wd-input-number v-model="value5" @change="handleChange5" without-input />
       </view>
     </demo-block>
-    <demo-block :title="$t('she-zhi-xiao-shu-jing-du')">
+    <demo-block title="设置小数精度">
       <wd-input-number v-model="value6" @change="handleChange6" :precision="1" :step="0.1" />
     </demo-block>
-    <demo-block :title="$t('shu-ru-yan-ge-wei-bu-shu-de-bei-shu')">
+    <demo-block title="输入严格为步数的倍数">
       <wd-input-number v-model="value7" @change="handleChange7" step-strictly :step="2" />
     </demo-block>
     <demo-block title="严格步进+边界限制">
@@ -48,11 +48,11 @@
         </view>
       </view>
     </demo-block>
-    <demo-block :title="$t('xiu-gai-shu-ru-kuang-kuan-du')">
+    <demo-block title="修改输入框宽度">
       <wd-input-number v-model="value8" input-width="70px" @change="handleChange8" />
     </demo-block>
-    <demo-block :title="$t('yun-xu-kong-zhi-bing-she-zhi-placeholder')">
-      <wd-input-number v-model="value9" allow-null :placeholder="$t('bu-xian')" input-width="70px" @change="handleChange9" />
+    <demo-block title="允许空值，并设置 placeholder">
+      <wd-input-number v-model="value9" allow-null placeholder="不限" input-width="70px" @change="handleChange9" />
     </demo-block>
     <demo-block title="非允许空值但可临时删除">
       <view class="temp-empty-demo">
@@ -82,10 +82,10 @@
         <view class="demo-note">上方组件会在初始化时自动将值1修正为4（≥3的最小2的倍数），下方组件不会自动修正</view>
       </view>
     </demo-block>
-    <demo-block :title="$t('yi-bu-bian-geng')">
+    <demo-block title="异步变更">
       <wd-input-number v-model="value11" :before-change="beforeChange" />
     </demo-block>
-    <demo-block :title="$t('chang-an-jia-jian')">
+    <demo-block title="长按加减">
       <wd-input-number v-model="value12" long-press @change="handleChange12" />
     </demo-block>
   </page-wraper>

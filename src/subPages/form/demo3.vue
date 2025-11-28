@@ -3,9 +3,9 @@
     <page-wraper>
       <wd-message-box />
       <wd-form ref="form" :model="model" :rules="rules">
-        <wd-cell-group custom-class="group" :title="$t('ji-chu-xin-xi')" border>
+        <wd-cell-group custom-class="group" title="基础信息" border>
           <wd-input
-            :label="$t('you-hui-quan-ming-cheng')"
+            label="优惠券名称"
             label-width="100px"
             :maxlength="20"
             show-word-limit
@@ -14,57 +14,51 @@
             suffix-icon="warn-bold"
             clearable
             v-model="model.couponName"
-            :placeholder="$t('qing-shu-ru-you-hui-quan-ming-cheng')"
+            placeholder="请输入优惠券名称"
             @clicksuffixicon="handleIconClick"
           />
           <wd-select-picker
-            :label="$t('tui-guang-ping-tai')"
+            label="推广平台"
             label-width="100px"
             prop="platform"
             v-model="model.platform"
             :columns="platformList"
-            :placeholder="$t('qing-xuan-ze-tui-guang-ping-tai')"
+            placeholder="请选择推广平台"
           />
           <wd-picker
-            :label="$t('you-hui-fang-shi')"
-            :placeholder="$t('qing-xuan-ze-you-hui-fang-shi')"
+            label="优惠方式"
+            placeholder="请选择优惠方式"
             label-width="100px"
             prop="promotion"
             v-model="model.promotion"
             :columns="promotionlist"
           />
-          <wd-cell prop="threshold" :title="$t('quan-mian-e')" required title-width="100px" custom-value-class="cell-left">
+          <wd-cell prop="threshold" title="券面额" required title-width="100px" custom-value-class="cell-left">
             <view style="text-align: left">
-              <view class="inline-txt" style="margin-left: 0">{{ $t('man') }}</view>
+              <view class="inline-txt" style="margin-left: 0">满</view>
               <wd-input
                 no-border
                 custom-style="display: inline-block; width: 70px; vertical-align: middle"
-                :placeholder="$t('qing-shu-ru-jin-e-0')"
+                placeholder="请输入金额"
                 v-model="model.threshold"
               />
-              <view class="inline-txt">{{ $t('jian') }}</view>
+              <view class="inline-txt">减</view>
               <wd-input
                 no-border
                 custom-style="display: inline-block; width: 70px; vertical-align: middle"
-                :placeholder="$t('qing-shu-ru-jin-e-0')"
+                placeholder="请输入金额"
                 v-model="model.price"
               />
             </view>
           </wd-cell>
         </wd-cell-group>
-        <wd-cell-group custom-class="group" :title="$t('shi-jian-he-di-zhi')" border>
-          <wd-datetime-picker
-            :label="$t('shi-jian')"
-            label-width="100px"
-            :placeholder="$t('qing-xuan-ze-shi-jian')"
-            prop="time"
-            v-model="model.time"
-          />
-          <wd-calendar :label="$t('ri-qi')" label-width="100px" :placeholder="$t('qing-xuan-ze-ri-qi')" prop="date" v-model="model.date" />
+        <wd-cell-group custom-class="group" title="时间和地址" border>
+          <wd-datetime-picker label="时间" label-width="100px" placeholder="请选择时间" prop="time" v-model="model.time" />
+          <wd-calendar label="日期" label-width="100px" placeholder="请选择日期" prop="date" v-model="model.date" />
 
           <wd-col-picker
-            :label="$t('di-zhi')"
-            :placeholder="$t('qing-xuan-ze-di-zhi')"
+            label="地址"
+            placeholder="请选择地址"
             label-width="100px"
             prop="address"
             v-model="model.address"
@@ -72,55 +66,48 @@
             :column-change="areaChange"
           />
         </wd-cell-group>
-        <wd-cell-group custom-class="group" :title="$t('qi-ta-xin-xi')" border>
+        <wd-cell-group custom-class="group" title="其他信息" border>
           <wd-textarea
-            :label="$t('huo-dong-xi-ze')"
+            label="活动细则"
             label-width="100px"
             type="textarea"
             v-model="model.content"
             :maxlength="300"
             show-word-limit
-            :placeholder="$t('qing-shu-ru-huo-dong-xi-ze-xin-xi')"
+            placeholder="请输入活动细则信息"
             clearable
             prop="content"
           />
-          <wd-cell :title="$t('fa-huo-shu-liang')" title-width="100px" prop="count">
+          <wd-cell title="发货数量" title-width="100px" prop="count">
             <view style="text-align: left">
               <wd-input-number v-model="model.count" />
             </view>
           </wd-cell>
-          <wd-cell :title="$t('kai-qi-zhe-kou')" title-width="100px" prop="switchVal" center>
+          <wd-cell title="开启折扣" title-width="100px" prop="switchVal" center>
             <view style="text-align: left">
               <wd-switch v-model="model.switchVal" />
             </view>
           </wd-cell>
           <wd-input
-            :label="$t('zhe-kou')"
+            label="折扣"
             v-if="model.switchVal"
             label-width="100px"
             prop="discount"
-            :placeholder="$t('qing-shu-ru-you-hui-jin-e')"
+            placeholder="请输入优惠金额"
             clearable
             v-model="model.discount"
           />
           <wd-input
-            :label="$t('wai-bi-ba-bu')"
+            label="歪比巴卜"
             label-width="100px"
             prop="cardId"
             suffix-icon="camera"
-            :placeholder="$t('qing-shu-ru-wai-bi-ba-bu')"
+            placeholder="请输入歪比巴卜"
             clearable
             v-model="model.cardId"
           />
-          <wd-input
-            :label="$t('ma-ka-ba-ka')"
-            label-width="100px"
-            prop="phone"
-            :placeholder="$t('qing-shu-ru-ma-ka-ba-ka')"
-            clearable
-            v-model="model.phone"
-          />
-          <wd-cell :title="$t('huo-dong-tu-pian')" title-width="100px" prop="fileList">
+          <wd-input label="玛卡巴卡" label-width="100px" prop="phone" placeholder="请输入玛卡巴卡" clearable v-model="model.phone" />
+          <wd-cell title="活动图片" title-width="100px" prop="fileList">
             <wd-upload
               :file-list="model.fileList"
               action="https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload"
@@ -130,12 +117,12 @@
         </wd-cell-group>
         <view class="tip">
           <wd-checkbox v-model="model.read" prop="read" custom-label-class="label-class">
-            {{ $t('yi-yue-du-bing-tong-yi') }}
-            <text style="color: #4d80f0">{{ $t('ba-la-ba-la-ba-la-xie-yi') }}</text>
+            已阅读并同意
+            <text style="color: #4d80f0">《巴拉巴拉吧啦协议》</text>
           </wd-checkbox>
         </view>
         <view class="footer">
-          <wd-button type="primary" size="large" @click="handleSubmit" block>{{ $t('ti-jiao') }}</wd-button>
+          <wd-button type="primary" size="large" @click="handleSubmit" block>提交</wd-button>
         </view>
       </wd-form>
     </page-wraper>
@@ -382,7 +369,7 @@
     },
     {
       value: '5',
-      label: t('1-hao-dian')
+      label: '店铺'
     },
     {
       value: '6',

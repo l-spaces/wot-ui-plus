@@ -1,18 +1,18 @@
 <template>
   <page-wraper>
-    <demo-block :title="$t('jiBenYongFa')">
+    <demo-block title="基本用法">
       <wd-rate v-model="value1" clearable @change="changeValue1" />
     </demo-block>
 
-    <demo-block :title="$t('zhi-du-zhuang-tai-readonly')">
+    <demo-block title="只读状态 readonly">
       <wd-rate v-model="value2" readonly />
     </demo-block>
 
-    <demo-block :title="$t('jin-yong-zhuang-tai')">
+    <demo-block title="禁用状态">
       <wd-rate v-model="value3" disabled />
     </demo-block>
 
-    <demo-block :title="$t('xiu-gai-xuan-zhong-yan-se')">
+    <demo-block title="修改选中颜色">
       <view style="margin-bottom: 10px">
         <wd-rate v-model="value4" active-color="linear-gradient(180deg, rgba(255,238,0,1) 0%,rgba(250,176,21,1) 100%)" @change="changeValue2" />
       </view>
@@ -25,19 +25,19 @@
       />
     </demo-block>
 
-    <demo-block :title="$t('xiu-gai-icon-he-xuan-zhong-yan-se')">
+    <demo-block title="修改icon和选中颜色">
       <wd-rate v-model="value6" icon="dong" active-icon="dong" active-color="#4D80F0" />
     </demo-block>
 
-    <demo-block :title="$t('xiu-gai-sizespace')">
+    <demo-block title="修改size、space">
       <wd-rate v-model="value7" space="10px" size="30px" />
     </demo-block>
 
-    <demo-block :title="$t('yun-xu-ban-xuan')">
+    <demo-block title="允许半选">
       <wd-rate v-model="value8" allow-half />
     </demo-block>
 
-    <demo-block :title="$t('yun-xu-qing-kong-ping-fen')">
+    <demo-block title="允许清空评分">
       <view style="margin-bottom: 24rpx">
         <wd-rate v-model="value9" clearable />
       </view>

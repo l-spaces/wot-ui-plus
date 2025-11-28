@@ -12,7 +12,7 @@
       </view>
       <view class="wd-privacy-popup__footer">
         <wd-button custom-class="wd-privacy-popup__footer-disagree " size="medium" round plain buttonId="disagree-btn" @click="handleDisagree">
-          {{ $t('ju-jue') }}
+          拒绝
         </wd-button>
         <wd-button
           class="wd-privacy-popup__footer-agree"
@@ -22,7 +22,7 @@
           open-type="agreePrivacyAuthorization"
           @agreeprivacyauthorization="handleAgree"
         >
-          {{ $t('tong-yi') }}
+          同意
         </wd-button>
       </view>
     </wd-popup>

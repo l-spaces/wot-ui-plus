@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2025-04-26 15:36:25
- * @LastEditTime: 2025-05-03 22:58:04
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-ui-plus/tests/components/wd-resize.test.ts
- * 记得注释
- */
 import { mount } from '@vue/test-utils'
 import WdResize from '@/uni_modules/wot-ui-plus/components/wd-resize/wd-resize.vue'
 import { describe, test, expect } from 'vitest'

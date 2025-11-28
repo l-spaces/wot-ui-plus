@@ -4,54 +4,54 @@
       <wd-message-box></wd-message-box>
     </view>
     <view class="demo-body">
-      <demo-block :title="$t('jiBenYongFa')" transparent>
+      <demo-block title="基本用法" transparent>
         <wd-drop-menu>
           <wd-drop-menu-item v-model="value1" :options="option1" @change="handleChange1" />
           <wd-drop-menu-item v-model="value2" :options="option2" @change="handleChange2" />
         </wd-drop-menu>
       </demo-block>
-      <demo-block :title="$t('zi-ding-yi-cai-dan-nei-rong')" transparent>
+      <demo-block title="自定义菜单内容" transparent>
         <wd-drop-menu>
           <wd-drop-menu-item v-model="value3" :options="option1" @change="handleChange3" />
-          <wd-drop-menu-item ref="dropMenu" :title="$t('shai-xuan')" @opened="handleOpened">
+          <wd-drop-menu-item ref="dropMenu" title="筛选" @opened="handleOpened">
             <view>
               <wd-slider v-model="valuetest" ref="slider" />
-              <wd-cell :title="$t('biao-ti-wen-zi-10')" :value="$t('nei-rong')" />
-              <wd-cell :title="$t('biao-ti-wen-zi-10')" :label="$t('miaoShuXinXi-0')" :value="$t('nei-rong')" />
+              <wd-cell title="标题文字" value="内容" />
+              <wd-cell title="标题文字" label="描述信息" value="内容" />
               <view style="padding: 0 10px 20px; box-sizing: border-box">
-                <wd-button block size="large" @click="confirm">{{ $t('zhu-yao-an-niu') }}</wd-button>
+                <wd-button block size="large" @click="confirm">主要按钮</wd-button>
               </view>
             </view>
           </wd-drop-menu-item>
         </wd-drop-menu>
       </demo-block>
-      <demo-block :title="$t('zi-ding-yi-cai-dan-xuan-xiang')" transparent>
+      <demo-block title="自定义菜单选项" transparent>
         <view class="custom-menu">
           <wd-drop-menu custom-style="flex: 1; min-width: 0">
             <wd-drop-menu-item v-model="value4" :options="option1" @change="handleChange4" />
           </wd-drop-menu>
           <view style="flex: 1">
-            <wd-sort-button v-model="value5" :title="$t('shang-jia-shi-jian')" @change="handleChange5" />
+            <wd-sort-button v-model="value5" title="上架时间" @change="handleChange5" />
           </view>
         </view>
       </demo-block>
-      <demo-block :title="$t('zi-ding-yi-cai-dan-tu-biao')" transparent>
+      <demo-block title="自定义菜单图标" transparent>
         <wd-drop-menu>
-          <wd-drop-menu-item :title="$t('di-tu')" icon="location" icon-size="14px" />
+          <wd-drop-menu-item title="地图" icon="location" icon-size="14px" />
         </wd-drop-menu>
       </demo-block>
-      <demo-block :title="$t('yi-bu-da-kai-guan-bi')" transparent>
+      <demo-block title="异步打开 / 关闭" transparent>
         <wd-drop-menu>
           <wd-drop-menu-item v-model="value10" :options="option1" @change="handleChange1" :before-toggle="handleBeforeToggle" />
         </wd-drop-menu>
       </demo-block>
-      <demo-block :title="$t('xiang-shang-dan-chu')" transparent>
+      <demo-block title="向上弹出" transparent>
         <wd-drop-menu direction="up">
           <wd-drop-menu-item v-model="value6" :options="option1" @change="handleChange6" custom-title="custom-title" custom-icon="custom-icon" />
           <wd-drop-menu-item v-model="value7" :options="option2" @change="handleChange7" />
         </wd-drop-menu>
       </demo-block>
-      <demo-block :title="$t('jinYong')" transparent>
+      <demo-block title="禁用" transparent>
         <wd-drop-menu direction="up">
           <wd-drop-menu-item v-model="value8" disabled :options="option1" @change="handleChange8" />
           <wd-drop-menu-item v-model="value9" :options="option2" @change="handleChange9" />

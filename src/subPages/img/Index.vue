@@ -1,15 +1,15 @@
 <template>
   <page-wraper>
-    <demo-block :title="$t('jiBenYongFa')">
+    <demo-block title="基本用法">
       <wd-img :width="100" :height="100" :src="joy" />
       <!-- 以组件位置为定位原点 -->
       <wd-img :width="100" :height="100" :src="img" custom-class="border" />
     </demo-block>
 
-    <demo-block :title="$t('cha-cao-yong-fa')">
+    <demo-block title="插槽用法">
       <wd-img :width="100" :height="100" src="https://www.123.com/a.jpg">
         <template #error>
-          <view class="error-wrap">{{ $t('jia-zai-shi-bai') }}</view>
+          <view class="error-wrap">加载失败</view>
         </template>
         <template #loading>
           <view class="loading-wrap">
@@ -19,26 +19,26 @@
       </wd-img>
     </demo-block>
 
-    <demo-block :title="$t('tian-chong')">
+    <demo-block title="填充">
       <view class="col" v-for="(mode, index) in modes" :key="index">
         <wd-img width="100%" height="27vw" :src="joy" :mode="mode" />
         <view class="center">{{ mode }}</view>
       </view>
     </demo-block>
-    <demo-block :title="$t('yuan-xing')">
+    <demo-block title="圆形">
       <view class="col" v-for="(mode, index) in modes" :key="index">
         <wd-img round width="100%" height="27vw" :src="joy" :mode="mode" />
         <view class="center">{{ mode }}</view>
       </view>
     </demo-block>
-    <demo-block :title="$t('yuan-jiao')">
+    <demo-block title="圆角">
       <view class="col" v-for="(mode, index) in modes" :key="index">
         <wd-img width="100%" height="27vw" :radius="5" :src="joy" :mode="mode" />
         <view class="center">{{ mode }}</view>
       </view>
     </demo-block>
 
-    <demo-block :title="$t('ke-yu-lan')">
+    <demo-block title="可预览">
       <view class="col">
         <wd-img :width="100" :height="100" :src="joy" :enable-preview="true" />
       </view>

@@ -1,6 +1,6 @@
 <template>
   <page-wraper>
-    <demo-block :title="$t('dian-zhuang-zhi-shi-qi')">
+    <demo-block title="点状指示器">
       <wd-swiper
         :list="swiperList"
         autoplay
@@ -11,7 +11,7 @@
       ></wd-swiper>
     </demo-block>
 
-    <demo-block :title="$t('dian-tiao-zhuang-zhi-shi-qi')">
+    <demo-block title="点条状指示器">
       <wd-swiper
         :list="swiperList"
         autoplay
@@ -22,7 +22,7 @@
       ></wd-swiper>
     </demo-block>
 
-    <demo-block :title="$t('shu-zi-zhi-shi-qi')">
+    <demo-block title="数字指示器">
       <wd-swiper
         :list="swiperList"
         autoplay
@@ -35,7 +35,7 @@
     </demo-block>
 
     <!-- #ifdef MP-WEIXIN || H5 || MP-DINGTALK -->
-    <demo-block :title="$t('shi-pin-lun-bo')">
+    <demo-block title="视频轮播">
       <wd-swiper
         :list="videoList"
         autoplay
@@ -46,7 +46,7 @@
       ></wd-swiper>
     </demo-block>
 
-    <demo-block :title="$t('shou-dong-bo-fang-shi-pin')">
+    <demo-block title="手动播放视频">
       <wd-swiper
         :list="videoList"
         autoplay
@@ -58,7 +58,7 @@
       ></wd-swiper>
     </demo-block>
 
-    <demo-block :title="$t('bo-fang-shi-pin-shi-ting-zhi-lun-bo')">
+    <demo-block title="播放视频时停止轮播">
       <wd-swiper
         :list="videoList"
         autoplay
@@ -72,7 +72,7 @@
     </demo-block>
     <!-- #endif -->
 
-    <demo-block :title="$t('shou-dong-qie-huan')">
+    <demo-block title="手动切换">
       <wd-swiper
         :list="swiperList"
         :autoplay="false"
@@ -84,7 +84,7 @@
       ></wd-swiper>
     </demo-block>
 
-    <demo-block :title="$t('ka-pian-yang-shi')">
+    <demo-block title="卡片样式">
       <view class="card-swiper">
         <wd-swiper
           autoplay
@@ -101,7 +101,7 @@
       </view>
     </demo-block>
 
-    <demo-block :title="$t('tong-shi-zhan-shi-2-ge-hua-kuai')">
+    <demo-block title="同时展示2个滑块">
       <view class="card-swiper">
         <wd-swiper
           autoplay
@@ -119,7 +119,7 @@
       </view>
     </demo-block>
 
-    <demo-block :title="$t('chui-zhi-fang-xiang')">
+    <demo-block title="垂直方向">
       <wd-swiper
         :list="swiperList"
         direction="vertical"
@@ -132,7 +132,7 @@
       ></wd-swiper>
     </demo-block>
 
-    <demo-block :title="$t('zi-ding-yi-zhi-shi-qi')">
+    <demo-block title="自定义指示器">
       <wd-swiper
         :list="swiperList"
         direction="vertical"
@@ -148,7 +148,7 @@
       </wd-swiper>
     </demo-block>
 
-    <demo-block :title="$t('zhi-ding-valuekey-he-textkey')">
+    <demo-block title="指定valueKey和textKey">
       <wd-swiper
         value-key="url"
         text-key="title"
@@ -160,7 +160,7 @@
       ></wd-swiper>
     </demo-block>
 
-    <demo-block :title="$t('shu-xing-kong-zhi-qie-huan')">
+    <demo-block title="属性控制切换">
       <wd-swiper :loop="isLoop" :autoplay="false" :list="swiperList" v-model:current="current8" />
       <wd-gap />
       <wd-cell-group>
@@ -176,7 +176,7 @@
       </view>
     </demo-block>
 
-    <demo-block :title="$t('cha-cao-yong-fa')">
+    <demo-block title="插槽用法">
       <wd-swiper :list="swiperList" autoplay v-model:current="current1" :indicator="{ type: 'dots-bar' }" @click="handleClick" @change="onChange">
         <template #default="{ item }">
           <image :src="item as string" mode="aspectFill" style="width: 100%; height: 100%" />

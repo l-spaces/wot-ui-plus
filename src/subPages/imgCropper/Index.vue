@@ -3,7 +3,7 @@
     <!-- #ifdef MP-WEIXIN -->
     <wd-privacy-popup></wd-privacy-popup>
     <!-- #endif -->
-    <demo-block :title="$t('jiBenYongFa')" style="text-align: center">
+    <demo-block title="基本用法" style="text-align: center">
       <wd-img-cropper
         v-model="show"
         :img-src="src"
@@ -17,11 +17,11 @@
           <wd-icon name="camera-filled" custom-class="img-icon"></wd-icon>
         </view>
         <wd-img v-if="imgSrc" round width="200px" height="200px" :src="imgSrc" mode="aspectFit" custom-class="profile-img" @click="upload" />
-        <view style="font-size: 14px">{{ $t('dian-ji-shang-chuan-tou-xiang') }}</view>
+        <view style="font-size: 14px">点击上传头像</view>
       </view>
     </demo-block>
 
-    <demo-block :title="$t('zi-ding-yi-cai-jian-bi-li')" style="text-align: center">
+    <demo-block title="自定义裁剪比例" style="text-align: center">
       <view class="profile-grid">
         <view v-for="(ratio, index) in ['3:2', '16:9', '16:10']" :key="index" class="profile-item">
           <wd-img-cropper
@@ -43,12 +43,12 @@
             custom-class="profile-img"
             @click="uploadCustom(index)"
           />
-          <view style="font-size: 14px">{{ ratio }}{{ $t('bi-li-cai-jian') }}</view>
+          <view style="font-size: 14px">{{ ratio }}比例裁剪</view>
         </view>
       </view>
     </demo-block>
 
-    <demo-block :title="$t('cai-jian-hou-shang-chuan')" style="text-align: center">
+    <demo-block title="裁剪后上传" style="text-align: center">
       <wd-img-cropper v-model="showUpload" :img-src="srcUpload" @confirm="handleConfirmUpload" @cancel="handleCancel"></wd-img-cropper>
       <view class="profile">
         <view v-if="!imgSrcUpload" class="img" @click="uploadWithCrop">
@@ -64,7 +64,7 @@
           custom-class="profile-img"
           @click="uploadWithCrop"
         />
-        <view style="font-size: 14px">{{ $t('dian-ji-shang-chuan-cai-jian-hou-de-tou-xiang') }}</view>
+        <view style="font-size: 14px">点击上传裁剪后的头像</view>
       </view>
     </demo-block>
   </page-wraper>

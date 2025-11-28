@@ -1,33 +1,33 @@
 <template>
   <view>
     <page-wraper>
-      <demo-block :title="$t('jiBenYongFa')">
+      <demo-block title="基本用法">
         <wd-button @click="showToast">toast</wd-button>
-        <wd-button @click="showLongToast">{{ $t('chang-wen-an') }}</wd-button>
+        <wd-button @click="showLongToast">长文案</wd-button>
       </demo-block>
-      <demo-block :title="$t('lei-xing-toast')">
-        <wd-button @click="showSuccessToast">{{ $t('cheng-gong-toast') }}</wd-button>
-        <wd-button @click="showErrorToast">{{ $t('cuo-wu-toast') }}</wd-button>
-        <wd-button @click="showWarnToast">{{ $t('jing-gao-toast') }}</wd-button>
-        <wd-button @click="showNormalToast">{{ $t('chang-gui-toast') }}</wd-button>
+      <demo-block title="类型toast">
+        <wd-button @click="showSuccessToast">成功toast</wd-button>
+        <wd-button @click="showErrorToast">错误toast</wd-button>
+        <wd-button @click="showWarnToast">警告toast</wd-button>
+        <wd-button @click="showNormalToast">常规toast</wd-button>
       </demo-block>
-      <demo-block :title="$t('shi-yong-tu-biao')">
-        <wd-button @click="showInnerIconToast">{{ $t('nei-bu-tu-biao') }}</wd-button>
-        <wd-button @click="showCustomIconToast">{{ $t('ziDingYiTuBiao') }}</wd-button>
+      <demo-block title="使用图标">
+        <wd-button @click="showInnerIconToast">内部图标</wd-button>
+        <wd-button @click="showCustomIconToast">自定义图标</wd-button>
       </demo-block>
-      <demo-block :title="$t('ti-shi-wei-zhi')">
-        <wd-button @click="showTopToast">{{ $t('ding-bu-toast') }}</wd-button>
-        <wd-button @click="showMiddletoast">{{ $t('ju-zhong-toast') }}</wd-button>
-        <wd-button @click="showBottomToast">{{ $t('di-bu-toast') }}</wd-button>
+      <demo-block title="提示位置">
+        <wd-button @click="showTopToast">顶部toast</wd-button>
+        <wd-button @click="showMiddletoast">居中toast</wd-button>
+        <wd-button @click="showBottomToast">底部toast</wd-button>
       </demo-block>
-      <demo-block :title="$t('loading')">
-        <wd-button @click="showLoadingToast">{{ $t('loading-jia-zai') }}</wd-button>
-        <wd-button @click="showLoadingToast2">{{ $t('ring-lei-xing-loading') }}</wd-button>
-        <wd-button @click="showLoadingToast3">{{ $t('zong-xiang-bu-ju-loading') }}</wd-button>
+      <demo-block title="Loading">
+        <wd-button @click="showLoadingToast">Loading加载</wd-button>
+        <wd-button @click="showLoadingToast2">ring类型loading</wd-button>
+        <wd-button @click="showLoadingToast3">纵向布局loading</wd-button>
       </demo-block>
-      <demo-block :title="$t('pai-ban-fang-xiang')">
-        <wd-button @click="showHorizonToast">{{ $t('heng-xiang-pai-ban') }}</wd-button>
-        <wd-button @click="showVerticalToast">{{ $t('zong-xiang-pai-ban') }}</wd-button>
+      <demo-block title="排版方向">
+        <wd-button @click="showHorizonToast">横向排版</wd-button>
+        <wd-button @click="showVerticalToast">纵向排版</wd-button>
       </demo-block>
     </page-wraper>
   </view>
@@ -88,14 +88,14 @@
     })
   }
   function showLoadingToast() {
-    toast.loading(t('3s-hou-tiao-yong-close-guan-bi'))
+    toast.loading('3s后调用close关闭')
     setTimeout(() => {
       toast.close()
     }, 3000)
   }
   function showLoadingToast2() {
     toast.loading({
-      msg: t('3s-hou-tiao-yong-close-guan-bi-0'),
+      msg: '3s后调用close关闭',
       loadingType: 'ring',
       loadingColor: '#fff'
     })

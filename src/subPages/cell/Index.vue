@@ -1,17 +1,17 @@
 <template>
   <page-wraper>
     <wd-toast />
-    <demo-block :title="$t('jiBenYongFa')" transparent>
+    <demo-block title="基本用法" transparent>
       <wd-cell-group>
-        <wd-cell :title="$t('biao-ti-wen-zi')" :value="$t('nei-rong')" />
-        <wd-cell :title="$t('biao-ti-wen-zi-0')" :label="$t('miaoShuXinXi-0')" :value="$t('nei-rong')" />
+        <wd-cell title="标题文字" value="内容" />
+        <wd-cell title="标题文字" label="描述信息" value="内容" />
       </wd-cell-group>
     </demo-block>
 
-    <demo-block :title="$t('tu-biao')" transparent>
+    <demo-block title="图标" transparent>
       <wd-cell-group>
-        <wd-cell :title="$t('biao-ti-wen-zi-1')" :value="$t('nei-rong')" icon="setting" />
-        <wd-cell :title="$t('biao-ti-wen-zi-2')" :value="$t('nei-rong')">
+        <wd-cell title="标题文字" value="内容" icon="setting" />
+        <wd-cell title="标题文字" value="内容">
           <template #icon>
             <view class="cell-icon"></view>
           </template>
@@ -19,116 +19,95 @@
       </wd-cell-group>
     </demo-block>
 
-    <demo-block :title="$t('fen-zu-biao-ti')" transparent>
-      <wd-cell-group :title="$t('jiao-yi-guan-li')" :value="$t('nei-rong')">
-        <wd-cell :title="$t('biao-ti-wen-zi-3')" :value="$t('nei-rong')" />
-        <wd-cell
-          :title="$t('biao-ti-wen-zi-4')"
-          :label="$t('huang-he-duan-ji-tou-gu-ren-jin-zai-fou-jiu-jiang-shan-hun-shi-xin-chou-yu-mai-gui-hua-tong-zai-jiu-zhong-bu-si-shao-nian-you')"
-          :value="$t('nei-rong')"
-        ></wd-cell>
+    <demo-block title="分组标题" transparent>
+      <wd-cell-group title="交易管理" value="内容">
+        <wd-cell title="标题文字" value="内容" />
+        <wd-cell title="标题文字" label="黄鹤断矶头，故人今在否？旧江山浑是新愁。欲买桂花同载酒，终不似，少年游。" value="内容"></wd-cell>
       </wd-cell-group>
     </demo-block>
 
-    <demo-block :title="$t('da-chi-cun')" transparent>
+    <demo-block title="大尺寸" transparent>
       <wd-cell-group>
-        <wd-cell size="large" :title="$t('biao-ti-wen-zi-5')" :value="$t('nei-rong')" />
-        <wd-cell :title="$t('biao-ti-wen-zi-6')" :value="$t('nei-rong')" size="large" icon="setting" is-link />
-        <wd-cell size="large" :title="$t('biao-ti-wen-zi-7')" :label="$t('miaoShuXinXi-0')" :value="$t('nei-rong')" />
+        <wd-cell size="large" title="标题文字" value="内容" />
+        <wd-cell size="large" title="标题文字" value="内容" icon="setting" is-link />
+        <wd-cell size="large" title="标题文字" label="描述信息" value="内容" />
       </wd-cell-group>
     </demo-block>
 
-    <demo-block :title="$t('zhan-shi-bian-kuang-xian')" transparent>
-      <wd-cell-group :title="$t('jiao-yi-guan-li-0')" border>
-        <wd-cell :title="$t('biao-ti-wen-zi-8')" :value="$t('nei-rong')" />
-        <wd-cell :border="false" :title="$t('biao-ti-wen-zi-9')" :label="$t('zhe-yi-ge-cell-bu-xiang-yao-bian-kuang')" :value="$t('nei-rong')" />
-        <wd-cell :title="$t('biao-ti-wen-zi-10')" :label="$t('miaoShuXinXi-0')" :value="$t('nei-rong')"></wd-cell>
+    <demo-block title="展示边框线" transparent>
+      <wd-cell-group title="交易管理" border>
+        <wd-cell title="标题文字" value="内容" />
+        <wd-cell :border="false" title="标题文字" label="这一个cell不想要边框" value="内容" />
+        <wd-cell title="标题文字" label="描述信息" value="内容"></wd-cell>
       </wd-cell-group>
     </demo-block>
 
-    <demo-block :title="$t('dian-ji-shi-jian')" transparent>
+    <demo-block title="点击事件" transparent>
       <wd-cell-group>
-        <wd-cell :title="$t('biao-ti-wen-zi-11')" :value="$t('nei-rong')" clickable @click="showToast" />
+        <wd-cell title="标题文字" value="内容" clickable @click="showToast" />
       </wd-cell-group>
     </demo-block>
 
-    <demo-block :title="$t('ye-mian-tiao-zhuan')" transparent>
+    <demo-block title="页面跳转" transparent>
       <wd-cell-group>
-        <wd-cell :title="$t('bang-zhu-yu-fan-kui')" is-link to="/pages/index/Index" />
-        <wd-cell :title="$t('she-zhi')" :value="$t('nei-rong')" is-link to="/pages/button/Index" replace></wd-cell>
+        <wd-cell title="帮助与反馈" is-link to="/pages/index/Index" />
+        <wd-cell title="设置" value="内容" is-link to="/pages/button/Index" replace></wd-cell>
       </wd-cell-group>
     </demo-block>
 
-    <demo-block :title="$t('chui-zhi-ju-zhong')" transparent>
+    <demo-block title="垂直居中" transparent>
       <wd-cell-group>
-        <wd-cell :title="$t('biao-ti-wen-zi-12')" :value="$t('nei-rong')" center />
-        <wd-cell :title="$t('biao-ti-wen-zi-13')" :label="$t('miaoShuXinXi-0')" :value="$t('nei-rong')" center />
+        <wd-cell title="标题文字" value="内容" center />
+        <wd-cell title="标题文字" label="描述信息" value="内容" center />
       </wd-cell-group>
     </demo-block>
 
-    <demo-block :title="$t('biao-dan-shu-xing')" transparent>
+    <demo-block title="表单属性" transparent>
       <wd-cell-group border>
-        <wd-cell :title="$t('bi-tian')" required>
+        <wd-cell title="必填" required>
           <wd-rate v-model="rate" icon="dong" active-icon="dong" @change="handleRateChange" />
         </wd-cell>
-        <wd-cell :title="$t('bi-tian-xing-hao-zai-you-ce')" required marker-side="after">
+        <wd-cell title="必填星号在右" required marker-side="after">
           <wd-rate v-model="rate1" icon="dong" active-icon="dong" @change="handleRateChange" />
         </wd-cell>
-        <wd-cell :title="$t('shang-xia-jie-gou')" vertical required marker-side="after">
+        <wd-cell title="上下结构" vertical required marker-side="after">
           <wd-slider v-model="slider" @change="handleSliderChange" />
         </wd-cell>
       </wd-cell-group>
     </demo-block>
 
-    <demo-block :title="$t('she-zhi-kuan-du')" transparent>
+    <demo-block title="设置宽度" transparent>
       <wd-cell-group>
-        <wd-cell
-          :title="$t('biao-ti-wen-zi-14')"
-          :label="$t('zhe-li-shi-wen-zi-miao-shu-zhe-li-shi-wen-zi-miao-shu-zhe-li-shi-wen-zi-miao-shu')"
-          title-width="200px"
-          :value="$t('nei-rong')"
-        />
+        <wd-cell title="标题文字" label="这里是文字描述这里是文字描述这里是文字描述" title-width="200px" value="内容" />
       </wd-cell-group>
     </demo-block>
 
-    <demo-block :title="$t('sheng-lve-hao-xian-shi')" transparent>
+    <demo-block title="省略号显示" transparent>
       <wd-cell-group>
-        <wd-cell
-          :title="$t('zheng-chang-xian-shi')"
-          :value="$t('zhe-shi-yi-duan-hen-chang-de-wen-zi-nei-rong-tong-chang-qing-kuang-xia-hui-wan-zheng-xian-shi')"
-        />
-        <wd-cell
-          :title="$t('sheng-lve-hao-xian-shi')"
-          :value="$t('zhe-shi-yi-duan-hen-chang-de-wen-zi-nei-rong-dang-qi-yong-ellipsis-shu-xing-shi-chao-chu-bu-fen-jiang-xian-shi-sheng-lve-hao')"
-          ellipsis
-        />
-        <wd-cell
-          :title="$t('zuo-dui-qi-sheng-lve')"
-          :value="$t('zhe-shi-yi-duan-hen-chang-de-wen-zi-nei-rong-zuo-dui-qi-bing-qi-yong-sheng-lve-hao-gong-neng')"
-          value-align="left"
-          ellipsis
-        />
+        <wd-cell title="正常显示" value="这是一段很长的文字内容，通常情况下会完整显示" />
+        <wd-cell title="省略号显示" value="这是一段很长的文字内容，当启用ellipsis属性时，超出部分将显示省略号" ellipsis />
+        <wd-cell title="左对齐省略" value="这是一段很长的文字内容，左对齐并启用省略号功能" value-align="left" ellipsis />
       </wd-cell-group>
     </demo-block>
 
-    <demo-block :title="$t('zi-ding-yi-slot')" transparent>
+    <demo-block title="自定义slot" transparent>
       <wd-cell-group>
-        <wd-cell :title="$t('biao-ti-wen-zi-15')" center>
-          <wd-button custom-class="custom-value" size="small" plain>{{ $t('an-niu-0') }}</wd-button>
+        <wd-cell title="标题文字" center>
+          <wd-button custom-class="custom-value" size="small" plain>按钮</wd-button>
         </wd-cell>
-        <wd-cell :title="$t('biao-ti-wen-zi-16')" center>
+        <wd-cell title="标题文字" center>
           <view class="custom-value" style="height: 32px">
             <wd-switch v-model="switchValue" @change="handleSwitchChange" />
           </view>
         </wd-cell>
-        <wd-cell :title="$t('biao-ti-wen-zi-17')" is-link to="/pages/index/index">
-          <view class="custom-text">{{ $t('ding-gou') }}</view>
+        <wd-cell title="标题文字" is-link to="/pages/index/index">
+          <view class="custom-text">订购</view>
         </wd-cell>
         <wd-cell>
           <template #title>
             <view>
-              <view style="display: inline-block">{{ $t('biao-ti-wen-zi-18') }}</view>
-              <view class="end-time">{{ $t('25-tian-hou-dao-qi') }}</view>
+              <view style="display: inline-block">标题文字</view>
+              <view class="end-time">30天后到期</view>
             </view>
           </template>
         </wd-cell>

@@ -2,24 +2,24 @@
   <view @click="closeOutside">
     <wd-toast />
     <page-wraper>
-      <demo-block :title="$t('jiBenYongFa')" transparent>
+      <demo-block title="基本用法" transparent>
         <wd-search v-model="value1" hideCancel :clearabled="false" @search="search" @change="change" @cancel="cancel" @clear="clear" />
       </demo-block>
 
-      <demo-block :title="$t('bai-se-shu-ru-kuang')" transparent>
+      <demo-block title="白色输入框" transparent>
         <wd-search light cancelTxt="搜索" />
       </demo-block>
 
-      <demo-block :title="$t('sou-suo-zhan-wei-fu-ju-zuo')" transparent>
+      <demo-block title="搜索占位符居左" transparent>
         <wd-search placeholder-left />
       </demo-block>
 
-      <demo-block :title="$t('jin-yong-qie-yin-cang-qu-xiao-an-niu')" transparent>
+      <demo-block title="禁用且隐藏取消按钮" transparent>
         <wd-search disabled hide-cancel />
       </demo-block>
 
       <view style="margin: 15px 0; color: #666">
-        <view style="padding: 0 15px; margin: 10px 0; font-size: 13px">{{ $t('zi-ding-yi-zuo-ce-cha-cao') }}</view>
+        <view style="padding: 0 15px; margin: 10px 0; font-size: 13px">自定义左侧插槽</view>
         <wd-search v-model="value3">
           <template #prefix>
             <wd-popover mode="menu" :content="menu" @menuclick="changeSearchType">
@@ -32,19 +32,19 @@
         </wd-search>
       </view>
 
-      <demo-block :title="$t('zi-ding-yi-you-ce-wen-an')" transparent>
-        <wd-search :placeholder="$t('qing-shu-ru-ding-dan-hao-ding-dan-ming-cheng')" :cancel-txt="$t('sou-suo')" />
+      <demo-block title="自定义右侧文案" transparent>
+        <wd-search placeholder="请输入订单号 / 订单名称" cancel-txt="搜索" />
       </demo-block>
 
-      <demo-block :title="$t('she-zhi-zui-da-chang-du')" transparent>
+      <demo-block title="设置最大长度" transparent>
         <wd-search v-model="value2" :maxlength="4" />
       </demo-block>
 
-      <demo-block :title="$t('qing-kong-hou-zi-dong-ju-jiao')" transparent>
+      <demo-block title="清空后自动聚焦" transparent>
         <wd-search v-model="value4" focus-when-clear />
       </demo-block>
 
-      <demo-block :title="$t('zi-dong-ju-jiao')" transparent>
+      <demo-block title="自动聚焦" transparent>
         <wd-search v-model="value5" focus />
       </demo-block>
     </page-wraper>

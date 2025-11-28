@@ -1,6 +1,6 @@
 <template>
   <page-wraper>
-    <demo-block :title="$t('ji-chu-yong-fa-0')">
+    <demo-block title="基础用法">
       <wd-row>
         <wd-col :span="24"><view class="bg-dark1">span: 24</view></wd-col>
       </wd-row>
@@ -20,7 +20,7 @@
         <wd-col :span="6"><view class="bg-light">span: 6</view></wd-col>
       </wd-row>
     </demo-block>
-    <demo-block :title="$t('fen-lan-pian-yi')">
+    <demo-block title="分栏偏移">
       <wd-row>
         <wd-col :span="4"><view class="bg-dark">span: 4</view></wd-col>
         <wd-col :span="8" :offset="4"><view class="bg-light">span: 8 offset: 4</view></wd-col>
@@ -30,7 +30,7 @@
         <wd-col :span="8" :offset="4"><view class="bg-light">span: 8 offset: 4</view></wd-col>
       </wd-row>
     </demo-block>
-    <demo-block :title="$t('fen-lan-jian-ge')">
+    <demo-block title="分栏间隔">
       <wd-row :gutter="20">
         <wd-col :span="8"><view class="bg-dark">span: 8</view></wd-col>
         <wd-col :span="8"><view class="bg-light">span: 8</view></wd-col>

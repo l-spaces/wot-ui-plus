@@ -17,7 +17,7 @@ jobs:
           body: |
             你好，@${{ github.event.issue.user.login }}。
 
-            看起来这条 issue 描述得有些模糊，缺少一些必要的信息，推荐阅读一下[贡献指南](https://github.com/Moonofweisheng/wot-ui-plus/blob/master/.github/CONTRIBUTING.md)。
+            看起来这条 issue 描述得有些模糊，缺少一些必要的信息，推荐阅读一下[贡献指南](https://gitee.com/my_spaces/wot-ui-plus/blob/main/.github/CONTRIBUTING.md)。
 
       - name: need reproduce
         if: github.event.label.name == 'need reproduce'

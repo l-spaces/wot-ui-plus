@@ -2,28 +2,28 @@
   <page-wraper>
     <wd-message-box></wd-message-box>
     <view>
-      <demo-block :title="$t('jiBenYongFa')">
+      <demo-block title="基本用法">
         <wd-switch v-model="checked1" @change="handleChange1" />
       </demo-block>
-      <demo-block :title="$t('xiu-gai-zhi-activevalue-inactivevalue')">
+      <demo-block title="修改值 active-value 、 inactive-value">
         <view style="margin-bottom: 10px">{{ checked2 }}</view>
         <wd-switch v-model="checked2" active-value="你好" inactive-value="世界" @change="handleChange2" />
       </demo-block>
-      <demo-block :title="$t('zi-ding-yi-yan-se-activecolor-inactivecolor')">
+      <demo-block title="自定义颜色 active-color 、 inactive-color">
         <wd-switch v-model="checked3" circle-color="#333333" active-color="#13ce66" inactive-color="#f00" @change="handleChange3" />
       </demo-block>
-      <demo-block :title="$t('zi-ding-yi-da-xiao')">
+      <demo-block title="自定义大小">
         <wd-switch v-model="checked4" :size="24" @change="handleChange4" />
         <wd-switch v-model="checked4" @change="handleChange4" />
         <wd-switch v-model="checked4" :size="34" @change="handleChange4" />
       </demo-block>
-      <demo-block :title="$t('xuan-zhong-jin-yong')">
+      <demo-block title="选中禁用">
         <wd-switch v-model="checked5" disabled />
       </demo-block>
-      <demo-block :title="$t('fei-xuan-zhong-jin-yong')">
+      <demo-block title="非选中禁用">
         <wd-switch v-model="checked6" disabled />
       </demo-block>
-      <demo-block :title="$t('beforechange-xiu-gai-qian-gou-zi-han-shu')">
+      <demo-block title="before-change 修改前钩子函数">
         <wd-switch v-model="checked7" :before-change="beforeChange" @change="handleChange5" />
       </demo-block>
     </view>

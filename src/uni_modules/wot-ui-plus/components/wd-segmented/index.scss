@@ -7,7 +7,7 @@
 
     @include e(item) {
       @include e(text) {
-        color: $-dark-color ;
+        color: $-dark-color;
       }
     }
   }

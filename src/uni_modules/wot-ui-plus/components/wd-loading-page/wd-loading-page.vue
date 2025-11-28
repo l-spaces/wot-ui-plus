@@ -50,6 +50,8 @@
 </script>
 
 <script lang="ts" setup>
+  import wdTransition from '../wd-transition/wd-transition.vue'
+  import wdLoading from '../wd-loading/wd-loading.vue'
   import { computed, ref, watch, useSlots } from 'vue'
   import { loadingProps } from './types'
   import { addUnit } from '../common/util'

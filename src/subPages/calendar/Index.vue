@@ -2,20 +2,20 @@
   <page-wraper>
     <view>
       <wd-cell-group border>
-        <wd-calendar :label="$t('dan-ge-ri-qi-xuan-ze')" v-model="value1" @confirm="handleConfirm1" />
-        <wd-calendar :label="$t('duo-ge-ri-qi-xuan-ze')" type="dates" v-model="value2" @confirm="handleConfirm2" />
-        <wd-calendar :label="$t('ri-qi-fan-wei-xuan-ze')" type="daterange" v-model="value3" />
-        <wd-calendar :label="$t('ri-qi-shi-jian-xuan-ze')" type="datetime" v-model="value4" />
-        <wd-calendar :label="$t('ri-qi-shi-jian-fan-wei-xuan-ze')" type="datetimerange" v-model="value5" />
-        <wd-calendar :label="$t('zhou-xuan-ze')" type="week" v-model="value6" />
-        <wd-calendar :label="$t('yue-xuan-ze')" type="month" :min-date="minDate" v-model="value7" />
-        <wd-calendar :label="$t('zhou-fan-wei-xuan-ze')" :first-day-of-week="1" type="weekrange" v-model="value8" />
-        <wd-calendar :label="$t('yue-fan-wei-xuan-ze')" type="monthrange" v-model="value9" />
-        <wd-calendar :label="$t('ri-zhou-yue-qie-huan')" :first-day-of-week="1" show-type-switch v-model="value10" />
-        <wd-calendar :label="$t('kuai-jie-cao-zuo')" v-model="value16" :show-confirm="false" />
-        <wd-calendar :label="$t('ri-qi-ge-shi-hua')" type="daterange" v-model="value11" :formatter="formatter" />
+        <wd-calendar label="单个日期选择" v-model="value1" @confirm="handleConfirm1" />
+        <wd-calendar label="多个日期选择" type="dates" v-model="value2" @confirm="handleConfirm2" />
+        <wd-calendar label="日期范围选择" type="daterange" v-model="value3" />
+        <wd-calendar label="日期时间选择" type="datetime" v-model="value4" />
+        <wd-calendar label="日期时间范围选择" type="datetimerange" v-model="value5" />
+        <wd-calendar label="周选择" type="week" v-model="value6" />
+        <wd-calendar label="月选择" type="month" :min-date="minDate" v-model="value7" />
+        <wd-calendar label="周范围选择" :first-day-of-week="1" type="weekrange" v-model="value8" />
+        <wd-calendar label="月范围选择" type="monthrange" v-model="value9" />
+        <wd-calendar label="日周月切换" :first-day-of-week="1" show-type-switch v-model="value10" />
+        <wd-calendar label="快捷操作" v-model="value16" :show-confirm="false" />
+        <wd-calendar label="日期格式化" type="daterange" v-model="value11" :formatter="formatter" />
         <wd-calendar
-          :label="$t('kuai-jie-xuan-xiang')"
+          label="快捷选项"
           :shortcuts="shortcuts"
           :on-shortcuts-click="onShortcutsClick"
           type="daterange"
@@ -24,7 +24,7 @@
           @confirm="handleConfirm3"
         />
         <wd-calendar
-          :label="$t('zi-ding-yi-zhan-shi')"
+          label="自定义展示"
           type="daterange"
           const
           v-model="value13"
@@ -32,35 +32,29 @@
           :inner-display-format="innerDisplayFormat"
         />
         <wd-calendar label="before-confirm" v-model="value14" :before-confirm="beforeConfirm" />
+        <wd-calendar label="单个日期选择(可清空)" v-model="valueClear1" clearable @clear="handleClear1" @confirm="handleConfirmClear1" />
         <wd-calendar
-          :label="$t('dan-ge-ri-qi-xuan-ze-ke-qing-kong')"
-          v-model="valueClear1"
-          clearable
-          @clear="handleClear1"
-          @confirm="handleConfirmClear1"
-        />
-        <wd-calendar
-          :label="$t('ri-qi-fan-wei-xuan-ze-ke-qing-kong')"
+          label="日期范围选择(可清空)"
           type="daterange"
           v-model="valueClear2"
           clearable
           @clear="handleClear2"
           @confirm="handleConfirmClear2"
         />
-        <wd-calendar :label="$t('bi-tian-xing-hao-zai-you-ce')" v-model="value18" required marker-side="after" @confirm="handleConfirm6" />
+        <wd-calendar label="必填星号在右" v-model="value18" required marker-side="after" @confirm="handleConfirm6" />
       </wd-cell-group>
     </view>
 
-    <demo-block transparent :title="$t('zi-ding-yi-xuan-ze-qi')">
+    <demo-block transparent title="自定义选择器">
       <view style="margin: 0 15px">
-        <view style="margin-bottom: 10px">{{ $t('dang-qian-xuan-zhong-ri-qi-formatvalue') + formatValue }}</view>
+        <view style="margin-bottom: 10px">当前选中日期：{{ formatValue }}</view>
         <wd-calendar v-model="value15" use-default-slot @confirm="handleConfirm4">
-          <wd-button>{{ $t('xuan-ze-ri-qi') }}</wd-button>
+          <wd-button>选择日期</wd-button>
         </wd-calendar>
       </view>
     </demo-block>
-    <demo-block :title="$t('zu-jian-shi-li-shi-jian')">
-      <wd-button @click="openCalendar">{{ $t('da-kai-ri-li') }}</wd-button>
+    <demo-block title="组件实例事件">
+      <wd-button @click="openCalendar">打开日历</wd-button>
       <wd-calendar ref="calendarRef" v-model="value17" :with-cell="false" @confirm="handleConfirm5" />
     </demo-block>
   </page-wraper>

@@ -5,13 +5,13 @@
     <!-- #endif -->
     <wd-message-box></wd-message-box>
     <wd-toast></wd-toast>
-    <demo-block :title="$t('jiBenYongFa')">
+    <demo-block title="基本用法">
       <wd-upload accept="image" v-model:file-list="fileList" image-mode="aspectFill" :action="action"></wd-upload>
     </demo-block>
-    <demo-block :title="$t('zui-da-shang-chuan-shu-xian-zhi')">
+    <demo-block title="最大上传数限制">
       <wd-upload :file-list="fileList3" :limit="3" :action="action" @change="handleChange3"></wd-upload>
     </demo-block>
-    <demo-block :title="$t('fu-gai-shang-chuan')">
+    <demo-block title="覆盖上传">
       <!-- #ifdef MP-WEIXIN || H5  -->
       <wd-upload accept="all" reupload v-model:file-list="fileList17" image-mode="aspectFill" :action="action"></wd-upload>
       <!-- #endif -->
@@ -21,16 +21,16 @@
       <!-- #endif -->
       <!-- #endif -->
     </demo-block>
-    <demo-block :title="$t('lan-jie-yu-lan-tu-pian-cao-zuo')">
+    <demo-block title="拦截预览图片操作">
       <wd-upload :file-list="fileList4" :action="action" @change="handleChange4" :before-preview="beforePreview"></wd-upload>
     </demo-block>
-    <demo-block :title="$t('shang-chuan-qian-zhi-chu-li')">
+    <demo-block title="上传前置处理">
       <wd-upload :file-list="fileList5" :action="action" @change="handleChange5" :before-upload="beforeUpload"></wd-upload>
     </demo-block>
-    <demo-block :title="$t('yi-chu-tu-pian-qian-zhi-chu-li')">
+    <demo-block title="移除图片前置处理">
       <wd-upload :file-list="fileList6" :action="action" @change="handleChange6" :before-remove="beforeRemove"></wd-upload>
     </demo-block>
-    <demo-block :title="$t('shang-chuan-zhuang-tai-gou-zi')">
+    <demo-block title="上传状态钩子">
       <wd-upload
         :file-list="fileList7"
         :action="action"
@@ -40,19 +40,19 @@
         @progress="handleProgess"
       ></wd-upload>
     </demo-block>
-    <demo-block :title="$t('jinYong')">
+    <demo-block title="禁用">
       <wd-upload :file-list="fileList8" disabled :action="action" @change="handleChange8"></wd-upload>
     </demo-block>
-    <demo-block :title="$t('duo-xuan')">
+    <demo-block title="多选">
       <wd-upload :file-list="fileList2" multiple :action="action" @change="handleChange2"></wd-upload>
     </demo-block>
 
-    <demo-block :title="$t('zi-ding-yi-huan-qi-shang-chuan-yang-shi-bing-xian-zhi-shang-chuan-5-zhang')">
+    <demo-block title="自定义唤起上传样式并限制上传5张">
       <wd-upload :file-list="fileList9" :action="action" @change="handleChange9" :limit="5">
-        <wd-button>{{ $t('zi-ding-yi-huan-qi-yang-shi') }}</wd-button>
+        <wd-button>自定义唤起样式</wd-button>
       </wd-upload>
     </demo-block>
-    <demo-block :title="$t('xuan-ze-wen-jian-qian-zhi-chu-li')">
+    <demo-block title="选择文件前置处理">
       <wd-upload :file-list="fileList10" :action="action" @change="handleChange10" :before-choose="beforeChoose"></wd-upload>
     </demo-block>
 
@@ -60,35 +60,35 @@
       <wd-upload :file-list="fileList11" action="https://xxx.aliyuncs.com" :build-form-data="buildFormData" @change="handleChange11"></wd-upload>
     </demo-block> -->
 
-    <demo-block :title="$t('shang-chuan-shi-pin')">
+    <demo-block title="上传视频">
       <wd-upload accept="video" multiple :file-list="fileList1" :action="action" @change="handleChange1"></wd-upload>
     </demo-block>
 
     <!-- #ifdef MP-WEIXIN -->
-    <demo-block :title="$t('shang-chuan-shi-pin-he-tu-pian')">
+    <demo-block title="上传视频和图片">
       <wd-upload accept="media" multiple :file-list="fileList11" :action="action" @change="handleChange11"></wd-upload>
     </demo-block>
-    <demo-block :title="$t('jin-shang-chuan-wen-jian')">
+    <demo-block title="仅上传文件">
       <wd-upload accept="file" multiple :file-list="fileList12" :action="action" @change="handleChange12"></wd-upload>
     </demo-block>
     <!-- #endif -->
 
     <!-- #ifdef MP-WEIXIN || H5  -->
-    <demo-block :title="$t('shang-chuan-shi-pin-tu-pian-he-wen-jian')">
+    <demo-block title="上传视频图片和文件">
       <wd-upload accept="all" multiple :file-list="fileList13" :action="action" @change="handleChange13"></wd-upload>
     </demo-block>
     <!-- #endif -->
 
-    <demo-block :title="$t('shou-dong-chu-fa-shang-chuan')">
+    <demo-block title="手动触发上传">
       <wd-upload ref="upload14" :auto-upload="false" :file-list="fileList14" :action="action" @change="handleChange14"></wd-upload>
-      <wd-button @click="upload14?.submit()">{{ $t('kai-shi-shang-chuan') }}</wd-button>
+      <wd-button @click="upload14?.submit()">开始上传</wd-button>
     </demo-block>
 
-    <demo-block :title="$t('zi-ding-yi-shang-chuan-fang-fa')">
+    <demo-block title="自定义上传方法">
       <wd-upload v-model:file-list="fileList15" :upload-method="customUpload"></wd-upload>
     </demo-block>
 
-    <demo-block :title="$t('zi-ding-yi-yu-lan-yang-shi')">
+    <demo-block title="自定义预览样式">
       <wd-upload v-model:file-list="fileList16" accept="image" image-mode="aspectFill" :action="action">
         <template #preview-cover="{ file, index }">
           <!-- 小程序拿不到文件 -->
@@ -97,18 +97,18 @@
       </wd-upload>
     </demo-block>
     <!-- #ifdef H5 || MP-WEIXIN -->
-    <demo-block :title="$t('gen-ju-kuo-zhan-ming-guo-lv')">
+    <demo-block title="根据扩展名过滤">
       <!-- #ifdef H5 -->
       <wd-upload v-model:file-list="fileList18" :extension="['.jpg', '.png']" :action="action"></wd-upload>
-      <view style="margin: 10px 0">{{ $t('xuan-ze-shi-pin-shi-guo-lv-mp4') }}</view>
+      <view style="margin: 10px 0">选择视频时过滤mp4</view>
       <wd-upload accept="video" v-model:file-list="fileList19" :extension="['.mp4']" :action="action"></wd-upload>
-      <view style="margin: 10px 0">{{ $t('shang-chuan-suo-you-lei-xing-wen-jian-shi-guo-lv-pdf-he-docx') }}</view>
+      <view style="margin: 10px 0">上传所有类型文件时过滤.pdf和.docx</view>
       <wd-upload accept="all" v-model:file-list="fileList21" :extension="['.pdf', '.docx']" :action="action"></wd-upload>
       <!-- #endif -->
       <!-- #ifdef MP-WEIXIN -->
-      <view style="margin-bottom: 10px">{{ $t('xuan-ze-wen-jian-shi-guo-lv-txt-wen-jian') }}</view>
+      <view style="margin-bottom: 10px">选择文件时过滤.txt文件</view>
       <wd-upload accept="file" v-model:file-list="fileList19" :extension="['.txt']" :action="action"></wd-upload>
-      <view style="margin: 10px 0">{{ $t('xuan-ze-suo-you-wen-jian-shi-guo-lv-jpg-he-mp4') }}</view>
+      <view style="margin: 10px 0">选择所有文件时过滤.jpg和.mp4</view>
       <wd-upload accept="all" v-model:file-list="fileList20" :extension="['.jpg', '.mp4']" :action="action"></wd-upload>
       <!-- #endif -->
     </demo-block>

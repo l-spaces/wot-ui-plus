@@ -11,7 +11,7 @@
       <demo-block title="图标列表">
         <view class="icon">
           <view style="position: sticky; top: 0; z-index: 2">
-            <wd-search hide-cancel :placeholder="$t('cha-zhao-tu-biao')" light v-model="keyword" @search="handleSearch" @clear="handleClear" />
+            <wd-search hide-cancel placeholder="查找图标" light v-model="keyword" @search="handleSearch" @clear="handleClear" />
           </view>
           <view class="icon-list">
             <view v-for="(icon, index) in showIcons" :key="index" class="icon-item">
@@ -20,7 +20,7 @@
               </view>
               <view class="icon-item-name" @click="handleClickName(icon)">{{ icon }}</view>
             </view>
-            <wd-status-tip v-if="!showIcons.length" image="search" :tip="$t('dang-qian-wu-xiang-guan-tu-biao')" />
+            <wd-status-tip v-if="!showIcons.length" image="search" tip="当前无相关图标" />
           </view>
         </view>
       </demo-block>

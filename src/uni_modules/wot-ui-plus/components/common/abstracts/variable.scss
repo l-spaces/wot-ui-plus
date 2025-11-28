@@ -165,7 +165,7 @@ $-button-success-bg-color: var(--wot-button-success-bg-color, $-color-success) !
 $-button-info-color: var(--wot-button-info-color, $-color-title) !default; // 信息按钮颜色 (131415)
 $-button-info-bg-color: var(--wot-button-info-bg-color, #f0f0f0) !default; // 信息按钮背景颜色 (f0f0f0)
 $-button-info-plain-border-color: var(--wot-button-info-plain-border-color, rgba(0, 0, 0, 0.45)) !default; // 信息按钮禁用颜色 (666666)
-$-button-info-plain-normal-color: var(--wot-button-info-plain-normal-color, rgba(0, 0, 0, 0.85)) !default; // 信息幽灵按钮默认颜色 (444444) 
+$-button-info-plain-normal-color: var(--wot-button-info-plain-normal-color, rgba(0, 0, 0, 0.85)) !default; // 信息幽灵按钮默认颜色 (444444)
 $-button-warning-color: var(--wot-button-warning-color, $-color-white) !default; // 警告按钮字体颜色 (ffffff)
 $-button-warning-bg-color: var(--wot-button-warning-bg-color, $-color-warning) !default; // 警告按钮背景颜色 (f7a600)
 $-button-error-color: var(--wot-button-error-color, $-color-white) !default; // 错误按钮字体颜色 (ffffff)
@@ -389,7 +389,10 @@ $-message-box-content-fs: var(--wot-message-box-content-fs, 14px) !default; // �
 $-message-box-content-color: var(--wot-message-box-content-color, #666666) !default; // 内容颜色 (666666)
 $-message-box-content-max-height: var(--wot-message-box-content-max-height, 264px) !default; // 内容最大高度 (264px)
 $-message-box-content-scrollbar-width: var(--wot-message-box-content-scrollbar-width, 4px) !default; // 内容滚动条宽度 (4px)
-$-message-box-content-scrollbar-color: var(--wot-message-box-content-scrollbar-color, rgba(0, 0, 0, 0.1)) !default; // 内容滚动条颜色 (rgba(0, 0, 0, 0.1))
+$-message-box-content-scrollbar-color: var(
+  --wot-message-box-content-scrollbar-color,
+  rgba(0, 0, 0, 0.1)
+) !default; // 内容滚动条颜色 (rgba(0, 0, 0, 0.1))
 $-message-box-input-error-color: var(--wot-message-box-input-error-color, $-input-error-color) !default; // 输入框错误颜色
 
 /* notice-bar */
@@ -461,8 +464,14 @@ $-col-picker-selected-color: var(--wot-col-picker-selected-color, rgba(0, 0, 0, 
 $-col-picker-selected-fw: var(--wot-col-picker-selected-fw, 700) !default; // 弹框顶部值高亮字重 (700)
 $-col-picker-line-width: var(--wot-col-picker-line-width, 16px) !default; // 弹框顶部值高亮线条宽度 (16px)
 $-col-picker-line-height: var(--wot-col-picker-line-height, 3px) !default; // 弹框顶部值高亮线条高度 (3px)
-$-col-picker-line-color: var(--wot-col-picker-line-color, linear-gradient(315deg, rgba(81, 124, 240, 1), rgba(118, 158, 245, 1))) !default; // 弹框顶部值高亮线条颜色
-$-col-picker-line-box-shadow: var(--wot-col-picker-line-box-shadow, 0px 1px 2px 0px rgba(1, 87, 255, 0.2)) !default; // 弹框顶部值高亮线条阴影 (0px 1px 2px 0px rgba(1, 87, 255, 0.2))
+$-col-picker-line-color: var(
+  --wot-col-picker-line-color,
+  linear-gradient(315deg, rgba(81, 124, 240, 1), rgba(118, 158, 245, 1))
+) !default; // 弹框顶部值高亮线条颜色
+$-col-picker-line-box-shadow: var(
+  --wot-col-picker-line-box-shadow,
+  0px 1px 2px 0px rgba(1, 87, 255, 0.2)
+) !default; // 弹框顶部值高亮线条阴影 (0px 1px 2px 0px rgba(1, 87, 255, 0.2))
 $-col-picker-list-height: var(--wot-col-picker-list-height, 53vh) !default; // 弹框列表高度 (53vh)
 $-col-picker-list-padding-bottom: var(--wot-col-picker-list-padding-bottom, 30px) !default; // 弹框列表底部间距 (30px)
 $-col-picker-list-color: var(--wot-col-picker-list-color, rgba(0, 0, 0, 0.85)) !default; // 弹框列表文字颜色 (rgba(0, 0, 0, 0.85))
@@ -547,7 +556,10 @@ $-search-light-bg: var(--wot-search-light-bg, $-color-bg) !default; // light 类
 /* slider */
 $-slider-fs: var(--wot-slider-fs, $-fs-content) !default; // 字体大小 (14px)
 $-slider-handle-radius: var(--wot-slider-handle-radius, 12px) !default; // 滑块半径 (12px)
-$-slider-handle-bg: var(--wot-slider-handle-bg, resultColor(139deg, $-color-theme, 'dark' 'light', #ffffff #f7f7f7, 0% 100%)) !default; // 滑块背景 (rgba(255, 255, 255, 1))
+$-slider-handle-bg: var(
+  --wot-slider-handle-bg,
+  resultColor(139deg, $-color-theme, 'dark' 'light', #ffffff #f7f7f7, 0% 100%)
+) !default; // 滑块背景 (rgba(255, 255, 255, 1))
 $-slider-axie-height: var(--wot-slider-axie-height, 3px) !default; // 滑轴高度 (3px)
 $-slider-color: var(--wot-slider-color, #333) !default; // 字体颜色 (333)
 $-slider-axie-bg: var(--wot-slider-axie-bg, #e5e5e5) !default; // 滑轴的默认背景色 (e5e5e5)
@@ -675,7 +687,10 @@ $-tooltip-line-height: var(--wot-tooltip-line-height, 18px) !default; // 行高 
 $-popover-bg: var(--wot-popover-bg, $-color-white) !default; // 背景色
 $-popover-color: var(--wot-popover-color, rgba(0, 0, 0, 0.85)) !default; // 文字颜色
 $-popover-box-shadow: var(--wot-popover-box-shadow, 0px 2px 10px 0px rgba(0, 0, 0, 0.1)) !default; // 阴影颜色 (0px 2px 10px 0px rgba(0, 0, 0, 0.1))
-$-popover-arrow-box-shadow: var(--wot-popover-arrow-box-shadow, 0px 2px 10px 0px rgba(0, 0, 0, 0.2)) !default; // 阴影颜色 (0px 2px 10px 0px rgba(0, 0, 0, 0.2))
+$-popover-arrow-box-shadow: var(
+  --wot-popover-arrow-box-shadow,
+  0px 2px 10px 0px rgba(0, 0, 0, 0.2)
+) !default; // 阴影颜色 (0px 2px 10px 0px rgba(0, 0, 0, 0.2))
 $-popover-border-color: var(--wot-popover-border-color, rgba(0, 0, 0, 0.09)) !default; // 边框颜色 (rgba(0, 0, 0, 0.09))
 $-popover-radius: var(--wot-popover-radius, 4px) !default; // 圆角大小 (4px)
 $-popover-arrow-size: var(--wot-popover-arrow-size, 6px) !default; // 箭头大小 (6px)
@@ -892,7 +907,10 @@ $-number-keyboard-key-border-radius: var(--wot-number-keyboard-key-border-radius
 $-number-keyboard-delete-font-size: var(--wot-number-keyboard-delete-font-size, 16px) !default; // 数字键盘删除键字体大小 (16px)
 $-number-keyboard-key-active-color: var(--wot-number-keyboard-key-active-color, $-color-gray-3) !default; // 数字键盘按键激活颜色 ($-color-gray-3)
 $-number-keyboard-button-text-color: var(--wot-number-keyboard-button-text-color, $-color-white) !default; // 数字键盘操作按钮字体颜色 ($-color-white)
-$-number-keyboard-button-background: var(--wot-number-keyboard--button-background, $-color-theme) !default; // 数字键盘操作按钮背景颜色 ($-color-theme)
+$-number-keyboard-button-background: var(
+  --wot-number-keyboard--button-background,
+  $-color-theme
+) !default; // 数字键盘操作按钮背景颜色 ($-color-theme)
 $-number-keyboard-button-active-opacity: var(--wot-number-keyboard-button-active-opacity, 0.6) !default; // 数字键盘操作按钮激活透明度 (0.6)
 $-number-keyboard-background: var(--wot-number-keyboard-background, $-color-gray-2) !default; // 数字键盘背景颜色 ($-color-gray-2)
 $-number-keyboard-title-height: var(--wot-number-keyboard-title-height, 34px) !default; // 数字键盘标题高度 (34px)

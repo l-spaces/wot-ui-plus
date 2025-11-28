@@ -46,7 +46,7 @@
       <wd-segmented :options="list2" mode="button" :v-model="current4" @change="change4"></wd-segmented>
     </demo-block>
 
-    <demo-block :title="$t('zi-ding-yi-xuan-ran-fen-duan-qi-biao-qian')" transparent>
+    <demo-block title="自定义渲染分段器标签" transparent>
       <view class="section">
         <wd-segmented :options="list1" v-model="current5" height="80px" @change="handleChange">
           <template #label="{ option }">

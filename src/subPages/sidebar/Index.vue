@@ -1,49 +1,40 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-11-06 20:08:34
- * @LastEditTime: 2025-05-07 18:55:52
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-ui-plus/src/subPages/sidebar/Index.vue
- * 记得注释
--->
 <template>
   <page-wraper>
-    <demo-block :title="$t('ji-chu-yong-fa-0')" transparent>
+    <demo-block title="基础用法" transparent>
       <view style="display: flex; justify-content: space-around">
         <wd-sidebar v-model="active1">
-          <wd-sidebar-item :value="0" :label="$t('biao-qian-ming-cheng')" />
-          <wd-sidebar-item :value="1" :label="$t('biao-qian-ming-cheng')" />
-          <wd-sidebar-item :value="2" :label="$t('biao-qian-ming-cheng')" />
+          <wd-sidebar-item :value="0" label="标签名称" />
+          <wd-sidebar-item :value="1" label="标签名称" />
+          <wd-sidebar-item :value="2" label="标签名称" />
         </wd-sidebar>
         <wd-sidebar v-model="active2">
-          <wd-sidebar-item :value="0" :label="$t('biao-qian-ming-cheng')" is-dot />
-          <wd-sidebar-item :value="1" :label="$t('biao-qian-ming-cheng')" badge="5" />
-          <wd-sidebar-item :value="2" :label="$t('biao-qian-ming-cheng')" badge="2" :badge-props="{ type: 'warning', modelValue: 55, max: 99 }" />
+          <wd-sidebar-item :value="0" label="标签名称" is-dot />
+          <wd-sidebar-item :value="1" label="标签名称" badge="5" />
+          <wd-sidebar-item :value="2" label="标签名称" badge="2" :badge-props="{ type: 'warning', modelValue: 55, max: 99 }" />
         </wd-sidebar>
         <wd-sidebar v-model="active3" :before-change="beforeChange">
-          <wd-sidebar-item :value="0" :label="$t('biao-qian-ming-cheng')" />
-          <wd-sidebar-item :value="1" :label="$t('biao-qian-ming-cheng')" disabled />
-          <wd-sidebar-item :value="2" :label="$t('biao-qian-ming-cheng')" />
+          <wd-sidebar-item :value="0" label="标签名称" />
+          <wd-sidebar-item :value="1" label="标签名称" disabled />
+          <wd-sidebar-item :value="2" label="标签名称" />
         </wd-sidebar>
       </view>
     </demo-block>
 
-    <demo-block :title="$t('mao-dian-yong-fa-shi-li')" transparent>
+    <demo-block title="锚点用法示例" transparent>
       <view class="demo-button">
-        <wd-button @click="handleClick1" :round="false" block size="large">{{ $t('mao-dian-yong-fa') }}</wd-button>
+        <wd-button @click="handleClick1" :round="false" block size="large">锚点用法</wd-button>
       </view>
     </demo-block>
 
-    <demo-block :title="$t('qie-huan-ye-mian-yong-fa-shi-li')" transparent>
+    <demo-block title="切换页面用法示例" transparent>
       <view class="demo-button">
-        <wd-button @click="handleClick2" :round="false" block size="large">{{ $t('qie-huan-ye-mian') }}</wd-button>
+        <wd-button @click="handleClick2" :round="false" block size="large">切换页面</wd-button>
       </view>
     </demo-block>
 
-    <demo-block :title="$t('zi-ding-yi-tu-biao-shi-li')" transparent>
+    <demo-block title="自定义图标示例" transparent>
       <view class="demo-button">
-        <wd-button @click="handleClick3" :round="false" block size="large">{{ $t('ziDingYiTuBiao') }}</wd-button>
+        <wd-button @click="handleClick3" :round="false" block size="large">自定义图标</wd-button>
       </view>
     </demo-block>
   </page-wraper>

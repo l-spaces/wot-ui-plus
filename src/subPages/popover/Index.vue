@@ -3,7 +3,7 @@
     <wd-toast />
 
     <view @click="closeOutside" class="wrapper">
-      <demo-block :title="$t('wei-zhi')">
+      <demo-block title="位置">
         <wd-radio-group v-model="placement" inline shape="dot">
           <wd-radio value="bottom" custom-class="custom-radio">bottom</wd-radio>
           <wd-radio value="bottom-start" custom-class="custom-radio">bottom-start</wd-radio>
@@ -19,29 +19,29 @@
           <wd-radio value="right-end" custom-class="custom-radio">right-end</wd-radio>
         </wd-radio-group>
       </demo-block>
-      <demo-block custom-class="pop" :title="$t('jiBenYongFa')">
+      <demo-block custom-class="pop" title="基本用法">
         <view class="center">
-          <wd-popover id="pop1" :content="$t('zhe-shi-yi-duan-nei-rong')" :placement="placement" v-model="show1" @change="handleChange1">
-            <wd-button data-id="pop1">{{ $t('dian-ji-zhan-shi') }}</wd-button>
+          <wd-popover id="pop1" content="这是一段内容。" :placement="placement" v-model="show1" @change="handleChange1">
+            <wd-button data-id="pop1">点击展示</wd-button>
           </wd-popover>
         </view>
       </demo-block>
 
-      <demo-block custom-class="pop" :title="$t('qian-tao-xin-xi')">
+      <demo-block custom-class="pop" title="嵌套信息">
         <view class="center list">
           <wd-popover v-model="show2" use-content-slot :placement="placement" @change="handleChange2">
             <template #content>
-              <view class="pop-content">{{ $t('zhe-shi-yi-duan-zi-ding-yi-yang-shi-de-nei-rong') }}</view>
+              <view class="pop-content">这是一段自定义样式的内容。</view>
             </template>
-            <wd-button>{{ $t('dian-ji-zhan-shi-0') }}</wd-button>
+            <wd-button>点击展示</wd-button>
           </wd-popover>
         </view>
       </demo-block>
 
-      <demo-block custom-class="pop" :title="$t('lie-biao-zhan-shi')">
+      <demo-block custom-class="pop" title="列表展示">
         <view class="center list">
           <wd-popover v-model="show3" mode="menu" :placement="placement" :content="menu" @menuclick="link" @change="handleChange3">
-            <wd-button>{{ $t('lie-biao') }}</wd-button>
+            <wd-button>列表</wd-button>
           </wd-popover>
         </view>
       </demo-block>

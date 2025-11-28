@@ -1,16 +1,16 @@
 <template>
   <page-wraper>
     <view class="container">
-      <demo-block :title="$t('jiBenYongFa')">
+      <demo-block title="基本用法">
         <wd-button type="primary" @click="clickLoading(0)">基本语法</wd-button>
       </demo-block>
-      <demo-block :title="$t('jiBenYongFa')">
+      <demo-block title="自定义图片">
         <wd-button type="primary" @click="clickLoading(1)">自定义图片</wd-button>
       </demo-block>
-      <demo-block :title="$t('jiBenYongFa')">
+      <demo-block title="自定义加载动画模式">
         <wd-button type="primary" @click="clickLoading(2)">自定义加载动画模式</wd-button>
       </demo-block>
-      <demo-block :title="$t('jiBenYongFa')">
+      <demo-block title="自定义背景色">
         <wd-button type="primary" @click="clickLoading(3)">自定义背景色</wd-button>
       </demo-block>
       <wd-loading-page :loading="show" v-bind="loadingPageData" />
