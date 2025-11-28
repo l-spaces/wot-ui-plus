@@ -16,7 +16,7 @@
         </wd-badge>
       </demo-block>
       <demo-block title="局部水印">
-        <wd-watermark :opacity="0.8" image="https://wot-ui.cn/logo.png" :image-width="38" :image-height="38" :full-screen="false"></wd-watermark>
+        <wd-watermark :opacity="0.8" image="https://wot-ui-plus.cn/logo.png" :image-width="38" :image-height="38" :full-screen="false"></wd-watermark>
         <wd-badge custom-class="badge" :modelValue="12">
           <wd-button :round="false" type="info" size="small">评论</wd-button>
         </wd-badge>
@@ -68,7 +68,7 @@
   const showImage = ref(false) // 是否展示图片
 
   const image = computed(() => {
-    return showImage.value ? 'https://wot-ui.cn/logo.png' : ''
+    return showImage.value ? 'https://wot-ui-plus.cn/logo.png' : ''
   })
 
   function doSetImage(show: boolean) {

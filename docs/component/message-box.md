@@ -3,7 +3,7 @@
 弹出对话框，常用于消息提示、消息确认等，支持函数调用。
 
 :::tip 提示
-全局调用方案见 [wot-starter](https://starter.wot-ui.cn/guide/feedback.html)，支持在路由导航守卫和网络请求拦截器等场景使用的可全局调用的反馈组件。
+全局调用方案见示例
 :::
 
 ## Alert 弹框

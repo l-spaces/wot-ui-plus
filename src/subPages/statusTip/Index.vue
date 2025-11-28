@@ -41,7 +41,7 @@
     </demo-block>
 
     <demo-block title="自定义图片">
-      <wd-status-tip image="https://wot-ui.cn/assets/panda.jpg" tip="查看我的头像" />
+      <wd-status-tip image="https://wot-ui-plus.cn/assets/panda.jpg" tip="查看我的头像" />
     </demo-block>
 
     <demo-block title="插槽自定义图片内容">
@@ -76,7 +76,7 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-  const urlPrefix = 'https://wot-ui.cn/assets/'
+  const urlPrefix = 'https://wot-ui-plus.cn/assets/'
 </script>
 <style lang="scss" scoped>
   .bottom-actions {

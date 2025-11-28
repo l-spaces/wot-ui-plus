@@ -48,65 +48,9 @@
     switchLanguage(locale)
   }
 
-  const githubData = ref<any>({
-    collaborators: [
-      {
-        login: '不如摸鱼去',
-        avatar_url: 'https://avatars.githubusercontent.com/u/26426873?v=4'
-      },
-      {
-        login: 'jasper-ops',
-        avatar_url: 'https://avatars.githubusercontent.com/u/85024227?v=4'
-      },
-      {
-        login: '二狗',
-        avatar_url: 'https://avatars.githubusercontent.com/u/50100966?v=4'
-      },
-      {
-        login: 'RJQingHuan',
-        avatar_url: 'https://avatars.githubusercontent.com/u/53939074?v=4'
-      },
-      {
-        login: 'skiyee',
-        avatar_url: 'https://avatars.githubusercontent.com/u/120664167?v=4'
-      }
-    ],
-    contributors: [
-      {
-        login: 'contributor1',
-        avatar_url: 'https://avatars.githubusercontent.com/u/12345678?v=4'
-      },
-      {
-        login: 'contributor2',
-        avatar_url: 'https://avatars.githubusercontent.com/u/87654321?v=4'
-      }
-    ]
-  })
-
   // 切换语言
   const switchLanguage = (locale: string) => {
     setLocale(locale)
-  }
-
-  // 打开公众号二维码
-  const openWeChat = () => {
-    uni.previewImage({
-      urls: ['https://wot-ui.cn/wechatPublicAccount.png']
-    })
-  }
-
-  // 打开捐赠二维码
-  const donate = () => {
-    uni.previewImage({
-      urls: ['https://wot-ui.cn/weixinQrcode.jpg']
-    })
-    // 打开捐赠页面
-  }
-
-  const watchAd = () => {
-    uni.navigateTo({
-      url: '/subPages/wxRewardAd/Index'
-    })
   }
 </script>
 

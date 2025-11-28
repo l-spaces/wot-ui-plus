@@ -65,7 +65,7 @@
  * - 文档目录：docs/component/*.md
  * - 输出目录：src/uni_modules/wot-ui-plus/
  * - 组件前缀：wd-
- * - 文档站点：https://wot-ui.cn/component/
+ * - 文档站点：https://wot-ui-plus.cn/component/
  *
  * @usage-scenarios
  * - 构建流程：作为 npm run build 的一部分自动执行
@@ -100,7 +100,7 @@
  * @see
  * - WebTypes 规范：https://github.com/JetBrains/web-types
  * - components-helper 文档：https://github.com/codedigua/components-helper
- * - wot-ui-plus 组件库：https://wot-ui.cn/
+ * - wot-ui-plus 组件库：https://wot-ui-plus.cn/
  *
  * @example
  * 执行脚本生成 WebTypes 文件：
@@ -125,7 +125,7 @@
  *         {
  *           "name": "wd-button",
  *           "description": "按钮组件",
- *           "doc-url": "https://wot-ui.cn/component/button.html",
+ *           "doc-url": "https://wot-ui-plus.cn/component/button.html",
  *           "attributes": [
  *             {
  *               "name": "type",
@@ -203,10 +203,10 @@ const reComponentName: ReComponentName = (title: string) => {
  * @param {string} header - 文档标题（可选）
  * @returns {string} 完整的文档 URL
  * @example
- * const docUrl = reDocUrl('button', 'Attributes'); // 返回 'https://wot-ui.cn/component/button.html#attributes'
+ * const docUrl = reDocUrl('button', 'Attributes'); // 返回 'https://wot-ui-plus.cn/component/button.html#attributes'
  */
 const reDocUrl: ReDocUrl = (fileName, header) => {
-  const docs = 'https://wot-ui.cn/component/'
+  const docs = 'https://wot-ui-plus.cn/component/'
   // 清理标题并转换为 URL 片段格式
   const _header = header ? removeHtmlTagsAndNonEnglish(header).replace(/\s+/g, '-').toLowerCase() : ''
 

@@ -74,14 +74,14 @@ const list = ref([
     value: '李雷',
     disabled: false,
     payload: {
-      avatar: 'https://wot-ui.cn/assets/redpanda.jpg'
+      avatar: 'https://wot-ui-plus.cn/assets/redpanda.jpg'
     }
   },
   {
     value: '韩梅梅',
     disabled: false,
     payload: {
-      avatar: 'https://wot-ui.cn/assets/capybara.jpg'
+      avatar: 'https://wot-ui-plus.cn/assets/capybara.jpg'
     }
   }
 ])
