@@ -4,13 +4,13 @@ import { baseProps, makeBooleanProp, makeNumericProp, makeStringProp } from '../
 // 加载动画的模式，outline-圆形，ring-半圆形
 export type LoadingType = 'outline' | 'ring'
 
-export const loadingProps = {
+export const loadingPageProps = {
   ...baseProps,
 
   /**
    * 提示内容
    */
-  loadingText: makeStringProp('加载中'),
+  text: makeStringProp('加载中'),
   /**
    * 自定义加载图标
    */
@@ -49,4 +49,4 @@ export const loadingProps = {
   zIndex: makeNumericProp(10)
 }
 
-export type LoadingProps = ExtractPropTypes<typeof loadingProps>
+export type loadingPageProps = ExtractPropTypes<typeof loadingPageProps>
