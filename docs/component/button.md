@@ -1,185 +1,380 @@
-# Button 按钮
+# wd-button 按钮组件
 
-按钮用于触发一个操作，如提交表单或打开链接。
+## 组件概述
 
-## 基本用法
+wd-button 是一个基于 UniApp + Vue 3 + TypeScript 开发的跨平台按钮组件，用于触发用户交互操作。该组件支持多种按钮类型、尺寸、样式和开放能力，适用于各种需要用户点击操作的场景，如表单提交、页面跳转、功能触发等。
 
-基本按钮。
+## API 参考
 
-```html
-<wd-button>主要按钮</wd-button>
-<wd-button type="success">成功按钮</wd-button>
-<wd-button type="info">信息按钮</wd-button>
-<wd-button type="warning">警告按钮</wd-button>
-<wd-button type="error">危险按钮</wd-button>
+### Props
+
+| 属性名 | 类型 | 默认值 | 必填 | 描述 |
+| --- | --- | --- | --- | --- |
+| plain | boolean | false | 否 | 幽灵按钮 |
+| round | boolean | true | 否 | 圆角按钮 |
+| disabled | boolean | false | 否 | 禁用按钮 |
+| hairline | boolean | false | 否 | 是否细边框 |
+| block | boolean | false | 否 | 块状按钮 |
+| type | string | 'primary' | 否 | 按钮类型，可选值：primary / success / info / warning / error / text / icon |
+| size | string | 'medium' | 否 | 按钮尺寸，可选值：small / medium / large |
+| icon | string | - | 否 | 图标类名 |
+| classPrefix | string | 'wd-icon' | 否 | 类名前缀，用于使用自定义图标，用法参考Icon组件 |
+| loading | boolean | false | 否 | 加载中按钮 |
+| loadingColor | string | - | 否 | 加载图标颜色 |
+| openType | string | - | 否 | 开放能力 |
+| hoverStopPropagation | boolean | - | 否 | 指定是否阻止本节点的祖先节点出现点击态 |
+| lang | string | - | 否 | 指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文 |
+| sessionFrom | string | - | 否 | 会话来源，open-type="contact"时有效 |
+| sendMessageTitle | string | - | 否 | 会话内消息卡片标题，open-type="contact"时有效 |
+| sendMessagePath | string | - | 否 | 会话内消息卡片点击跳转小程序路径，open-type="contact"时有效 |
+| sendMessageImg | string | - | 否 | 会话内消息卡片图片，open-type="contact"时有效 |
+| appParameter | string | - | 否 | 打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效 |
+| showMessageCard | boolean | - | 否 | 是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示"可能要发送的小程序"提示，用户点击后可以快速发送小程序消息，open-type="contact"时有效 |
+| buttonId | string | - | 否 | 按钮的唯一标识，可用于设置隐私同意授权按钮的id |
+| scope | string | - | 否 | 支付宝小程序，当 open-type 为 getAuthorize 时有效。可选值：'phoneNumber' | 'userInfo' |
+| customStyle | string | '' | 否 | 自定义样式 |
+| customClass | string | '' | 否 | 自定义类名 |
+
+### Events
+
+| 事件名 | 触发条件 | 参数说明 |
+| --- | --- | --- |
+| click | 点击按钮时触发 | event: 事件对象 |
+| getuserinfo | 获取用户信息时触发，open-type="getUserInfo"时有效 | detail: 用户信息 |
+| contact | 联系客服时触发，open-type="contact"时有效 | detail: 客服信息 |
+| getphonenumber | 获取手机号时触发，open-type="getPhoneNumber"时有效 | detail: 手机号信息 |
+| getrealtimephonenumber | 获取实时手机号时触发，open-type="getRealtimePhoneNumber"时有效 | detail: 实时手机号信息 |
+| error | 发生错误时触发 | detail: 错误信息 |
+| launchapp | 打开 APP 时触发，open-type="launchApp"时有效 | detail: 打开 APP 结果 |
+| opensetting | 打开设置页时触发，open-type="openSetting"时有效 | detail: 设置信息 |
+| chooseavatar | 选择头像时触发，open-type="chooseAvatar"时有效 | detail: 头像信息 |
+| agreeprivacyauthorization | 同意隐私授权时触发，open-type="agreePrivacyAuthorization"时有效 | detail: 授权信息 |
+
+### Methods
+
+该组件无对外暴露的方法。
+
+### Slots
+
+| 插槽名 | 作用域变量 | 使用说明 |
+| --- | --- | --- |
+| default | - | 自定义按钮内容 |
+
+## 多场景使用示例
+
+### 基础用法
+
+```vue
+<template>
+  <view class="demo-button">
+    <wd-button type="primary" @click="handleClick">主要按钮</wd-button>
+    <wd-button type="success" @click="handleClick">成功按钮</wd-button>
+    <wd-button type="info" @click="handleClick">信息按钮</wd-button>
+    <wd-button type="warning" @click="handleClick">警告按钮</wd-button>
+    <wd-button type="error" @click="handleClick">错误按钮</wd-button>
+    <wd-button type="default" @click="handleClick">默认按钮</wd-button>
+  </view>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+// 点击事件处理
+function handleClick(event: any) {
+  console.log('按钮被点击', event)
+}
+</script>
+
+<style scoped>
+.demo-button {
+  padding: 20px;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+</style>
 ```
 
-## 禁用
+### 不同尺寸
 
-设置 `disabled` 属性。
+```vue
+<template>
+  <view class="demo-button">
+    <wd-button type="primary" size="small">小尺寸按钮</wd-button>
+    <wd-button type="primary" size="medium">中尺寸按钮</wd-button>
+    <wd-button type="primary" size="large">大尺寸按钮</wd-button>
+  </view>
+</template>
 
-```html
-<wd-button disabled>默认按钮</wd-button>
+<script lang="ts" setup>
+// 无需额外引入
+</script>
+
+<style scoped>
+.demo-button {
+  padding: 20px;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+</style>
 ```
 
-## 幽灵按钮
+### 不同样式
 
-设置 `plain` 属性。
+```vue
+<template>
+  <view class="demo-button">
+    <wd-button type="primary" :plain="false">普通按钮</wd-button>
+    <wd-button type="primary" :plain="true">幽灵按钮</wd-button>
+    <wd-button type="primary" :round="true">圆角按钮</wd-button>
+    <wd-button type="primary" :round="false">直角按钮</wd-button>
+    <wd-button type="primary" :block="true">块状按钮</wd-button>
+    <wd-button type="primary" :hairline="true">细边框按钮</wd-button>
+  </view>
+</template>
 
-```html
-<wd-button plain>主要按钮</wd-button>
+<script lang="ts" setup>
+// 无需额外引入
+</script>
+
+<style scoped>
+.demo-button {
+  padding: 20px;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+</style>
 ```
 
-## 细边框幽灵按钮
+### 带图标按钮
 
-设置 `hairline` 属性。
+```vue
+<template>
+  <view class="demo-button">
+    <wd-button type="primary" icon="search">搜索按钮</wd-button>
+    <wd-button type="success" icon="check">成功按钮</wd-button>
+    <wd-button type="warning" icon="warning">警告按钮</wd-button>
+    <wd-button type="error" icon="close">错误按钮</wd-button>
+    <wd-button type="info" icon="info">信息按钮</wd-button>
+  </view>
+</template>
 
-```html
-<wd-button plain hairline>主要按钮</wd-button>
+<script lang="ts" setup>
+// 无需额外引入
+</script>
+
+<style scoped>
+.demo-button {
+  padding: 20px;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+</style>
 ```
 
-## 按钮大小
+### 加载中状态
 
-设置 `size` ，支持 'small'、'medium'、'large'，默认为 'medium'。
+```vue
+<template>
+  <view class="demo-button">
+    <wd-button type="primary" :loading="loading" @click="toggleLoading">
+      {{ loading ? '加载中...' : '点击加载' }}
+    </wd-button>
+    <wd-button type="success" :loading="loading" loading-color="#fff" @click="toggleLoading">
+      {{ loading ? '加载中...' : '点击加载' }}
+    </wd-button>
+  </view>
+</template>
 
-```html
-<wd-button size="small">小号按钮</wd-button>
-<wd-button size="medium">中号按钮</wd-button>
-<wd-button size="large">大号按钮</wd-button>
-```
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-## 加载中按钮
+// 加载状态
+const loading = ref(false)
 
-设置 `loading` 属性，让按钮处于加载中状态。加载中的按钮是禁止点击的。
-
-```html
-<wd-button loading>加载中</wd-button>
-```
-
-## 文字按钮
-
-将 `type` 设置为 `text`。文字按钮不支持其他颜色。
-
-```html
-<wd-button type="text">文字按钮</wd-button>
-```
-
-## 图标按钮
-
-将 `type` 设置为 `icon`，同时设置 `icon` 属性，icon 为图标的类名，可以直接使用 `Icon 图标` 章节中的图标类名。
-
-```html
-<wd-button type="icon" icon="picture"></wd-button>
-```
-
-## 带图标的按钮
-
-设置 `icon` 属性，不需要设置 `type` 为 `icon`，即可以直接使用带图标的按钮。
-
-```html
-<wd-button icon="edit-outline"></wd-button>
-```
-
-结合`classPrefix`可以使用自定义图标，参见 [Icon 自定义图标](/component/icon#自定义图标)。
-
-```html
-<wd-button classPrefix="fish" icon="kehuishouwu">可回收</wd-button>
-```
-
-## 块状按钮
-
-设置 `block` 属性。
-
-```html
-<wd-button block>主要按钮</wd-button>
-```
-
-## 自定义样式
-
-通过 `custom-class` 和 `custom-style` 属性可以自定义按钮的样式，这里我们使用`custom-class`给按钮添加一个 `Material Design 3` 风格的`box-shadow`。
-
-```html
-<view class="page-class">
-  <wd-button custom-class="custom-shadow">主要按钮</wd-button>
-  <wd-button type="success" custom-class="custom-shadow">成功按钮</wd-button>
-  <wd-button type="info" custom-class="custom-shadow">信息按钮</wd-button>
-  <wd-button type="warning" custom-class="custom-shadow">警告按钮</wd-button>
-  <wd-button type="error" custom-class="custom-shadow">危险按钮</wd-button>
-</view>
-```
-
-```scss
-.page-class {
-  :deep() {
-    .custom-shadow {
-      box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
-    }
+// 切换加载状态
+function toggleLoading() {
+  loading.value = !loading.value
+  // 模拟加载完成
+  if (loading.value) {
+    setTimeout(() => {
+      loading.value = false
+    }, 2000)
   }
 }
+</script>
+
+<style scoped>
+.demo-button {
+  padding: 20px;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+</style>
 ```
 
-## Attributes
+## 样式定制指南
 
-| 参数                   | 说明                                                                                                                                                           | 类型        | 可选值                                                   | 默认值       | 最低版本 |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------- | ------------ | -------- |
-| type                   | 按钮类型                                                                                                                                                       | string      | primary / success / info / warning / error / text / icon | primary      | -        |
-| round                  | 圆角按钮                                                                                                                                                       | boolean     | -                                                        | true         | -        |
-| plain                  | 幽灵按钮                                                                                                                                                       | boolean     | -                                                        | false        | -        |
-| hairline               | 是否细边框                                                                                                                                                     | boolean     | -                                                        | false        | -        |
-| loading                | 加载中按钮                                                                                                                                                     | boolean     | -                                                        | false        | -        |
-| block                  | 块状按钮                                                                                                                                                       | boolean     | -                                                        | false        | -        |
-| size                   | 按钮尺寸                                                                                                                                                       | string      | small / medium / large                                   | medium       | -        |
-| disabled               | 禁用按钮                                                                                                                                                       | boolean     | -                                                        | false        | -        |
-| icon                   | 图标类名                                                                                                                                                       | string      | -                                                        | -            | -        |
-| loading-color          | 加载图标颜色                                                                                                                                                   | string      | -                                                        | -            | -        |
-| open-type              | 微信开放能力                                                                                                                                                   | string      | -                                                        | -            | -        |
-| hover-stop-propagation | 指定是否阻止本节点的祖先节点出现点击态                                                                                                                         | boolean     | -                                                        | false        | -        |
-| lang                   | 指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文                                                                                                | string      | zh_CN / zh_TW                                            | en           | -        |
-| session-from           | 会话来源，open-type="contact"时有效                                                                                                                            | string      | -                                                        | -            | -        |
-| send-message-title     | 会话内消息卡片标题，open-type="contact"时有效                                                                                                                  | string      | -                                                        | 当前标题     | -        |
-| send-message-path      | 会话内消息卡片点击跳转小程序路径，open-type="contact"时有效                                                                                                    | string      | -                                                        | 当前分享路径 | -        |
-| send-message-img       | 会话内消息卡片图片，open-type="contact"时有效                                                                                                                  | string      | -                                                        | 截图         | -        |
-| app-parameter          | 打开 APP 时，向 APP 传递的参数，open-type=launchApp 时有效                                                                                                     | string      | -                                                        | -            | -        |
-| show-message-card      | 是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示"可能要发送的小程序"提示，用户点击后可以快速发送小程序消息，open-type="contact"时有效 | boolean     | -                                                        | false        | -        |
-| classPrefix            | 类名前缀，用于使用自定义图标，参见[icon](/component/icon#自定义图标)                                                                                           | string      | -                                                        | 'wd-icon'    | 0.1.27   |
-| button-id              | 按钮的唯一标识，可用于设置隐私同意授权按钮的 id                                                                                                                | string      | -                                                        | -            | 1.3.6    |
-| scope                  | 支付宝小程序使用，当 open-type 为 getAuthorize 时有效。                                                                                                        | ButtonScope | `phoneNumber` / `userInfo`                               | -            | 1.3.14   |
+### 自定义整体样式
 
-### ButtonOpenType 开放能力
+通过 `customStyle` 和 `customClass` 属性可以自定义按钮的整体样式：
 
-| 属性                      | 说明                                                                                       |
-| ------------------------- | ------------------------------------------------------------------------------------------ |
-| feedback                  | 打开“意见反馈”页面，用户可提交反馈内容并上传日志。                                         |
-| share                     | 触发用户转发                                                                               |
-| getUserInfo               | 获取用户信息，可以从@getuserinfo 回调中获取到用户信息                                      |
-| contact                   | 打开客服会话，如果用户在会话中点击消息卡片后返回应用，可以从 @contact 回调中获得具体信息   |
-| getPhoneNumber            | 获取用户手机号，可以从@getphonenumber 回调中获取到用户信息                                 |
-| getRealtimePhoneNumber    | 实时获取用户手机号，可以从@getrealtimephonenumber 回调中获取到用户信息，仅微信小程序       |
-| launchApp                 | 小程序中打开 APP，可以通过 app-parameter 属性设定向 APP 传的参数                           |
-| openSetting               | 打开授权设置页                                                                             |
-| chooseAvatar              | 获取用户头像，可以从@chooseavatar 回调中获取到头像信息                                     |
-| getAuthorize              | 支持小程序授权，支付宝小程序配合`scope`使用，可以实现`getPhoneNumber`和`getUserInfo`功能。 |
-| lifestyle                 | 关注生活号，支付宝小程序                                                                   |
-| contactShare              | 分享到通讯录好友，支付宝小程序                                                             |
-| agreePrivacyAuthorization | 用户同意隐私协议按钮。可通过 @agreeprivacyauthorization 监听用户同意隐私协议事件。         |
+```vue
+<template>
+  <wd-button 
+    type="primary" 
+    customStyle="margin: 10px; padding: 15px; border-radius: 8px;" 
+    customClass="custom-button"
+  >
+    自定义样式按钮
+  </wd-button>
+</template>
 
-## Events
+<style>
+.custom-button {
+  /* 自定义样式 */
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+</style>
+```
 
-| 事件名称                  | 说明                                                             | 参数     | 最低版本 |
-| ------------------------- | ---------------------------------------------------------------- | -------- | -------- |
-| click                     | 点击事件                                                         | `event`  | -        |
-| getuserinfo               | 获取用户信息                                                     | `detail` | -        |
-| contact                   | 客服消息回调，open-type="contact"时有效                          | `detail` | -        |
-| getphonenumber            | 获取用户手机号回调，open-type=getPhoneNumber 时有效              | `detail` | -        |
-| getrealtimephonenumber    | 实时获取用户手机号回调，open-type=getRealtimePhoneNumber 时有效  | `detail` | 1.13.0   |
-| error                     | 当使用开放能力时，发生错误的回调，open-type=launchApp 时有效     | `detail` | -        |
-| launchapp                 | 打开 APP 成功的回调，open-type=launchApp 时有效                  | `detail` | -        |
-| opensetting               | 在打开授权设置页后回调，open-type=openSetting 时有效             | `detail` | -        |
-| chooseavatar              | 获取用户头像回调，open-type=chooseAvatar 时有效                  | `detail` | -        |
-| agreeprivacyauthorization | 用户同意隐私协议回调，open-type=agreePrivacyAuthorization 时有效 | `detail` | -        |
+### 自定义按钮颜色
 
-## 外部样式类
+通过修改 CSS 变量可以自定义按钮的颜色：
 
-| 类名         | 说明       | 最低版本 |
-| ------------ | ---------- | -------- |
-| custom-class | 根节点样式 | -        |
+```vue
+<template>
+  <wd-button type="primary" customClass="custom-color-button">自定义颜色按钮</wd-button>
+</template>
+
+<style>
+.custom-color-button {
+  /* 自定义主色调 */
+  --wd-button-primary-color: #409eff;
+  /* 自定义主色调背景色 */
+  --wd-button-primary-background-color: #ecf5ff;
+}
+</style>
+```
+
+### 自定义图标按钮
+
+通过 `icon` 属性可以添加图标，通过 `classPrefix` 属性可以使用自定义图标：
+
+```vue
+<template>
+  <wd-button type="primary" icon="custom-icon" class-prefix="my-icon">自定义图标按钮</wd-button>
+</template>
+
+<style>
+/* 自定义图标样式 */
+.my-icon {
+  /* 自定义图标字体 */
+  font-family: 'my-icon-font';
+}
+
+.my-icon-custom-icon::before {
+  content: '\e600';
+}
+</style>
+```
+
+## 注意事项
+
+1. **按钮类型和尺寸**：
+   - 支持多种按钮类型，包括 primary、success、info、warning、error、default、text、icon
+   - 支持三种按钮尺寸，包括 small、medium、large
+   - 不同类型和尺寸的按钮有不同的视觉表现，建议根据实际场景选择合适的类型和尺寸
+
+2. **开放能力**：
+   - 支持多种小程序开放能力，如获取用户信息、分享、联系客服等
+   - 不同开放能力有不同的使用条件和限制，建议参考小程序官方文档
+   - 开放能力仅在小程序环境下有效，H5 和 App 环境下会被忽略
+
+3. **加载中状态**：
+   - 设置 `loading` 为 `true` 时，按钮会显示加载动画
+   - 加载中状态下，按钮会被禁用，无法点击
+   - 可以通过 `loadingColor` 属性自定义加载图标颜色
+
+4. **禁用状态**：
+   - 设置 `disabled` 为 `true` 时，按钮会被禁用
+   - 禁用状态下，按钮无法点击，视觉上会呈现禁用样式
+
+5. **事件处理**：
+   - 点击事件仅在按钮未禁用且未处于加载中状态时触发
+   - 开放能力事件会传递详细的事件信息，建议根据实际需求处理
+
+6. **多平台适配**：
+   - 组件使用了条件编译处理不同平台的差异
+   - 不同平台的表现可能存在细微差异，建议在不同平台上进行充分测试
+   - 开放能力仅在小程序环境下有效，H5 和 App 环境下会被忽略
+
+7. **性能优化**：
+   - 避免频繁更新按钮状态，如 loading、disabled 等
+   - 对于大量按钮的场景，建议使用按需渲染或虚拟列表
+   - 合理使用自定义样式，避免过度复杂的样式计算
+
+## 常见问题解决方案
+
+1. **按钮点击无响应**：
+   - 检查按钮是否被禁用或处于加载中状态
+   - 检查点击事件是否正确绑定
+   - 检查按钮是否被其他元素遮挡
+
+2. **开放能力无效**：
+   - 检查是否在小程序环境下使用
+   - 检查开放能力是否需要特殊配置或权限
+   - 检查开放能力参数是否正确设置
+
+3. **样式显示异常**：
+   - 检查自定义样式是否正确
+   - 检查是否与其他样式冲突
+   - 尝试使用 `!important` 强制覆盖样式
+
+4. **图标不显示**：
+   - 检查图标名称是否正确
+   - 检查图标类名前缀是否正确设置
+   - 检查图标字体是否正确引入
+
+5. **多平台兼容性问题**：
+   - 在不同平台上进行充分测试
+   - 注意不同平台的差异，使用条件编译进行处理
+   - 参考小程序官方文档，了解不同平台的限制和特性
+
+## 性能优化建议
+
+1. **合理使用按钮类型**：
+   - 根据实际场景选择合适的按钮类型和尺寸
+   - 避免不必要的样式定制，使用组件默认样式可以提高性能
+
+2. **减少状态更新**：
+   - 避免频繁修改按钮的 loading、disabled 等状态
+   - 建议在初始化时设置好按钮状态，减少后续更新
+
+3. **优化事件处理**：
+   - 避免在点击事件中执行复杂的操作
+   - 对于耗时操作，建议使用异步处理
+
+4. **使用虚拟列表**：
+   - 对于大量按钮的场景，建议使用虚拟列表或按需渲染
+   - 可以减少 DOM 节点数量，提高页面渲染性能
+
+5. **合理使用开放能力**：
+   - 仅在必要时使用开放能力
+   - 开放能力可能会影响页面性能，建议谨慎使用

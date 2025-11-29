@@ -1,463 +1,329 @@
----
-version: 1.6.0
----
+# wd-signature 签名组件
 
-# Signature 签名
+## 组件概述
 
-用于签名场景，基于 Canvas 实现的签名组件。提供了基础签名、历史记录、笔锋效果等功能。
+签名组件是一种常用的 UI 组件，用于在移动设备或网页上进行手写签名。`wd-signature` 组件提供了完整的签名功能，包括手写绘制、清除、撤销、恢复、确认等，支持自定义笔颜色、笔宽度、背景色等样式，适用于各种需要签名的场景。
 
-:::tip 提醒
-如果遇到导出图片不清晰，可以将 `exportScale` 设置为 `2` 以上。
-:::
+### 功能特性
+- 支持手写签名绘制
+- 支持自定义笔颜色和宽度
+- 支持压感模式（笔锋效果）
+- 支持清除签名
+- 支持撤销和恢复功能
+- 支持历史记录
+- 支持自定义背景色
+- 支持导出图片
+- 支持禁用状态
+- 支持自定义按钮文本
+- 支持自定义画布尺寸
+- 支持禁用画布滚动
 
-## 基础用法
+### 适用场景
+- 电子合同签署
+- 表单签名确认
+- 手写签名验证
+- 电子签名采集
+- 移动应用签名功能
 
-基础的电子签名功能。签名完成后会使用预览组件显示签名图片。
+## API 参考
 
-```html
-<wd-signature @confirm="confirm" @clear="clear" :export-scale="2" background-color="#ffffff" />
-```
+### Props
 
-```typescript
-const img = ref<Partial<SignatureResult>>({})
+| 属性名 | 类型 | 默认值 | 必填 | 描述 |
+| --- | --- | --- | --- | --- |
+| customStyle | string | '' | 否 | 自定义根节点样式 |
+| customClass | string | '' | 否 | 自定义根节点样式类 |
+| penColor | string | '#000' | 否 | 签名笔颜色 |
+| lineWidth | number | 3 | 否 | 签名笔宽度 |
+| clearText | string | - | 否 | 清空按钮的文本 |
+| revokeText | string | - | 否 | 撤回按钮的文本 |
+| restoreText | string | - | 否 | 恢复按钮的文本 |
+| confirmText | string | - | 否 | 确认按钮的文本 |
+| fileType | string | 'png' | 否 | 目标文件的类型 |
+| quality | number | 1 | 否 | 目标文件的质量 |
+| exportScale | number | 1 | 否 | 导出图片的缩放比例 |
+| disabled | boolean | false | 否 | 是否禁用签名板 |
+| height | number/string | - | 否 | 画布的高度 |
+| width | number/string | - | 否 | 画布的宽度 |
+| backgroundColor | string | - | 否 | 画板的背景色 |
+| disableScroll | boolean | true | 否 | 是否禁用画布滚动 |
+| enableHistory | boolean | false | 否 | 是否开启历史记录 |
+| step | number | 1 | 否 | 撤回和恢复的步长 |
+| undoText | string | - | 否 | 撤销按钮的文本（已废弃，建议使用 revokeText） |
+| redoText | string | - | 否 | 恢复按钮的文本（已废弃，建议使用 restoreText） |
+| pressure | boolean | false | 否 | 是否启用压感模式(笔锋) |
+| minWidth | number | 2 | 否 | 压感模式下笔画最小宽度 |
+| maxWidth | number | 6 | 否 | 压感模式下笔画最大宽度 |
+| minSpeed | number | 1.5 | 否 | 最小速度阈值，影响压感模式下的笔画宽度变化 |
 
-function confirm(result: SignatureResult) {
-  if (result.success) {
-    uni.previewImage({
-      urls: [result.tempFilePath]
-    })
-  }
-}
+### Events
 
-function clear() {
-  img.value = {}
-}
-```
+| 事件名 | 触发条件 | 参数说明 |
+| --- | --- | --- |
+| start | 开始签名时触发 | event: 触摸事件对象 |
+| signing | 签名过程中触发 | event: 触摸事件对象 |
+| end | 结束签名时触发 | event: 触摸事件对象 |
+| confirm | 确认签名时触发 | result: 签名结果对象，包含 tempFilePath、success、width、height |
+| clear | 清除签名时触发 | - |
 
-## 历史记录
+### Slots
 
-通过 `enable-history` 开启历史记录功能，可以进行撤销和恢复操作。
+| 插槽名 | 作用域变量 | 描述 |
+| --- | --- | --- |
+| footer | clear: 清除签名方法<br>confirm: 确认签名方法<br>current-step: 当前步骤<br>revoke: 撤回方法<br>restore: 恢复方法<br>can-undo: 是否可以撤销<br>can-redo: 是否可以恢复<br>history-list: 历史记录列表 | 自定义底部按钮区域 |
 
-```html
-<wd-signature enable-history background-color="#f5f5f5" />
-```
+### Methods
 
-## 笔锋模式
+| 方法名 | 参数 | 返回值 | 功能说明 |
+| --- | --- | --- | --- |
+| init | forceUpdate?: boolean | void | 初始化签名板，forceUpdate 为 true 时强制更新 |
+| clear | - | void | 清除签名 |
+| confirm | - | void | 确认签名并生成图片 |
+| restore | - | void | 恢复上一步操作 |
+| revoke | - | void | 撤销上一步操作 |
 
-通过 `pressure` 开启笔锋模式，模拟真实书写效果。笔锋模式下笔画粗细会随书写速度变化。
+## 使用示例
 
-### 基础笔锋效果
+### 基础用法
 
-```html
-<wd-signature pressure :height="300" />
-```
-
-:::tip 使用建议
-
-1. 笔锋模式推荐参数范围：
-   - min-width: 1-2
-   - max-width: 4-6
-   - min-speed: 1-2
-2. max-width 和 min-width 的差值建议保持在 3-5 之间
-3. min-speed 值越小，压感越灵敏，建议根据实际书写习惯调整
-4. 对于签名场景，建议将画布高度设置在 300-400 之间
-   :::
-
-### 自定义笔锋参数
-
-可以通过以下属性精确控制笔锋效果：
-
-- `min-width`: 最小笔画宽度，快速书写时的线条粗细
-- `max-width`: 最大笔画宽度，慢速书写时的线条粗细
-- `min-speed`: 速度阈值，用于调整压感灵敏度
-
-```html
-<wd-signature pressure :height="300" :min-width="1" :max-width="6" :min-speed="1.5" background-color="#f5f5f5" />
-<view class="tip-text">快速书写产生细线条，慢速书写产生粗线条</view>
-```
-
-### 笔锋模式 + 历史记录
-
-笔锋模式可以与历史记录功能结合使用，支持对带有笔锋效果的线条进行撤销和恢复操作。
-
-```html
-<wd-signature pressure enable-history :height="300" :min-width="1" :max-width="6" background-color="#f5f5f5" />
-<view class="tip-text">结合历史记录，支持笔锋效果的撤销与恢复</view>
-```
-
-## 自定义功能
-
-### 自定义按钮
-
-通过 `footer` 插槽自定义底部按钮。
-
-```html
-<wd-signature :disabled="disabled" enable-history :step="3">
-  <template #footer="{ clear, confirm, currentStep, restore, revoke, historyList }">
-    <wd-button block @click="changeDisabled" v-if="disabled">开始签名</wd-button>
-    <block v-if="!disabled">
-      <wd-button size="small" plain @click="revoke" :disabled="currentStep <= 0">撤回</wd-button>
-      <wd-button size="small" plain @click="restore" :disabled="currentStep >= historyList.length">恢复</wd-button>
-      <wd-button size="small" plain @click="clear">清除</wd-button>
-      <wd-button size="small" @click="confirm">确定</wd-button>
-    </block>
-  </template>
-</wd-signature>
-```
-
-```typescript
-const disabled = ref(true)
-
-function changeDisabled() {
-  disabled.value = false
-}
-```
-
-### 自定义画笔
-
-可以自定义画笔的颜色和宽度。
-
-```html
-<wd-signature pen-color="#0083ff" :line-width="4" />
-```
-
-### 弹窗中使用
-
-结合 `wd-popup` 组件在弹窗中使用签名板。建议使用 `after-enter` 事件调用签名板的 `init` 方法以确保正确初始化。
-
-```html
-<wd-button type="primary" @click="show = true">打开签名板</wd-button>
-
-<wd-popup
-  v-model="show"
-  closable
-  safe-area-inset-bottom
-  position="bottom"
-  custom-style="padding: 48px 20px 20px 20px; border-radius: 16px 16px 0 0;"
-  @after-enter="signatureRef?.init()"
->
-  <wd-signature ref="signatureRef" :height="300" enable-history pressure background-color="#f5f5f5" @confirm="handleConfirm" />
-</wd-popup>
-
-<wd-img v-if="img.tempFilePath" mode="widthFix" width="100%" :src="img.tempFilePath" />
-```
-
-```typescript
-import { ref } from 'vue'
-import type { SignatureInstance, SignatureResult } from '@/uni_modules/wot-ui-plus/components/wd-signature/types'
-
-const show = ref(false)
-const img = ref<Partial<SignatureResult>>({})
-const signatureRef = ref<SignatureInstance>()
-
-function handleConfirm(result: SignatureResult) {
-  show.value = false
-  if (result.success) {
-    uni.previewImage({
-      urls: [result.tempFilePath]
-    })
-  }
-}
-```
-
-```scss
-.popup-footer {
-  margin-top: 16px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-}
-```
-
-:::tip 提示
-弹窗中使用签名板时，建议：
-
-1. 开启 `closable` 显示关闭按钮
-2. 设置 `safe-area-inset-bottom` 以适配底部安全区
-3. 使用 `custom-style` 调整弹窗内边距，为关闭按钮留出空间
-4. 在弹窗的 `after-enter` 事件中调用签名板的 `init` 方法，确保正确初始化
-   :::
-
-### 横屏签名页面
-
-可以通过配置页面的 `pageOrientation` 来实现横屏签名页面。
-
-```json
-// pages.json
-{
-  "pages": [
-    {
-      "path": "pages/signature-landscape/Index",
-      "style": {
-        "navigationBarTitleText": "横屏签名",
-        "pageOrientation": "landscape"
-      }
-    }
-  ]
-}
-```
-
-```html
+```vue
 <template>
-  <view class="landscape-signature">
-    <wd-signature ref="signatureRef" :height="height" :width="width" pressure enable-history background-color="#f5f5f5" @confirm="handleConfirm" />
-  </view>
+  <wd-signature
+    v-model="signature"
+    @confirm="onConfirm"
+    @clear="onClear"
+  ></wd-signature>
 </template>
 
-<script lang="ts" setup>
-  import { ref, onMounted } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-  const height = ref(0)
-  const width = ref(0)
+const signature = ref('')
 
-  onMounted(() => {
-    const { windowWidth, windowHeight } = uni.getSystemInfoSync()
-    // 减去页面边距
-    height.value = windowWidth - 40
-    width.value = windowHeight - 40
-  })
+const onConfirm = (result: any) => {
+  console.log('签名结果:', result)
+  if (result.success) {
+    signature.value = result.tempFilePath
+  }
+}
+
+const onClear = () => {
+  console.log('清除签名')
+  signature.value = ''
+}
+</script>
+```
+
+### 自定义样式
+
+```vue
+<template>
+  <wd-signature
+    v-model="signature"
+    pen-color="#07c160"
+    line-width="5"
+    background-color="#f5f7fa"
+    @confirm="onConfirm"
+  ></wd-signature>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const signature = ref('')
+
+const onConfirm = (result: any) => {
+  console.log('签名结果:', result)
+  if (result.success) {
+    signature.value = result.tempFilePath
+  }
+}
+</script>
+```
+
+### 启用历史记录
+
+```vue
+<template>
+  <wd-signature
+    v-model="signature"
+    :enable-history="true"
+    :step="2"
+    @confirm="onConfirm"
+  ></wd-signature>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const signature = ref('')
+
+const onConfirm = (result: any) => {
+  console.log('签名结果:', result)
+  if (result.success) {
+    signature.value = result.tempFilePath
+  }
+}
+</script>
+```
+
+### 启用压感模式
+
+```vue
+<template>
+  <wd-signature
+    v-model="signature"
+    :pressure="true"
+    :min-width="2"
+    :max-width="8"
+    :min-speed="1.5"
+    @confirm="onConfirm"
+  ></wd-signature>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const signature = ref('')
+
+const onConfirm = (result: any) => {
+  console.log('签名结果:', result)
+  if (result.success) {
+    signature.value = result.tempFilePath
+  }
+}
+</script>
+```
+
+### 自定义底部按钮
+
+```vue
+<template>
+  <wd-signature
+    v-model="signature"
+    @confirm="onConfirm"
+    @clear="onClear"
+  >
+    <template #footer="{ clear, confirm, revoke, restore, canUndo, canRedo }">
+      <view class="custom-footer">
+        <wd-button size="small" plain @click="revoke" :disabled="!canUndo">
+          撤销
+        </wd-button>
+        <wd-button size="small" plain @click="restore" :disabled="!canRedo">
+          恢复
+        </wd-button>
+        <wd-button size="small" plain @click="clear">
+          清除
+        </wd-button>
+        <wd-button size="small" @click="confirm">
+          确认
+        </wd-button>
+      </view>
+    </template>
+  </wd-signature>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const signature = ref('')
+
+const onConfirm = (result: any) => {
+  console.log('签名结果:', result)
+  if (result.success) {
+    signature.value = result.tempFilePath
+  }
+}
+
+const onClear = () => {
+  console.log('清除签名')
+  signature.value = ''
+}
 </script>
 
-<style>
-  .landscape-signature {
-    padding: 20px;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-  }
+<style scoped>
+.custom-footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
 </style>
 ```
 
-:::tip 提示
-横屏签名页面的建议：
+### 控制画布尺寸
 
-1. 使用 `pageOrientation: "landscape"` 强制横屏显示
-2. 动态计算画布尺寸以适配不同设备
-3. 注意横屏时 windowWidth 和 windowHeight 的对调
-4. 建议开启笔锋模式提供更好的签名体验
-   :::
-
-### 横屏签名
-
-支持以下两种横屏签名实现方案：
-
-#### 1. 通用横屏方案 (推荐)
-
-通过自定义布局和按钮旋转实现横屏效果，适用于所有平台。
-
-```html
+```vue
 <template>
-  <view class="landscape-signature">
-    <wd-signature v-if="inited" :height="height" :width="width" enable-history pressure background-color="#f5f5f5" @confirm="handleConfirm">
-      <template #footer="{ clear, confirm, restore, revoke, canUndo, canRedo }">
-        <view class="custom-actions">
-          <view class="button-group">
-            <wd-button size="small" plain @click="revoke" :disabled="!canUndo">撤回</wd-button>
-            <wd-button size="small" plain @click="restore" :disabled="!canRedo">恢复</wd-button>
-            <wd-button size="small" plain @click="clear">清除</wd-button>
-            <wd-button size="small" type="primary" @click="confirm">完成</wd-button>
-          </view>
-        </view>
-      </template>
-    </wd-signature>
-  </view>
+  <wd-signature
+    v-model="signature"
+    :width="300"
+    :height="200"
+    @confirm="onConfirm"
+  ></wd-signature>
 </template>
-```
 
-```ts
-import { pause } from '@/uni_modules/wot-ui-plus/components/common/util'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-const height = ref(0)
-const width = ref(0)
-const inited = ref(false)
+const signature = ref('')
 
-onMounted(() => {
-  const { windowWidth, windowHeight } = uni.getSystemInfoSync()
-  width.value = windowWidth - 48
-  height.value = windowHeight - 48
-
-  pause(100).then(() => {
-    inited.value = true
-  })
-})
-```
-
-```scss
-.landscape-signature {
-  height: 100vh;
-  // #ifdef H5
-  height: calc(100vh - 44px);
-  // #endif
-  background: #fff;
-  position: relative;
-  padding: 24px 0;
-  padding-left: 48px;
-  box-sizing: border-box;
-
-  .custom-actions {
-    position: fixed;
-    left: 0;
-    top: 50%;
-    width: 48px;
-    transform: translateY(-50%) rotate(90deg);
-    transform-origin: center;
-    z-index: 10;
-
-    .button-group {
-      display: flex;
-      flex-direction: row;
-      gap: 12px;
-      white-space: nowrap;
-      width: max-content;
-      transform: translateX(-50%);
-    }
+const onConfirm = (result: any) => {
+  console.log('签名结果:', result)
+  if (result.success) {
+    signature.value = result.tempFilePath
   }
 }
+</script>
 ```
 
-:::tip 实现说明
-通用横屏方案特点：
+## 样式定制
 
-1. 使用 fixed 布局配合旋转实现左侧垂直按钮栏
-2. 通过 footer 插槽自定义操作按钮
-3. 使用 transform 实现按钮的旋转效果
-4. 适用于所有平台,实现方式一致
-5. 建议使用 inited 变量配合延迟加载避免画布初始化问题
-   :::
+### 自定义根节点样式
 
-#### 2. 原生横屏方案 (仅微信小程序)
+使用 `customStyle` 属性可以自定义组件根节点的样式：
 
-微信小程序提供了原生的横屏支持，使用时需要注意区分平台:
+```vue
+<wd-signature
+  v-model="signature"
+  :custom-style="{ margin: '20px', borderRadius: '8px' }"
+  @confirm="onConfirm"
+></wd-signature>
+```
 
-```json
-{
-  "path": "pages/signature/landscape",
-  "style": {
-    "navigationBarTitleText": "横屏签名",
-    // #ifdef MP-WEIXIN
-    "pageOrientation": "landscape"
-    // #endif
-  }
+### 自定义根节点类名
+
+使用 `customClass` 属性可以自定义组件根节点的类名：
+
+```vue
+<wd-signature
+  v-model="signature"
+  custom-class="my-signature"
+  @confirm="onConfirm"
+></wd-signature>
+
+<style scoped>
+:deep(.my-signature) {
+  margin: 20px;
+  border-radius: 8px;
 }
+</style>
 ```
 
-```html
-<template>
-  <view class="landscape-signature">
-    <wd-signature
-      v-if="inited"
-      ref="signatureRef"
-      :height="height"
-      :width="width"
-      enable-history
-      pressure
-      background-color="#f5f5f5"
-      @confirm="handleConfirm"
-    ></wd-signature>
-  </view>
-</template>
-```
+## 注意事项
 
-```ts
-import { pause } from '@/uni_modules/wot-ui-plus/components/common/util'
+1. **Canvas 兼容性**：组件使用 Canvas 实现签名功能，需要确保目标平台支持 Canvas。
 
-const height = ref(0)
-const width = ref(0)
-const inited = ref(false)
+2. **图片导出**：确认签名后，组件会生成临时图片文件，需要根据平台差异处理图片路径。
 
-onMounted(() => {
-  const { windowWidth, windowHeight } = uni.getSystemInfoSync()
-  width.value = windowWidth
-  height.value = windowHeight - 60 // 预留底部按钮空间
+3. **压感模式**：压感模式依赖设备支持，部分设备可能无法实现理想的压感效果。
 
-  pause(100).then(() => {
-    inited.value = true
-  })
-})
-```
+4. **历史记录**：开启历史记录会增加内存占用，建议根据实际需求决定是否开启。
 
-```scss
-.landscape-signature {
-  height: 100vh;
-  background: #fff;
-  position: relative;
-  box-sizing: border-box;
+5. **性能优化**：在移动设备上，建议合理设置画布尺寸，避免过大的画布影响性能。
 
-  // #ifdef MP-WEIXIN
-  padding: 0;
-  display: flex;
-  flex-direction: column;
+6. **禁用状态**：设置 `disabled` 为 `true` 时，签名板不可用，无法进行签名操作。
 
-  .weixin-actions {
-    padding: 12px;
-    background-color: #f8f8f8;
+7. **滚动禁用**：默认禁用画布滚动，避免签名时页面滚动，可通过 `disableScroll` 属性关闭。
 
-    .button-group {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-    }
-  }
-  // #endif
-}
-```
-
-:::warning 注意事项
-
-1. `pageOrientation` 配置仅在微信小程序端生效
-2. 使用条件编译区分不同平台的布局结构
-3. 微信小程序页面会自动旋转，按钮布局不需要特殊处理
-4. 预留底部按钮空间时需要考虑横屏布局
-5. 其他平台请使用通用横屏方案
-   :::
-
-## Attributes
-
-| 参数             | 说明               | 类型    | 默认值  | 最低版本 |
-| ---------------- | ------------------ | ------- | ------- | -------- |
-| pen-color        | 签名笔颜色         | string  | #000000 | -        |
-| line-width       | 签名笔宽度         | number  | 3       | -        |
-| height           | 画布的高度         | number  | 200     | -        |
-| width            | 画布的宽度         | number  | 300     | -        |
-| clear-text       | 清空按钮的文本     | string  | -       | -        |
-| confirm-text     | 确认按钮的文本     | string  | -       | -        |
-| file-type        | 导出图片类型       | string  | png     | -        |
-| quality          | 导出图片质量(0-1)  | number  | 1       | -        |
-| export-scale     | 导出图片的缩放比例 | number  | 1       | -        |
-| disabled         | 是否禁用签名板     | boolean | false   | -        |
-| background-color | 画板的背景色       | string  | -       | -        |
-| disable-scroll   | 是否禁用画布滚动   | boolean | true    | -        |
-| enable-history   | 是否开启历史记录   | boolean | false   | 1.8.0    |
-| step             | 历史记录步长       | number  | 1       | 1.8.0    |
-| pressure         | 是否启用笔锋模式   | boolean | false   | 1.8.0    |
-| min-width        | 笔锋模式最小宽度   | number  | 2       | 1.8.0    |
-| max-width        | 笔锋模式最大宽度   | number  | 6       | 1.8.0    |
-| min-speed        | 笔锋模式速度阈值   | number  | 1.5     | 1.8.0    |
-
-## Events
-
-| 事件名称 | 说明           | 参数                    | 最低版本 |
-| -------- | -------------- | ----------------------- | -------- |
-| start    | 开始签名时触发 | event: TouchEvent       | -        |
-| end      | 结束签名时触发 | event: TouchEvent       | -        |
-| signing  | 签名过程中触发 | event: TouchEvent       | -        |
-| confirm  | 确认签名时触发 | result: SignatureResult | -        |
-| clear    | 清空签名时触发 | -                       | -        |
-
-## Methods
-
-| 方法名  | 说明         | 参数                  | 最低版本 |
-| ------- | ------------ | --------------------- | -------- |
-| init    | 初始化签名板 | forceUpdate?: boolean | -        |
-| confirm | 确认签名     | -                     | -        |
-| clear   | 清空签名     | -                     | -        |
-| restore | 恢复上一步   | -                     | -        |
-| revoke  | 撤销上一步   | -                     | -        |
-
-## Slots
-
-| 名称   | 说明           | 参数                                                            | 最低版本 |
-| ------ | -------------- | --------------------------------------------------------------- | -------- |
-| footer | 自定义底部按钮 | `{ clear, confirm, restore, revoke, currentStep, historyList }` | -        |
+8. **按钮文本**：可以通过 `clearText`、`revokeText`、`restoreText`、`confirmText` 属性自定义按钮文本。

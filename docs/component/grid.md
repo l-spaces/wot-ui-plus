@@ -1,282 +1,363 @@
-# Grid 宫格
+# wd-grid 宫格
 
-宫格可以在水平方向上把页面分隔成等宽度的区块，用于展示内容或进行页面导航。
+## 组件概述
 
-## 基础用法
+宫格组件是一个用于创建网格布局的容器组件，它可以快速生成固定列数的网格布局，支持自定义列数、间距、边框样式等。组件采用 Vue3 + TypeScript + UniApp 技术栈实现，通常与 wd-grid-item 子组件配合使用，用于展示图标、文字等内容。
 
-基础用法需要绑定 `icon` 值以及 `text` 属性。默认显示一行。
+### 功能描述
+- 支持自定义列数
+- 支持自定义格子间距
+- 支持正方形格子
+- 支持显示边框
+- 支持自定义背景颜色
+- 支持点击反馈
+- 支持自定义 hover 样式
+- 轻量级设计，性能开销小
 
-`icon` 为 `wd-icon` 标签中的 `name` 属性。
+### 适用场景
+- 首页功能入口
+- 分类导航
+- 图标展示
+- 数据统计卡片
+- 任何需要网格布局的场景
 
-```html
-<wd-grid clickable>
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-</wd-grid>
+## API 参考
+
+### Props
+| 名称 | 类型 | 默认值 | 必填 | 描述 |
+| --- | --- | --- | --- | --- |
+| clickable | boolean | false | 否 | 是否开启格子点击反馈 |
+| square | boolean | false | 否 | 是否将格子固定为正方形 |
+| column | number | - | 否 | 列数，必须大于0 |
+| border | boolean | false | 否 | 是否显示边框 |
+| bgColor | string | '' | 否 | 背景颜色 |
+| gutter | number | - | 否 | 格子之间的间距，默认单位为px |
+| hoverClass | string | - | 否 | 自定义内容区域hover-class |
+| customClass | string | - | 否 | 自定义类名，用于覆盖组件默认样式 |
+| customStyle | string/object | - | 否 | 自定义样式，支持字符串和对象两种格式 |
+
+### Events
+组件本身不直接触发事件，主要通过 provide/inject 机制与子组件通信。
+
+### Methods
+组件未对外暴露任何方法。
+
+### Slots
+| 插槽名 | 作用域变量 | 使用说明 |
+| --- | --- | --- |
+| default | - | 默认插槽，用于放置 wd-grid-item 子组件 |
+
+## 多场景使用示例
+
+### 基础用法
+
+```vue
+<template>
+  <view class="container">
+    <wd-grid column="3">
+      <wd-grid-item v-for="item in items" :key="item.id" :text="item.text">
+        <template #icon>
+          <text class="icon">{{ item.icon }}</text>
+        </template>
+      </wd-grid-item>
+    </wd-grid>
+  </view>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const items = ref([
+  { id: 1, text: '功能1', icon: '📱' },
+  { id: 2, text: '功能2', icon: '📞' },
+  { id: 3, text: '功能3', icon: '📧' },
+  { id: 4, text: '功能4', icon: '📷' },
+  { id: 5, text: '功能5', icon: '🎵' },
+  { id: 6, text: '功能6', icon: '🎮' }
+])
+</script>
+
+<style scoped>
+.container {
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.icon {
+  font-size: 36px;
+}
+</style>
 ```
 
-## 自定义列数
+### 自定义列数和间距
 
-`column` 可以用来自定义宫格列数。未定义 `column` 属性时，默认显示为一行，定义该属性后，组件内部根据 `column` 属性自行划分行数。
+```vue
+<template>
+  <view class="container">
+    <wd-grid column="4" :gutter="10">
+      <wd-grid-item v-for="item in items" :key="item.id" :text="item.text">
+        <template #icon>
+          <text class="icon">{{ item.icon }}</text>
+        </template>
+      </wd-grid-item>
+    </wd-grid>
+  </view>
+</template>
 
-```html
-<wd-grid :column="3">
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-</wd-grid>
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const items = ref([
+  { id: 1, text: '功能1', icon: '📱' },
+  { id: 2, text: '功能2', icon: '📞' },
+  { id: 3, text: '功能3', icon: '📧' },
+  { id: 4, text: '功能4', icon: '📷' },
+  { id: 5, text: '功能5', icon: '🎵' },
+  { id: 6, text: '功能6', icon: '🎮' },
+  { id: 7, text: '功能7', icon: '📚' },
+  { id: 8, text: '功能8', icon: '🗓️' }
+])
+</script>
+
+<style scoped>
+.container {
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.icon {
+  font-size: 32px;
+}
+</style>
 ```
 
-## 自定义背景颜色
+### 正方形格子和边框
 
-`bg-color` 可以用来自定义宫格背景颜色。
+```vue
+<template>
+  <view class="container">
+    <wd-grid column="3" square border>
+      <wd-grid-item v-for="item in items" :key="item.id" :text="item.text">
+        <template #icon>
+          <text class="icon">{{ item.icon }}</text>
+        </template>
+      </wd-grid-item>
+    </wd-grid>
+  </view>
+</template>
 
-```html
-<wd-grid bg-color="rgba(0, 0, 0, 0.02)">
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-</wd-grid>
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const items = ref([
+  { id: 1, text: '功能1', icon: '📱' },
+  { id: 2, text: '功能2', icon: '📞' },
+  { id: 3, text: '功能3', icon: '📧' },
+  { id: 4, text: '功能4', icon: '📷' },
+  { id: 5, text: '功能5', icon: '🎵' },
+  { id: 6, text: '功能6', icon: '🎮' }
+])
+</script>
+
+<style scoped>
+.container {
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.icon {
+  font-size: 36px;
+}
+</style>
 ```
 
-## 开启边框
+### 点击反馈和自定义背景
 
-`border` 可以用来开启边框线展示。
+```vue
+<template>
+  <view class="container">
+    <wd-grid column="3" clickable :bg-color="'#fff'">
+      <wd-grid-item 
+        v-for="item in items" 
+        :key="item.id" 
+        :text="item.text"
+        @click="onItemClick(item)"
+      >
+        <template #icon>
+          <text class="icon">{{ item.icon }}</text>
+        </template>
+      </wd-grid-item>
+    </wd-grid>
+  </view>
+</template>
 
-```html
-<wd-grid border :column="3">
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-</wd-grid>
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const items = ref([
+  { id: 1, text: '功能1', icon: '📱' },
+  { id: 2, text: '功能2', icon: '📞' },
+  { id: 3, text: '功能3', icon: '📧' },
+  { id: 4, text: '功能4', icon: '📷' },
+  { id: 5, text: '功能5', icon: '🎵' },
+  { id: 6, text: '功能6', icon: '🎮' }
+])
+
+const onItemClick = (item: any) => {
+  console.log('点击了', item.text)
+  // 执行相应的业务逻辑
+}
+</script>
+
+<style scoped>
+.container {
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.icon {
+  font-size: 36px;
+}
+</style>
 ```
 
-## 内容插槽
+### 自定义样式和hover效果
 
-通过默认插槽可以自定义 `GridItem` 的内容。
+```vue
+<template>
+  <view class="container">
+    <wd-grid 
+      column="3" 
+      clickable 
+      hover-class="grid-hover"
+      :custom-style="{
+        borderRadius: '12px',
+        overflow: 'hidden'
+      }"
+    >
+      <wd-grid-item 
+        v-for="item in items" 
+        :key="item.id" 
+        :text="item.text"
+        :custom-style="{
+          borderRadius: '12px'
+        }"
+      >
+        <template #icon>
+          <text class="icon">{{ item.icon }}</text>
+        </template>
+      </wd-grid-item>
+    </wd-grid>
+  </view>
+</template>
 
-```html
-<wd-grid>
-  <wd-grid-item>
-    <image class="img" :src="joy" />
-  </wd-grid-item>
-  <wd-grid-item>
-    <image class="img" :src="joy" />
-  </wd-grid-item>
-  <wd-grid-item>
-    <image class="img" :src="joy" />
-  </wd-grid-item>
-</wd-grid>
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const items = ref([
+  { id: 1, text: '功能1', icon: '📱' },
+  { id: 2, text: '功能2', icon: '📞' },
+  { id: 3, text: '功能3', icon: '📧' }
+])
+</script>
+
+<style scoped>
+.container {
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.icon {
+  font-size: 40px;
+}
+
+/* 自定义hover样式 */
+.grid-hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  transform: scale(0.98);
+  transition: all 0.2s ease;
+}
+</style>
 ```
 
-```scss
-.img {
-  width: 100%;
-  height: 90px;
+## 样式定制指南
+
+### customClass 用法
+```vue
+<wd-grid custom-class="my-grid" />
+
+<style>
+.my-grid {
+  /* 自定义样式 */
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+</style>
+```
+
+### customStyle 用法
+```vue
+<wd-grid 
+  :custom-style="{
+    backgroundColor: '#fff',
+    borderRadius: '12px',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+  }"
+/>
+```
+
+### CSS 变量
+组件支持通过 CSS 变量自定义样式，常用变量如下：
+
+```css
+.wd-grid {
+  /* 自定义间距 */
+  --grid-gutter: 0px;
+  /* 自定义背景颜色 */
+  --grid-background-color: transparent;
+  /* 自定义边框颜色 */
+  --grid-border-color: #e5e5e5;
+}
+
+.wd-grid-item {
+  /* 自定义格子宽度 */
+  --grid-item-width: 33.3333%;
+  /* 自定义格子高度 */
+  --grid-item-height: auto;
+  /* 自定义文字颜色 */
+  --grid-item-text-color: #666;
+  /* 自定义文字大小 */
+  --grid-item-text-font-size: 12px;
 }
 ```
 
-## 单个插槽
+## 注意事项
 
-通过插槽 `icon` 可以插入 `GridItem` 中的图标位。
+1. **性能优化**：
+   - 组件本身非常轻量，性能开销小，可以放心使用
+   - 对于大量数据的网格，建议合理设置列数，避免单行显示过多元素
+   - 避免在循环中使用复杂的计算属性或方法，影响渲染性能
 
-通过插槽 `text` 可以插入 `GridItem` 中的文字位。
+2. **跨端兼容**：
+   - 组件在不同平台上的表现基本一致
+   - 在小程序平台上，hover-class 属性的效果可能略有差异
 
-注意:
+3. **使用限制**：
+   - 宫格组件必须与 wd-grid-item 子组件配合使用，否则无法实现完整的布局效果
+   - column 属性必须大于 0，否则会输出错误信息
+   - gutter 属性的单位默认为 px，不支持其他单位
 
-1. 使用单个插槽或者自定义样式时，需要用户使用 `custom-class` 控制 每一个 `GridItem` 的高度，保证每一个 `GridItem` 的高度相同且符合用户预期。
+4. **最佳实践**：
+   - 为不同场景定义统一的网格布局规范，如 3 列、4 列等
+   - 合理设置 gutter 属性，保持页面元素之间的呼吸感
+   - 对于需要点击交互的网格，建议开启 clickable 属性，提供良好的用户反馈
+   - 结合 wd-grid-item 的插槽功能，可以实现更复杂的网格内容
 
-2. 使用 icon 插槽时，如果插槽大小超过`icon-size`设置的值时，需要调整`icon-size`属性使其大小等于插槽尺寸。
-
-```html
-<wd-grid>
-  <wd-grid-item text="文字" v-for="index in 3" :key="index" icon-size="36px">
-    <template #icon>
-      <image class="slot-img" :src="joy" />
-    </template>
-  </wd-grid-item>
-</wd-grid>
-<wd-grid>
-  <wd-grid-item icon="picture" v-for="index in 3" :key="index">
-    <template #text>
-      <view class="text">自定义文字插槽</view>
-    </template>
-  </wd-grid-item>
-</wd-grid>
-```
-
-```scss
-.slot-img {
-  height: 36px;
-  width: 36px;
-  border-radius: 4px;
-}
-.text {
-  color: #ffb300;
-  margin-top: 8px;
-}
-```
-
-## 自定义样式
-
-通过设置 `custom-class` 可以自定义 `GridItem` 的样式。
-
-可以在 `custom-class` 样式属性中设定 `GridItem` 的宽、高度等属性。
-
-注意:
-
-- 设定宽高这类可能会影响布局的属性时，请将 `custom-class` 作用到当前 `Grid` 下的所有 `GridItem` 以确保所有 `GridItem` 样式相同。
-
-- **如果想改变 `GridItem` 高度, 不要直接设置 `Grid` 的高度, 修改单独的** `GridItem`。
-
-- **如果想改变 `icon` 大小设置 `icon-size` 属性, `custom-icon` 不能改变当前 icon 宽高。**
-
-```html
-<wd-grid>
-  <wd-grid-item
-    custom-class="custom-item"
-    icon="search"
-    text="京东JD.COM-专业的综合网上购物商城，销售超数万品牌、4020万种商品，囊括家电、手机、电脑、母婴、服装等13大品类。"
-  />
-  <wd-grid-item custom-class="custom-item" icon="person" text="秉承客户为先的理念，京东所售商品为正品行货、全国联保、机打发票。" />
-</wd-grid>
-```
-
-```scss
-:deep(.custom-item) {
-  height: 80px !important;
-  color: #e2231a;
-  padding-left: 20px;
-  text-align: left !important;
-}
-```
-
-## 正方形格子
-
-通过 `square` 属性开启正方形格属性。此时显示每一个 `GridItem` 都为正方形。
-
-注意: 使用 `square` 不要自定义 `GridItem` 的高度样式。
-
-```html
-<wd-grid square :column="3">
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-</wd-grid>
-```
-
-## 设定格间隙
-
-通过 `gutter` 属性设置格子之间的距离。
-
-```html
-<wd-grid :gutter="10" :column="3">
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-  <wd-grid-item icon="picture" text="文字" />
-</wd-grid>
-```
-
-## 页面导航
-
-通过 `clickable` 属性开启可点击状态, 可以绑定 `click` 事件。
-
-通过 `link-type` 属性设置页面跳转方式。
-
-通过 `url` 属性设置跳转链接, 通过 `url` 属性设置 URL 跳转链接。
-
-```html
-<wd-grid clickable>
-  <wd-grid-item link-type="redirectTo" url="/pages/button/index" @itemclick="click" icon="search" text="Redirect to ..." />
-  <wd-grid-item link-type="navigateTo" url="/pages/button/index" @itemclick="click" icon="setting" text="Navigate to ..." />
-</wd-grid>
-```
-
-## 提示信息
-
-设置 `is-dot` 属性后，会在图标右上角展示一个小红点。
-
-设置 `type` | `max` | `value` , 使用方式同组件 `wd-badge` 中的同名属性。
-
-```html
-<wd-grid>
-  <wd-grid-item is-dot icon="goods" text="文字" />
-  <wd-grid-item value="100" :max="99" icon="computer" text="文字" />
-</wd-grid>
-```
-
-## Grid Attributes
-
-| 参数        | 说明                           | 类型    | 可选值 | 默认值                         | 最低版本 |
-| ----------- | ------------------------------ | ------- | ------ | ------------------------------ | -------- |
-| column      | 列数                           | number  | -      | -                              | -        |
-| border      | 是否显示边框                   | boolean | -      | false                          | -        |
-| gutter      | 格子之间的间距，默认单位为`px` | number  | -      | -                              | -        |
-| square      | 是否将格子固定为正方形         | boolean | -      | false                          | -        |
-| clickable   | 是否开启格子点击反馈           | boolean | -      | false                          | -        |
-| bg-color    | 背景颜色设置                   | string  | -      | #ffffff                        | -        |
-| hover-class | 指定 grid-item 按下去的样式类  | string  | -      | wd-grid-item\_\_content--hover | 1.9.0    |
-
-## GridItem Attributes
-
-| 参数                 | 说明                                                                                                                      | 类型           | 可选值                                      | 默认值 | 最低版本 |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------- | ------------------------------------------- | ------ | -------- |
-| text                 | 文字 value                                                                                                                | string         | -                                           | -      | -        |
-| icon                 | 图标名称，可选值见 `wd-icon` 组件                                                                                         | string         | -                                           | -      | -        |
-| is-dot               | 是否显示图标右上角小红点                                                                                                  | boolean        | -                                           | false  | -        |
-| type                 | 图标右上角显示的 `badge` 类型                                                                                             | string         | primary / success / warning / danger / info | -      | -        |
-| value                | 图标右上角 `badge` 显示值                                                                                                 | string, number | -                                           | -      | -        |
-| max                  | 图标右上角 `badge` 最大值，超过最大值会显示 '{max}+'，要求 value 是 Number 类型                                           | number         | -                                           | -      | -        |
-| url                  | 点击后跳转的链接地址                                                                                                      | string         | -                                           | -      | -        |
-| link-type            | 页面跳转方式, 参考[微信小程序路由文档](https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/route.html) | string         | navigateTo / switchTab / reLaunch           | -      | -        |
-| <s>use-slot</s>      | 是否开启 `GridItem` 内容插槽 **（1.12.0 已废弃，直接使用默认插槽即可）**                                                  | boolean        | -                                           | false  | -        |
-| <s>use-icon-slot</s> | 是否开启 `GridItem` icon 插槽 **（1.12.0 已废弃，组件会自动检测 icon 插槽的存在）**                                       | boolean        | -                                           | false  | -        |
-| <s>use-text-slot</s> | 是否开启 `GridItem` text 内容插槽 **（1.12.0 已废弃，组件会自动检测 text 插槽的存在）**                                   | boolean        | -                                           | false  | -        |
-| icon-size            | 图标大小                                                                                                                  | string         | -                                           | 26px   | -        |
-| badge-props          | 自定义徽标的属性，传入的对象会被透传给 [Badge 组件的 props](/component/badge#attributes)                                  | BadgeProps     | -                                           | -      | 0.1.50   |
-
-## GridItem Events
-
-| 方法名    | 说明           | 参数  | 返回值 | 最低版本 |
-| --------- | -------------- | ----- | ------ | -------- |
-| itemclick | 点击(跳转)事件 | event | -      | -        |
-
-## Grid Slot
-
-| name    | 说明     | 最低版本 |
-| ------- | -------- | -------- |
-| default | 宫格内容 | -        |
-
-## GridItem Slot
-
-| name    | 说明                           | 最低版本 |
-| ------- | ------------------------------ | -------- |
-| default | 宫格中每一格的默认显示全部内容 | -        |
-| icon    | 宫格中图标位内容               | -        |
-| text    | 宫格中文本位内容               | -        |
-
-## Grid 外部样式类
-
-| 类名         | 说明            | 最低版本 |
-| ------------ | --------------- | -------- |
-| custom-class | Grid 根节点样式 | -        |
-
-## GridItem 外部样式类
-
-| 类名         | 说明                    | 最低版本 |
-| ------------ | ----------------------- | -------- |
-| custom-class | GridItem 根节点样式     | -        |
-| custom-text  | GridItem 下方文字样式   | -        |
-| custom-icon  | GridItem 上方 icon 样式 | -        |
+5. **常见问题**：
+   - 问题：网格布局错乱
+     解决方案：检查 column 属性是否设置正确，确保子组件数量与列数匹配
+   - 问题：边框显示异常
+     解决方案：确保 border 属性设置为 true，且子组件正确继承了父组件的配置
+   - 问题：点击反馈不生效
+     解决方案：检查 clickable 属性是否设置为 true，或自定义 hover-class 是否正确

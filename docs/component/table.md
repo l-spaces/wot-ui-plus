@@ -1,488 +1,321 @@
 # Table 表格
 
-用于展示多条结构类似的数据， 可对数据进行排序等操作。
+## 组件概述
 
-::: warning 提示
-`1.5.0`后取消了`height`的默认值，需要自行设置，最好设置为`number`类型，方便未来适配虚拟列表。
-:::
+Table 是一个功能强大的数据展示组件，用于以表格形式展示结构化数据。它支持固定表头、列排序、斑马纹、索引列、固定列等多种功能，适用于各种数据展示场景。
 
-## 基础用法
+### 功能特点
+- 支持固定表头和列
+- 支持列排序功能
+- 支持斑马纹样式
+- 支持索引列
+- 支持文本溢出省略
+- 支持自定义空状态
+- 支持自定义列宽和行高
+- 支持边框显示控制
+- 支持响应式设计，内容可横向滚动
 
-通过`data`设置表格数据。
+### 适用场景
+- 数据列表展示
+- 报表统计
+- 数据管理后台
+- 订单列表
+- 用户列表
+- 商品列表
 
-::: details 基础用法
+## API 参考
 
-```html
-<wd-table :data="dataList" :height="400">
-  <wd-table-col prop="name" label="姓名"></wd-table-col>
-  <wd-table-col prop="school" label="求学之所"></wd-table-col>
-  <wd-table-col prop="major" label="专业"></wd-table-col>
-</wd-table>
-```
+### Props
 
-```ts
-const dataList = reactive([
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业'
-  }
+| 参数名 | 类型 | 默认值 | 必填 | 描述 |
+| --- | --- | --- | --- | --- |
+| data | array | - | 是 | 显示的数据，数组中的每个对象代表一行数据 |
+| border | boolean | true | 否 | 是否显示表格边框 |
+| stripe | boolean | true | 否 | 是否显示斑马纹表格 |
+| height | number/string | - | 否 | 表格的高度，超出高度会显示纵向滚动条 |
+| rowHeight | number | 40 | 否 | 行高，单位为 px |
+| showHeader | boolean | true | 否 | 是否显示表头 |
+| ellipsis | boolean | true | 否 | 是否超出 2 行隐藏，显示省略号 |
+| index | boolean/object | false | 否 | 是否显示索引列，可传入对象配置索引列属性 |
+| fixedHeader | boolean | true | 否 | 是否固定表头 |
+| emptyText | string | '暂无数据' | 否 | 空数据时显示的文本 |
+| emptyHeight | number/string | 100 | 否 | 空数据区域高度，单位为 px |
+| customClass | string | '' | 否 | 自定义类名，用于覆盖组件样式 |
+| customStyle | object | {} | 否 | 自定义样式，直接应用到组件根元素 |
+
+### Events
+
+| 事件名 | 触发条件 | 参数说明 |
+| --- | --- | --- |
+| sort-method | 点击列排序按钮时触发 | column: TableColumn 对象，包含列信息和排序方向 |
+| row-click | 点击表格行时触发 | { rowIndex: number }，rowIndex 为点击行的索引 |
+
+### Methods
+
+该组件未对外暴露任何方法。
+
+### Slots
+
+| 插槽名 | 作用域变量 | 使用说明 |
+| --- | --- | --- |
+| default | - | 默认插槽，用于放置 `wd-table-col` 子组件 |
+| empty | - | 自定义空状态插槽，用于自定义无数据时的显示内容 |
+
+## 使用示例
+
+### 基础用法
+
+```vue
+<template>
+  <wd-table :data="tableData">
+    <wd-table-col prop="name" label="姓名" width="200" />
+    <wd-table-col prop="age" label="年龄" width="100" align="center" />
+    <wd-table-col prop="gender" label="性别" width="100" align="center" />
+    <wd-table-col prop="email" label="邮箱" width="300" />
+  </wd-table>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const tableData = ref([
+  { name: '张三', age: 25, gender: '男', email: 'zhangsan@example.com' },
+  { name: '李四', age: 30, gender: '女', email: 'lisi@example.com' },
+  { name: '王五', age: 28, gender: '男', email: 'wangwu@example.com' },
+  { name: '赵六', age: 35, gender: '女', email: 'zhaoliu@example.com' }
 ])
+</script>
 ```
 
-:::
+### 带排序功能
 
-## 固定列
+```vue
+<template>
+  <wd-table :data="tableData" @sort-method="handleSort">
+    <wd-table-col prop="name" label="姓名" width="200" />
+    <wd-table-col prop="age" label="年龄" width="100" align="center" sortable />
+    <wd-table-col prop="gender" label="性别" width="100" align="center" />
+    <wd-table-col prop="email" label="邮箱" width="300" />
+  </wd-table>
+</template>
 
-通过`fixed`设置表格列是否固定展示，默认`false`。
-:::warning 提示
-目前仅支持固定在左侧，且固定列组件的排列顺序要和实际想要展示的顺序相同。
-:::
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-```html
-<wd-table :data="dataList" :height="400">
-  <wd-table-col prop="name" label="姓名" fixed></wd-table-col>
-  <wd-table-col prop="school" label="求学之所"></wd-table-col>
-  <wd-table-col prop="major" label="专业"></wd-table-col>
-</wd-table>
-```
+const tableData = ref([
+  { name: '张三', age: 25, gender: '男', email: 'zhangsan@example.com' },
+  { name: '李四', age: 30, gender: '女', email: 'lisi@example.com' },
+  { name: '王五', age: 28, gender: '男', email: 'wangwu@example.com' },
+  { name: '赵六', age: 35, gender: '女', email: 'zhaoliu@example.com' }
+])
 
-## 显示索引
-
-通过`index`设置表格是否显示序号列，默认为`false`。同时也可以传入对象对序号列进行配置，参数同`TableColumnProps`
-
-```html
-<wd-table :data="dataList" height="328px" :index="true" :height="400">
-  <wd-table-col prop="name" label="姓名" sortable></wd-table-col>
-  <wd-table-col prop="grade" label="分数" sortable></wd-table-col>
-  <wd-table-col prop="hobby" label="一言以蔽之" sortable :width="160"></wd-table-col>
-</wd-table>
-
-<wd-table :data="dataList" height="328px" :index="{ align: 'center', width: 200 }">
-  <wd-table-col prop="name" label="姓名" sortable align="center"></wd-table-col>
-  <wd-table-col prop="grade" label="分数" sortable align="center"></wd-table-col>
-  <wd-table-col prop="hobby" label="一言以蔽之" sortable :width="160"></wd-table-col>
-</wd-table>
-```
-
-## 斑马纹
-
-通过`stripe`设置表格是否展示斑马纹，默认`true`。
-
-```html
-<wd-table :data="dataList" :stripe="false" :height="400">
-  <wd-table-col prop="name" label="姓名"></wd-table-col>
-  <wd-table-col prop="school" label="求学之所"></wd-table-col>
-  <wd-table-col prop="major" label="专业"></wd-table-col>
-</wd-table>
-```
-
-## 边框
-
-通过`border`设置表格是否展示边框，默认`true`。
-
-```html
-<wd-table :data="dataList" :border="false" :height="400">
-  <wd-table-col prop="name" label="姓名"></wd-table-col>
-  <wd-table-col prop="school" label="求学之所"></wd-table-col>
-  <wd-table-col prop="major" label="专业"></wd-table-col>
-</wd-table>
-```
-
-## 表格高度
-
-通过`height`设置表格高度，设置高度后会自动固定表头。
-
-```html
-<wd-table :data="dataList" :height="400">
-  <wd-table-col prop="name" label="姓名"></wd-table-col>
-  <wd-table-col prop="school" label="求学之所"></wd-table-col>
-  <wd-table-col prop="major" label="专业"></wd-table-col>
-</wd-table>
-```
-
-## 排序事件
-
-当存在列参与排序时，点击会触发`sort-method`排序事件。
-
-```html
-<wd-table :data="dataList" @sort-method="handleSort" :height="400">
-  <wd-table-col prop="name" label="姓名"></wd-table-col>
-  <wd-table-col prop="school" label="求学之所" sortable></wd-table-col>
-  <wd-table-col prop="major" label="专业"></wd-table-col>
-</wd-table>
-```
-
-```ts
-function handleSort(e) {
-  console.log('这里是排序事件')
+const handleSort = (column: any) => {
+  console.log('排序字段:', column.prop, '排序方向:', column.sortDirection)
+  // 根据排序字段和方向处理数据
 }
+</script>
 ```
 
-## 自定义列模板
+### 带索引列
 
-自定义列的显示内容，可组合其他组件使用。
-通过 `Scoped slot` 可以获取到 `row`, `index` 的数据，用法参考 demo。
+```vue
+<template>
+  <wd-table :data="tableData" :index="true">
+    <wd-table-col prop="name" label="姓名" width="200" />
+    <wd-table-col prop="age" label="年龄" width="100" align="center" />
+    <wd-table-col prop="gender" label="性别" width="100" align="center" />
+  </wd-table>
+</template>
 
-::: details 查看自定义列模版 demo
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-```html
-<wd-table :data="dataList" @sort-method="handleSort" :height="400">
-  <wd-table-col prop="name" label="姓名" fixed="true" width="320rpx" sortable></wd-table-col>
-  <wd-table-col prop="grade" label="分数" width="220rpx" sortable>
-    <template #value="{row}">
-      <view class="custom-class">
-        <text>{{ row.grade }}</text>
-        <text>同比{{ row.compare }}</text>
+const tableData = ref([
+  { name: '张三', age: 25, gender: '男' },
+  { name: '李四', age: 30, gender: '女' },
+  { name: '王五', age: 28, gender: '男' }
+])
+</script>
+```
+
+### 自定义列内容
+
+```vue
+<template>
+  <wd-table :data="tableData">
+    <wd-table-col prop="name" label="姓名" width="200" />
+    <wd-table-col prop="status" label="状态" width="150" align="center">
+      <template #value="{ row }">
+        <wd-tag :type="row.status === 'active' ? 'success' : 'danger'">
+          {{ row.status === 'active' ? '激活' : '禁用' }}
+        </wd-tag>
+      </template>
+    </wd-table-col>
+    <wd-table-col label="操作" width="200" align="center">
+      <template #value="{ row }">
+        <wd-button size="small" type="primary" @click="handleEdit(row)">编辑</wd-button>
+        <wd-button size="small" type="danger" @click="handleDelete(row)">删除</wd-button>
+      </template>
+    </wd-table-col>
+  </wd-table>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const tableData = ref([
+  { name: '张三', status: 'active' },
+  { name: '李四', status: 'disabled' },
+  { name: '王五', status: 'active' }
+])
+
+const handleEdit = (row: any) => {
+  console.log('编辑:', row)
+}
+
+const handleDelete = (row: any) => {
+  console.log('删除:', row)
+}
+</script>
+```
+
+### 自定义空状态
+
+```vue
+<template>
+  <wd-table :data="emptyData">
+    <wd-table-col prop="name" label="姓名" width="200" />
+    <wd-table-col prop="age" label="年龄" width="100" align="center" />
+    <template #empty>
+      <view class="custom-empty">
+        <image src="https://cdn.example.com/empty.png" style="width: 100rpx; height: 100rpx; margin-bottom: 20rpx;" />
+        <text style="color: #909399;">暂无数据，点击刷新</text>
+        <wd-button type="primary" size="small" style="margin-top: 20rpx;" @click="refreshData">刷新</wd-button>
       </view>
     </template>
-  </wd-table-col>
-  <wd-table-col prop="hobby" label="一言以蔽之" sortable></wd-table-col>
-  <wd-table-col prop="school" label="求学之所"></wd-table-col>
-  <wd-table-col prop="major" label="专业"></wd-table-col>
-  <wd-table-col prop="gender" label="性别"></wd-table-col>
-  <wd-table-col prop="graduation" label="学成时间"></wd-table-col>
-</wd-table>
-```
+  </wd-table>
+</template>
 
-```ts
+<script lang="ts" setup>
 import { ref } from 'vue'
-interface TableData {
-  name: string
-  school: string
-  major: string
-  gender: string
-  graduation: string
-  grade: number
-  compare: string
-  hobby: string
+
+const emptyData = ref([])
+
+const refreshData = () => {
+  // 模拟刷新数据
+  setTimeout(() => {
+    emptyData.value = [
+      { name: '张三', age: 25 },
+      { name: '李四', age: 30 }
+    ]
+  }, 1000)
 }
+</script>
 
-const dataList = ref<TableData[]>([
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 56,
-    compare: '10%',
-    hobby: '燕人张飞在此！'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 66,
-    compare: '11%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 45,
-    compare: '1%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 69,
-    compare: '14%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '21%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 87,
-    compare: '32%',
-    hobby: '我计不成，乃天命也！'
-  }
-])
-
-/**
- * 排序
- * @param e
- */
-function handleSort(e) {
-  dataList.value = dataList.value.reverse()
-}
-```
-
-```css
-.custom-class {
-  height: 80rpx;
-  width: 220rpx;
+<style scoped>
+.custom-empty {
   display: flex;
-  flex-direction: col;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 200rpx;
 }
+</style>
 ```
 
-:::
+## 样式定制
 
-## 不固定表头结合分页器使用
+### 自定义类名
 
-使用`pagination`组件，通过`v-model`绑定分页器当前页码，通过`total`设置分页器总条数，实现分页加载效果。
-
-设置`fixed-header`为`false`，取消固定表头。
-
-::: details 查看结合分页器使用 demo
-
-```html
-<wd-table :data="paginationData" :height="400" :fixed-header="false">
-  <wd-table-col prop="name" label="姓名" fixed align="center"></wd-table-col>
-  <wd-table-col prop="grade" label="分数" fixed align="center"></wd-table-col>
-  <wd-table-col prop="hobby" label="一言以蔽之" :width="160"></wd-table-col>
-  <wd-table-col prop="school" label="求学之所" :width="180"></wd-table-col>
-  <wd-table-col prop="major" label="专业"></wd-table-col>
-  <wd-table-col prop="gender" label="性别"></wd-table-col>
+```vue
+<wd-table 
+  :data="tableData" 
+  custom-class="my-table" 
+  custom-style="{ borderRadius: '8rpx', overflow: 'hidden' }"
+>
+  <!-- table columns -->
 </wd-table>
-<wd-pagination custom-style="border: 1px solid #ececec;border-top:none" v-model="page" :total="total"></wd-pagination>
 ```
 
-```ts
-interface TableData {
-  name: string
-  school: string
-  major: string
-  gender: string
-  graduation: string
-  grade: number
-  compare: string
-  hobby: string
-}
+### CSS 变量
 
-const dataList = ref<TableData[]>([
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 66,
-    compare: '48%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 68,
-    compare: '21%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 91,
-    compare: '12%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 91,
-    compare: '12%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 99,
-    compare: '18%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 36,
-    compare: '48%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 66,
-    compare: '48%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 68,
-    compare: '21%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 91,
-    compare: '12%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 99,
-    compare: '18%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 36,
-    compare: '48%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 66,
-    compare: '48%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 68,
-    compare: '21%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 91,
-    compare: '12%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 99,
-    compare: '18%',
-    hobby: '兴汉讨贼，克复中原'
-  }
-])
-const page = ref<number>(1)
-const pageSize = ref<number>(10)
+组件支持以下 CSS 变量进行样式定制：
 
-const total = ref<number>(dataList.value.length)
+| 变量名 | 默认值 | 描述 |
+| --- | --- | --- |
+| --table-background-color | #ffffff | 表格背景色 |
+| --table-border-color | #ebedf0 | 表格边框颜色 |
+| --table-header-background-color | #fafafa | 表头背景色 |
+| --table-header-text-color | #323233 | 表头文字颜色 |
+| --table-body-text-color | #646566 | 表格内容文字颜色 |
+| --table-stripe-background-color | #fafafa | 斑马纹背景色 |
+| --table-cell-padding | 12rpx 16rpx | 单元格内边距 |
+| --table-cell-font-size | 28rpx | 单元格字体大小 |
+| --table-header-font-weight | 500 | 表头字体粗细 |
+| --table-empty-text-color | #909399 | 空状态文字颜色 |
+| --table-shadow-color | rgba(0, 0, 0, 0.1) | 固定列阴影颜色 |
 
-const paginationData = computed(() => {
-  // 按页码和每页条数截取数据
-  return dataList.value.slice((page.value - 1) * pageSize.value, page.value * pageSize.value)
-})
-```
+## 注意事项
 
-:::
+1. **父子组件关系**：
+   - `wd-table` 必须与 `wd-table-col` 配合使用
+   - `wd-table-col` 必须作为 `wd-table` 的直接子组件
 
-## Attributes
+2. **数据格式**：
+   - `data` 属性必须是数组格式，每个元素是一个对象
+   - 对象的属性名应与 `wd-table-col` 的 `prop` 属性对应
 
-| 参数         | 说明                                                     | 类型                         | 可选值 | 默认值 | 最低版本 |
-| ------------ | -------------------------------------------------------- | ---------------------------- | ------ | ------ | -------- |
-| data         | 显示的数据                                               | Array                        | -      | -      | 0.0.39   |
-| border       | 是否带有边框                                             | boolean                      | -      | true   | 0.0.39   |
-| stripe       | 是否为斑马纹表                                           | boolean                      | -      | true   | 0.0.39   |
-| height       | Table 的高度，无默认值，设置后自动开启固定表头。         | `number / string`            | -      | -      | 0.0.39   |
-| rowHeight    | 行高                                                     | `number / string`            | -      | 50     | 0.0.39   |
-| showHeader   | 是否显示表头                                             | boolean                      | -      | true   | 0.0.39   |
-| ellipsis     | 是否超出 2 行隐藏                                        | boolean                      | -      | true   | 0.0.39   |
-| index        | 是否显示索引列，可传入`boolean`也可传入 column 配置      | `boolean / TableColumnProps` |        | false  | 1.2.19   |
-| fixed-header | 是否固定表头，需要结合`height`才可以实现固定表头的效果。 | boolean                      | -      | true   | 1.5.0    |
+3. **性能优化**：
+   - 对于大量数据（超过 100 行），建议启用 `fixedHeader` 以提高滚动性能
+   - 可以通过 `height` 属性限制表格高度，避免一次性渲染过多行
+   - 避免在表格列中放置过多复杂组件，影响渲染性能
 
-## Events
+4. **固定列注意事项**：
+   - 固定列会增加渲染复杂度，建议只固定必要的列
+   - 固定列的宽度应明确指定，避免自适应宽度
 
-| 事件名称    | 说明                                                               | 参数                             | 最低版本 |
-| ----------- | ------------------------------------------------------------------ | -------------------------------- | -------- |
-| sort-method | 指定数据按照哪个属性进行排序，仅当 sortable 设置为 true 的时候有效 | `TableColumn：当前点击列数据`    | 0.0.39   |
-| row-click   | 当某一行被点击时会触发该事件                                       | `{rowIndex:number} 点击行的下标` | 0.0.39   |
+5. **排序功能**：
+   - 排序功能需要配合 `sort-method` 事件使用，组件本身不处理数据排序
+   - 可以通过 `sort-method` 事件获取排序字段和方向，然后自行处理数据排序
 
-## TableColumn Attributes
+6. **自定义内容**：
+   - 可以通过 `wd-table-col` 的 `value` 插槽自定义列内容
+   - 自定义内容中可以访问行数据 `row` 和行索引 `index`
 
-| 参数     | 说明                        | 类型            | 可选值              | 默认值 | 最低版本 |
-| -------- | --------------------------- | --------------- | ------------------- | ------ | -------- |
-| prop     | 字段名称,对应列内容的字段名 | string          | -                   | -      | 0.0.39   |
-| label    | 显示的标题                  | string          | -                   | -      | 0.0.39   |
-| width    | 对应列的宽度，单位为 px     | number / string | -                   | 100    | 0.0.39   |
-| sortable | 是否开启列排序              | boolean         | -                   | false  | 0.0.39   |
-| fixed    | 是否固定本列                | boolean         | -                   | false  | 0.0.39   |
-| align    | 列的对齐方式                | AlignType       | left, center, right | left   | 0.0.39   |
+7. **空状态**：
+   - 可以通过 `emptyText` 属性自定义空状态文本
+   - 也可以通过 `empty` 插槽完全自定义空状态内容
 
-## TableColumn Slot
+### 状态流转
+- 初始状态：根据 props 初始化表格状态
+- 数据更新：监听 `data` 属性变化，重新渲染表格内容
+- 滚动事件：同步表头和内容的滚动位置
+- 排序事件：更新排序状态，触发 `sort-method` 事件
+- 点击事件：处理行点击，触发 `row-click` 事件
 
-| name  | 说明                                   | 参数                             | 最低版本 |
-| ----- | -------------------------------------- | -------------------------------- | -------- |
-| value | 自定义列的内容，1.2.16 新增`index`参数 | `{ row: Object, index: number }` | 0.1.22   |
+## 与 wd-table-col 的关系
+
+`wd-table` 组件与 `wd-table-col` 组件是紧密集成的关系：
+
+1. **依赖关系**：`wd-table` 必须包含一个或多个 `wd-table-col` 子组件
+2. **通信方式**：通过 Vue 的 provide/inject API 进行通信
+3. **状态管理**：表格状态由 `wd-table` 统一管理，子组件根据状态更新自身样式
+4. **布局计算**：`wd-table` 根据子组件的宽度计算表格总宽度
+5. **事件处理**：子组件的事件通过父组件 `wd-table` 统一处理
+
+## 常见问题
+
+### Q: 为什么表格没有显示数据？
+A: 请检查 `data` 属性是否为数组格式，以及 `wd-table-col` 的 `prop` 属性是否与数据对象的属性名匹配。
+
+### Q: 如何自定义表格行高？
+A: 可以通过 `rowHeight` 属性设置行高，单位为 px。
+
+### Q: 如何实现表格数据的排序？
+A: 可以通过 `wd-table-col` 的 `sortable` 属性启用排序，然后监听 `wd-table` 的 `sort-method` 事件，在事件处理函数中自行处理数据排序。
+
+### Q: 如何固定某一列？
+A: 可以通过 `wd-table-col` 的 `fixed` 属性固定列，设置为 `true` 即可。
+
+### Q: 如何自定义表格的空状态？
+A: 可以通过 `emptyText` 属性自定义空状态文本，或通过 `empty` 插槽完全自定义空状态内容。

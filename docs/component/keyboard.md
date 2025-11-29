@@ -1,323 +1,242 @@
----
-version: 1.3.10
----
+# 键盘组件（wd-keyboard）
 
-# Keyboard 虚拟键盘
+## 组件概述
 
-虚拟数字键盘，用于输入数字、密码、身份证或车牌号等场景。
+wd-keyboard 是一个功能丰富、高度可定制的虚拟键盘组件，基于 Vue 3 + TypeScript + UniApp 开发，支持多平台适配。该组件提供了多种键盘模式，包括默认数字键盘、自定义键盘和车牌键盘，适用于各种需要安全输入或特殊格式输入的场景。
 
-## 基本用法
+### 功能描述
+- 支持多种键盘模式（默认、自定义、车牌）
+- 可配置的键盘布局和按键样式
+- 支持随机按键顺序，增强安全性
+- 支持最大长度限制
+- 支持自定义标题和按钮文本
+- 支持自动切换车牌键盘语言
+- 支持点击外部关闭键盘
+- 支持自定义样式和类名
 
-可以通过 `v-model:visible` 控制键盘是否展示。
+### 适用业务场景
+- 密码输入（如支付密码、登录密码）
+- 验证码输入
+- 金额输入
+- 车牌号码输入
+- 其他需要特殊键盘输入的场景
 
-```html
-<wd-cell title="默认键盘" is-link @click="showKeyBoard" />
+## API 参考
 
-<wd-keyboard v-model:visible="visible" @input="onInput" @delete="onDelete"></wd-keyboard>
+### Props
+
+| 名称 | 类型 | 默认值 | 必填项 | 描述 |
+| --- | --- | --- | --- | --- |
+| visible | boolean | false | 否 | 是否可见 |
+| modelValue | string | '' | 否 | 绑定的值 |
+| title | string | - | 否 | 标题 |
+| mode | string | 'default' | 否 | 键盘模式，可选值：default（默认数字键盘）、custom（自定义键盘）、car（车牌键盘） |
+| zIndex | number | 100 | 否 | 层级 |
+| maxlength | number | Infinity | 否 | 最大长度 |
+| showDeleteKey | boolean | true | 否 | 是否显示删除键 |
+| randomKeyOrder | boolean | false | 否 | 是否随机键盘按键顺序 |
+| closeText | string | - | 否 | 确认按钮文本 |
+| deleteText | string | - | 否 | 删除按钮文本 |
+| closeButtonLoading | boolean | false | 否 | 关闭按钮是否显示加载状态 |
+| modal | boolean | false | 否 | 是否显示蒙层 |
+| hideOnClickOutside | boolean | true | 否 | 是否在点击外部时收起键盘 |
+| lockScroll | boolean | true | 否 | 是否锁定滚动 |
+| safeAreaInsetBottom | boolean | true | 否 | 是否在底部安全区域内 |
+| extraKey | string / array | - | 否 | 额外按键，在 default 模式下为单个按键，在 custom 模式下可以为多个按键 |
+| rootPortal | boolean | false | 否 | 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal) |
+| carLang | string | - | 否 | 车牌键盘语言模式，当 mode=car 时生效，可选值：zh（中文）、en（英文） |
+| autoSwitchLang | boolean | false | 否 | 是否自动切换车牌键盘语言，当 mode=car 且 carLang 是非受控状态时生效 |
+| customStyle | object | - | 否 | 自定义样式 |
+| customClass | string | - | 否 | 自定义类名 |
+
+### Events
+
+| 事件名 | 触发条件 | 参数说明 |
+| --- | --- | --- |
+| update:visible | 键盘可见性变化时触发 | visible: boolean（键盘是否可见） |
+| input | 按键输入时触发 | text: string（输入的文本） |
+| update:modelValue | 绑定值变化时触发 | value: string（新的绑定值） |
+| delete | 删除按键触发时触发 | - |
+| close | 键盘关闭时触发 | - |
+| update:carLang | 车牌键盘语言变化时触发 | lang: string（新的语言） |
+
+### Methods
+
+该组件没有对外暴露的方法。
+
+### Slots
+
+| 插槽名 | 作用域变量 | 使用说明 |
+| --- | --- | --- |
+| title | - | 自定义标题内容，替换默认的标题文本 |
+
+## 多场景使用示例代码
+
+### 基础用法
+
+```vue
+<template>
+  <view class="demo">
+    <text>输入值：{{ value }}</text>
+    <wd-button type="primary" @click="visible = true">显示键盘</wd-button>
+    <wd-keyboard
+      v-model:visible="visible"
+      v-model="value"
+      title="默认键盘"
+      close-text="确认"
+    />
+  </view>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const visible = ref(false)
+const value = ref('')
+</script>
 ```
 
-```ts
-const { show: showToast } = useToast()
-const visible = ref<boolean>(false)
+### 安全键盘（随机按键顺序）
 
-function showKeyBoard() {
-  visible.value = true
+```vue
+<template>
+  <view class="demo">
+    <text>密码：{{ value }}</text>
+    <wd-button type="primary" @click="visible = true">显示安全键盘</wd-button>
+    <wd-keyboard
+      v-model:visible="visible"
+      v-model="value"
+      title="安全键盘"
+      random-key-order
+      maxlength="6"
+      close-text="确认"
+      delete-text="删除"
+    />
+  </view>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const visible = ref(false)
+const value = ref('')
+</script>
+```
+
+### 自定义键盘
+
+```vue
+<template>
+  <view class="demo">
+    <text>输入值：{{ value }}</text>
+    <wd-button type="primary" @click="visible = true">显示自定义键盘</wd-button>
+    <wd-keyboard
+      v-model:visible="visible"
+      v-model="value"
+      title="自定义键盘"
+      mode="custom"
+      :extra-key="['.', '确认']"
+      close-text="关闭"
+    />
+  </view>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const visible = ref(false)
+const value = ref('')
+</script>
+```
+
+### 车牌键盘
+
+```vue
+<template>
+  <view class="demo">
+    <text>车牌号码：{{ value }}</text>
+    <wd-button type="primary" @click="visible = true">显示车牌键盘</wd-button>
+    <wd-keyboard
+      v-model:visible="visible"
+      v-model="value"
+      title="车牌键盘"
+      mode="car"
+      auto-switch-lang
+      maxlength="7"
+      delete-text="删除"
+    />
+  </view>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const visible = ref(false)
+const value = ref('')
+</script>
+```
+
+## 样式定制指南
+
+### customStyle 和 customClass
+
+wd-keyboard 组件支持通过 `customStyle` 和 `customClass` 进行样式定制。
+
+```vue
+<template>
+  <wd-keyboard
+    v-model:visible="visible"
+    v-model="value"
+    title="自定义样式键盘"
+    :custom-style="{ backgroundColor: '#f5f5f5', borderRadius: '10px 10px 0 0' }"
+    custom-class="custom-keyboard"
+  />
+</template>
+
+<style scoped>
+.custom-keyboard {
+  /* 自定义类名样式 */
+  border: 1px solid #e4e7ed;
 }
 
-const onInput = (value) => showToast(`${value}`)
-const onDelete = () => showToast('删除')
-```
-
-## 带右侧栏的键盘
-
-将 `mode` 属性设置为 `custom` 来展示键盘的右侧栏，常用于输入金额的场景。
-
-```html
-<wd-cell title="带右侧栏的键盘" is-link @click="showKeyBoard" />
-
-<wd-keyboard v-model:visible="visible" mode="custom" extra-key="." close-text="完成" @input="onInput" @delete="onDelete"></wd-keyboard>
-```
-
-```ts
-const { show: showToast } = useToast()
-const visible = ref<boolean>(false)
-
-function showKeyBoard() {
-  visible.value = true
+/* 可以通过深度选择器修改键盘内部样式 */
+:deep(.wd-keyboard__title) {
+  color: #303133;
+  font-size: 16px;
 }
 
-const onInput = (value) => showToast(`${value}`)
-const onDelete = () => showToast('删除')
-```
-
-## 身份证键盘
-
-通过 `extra-key` 属性可以设置左下角按键内容，比如需要输入身份证号时，可以将 `extra-key` 设置为 `X`。
-
-```html
-<wd-cell title="身份证键盘" is-link @click="showKeyBoard" />
-
-<wd-keyboard v-model:visible="visible" extra-key="X" close-text="完成" @input="onInput" @delete="onDelete" />
-```
-
-```ts
-const { show: showToast } = useToast()
-const visible = ref<boolean>(false)
-
-function showKeyBoard() {
-  visible.value = true
+:deep(.wd-key) {
+  background-color: #ffffff;
+  color: #303133;
+  border: 1px solid #e4e7ed;
 }
-
-const onInput = (value) => showToast(`${value}`)
-const onDelete = () => showToast('删除')
+</style>
 ```
 
-## 车牌号键盘
-
-将 `mode` 属性设置为 `car` 来展示车牌号键盘，常用于输入车牌号的场景。
-
-```html
-<wd-cell title="车牌号键盘" is-link @click="showKeyBoard" />
-
-<wd-keyboard v-model:visible="visible" mode="car" @input="onInput" @delete="onDelete"></wd-keyboard>
-```
-
-```ts
-const { show: showToast } = useToast()
-const visible = ref<boolean>(false)
-
-function showKeyBoard() {
-  visible.value = true
-}
-
-const onInput = (value) => showToast(`${value}`)
-const onDelete = () => showToast('删除')
-```
-
-## 车牌号键盘语言控制
-
-通过 `car-lang` 属性可以控制车牌键盘的语言模式，支持中文省份（`zh`）和英文字母（`en`）。通过 `auto-switch-lang` 属性可以控制是否自动切换语言。
-
-```html
-<!-- 受控模式：手动控制语言切换 -->
-<wd-cell title="车牌号键盘（受控）" :value="value" is-link @click="showKeyBoard" />
-
-<wd-keyboard v-model="value" v-model:visible="visible" v-model:car-lang="lang" mode="car" @input="onInput" @delete="onDelete"></wd-keyboard>
-
-<!-- 非受控模式：禁用自动切换 -->
-<wd-cell title="车牌号键盘（非受控）" :value="value2" is-link @click="showKeyBoard2" />
-
-<wd-keyboard v-model="value2" v-model:visible="visible2" mode="car" auto-switch-lang @input="onInput" @delete="onDelete"></wd-keyboard>
-```
-
-```ts
-const { show: showToast } = useToast()
-const visible = ref<boolean>(false)
-const visible2 = ref<boolean>(false)
-const value = ref<string>('')
-const value2 = ref<string>('')
-const lang = ref<'zh' | 'en'>('zh')
-
-function showKeyBoard() {
-  visible.value = true
-}
-
-function showKeyBoard2() {
-  visible2.value = true
-}
-
-const onInput = (value) => showToast(`${value}`)
-const onDelete = () => showToast('删除')
-```
-
-## 带标题的键盘
-
-通过 `title` 属性可以设置键盘标题。
-
-```html
-<wd-cell title="带标题的键盘" is-link @click="showKeyBoard" />
-
-<wd-keyboard v-model:visible="visible" title="输入密码" extra-key="." close-text="完成" @input="onInput" @delete="onDelete" />
-```
-
-```ts
-const { show: showToast } = useToast()
-const visible = ref<boolean>(false)
-
-function showKeyBoard() {
-  visible.value = true
-}
-
-const onInput = (value) => showToast(`${value}`)
-const onDelete = () => showToast('删除')
-```
-
-## 使用 slot 自定义标题
-
-```html
-<wd-cell title="使用 slot 自定义标题" is-link @click="showKeyBoard" />
-
-<wd-keyboard v-model:visible="visible" extra-key="." close-text="完成" @input="onInput" @delete="onDelete">
-  <template #title>
-    <text style="color: red">自定义标题</text>
-  </template>
-</wd-keyboard>
-```
-
-```ts
-const { show: showToast } = useToast()
-const visible = ref<boolean>(false)
-
-function showKeyBoard() {
-  visible.value = true
-}
-
-const onInput = (value) => showToast(`${value}`)
-const onDelete = () => showToast('删除')
-```
-
-## 多个额外按键
-
-当 `mode` 为 `custom` 时，支持以数组的形式配置两个 `extra-key`。
-
-```html
-<wd-cell title="多个额外按键" is-link @click="showKeyBoard" />
-
-<wd-keyboard v-model:visible="visible" mode="custom" :extra-key="['00', '.']" close-text="完成" @input="onInput" @delete="onDelete" />
-```
-
-```ts
-const { show: showToast } = useToast()
-const visible = ref<boolean>(false)
-
-function showKeyBoard() {
-  visible.value = true
-}
-
-const onInput = (value) => showToast(`${value}`)
-const onDelete = () => showToast('删除')
-```
-
-## 随机数字键盘
-
-通过 `random-key-order` 属性可以随机排序数字键盘，常用于安全等级较高的场景。
-
-```html
-<wd-cell title="随机数字键盘" is-link @click="showKeyBoard" />
-
-<wd-keyboard v-model:visible="visible" random-key-order @input="onInput" @delete="onDelete" />
-```
-
-```ts
-const { show: showToast } = useToast()
-const visible = ref<boolean>(false)
-
-function showKeyBoard() {
-  visible.value = true
-}
-
-const onInput = (value) => showToast(`${value}`)
-const onDelete = () => showToast('删除')
-```
-
-## 双向绑定
-
-可以通过 `v-model` 绑定键盘当前输入值，并通过 `maxlength` 属性来限制输入长度。
-
-```html
-<wd-cell title="双向绑定" :value="value1" is-link @click="showKeyBoard" />
-<wd-keyboard
-  v-model="value1"
-  :maxlength="6"
-  v-model:visible="visible"
-  title="键盘标题"
-  extra-key="."
-  close-text="完成"
-  @input="onInput"
-  @delete="onDelete"
-></wd-keyboard>
-```
-
-```ts
-const { show: showToast } = useToast()
-const visible = ref<boolean>(false)
-const value1 = ref<string>('')
-
-function showKeyBoard() {
-  visible.value = true
-}
-
-const onInput = (value) => showToast(`${value}`)
-const onDelete = () => showToast('删除')
-```
-
-## 展示蒙层遮罩
-
-`hideOnClickOutside`控制键盘弹窗是否有遮罩，通过`modal`控制遮罩是否为透明。
-
-::: tip 提示
-当前`modal`仅控制遮罩是否为透明，`hideOnClickOutside`控制弹窗是否有遮罩，当存在遮罩时，点击遮罩就可以关闭键盘，但是键盘展开时必须点击遮罩关闭当前键盘后才可以再点击别的按钮。也可以关闭`hideOnClickOutside`，手动控制键盘是否展示来实现点击外部时收起键盘，这样更灵活。
-:::
-
-```html
-<wd-cell title="双向绑定" :value="value1" is-link @click="showKeyBoard" />
-<wd-keyboard :modal="true" :hide-on-click-outside="true" v-model:visible="visible" @input="onInput" @delete="onDelete" />
-```
-
-```ts
-const { show: showToast } = useToast()
-const visible = ref<boolean>(false)
-const value1 = ref<string>('')
-
-function showKeyBoard() {
-  visible.value = true
-}
-
-const onInput = (value) => showToast(`${value}`)
-const onDelete = () => showToast('删除')
-```
-
-## Attributes
-
-| 参数                | 说明                                                                 | 类型                  | 可选值                     | 默认值     | 最低版本 |
-| ------------------- | -------------------------------------------------------------------- | --------------------- | -------------------------- | ---------- | -------- |
-| v-model:visible     | 是否展开                                                             | `boolean`             | -                          | `false`    | 1.3.10   |
-| v-model             | 绑定的值                                                             | `string`              | -                          | -          | 1.3.10   |
-| title               | 标题                                                                 | `string`              | -                          | -          | 1.3.10   |
-| mode                | 键盘模式                                                             | `string`              | `default`, `car`, `custom` | `default`  | 1.3.10   |
-| zIndex              | 层级                                                                 | `number`              | -                          | `100`      | 1.3.10   |
-| maxlength           | 最大长度                                                             | `number`              | -                          | `Infinity` | 1.3.10   |
-| showDeleteKey       | 是否显示删除键                                                       | `boolean`             | -                          | `true`     | 1.3.10   |
-| randomKeyOrder      | 是否随机键盘按键顺序                                                 | `boolean`             | -                          | `false`    | 1.3.10   |
-| closeText           | 确认按钮文本                                                         | `string`              | -                          | -          | 1.3.10   |
-| deleteText          | 删除按钮文本                                                         | `string`              | -                          | -          | 1.3.10   |
-| closeButtonLoading  | 关闭按钮是否显示加载状态                                             | `boolean`             | -                          | `false`    | 1.3.10   |
-| modal               | 是否显示蒙层遮罩                                                     | `boolean`             | -                          | `false`    | 1.3.10   |
-| hideOnClickOutside  | 是否在点击外部时收起键盘                                             | `boolean`             | -                          | `true`     | 1.3.10   |
-| lockScroll          | 是否锁定背景滚动，锁定时蒙层里的内容也将无法滚动                     | `boolean`             | -                          | `true`     | 1.3.10   |
-| safeAreaInsetBottom | 是否在底部安全区域内                                                 | `boolean`             | -                          | `true`     | 1.3.10   |
-| extraKey            | 额外按键                                                             | `string` / `string[]` | -                          | -          | 1.3.10   |
-| root-portal         | 是否从页面中脱离出来，用于解决各种 fixed 失效问题                    | `boolean`             | -                          | `false`    | 1.11.0   |
-| v-model:carLang     | 车牌键盘语言模式，当 mode=car 时生效                                 | `string`              | `zh`, `en`                 | -          | 1.13.0   |
-| autoSwitchLang      | 是否自动切换车牌键盘语言，当 mode=car 且 car-lang 是非受控状态时生效 | `boolean`             | -                          | `false`    | 1.13.0   |
-
-## Slot
-
-| name  | 说明 | 类型 | 最低版本 |
-| ----- | ---- | ---- | -------- |
-| title | 标题 | -    | 1.2.12   |
-
-## Events
-
-| 事件名称 | 说明                           | 参数        | 最低版本 |
-| -------- | ------------------------------ | ----------- | -------- |
-| input    | 点击按键时触发                 | key: string | -        |
-| delete   | 点击删除键时触发               | -           | -        |
-| close    | 点击关闭按钮或非键盘区域时触发 | -           | -        |
-
-## 外部样式类
-
-| 类名         | 说明         | 最低版本 |
-| ------------ | ------------ | -------- |
-| custom-class | 根节点样式类 | 1.3.10   |
-| custom-style | 根节点样式   | 1.3.10   |
+## 注意事项
+
+1. **键盘模式选择**：
+   - `default` 模式：适合普通数字输入场景
+   - `custom` 模式：适合需要自定义额外按键的场景
+   - `car` 模式：专门用于车牌号码输入
+
+2. **随机按键顺序**：
+   - 开启 `random-key-order` 属性可以增强安全性，适合密码输入场景
+   - 但会降低用户输入效率，不建议在普通输入场景中使用
+
+3. **车牌键盘自动切换语言**：
+   - 开启 `autoSwitchLang` 属性后，输入第一位（省份）后会自动切换到英文
+   - 清空输入值后会自动切换回中文
+
+4. **性能优化建议**：
+   - 避免频繁切换键盘可见性
+   - 合理设置 `maxlength` 属性，避免输入过长内容
+   - 在不需要时关闭 `random-key-order` 属性
+
+5. **使用限制**：
+   - 组件依赖于 UniApp 环境，无法在纯 Vue 项目中直接使用
+   - 部分功能（如 `root-portal`）可能在不同平台上表现不同，需要测试验证
+
+6. **事件处理**：
+   - 建议使用 `v-model` 双向绑定来处理输入值，而不是直接监听 `input` 事件
+   - 可以通过监听 `close` 事件来处理键盘关闭后的逻辑

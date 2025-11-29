@@ -1,299 +1,341 @@
 # Collapse 折叠面板
 
-将一组内容放置在多个折叠面板中，点击面板的标题可以展开或收缩其内容。
+## 组件概述
 
-## 基本使用
+Collapse 是一个用于展示可折叠内容的组件，支持多种模式，包括普通模式、手风琴模式和查看更多模式。它允许用户通过点击标题展开或折叠内容，适用于需要展示大量内容但希望节省空间的场景。
 
-`v-model` 为绑定值，可以为 array 类型（普通折叠）、 string 类型（手风琴）和 boolean 类型（收起展开查看更多）。CollapseItem 的 `name` 为必填, `title` 选填且可通过 `slot` 自定义。`name` 用于标识该折叠栏。
+### 适用场景
 
-```typescript
-const value = ref<string[]>(['item1'])
+- 常见问题解答（FAQ）页面
+- 产品详情页的规格参数
+- 设置页面的选项分组
+- 长列表内容的折叠展示
+- 查看更多/收起功能
+- 手风琴式内容展示
+
+## API 参考
+
+### Props
+
+| 参数 | 类型 | 默认值 | 必填 | 描述 |
+| --- | --- | --- | --- | --- |
+| model-value | String / Array / Boolean | - | 否 | 绑定值，普通模式下为数组，手风琴模式下为字符串，查看更多模式下为布尔值 |
+| accordion | Boolean | false | 否 | 是否为手风琴模式，手风琴模式下只能同时展开一个面板 |
+| viewmore | Boolean | false | 否 | 是否为查看更多模式 |
+| use-more-slot | Boolean | false | 否 | 查看更多模式下是否使用自定义展开按钮插槽 |
+| line-num | Number | 2 | 否 | 查看更多模式下，收起时的显示行数 |
+| custom-more-slot-class | String | - | 否 | 查看更多模式下的插槽外部自定义样式类 |
+| custom-style | String | - | 否 | 自定义根节点样式 |
+| custom-class | String | - | 否 | 自定义根节点样式类 |
+
+### Events
+
+| 事件名 | 触发条件 | 参数说明 |
+| --- | --- | --- |
+| change | 面板展开或折叠时触发 | { value: String / Array / Boolean } - 当前展开的面板标识符或查看更多状态 |
+| update:modelValue | 绑定值变化时触发 | value: String / Array / Boolean - 新的绑定值 |
+
+### Methods
+
+| 方法名 | 参数 | 返回值 | 功能说明 |
+| --- | --- | --- | --- |
+| toggleAll | options: Boolean / Object | - | 切换所有面板展开状态，传 true 为全部展开，false 为全部收起，不传参为全部切换；options 可以是对象，包含 expanded 和 skipDisabled 属性 |
+
+### Slots
+
+| 插槽名 | 作用域变量 | 使用说明 |
+| --- | --- | --- |
+| default | - | 面板内容插槽，用于放置 CollapseItem 组件或查看更多模式下的内容 |
+| more | - | 查看更多模式下的自定义展开/收起按钮插槽，需设置 useMoreSlot 为 true |
+
+## 使用示例
+
+### 基础用法
+
+```vue
+<template>
+  <view class="collapse-demo">
+    <wd-collapse v-model="activeNames">
+      <wd-collapse-item title="标题一" name="1">
+        <view class="content">内容一</view>
+      </wd-collapse-item>
+      <wd-collapse-item title="标题二" name="2">
+        <view class="content">内容二</view>
+      </wd-collapse-item>
+      <wd-collapse-item title="标题三" name="3">
+        <view class="content">内容三</view>
+      </wd-collapse-item>
+    </wd-collapse>
+  </view>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const activeNames = ref(['1'])
+</script>
+
+<style scoped>
+.content {
+  padding: 15px;
+  background-color: #f5f7fa;
+  border-radius: 4px;
+}
+</style>
 ```
 
-```html
-<wd-collapse v-model="value">
-  <wd-collapse-item title="标签1" name="item1">这是一条简单的示例文字。</wd-collapse-item>
-  <wd-collapse-item title="标签2" name="item2">这是一条简单的示例文字。</wd-collapse-item>
-  <wd-collapse-item name="item3">
-    <template #title="{ expanded, disabled, isFirst }">
-      <view class="header">
-        <text style="color: red">通过 slot 自定义标题</text>
-        <text>{{ expanded ? '我展开了' : '我已收起' }}</text>
+### 手风琴模式
+
+```vue
+<template>
+  <view class="collapse-demo">
+    <wd-collapse v-model="activeName" accordion>
+      <wd-collapse-item title="标题一" name="1">
+        <view class="content">内容一</view>
+      </wd-collapse-item>
+      <wd-collapse-item title="标题二" name="2">
+        <view class="content">内容二</view>
+      </wd-collapse-item>
+      <wd-collapse-item title="标题三" name="3">
+        <view class="content">内容三</view>
+      </wd-collapse-item>
+    </wd-collapse>
+  </view>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const activeName = ref('1')
+</script>
+```
+
+### 查看更多模式
+
+```vue
+<template>
+  <view class="collapse-demo">
+    <wd-collapse v-model="showAll" viewmore>
+      <view class="long-content">
+        这是一段很长的内容，当设置了 viewmore 为 true 时，会自动折叠显示，只显示指定行数的内容。点击查看更多按钮可以展开全部内容，再次点击可以收起。
+        这是一段很长的内容，当设置了 viewmore 为 true 时，会自动折叠显示，只显示指定行数的内容。点击查看更多按钮可以展开全部内容，再次点击可以收起。
+        这是一段很长的内容，当设置了 viewmore 为 true 时，会自动折叠显示，只显示指定行数的内容。点击查看更多按钮可以展开全部内容，再次点击可以收起。
       </view>
-    </template>
-    这是一条简单的示例文字。
-  </wd-collapse-item>
-</wd-collapse>
+    </wd-collapse>
+  </view>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const showAll = ref(false)
+</script>
+
+<style scoped>
+.long-content {
+  line-height: 1.6;
+}
+</style>
 ```
 
-```css
-.header {
+### 自定义标题
+
+```vue
+<template>
+  <view class="collapse-demo">
+    <wd-collapse v-model="activeNames">
+      <wd-collapse-item name="1">
+        <template #title>
+          <view class="custom-title">
+            <text class="title-text">自定义标题</text>
+            <text class="title-badge">NEW</text>
+            <wd-icon name="down" class="title-icon"></wd-icon>
+          </view>
+        </template>
+        <view class="content">自定义标题的内容</view>
+      </wd-collapse-item>
+    </wd-collapse>
+  </view>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const activeNames = ref(['1'])
+</script>
+
+<style scoped>
+.custom-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-```
 
-## 手风琴
-
-设置 `accordion` 属性。
-
-```html
-<wd-collapse v-model="value" accordion>
-  <wd-collapse-item title="标签1" name="item1">这是一条简单的示例文字。</wd-collapse-item>
-  <wd-collapse-item title="标签2" name="item2">这是一条简单的示例文字。</wd-collapse-item>
-  <wd-collapse-item title="标签3" name="item3">这是一条简单的示例文字。</wd-collapse-item>
-</wd-collapse>
-```
-
-## 禁用
-
-给 CollapseItem 设置 `disabled` 属性，禁用某个折叠栏。
-
-```html
-<wd-collapse v-model="value">
-  <wd-collapse-item title="标签1" name="item1">这是一条简单的示例文字。</wd-collapse-item>
-  <wd-collapse-item title="标签2" name="item2" disabled>这是一条简单的示例文字。</wd-collapse-item>
-  <wd-collapse-item title="标签3" name="item3">这是一条简单的示例文字。</wd-collapse-item>
-</wd-collapse>
-```
-
-## 异步更新
-
-通过给`wd-collapse-item`组件传入 `beforeExpend` 函数可以在打开面板前进行校验和处理，返回 true 表示允许打开，返回 false 表示禁止打开。支持返回 Promise 进行例如调用接口获取面板数据的操作。
-
-```html
-<wd-collapse v-model="value">
-  <wd-collapse-item v-for="(item, index) in itemList" :before-expend="beforeExpend" :key="index" :title="item.title" :name="item.name">
-    {{ item.body }}
-  </wd-collapse-item>
-</wd-collapse>
-```
-
-```ts
-import { useToast } from '@/uni_modules/wot-ui-plus'
-const toast = useToast()
-const value = ref<string[]>(['item1'])
-
-const itemList = ref<Record<string, any>[]>([
-  {
-    title: '标签1',
-    name: 'item1',
-    body: '如订单处于暂停状态，进入“我的订单”页面，找到要取消的订单，点击“取消订单”按钮；选择订单取消原因后，点击“下一步”提交申请即可。'
-  },
-  {
-    title: '标签1',
-    name: 'item2',
-    body: '一般情况下，买家只能向商户申请退款，商户确认可以退款后，可以通过接口或者商户平台向微信支付发起退款申请。'
-  },
-  {
-    title: '标签1',
-    name: 'item3',
-    body: '将收到的有质量问题的商品照片或者订单截图上传到微信公众账号（微信关注联华华商公众号），我们的工作人员会尽快帮您处理。'
-  },
-  {
-    title: '标签1',
-    name: 'item4',
-    body: '七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。'
-  },
-  {
-    title: '标签1',
-    name: 'item5',
-    body: 'Q1:优惠券使用详情？详情页面【我的】-【我的优惠】-【优惠券规则说明】。'
-  }
-])
-
-/**
- * 折叠面板展开前回调方法
- * @param e
- */
-function beforeExpend(name) {
-  const index = itemList.value.findIndex((item) => {
-    return item.name === name
-  })
-  if (index > -1) {
-    itemList.value[index].body =
-      'Q1:七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。'
-  }
-
-  return new Promise((reslove, reject) => {
-    toast.loading('加载中')
-    setTimeout(() => {
-      toast.close()
-      reslove(true)
-    }, 500)
-  })
+.title-text {
+  font-size: 16px;
+  font-weight: bold;
 }
-```
 
-## 查看更多
-
-Collapse 可以单独使用，通过设置 `viewmore` 属性，将其转化为查看更多的折叠类型，同时可以设置 `line-num` 修改收起时的显示行数。这时候的 `value` 为 boolean 类型。
-
-```html
-<wd-collapse viewmore v-model="value">
-  这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。
-</wd-collapse>
-```
-
-## 查看更多-使用插槽
-
-Collapse 查看更多的模式下，可以使用插槽定义自己想要的折叠处样式，使用 `use-more-slot` 设置插槽开启。并且可以使用外部样式类 `custom-more-slot-class` 为自定义插槽设置样式。
-
-```scss
-:deep(.more-slot) {
-  color: red;
+.title-badge {
+  font-size: 12px;
+  background-color: #ff6b6b;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: 8px;
 }
-```
 
-```html
-<wd-collapse viewmore v-model="value" @change="handleChange" use-more-slot custom-more-slot-class="more-slot">
-  具名插槽：这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。
-  <template #more>
-    <view>显示全部</view>
-  </template>
-</wd-collapse>
-```
-
-## 嵌套使用
-
-`collapse`可以嵌套使用，同时由于`collapse-item`的内容容器存在默认的`padding`，所以嵌套的`collapse`需要设置`custom-body-style`或者`custom-body-class`来覆盖默认样式。
-
-**_以下为示例，也可以自行调整样式。_**
-
-:::tip 注意
-`custom-body-style`和`custom-body-class`在`1.4.0`及以上版本支持。
-:::
-
-```html
-<view class="collapse">
-  <wd-collapse v-model="collapseRoot">
-    <wd-collapse-item custom-body-style="padding:0 0 0 14px" v-for="item in 5" :key="item" :title="`标签${item}`" :name="`${item}`">
-      <wd-collapse v-model="collapseList[item - 1]">
-        <wd-collapse-item
-          v-for="(item, index) in itemList"
-          :custom-class="index === 0 ? 'no-border' : ''"
-          :key="index"
-          :title="item.title"
-          :name="item.name"
-        >
-          {{ item.body }}
-        </wd-collapse-item>
-      </wd-collapse>
-    </wd-collapse-item>
-  </wd-collapse>
-</view>
-```
-
-```css
-.collapse {
-  :deep() {
-    .no-border {
-      &::after {
-        display: none;
-      }
-    }
-  }
+.title-icon {
+  font-size: 16px;
+  color: #909399;
 }
+</style>
 ```
 
-```ts
-const collapseRoot = ref<string[]>(['0'])
-const collapseList = ref<Array<string[]>>([['item1'], ['item2'], ['item3'], ['item4'], ['item5']])
-```
+### 禁用某些面板
 
-## CollapseItem Attributes
+```vue
+<template>
+  <view class="collapse-demo">
+    <wd-collapse v-model="activeNames">
+      <wd-collapse-item title="可展开面板" name="1">
+        <view class="content">内容一</view>
+      </wd-collapse-item>
+      <wd-collapse-item title="禁用面板" name="2" disabled>
+        <view class="content">内容二</view>
+      </wd-collapse-item>
+      <wd-collapse-item title="可展开面板" name="3">
+        <view class="content">内容三</view>
+      </wd-collapse-item>
+    </wd-collapse>
+  </view>
+</template>
 
-| 参数          | 说明                                                        | 类型     | 可选值 | 默认值 | 最低版本 |
-| ------------- | ----------------------------------------------------------- | -------- | ------ | ------ | -------- |
-| name          | 折叠栏的标识符                                              | string   | -      | -      | -        |
-| title         | 折叠栏的标题, 支持同名 slot 自定义内容                      | string   | -      | ''     | -        |
-| disabled      | 禁用折叠栏                                                  | boolean  | -      | false  | -        |
-| before-expend | 打开前的回调函数，返回 false 可以阻止打开，支持返回 Promise | Function | -      | -      | -        |
-
-### `before-expend` 执行时会传递以下回调参数：
-
-| 参数名 | 说明       | 类型     |
-| ------ | ---------- | -------- |
-| name   | 唯一标识符 | `String` |
-
-## Collapse Attributes
-
-| 参数        | 说明                                 | 类型                     | 可选值 | 默认值 | 最低版本 |
-| ----------- | ------------------------------------ | ------------------------ | ------ | ------ | -------- |
-| value       | 绑定值                               | string / array / boolean | -      | -      | -        |
-| accordion   | 手风琴                               | boolean                  | -      | false  | -        |
-| viewmore    | 查看更多的折叠面板                   | boolean                  | -      | false  | -        |
-| useMoreSlot | 查看更多的自定义插槽使用标志         | boolean                  | -      | false  | -        |
-| line-num    | 查看更多的折叠面板，收起时的显示行数 | number                   | -      | 2      | -        |
-
-## Collapse Events
-
-| 事件名称 | 说明             | 参数        | 最低版本 |
-| -------- | ---------------- | ----------- | -------- |
-| change   | 绑定值变化时触发 | `{ value }` | -        |
-
-## Methods
-
-| 方法名    | 说明                                                                             | 参数                                 | 最低版本 |
-| --------- | -------------------------------------------------------------------------------- | ------------------------------------ | -------- |
-| toggleAll | 切换所有面板展开状态，传 `true` 为全部展开，`false` 为全部收起，不传参为全部切换 | `options?: CollapseToggleAllOptions` | 0.2.6    |
-
-### CollapseToggleAllOptions 参数说明
-
-| 参数名       | 说明                                | 类型    | 默认值 |
-| ------------ | ----------------------------------- | ------- | ------ |
-| expanded     | 是否展开，true 为展开，false 为收起 | boolean | -      |
-| skipDisabled | 是否跳过禁用项                      | boolean | false  |
-
-### toggleAll 方法示例
-
-```html
-<wd-collapse ref="collapse">...</wd-collapse>
-```
-
-```ts
+<script setup lang="ts">
 import { ref } from 'vue'
-import type { CollapseInstance } from '@/uni_modules/wot-ui-plus/components/wd-collapse/types'
 
-const collapseRef = ref<CollapseInstance>()
-
-// 全部切换
-collapseRef.value?.toggleAll()
-// 全部展开
-collapseRef.value?.toggleAll(true)
-// 全部收起
-collapseRef.value?.toggleAll(false)
-
-// 全部全部切换，并跳过禁用项
-collapseRef.value?.toggleAll({
-  skipDisabled: true
-})
-// 全部选中，并跳过禁用项
-collapseRef.value?.toggleAll({
-  expanded: true,
-  skipDisabled: true
-})
+const activeNames = ref(['1'])
+</script>
 ```
 
-## Collapse Slot
+## 样式定制
 
-| name  | 说明                                                 | 最低版本 |
-| ----- | ---------------------------------------------------- | -------- |
-| title | 标题，便于开发者自定义标题（非 viewmore 使用）       | 1.2.27   |
-| more  | 查看更多，便于开发者自定义查看更多类型的展开收起样式 | -        |
+### 自定义根节点样式
 
-## CollapseItem 外部样式类
+```vue
+<template>
+  <view class="collapse-demo">
+    <wd-collapse 
+      v-model="activeNames" 
+      custom-class="my-collapse" 
+      custom-style="background-color: #f5f7fa; padding: 10px; border-radius: 8px;"
+    >
+      <wd-collapse-item title="标题一" name="1">
+        <view class="content">内容一</view>
+      </wd-collapse-item>
+      <wd-collapse-item title="标题二" name="2">
+        <view class="content">内容二</view>
+      </wd-collapse-item>
+    </wd-collapse>
+  </view>
+</template>
 
-| 类名              | 说明                           | 最低版本 |
-| ----------------- | ------------------------------ | -------- |
-| custom-class      | collapseItem 根节点样式        | -        |
-| custom-body-style | 自定义折叠面板内容容器的样式   | 1.4.0    |
-| custom-body-class | 自定义折叠面板内容容器的样式类 | 1.4.0    |
+<style scoped>
+.my-collapse {
+  /* 自定义根节点样式 */
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+</style>
+```
 
-## Collapse 外部样式类
+### 自定义查看更多按钮
 
-| 类名                   | 说明                               | 最低版本 |
-| ---------------------- | ---------------------------------- | -------- |
-| custom-class           | collapse 根节点样式                | -        |
-| custom-more-slot-class | 查看更多模式下的插槽外部自定义样式 | -        |
+```vue
+<template>
+  <view class="collapse-demo">
+    <wd-collapse 
+      v-model="showAll" 
+      viewmore 
+      use-more-slot 
+      custom-more-slot-class="my-more-button"
+    >
+      <view class="long-content">
+        这是一段很长的内容，当设置了 viewmore 为 true 时，会自动折叠显示，只显示指定行数的内容。
+      </view>
+      <template #more>
+        <view class="custom-more">
+          <text>{{ showAll ? '收起' : '查看更多' }}</text>
+          <wd-icon name="down" :class="{ 'rotate': showAll }"></wd-icon>
+        </view>
+      </template>
+    </wd-collapse>
+  </view>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const showAll = ref(false)
+</script>
+
+<style scoped>
+.my-more-button {
+  /* 自定义查看更多按钮样式 */
+  margin-top: 10px;
+}
+
+.custom-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4d80f0;
+  font-size: 14px;
+}
+
+.rotate {
+  transform: rotate(180deg);
+  transition: transform 0.3s;
+}
+</style>
+```
+
+## 注意事项
+
+### 1. 不同模式下的绑定值类型
+
+- **普通模式**：`model-value` 为数组类型，存储所有展开面板的 name
+- **手风琴模式**：`model-value` 为字符串类型，存储当前展开面板的 name
+- **查看更多模式**：`model-value` 为布尔类型，表示是否展开全部内容
+
+### 2. 手风琴模式
+
+- 手风琴模式下，同一时间只能展开一个面板
+- 当点击已展开的面板时，会自动收起
+- 手风琴模式下，`model-value` 只能是字符串类型
+
+### 3. 查看更多模式
+
+- 查看更多模式下，内容会根据 `line-num` 属性设置的行数进行折叠
+- 支持自定义展开/收起按钮，通过 `use-more-slot` 和 `more` 插槽实现
+- 查看更多模式下，`model-value` 只能是布尔类型
+
+### 4. 性能优化
+
+- 对于大量面板的场景，建议使用 `v-for` 动态生成
+- 可以使用 `v-if` 或 `v-show` 控制面板的显示/隐藏
+- 避免在面板内容中放置过于复杂的组件，影响展开/折叠性能
+
+### 5. 嵌套使用
+
+- 支持嵌套使用 Collapse 组件
+- 嵌套时注意 `model-value` 的作用域，避免冲突
+- 建议为每个嵌套的 Collapse 组件设置独立的 `model-value`
+
+## 组件关系
+
+Collapse 组件与 CollapseItem 组件配合使用：
+
+- Collapse 作为容器组件，管理所有 CollapseItem 的展开/折叠状态
+- CollapseItem 作为面板组件，展示单个可折叠面板
+- 两者通过 provide/inject 进行通信
+- Collapse 组件暴露 `toggleAll` 方法，用于批量控制面板状态
