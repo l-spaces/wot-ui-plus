@@ -1,138 +1,493 @@
-# Transition 动画
+# Transition 过渡动画
 
-用于在元素进入或离开时应用过渡效果。
+## 组件概述
 
-## 基本用法
+wd-transition 是一个用于实现元素过渡动画的组件，基于 Vue 3 的 Transition API 封装，提供了丰富的预设动画效果和灵活的自定义选项。它可以轻松实现元素的进入和离开动画，是构建流畅用户体验的重要组件。
 
-将元素包裹在 `wd-transition` 标签中，并设置 `show` 来切换显隐，设置 `name` 选择动画。
+### 功能特点
+- 支持 12 种预设动画效果
+- 支持自定义动画持续时间
+- 支持懒渲染，触发展示时才渲染内容
+- 支持进入和离开动画的独立配置
+- 支持自定义过渡类名
+- 支持动画生命周期事件
+- 支持触摸滚动阻止
+- 支持动画结束后销毁元素
 
-```html
-<wd-transition :show="show" name="fade">内容</wd-transition>
-```
+### 适用场景
+- 模态框的显示和隐藏动画
+- 下拉菜单的展开和收起动画
+- 列表项的添加和删除动画
+- 页面切换动画
+- 任何需要平滑过渡效果的元素
 
-## 动画类型
+## API 参考
 
-`wd-transition` 内置了常用的动画，如 `fade`、`slide`、`zoom-in` 等。
+### Props
 
-```html
-<wd-transition :show="show" name="slide">内容</wd-transition>
-```
+| 参数名 | 类型 | 默认值 | 必填 | 描述 |
+| --- | --- | --- | --- | --- |
+| customStyle | string | '' | 否 | 自定义根节点样式 |
+| customClass | string | '' | 否 | 自定义根节点样式类 |
+| show | boolean | false | 否 | 是否展示组件 |
+| duration | number / boolean / object | 300 | 否 | 动画执行时间，支持数字、布尔值或对象类型 |
+| lazyRender | boolean | false | 否 | 弹层内容懒渲染，触发展示时才渲染内容 |
+| name | string / array | 'fade' | 否 | 动画类型，可选值：fade / fade-up / fade-down / fade-left / fade-right / slide-up / slide-down / slide-left / slide-right / zoom-in / zoom-out |
+| destroy | boolean | true | 否 | 是否在动画结束时销毁子节点（display: none) |
+| enterClass | string | '' | 否 | 进入过渡的开始状态 |
+| enterActiveClass | string | '' | 否 | 进入过渡的激活状态 |
+| enterToClass | string | '' | 否 | 进入过渡的结束状态 |
+| leaveClass | string | '' | 否 | 离开过渡的开始状态 |
+| leaveActiveClass | string | '' | 否 | 离开过渡的激活状态 |
+| leaveToClass | string | '' | 否 | 离开过渡的结束状态 |
+| disableTouchMove | boolean | false | 否 | 是否阻止触摸滚动 |
 
-## 动画时间
+### Events
 
-可以通过 `duration` 设置动画执行时间，动画拆分为 `enter` 进入动画和 `leave` 离开动画，`duration` 可以分别设置进入动画执行时间和离开动画执行时间： `{ enter: 300, leave: 500 }`。
+| 事件名 | 触发条件 | 参数说明 |
+| --- | --- | --- |
+| click | 点击组件时触发 | - |
+| before-enter | 进入过渡开始前触发 | - |
+| enter | 进入过渡开始时触发 | - |
+| after-enter | 进入过渡结束后触发 | - |
+| before-leave | 离开过渡开始前触发 | - |
+| leave | 离开过渡开始时触发 | - |
+| after-leave | 离开过渡结束后触发 | - |
 
-## 自定义动画
+### Slots
 
-可以通过 `enter-class`、`enter-active-class`、`enter-to-class`、`leave-class`、`leave-active-class`、`leave-to-class` 设置自定义动画的类名。
+| 插槽名 | 作用域变量 | 使用说明 |
+| --- | --- | --- |
+| default | - | 过渡动画包裹的内容 |
 
-在动画进入时，会给标签设置 `enter-class` 和 `enter-active-class` 样式，在下一帧切换为 `enter-to-class` 和 `enter-active-class` 样式，因此进入动画是从 `enter-class` 样式切换为 `enter-to-class` 样式状态，`enter-active-class` 设置 `transition` 相关属性。
+### Methods
 
-在动画离开时，会给标签设置 `leave-class` 和 `leave-active-class` 样式，在下一帧切换为 `leave-to-class` 和 `leave-active-class` 样式，因此离开动画是从 `leave-class` 样式切换为 `leave-to-class` 样式状态，`leave-active-class` 设置 `transition` 相关属性。
+该组件未对外暴露任何方法。
 
-```html
-<wd-transition
-  :show="customShow"
-  :duration="{ enter: 700, leave: 1000 }"
-  enter-class="custom-enter"
-  enter-active-class="custom-enter-active"
-  enter-to-class="custom-enter-to"
-  leave-class="custom-leave"
-  leave-active-class="custom-leave-active"
-  leave-to-class="custom-leave-to"
-  custom-class="block"
-/>
-```
+## 使用示例
 
-```scss
-:deep(button) {
-  margin: 0 10px 10px 0;
+### 基础用法
+
+```vue
+<template>
+  <view class="demo">
+    <wd-button @click="show = !show">切换显示</wd-button>
+    <wd-transition :show="show" name="fade">
+      <view class="content">这是一个带有淡入淡出动画的内容</view>
+    </wd-transition>
+  </view>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const show = ref(false)
+</script>
+
+<style scoped>
+.demo {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
-:deep(.block) {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  margin: -50px 0 0 -50px;
-  width: 100px;
+
+.content {
+  width: 200px;
   height: 100px;
-  background: #0083ff;
+  background-color: #1989fa;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
 }
-
-:deep(.custom-enter-active),
-:deep(.custom-leave-active) {
-  transition-property: background, transform;
-}
-:deep(.custom-enter) {
-  transform: translate3d(-100px, -100px, 0) rotate(-180deg);
-  background: #ff0000;
-}
-:deep(.custom-leave-to) {
-  transform: translate3d(100px, 100px, 0) rotate(180deg);
-  background: #ff0000;
-}
+</style>
 ```
 
-## Attributes
+### 不同动画类型
 
-| 参数               | 说明                       | 类型                      | 可选值           | 默认值  | 最低版本 |
-| ------------------ | -------------------------- | ------------------------- | ---------------- | ------- | -------- |
-| show               | 是否展示组件               | boolean                   | -                | -       | -        |
-| name               | 动画类型                   | string / array            | `TransitionName` | -       | -        |
-| duration           | 动画执行时间               | number / object / boolean | -                | 300(ms) | -        |
-| custom-style       | 自定义样式                 | string                    | -                | -       | -        |
-| custom-class       | 自定义根节点样式类         | string                    | -                | -       | -        |
-| lazy-render        | 弹层内容懒渲染             | boolean                   | -                | false   | -        |
-| destroy            | 是否在动画结束时销毁子节点 | boolean                   | -                | true    | -        |
-| enter-class        | 进入过渡的开始状态         | string                    | -                | -       | -        |
-| enter-active-class | 进入过渡的激活状态         | string                    | -                | -       | -        |
-| enter-to-class     | 进入过渡的结束状态         | string                    | -                | -       | -        |
-| leave-class        | 离开过渡的开始状态         | string                    | -                | -       | -        |
-| leave-active-class | 离开过渡的激活状态         | string                    | -                | -       | -        |
-| leave-to-class     | 离开过渡的结束状态         | string                    | -                | -       | -        |
-| disable-touch-move | 是否阻止触摸滚动           | boolean                   | -                | false   | 1.11.0   |
+```vue
+<template>
+  <view class="demo">
+    <view class="buttons">
+      <wd-button @click="changeAnimation('fade')">淡入淡出</wd-button>
+      <wd-button @click="changeAnimation('slide-up')">向上滑入</wd-button>
+      <wd-button @click="changeAnimation('slide-down')">向下滑入</wd-button>
+      <wd-button @click="changeAnimation('slide-left')">向左滑入</wd-button>
+      <wd-button @click="changeAnimation('slide-right')">向右滑入</wd-button>
+      <wd-button @click="changeAnimation('zoom-in')">放大进入</wd-button>
+      <wd-button @click="changeAnimation('zoom-out')">缩小进入</wd-button>
+    </view>
+    <wd-transition :show="show" :name="animationName">
+      <view class="content">{{ animationName }}</view>
+    </wd-transition>
+    <wd-button @click="show = !show">切换显示</wd-button>
+  </view>
+</template>
 
-### TransitionName 动画类型
+<script setup lang="ts">
+import { ref } from 'vue'
 
-| 名称        | 说明         | 最低版本 |
-| ----------- | ------------ | -------- |
-| fade        | 淡入淡出     | -        |
-| fade-down   | 向下淡入淡出 | -        |
-| fade-left   | 向左淡入淡出 | -        |
-| fade-right  | 向右淡入淡出 | -        |
-| fade-up     | 向上淡入淡出 | -        |
-| slide-down  | 向下滑动     | -        |
-| slide-left  | 向左滑动     | -        |
-| slide-right | 向右滑动     | -        |
-| slide-up    | 向上滑动     | -        |
-| zoom-in     | 缩放进入     | -        |
-| zoom-out    | 缩放离开     | -        |
+const show = ref(false)
+const animationName = ref('fade')
 
-## Events
+const changeAnimation = (name: string) => {
+  animationName.value = name
+  show.value = false
+  // 延迟触发，确保动画重新执行
+  setTimeout(() => {
+    show.value = true
+  }, 100)
+}
+</script>
 
-| 事件名称     | 说明       | 参数 | 最低版本 |
-| ------------ | ---------- | ---- | -------- |
-| before-enter | 进入前触发 | -    | -        |
-| enter        | 进入时触发 | -    | -        |
-| after-enter  | 进入后触发 | -    | -        |
-| before-leave | 离开前触发 | -    | -        |
-| leave        | 离开时触发 | -    | -        |
-| after-leave  | 离开后触发 | -    | -        |
-| click        | 点击时触发 | -    | -        |
+<style scoped>
+.demo {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
 
-## Slots
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
 
-| 插槽名称 | 说明                   | 最低版本 |
-| -------- | ---------------------- | -------- |
-| default  | 需要应用动画效果的内容 | -        |
+.content {
+  width: 200px;
+  height: 100px;
+  background-color: #1989fa;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+</style>
+```
 
-## 外部样式类
+### 自定义动画时长
 
-| 类名               | 说明                                                                                                                   | 最低版本 |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------- | -------- |
-| custom-class       | 根节点样式                                                                                                             | -        |
-| enter-class        | 定义进入过渡的开始状态，在元素被插入前生效，在插入的下一帧移除                                                         | -        |
-| enter-active-class | 定义动画执行期间的状态，在整个进入动画中应用；在元素被插入前生效，在动画结束后移除；可以定义 transition 相关属性       | -        |
-| enter-to-class     | 定义进入过渡的结束状态，在元素被插入的下一帧生效，在动画结束后移除                                                     | -        |
-| leave-class        | 定义离开过渡的开始状态，在离开动画触发时立即生效，在下一帧移除                                                         | -        |
-| leave-active-class | 定义动画执行期间的状态，在整个离开动画中应用；在离开动画触发时立即生效，在动画结束后移除；可以定义 transition 相关属性 | -        |
-| leave-to-class     | 定义离开过渡的结束状态，在离开动画触发时的下一帧生效，在动画结束后移除                                                 | -        |
+```vue
+<template>
+  <view class="demo">
+    <wd-button @click="show = !show">切换显示</wd-button>
+    <wd-transition :show="show" name="slide-up" :duration="1000">
+      <view class="content">这是一个1秒动画时长的内容</view>
+    </wd-transition>
+    <wd-transition :show="show" name="slide-down" :duration="{ enter: 500, leave: 1500 }">
+      <view class="content">进入500ms，离开1500ms</view>
+    </wd-transition>
+  </view>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const show = ref(false)
+</script>
+
+<style scoped>
+.demo {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.content {
+  width: 200px;
+  height: 100px;
+  background-color: #1989fa;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+</style>
+```
+
+### 懒渲染和生命周期事件
+
+```vue
+<template>
+  <view class="demo">
+    <wd-button @click="show = !show">切换显示</wd-button>
+    <view class="events">
+      <view v-for="(event, index) in events" :key="index" class="event-item">
+        {{ event }}
+      </view>
+    </view>
+    <wd-transition 
+      :show="show" 
+      name="fade-up" 
+      lazy-render 
+      @before-enter="onBeforeEnter" 
+      @enter="onEnter" 
+      @after-enter="onAfterEnter" 
+      @before-leave="onBeforeLeave" 
+      @leave="onLeave" 
+      @after-leave="onAfterLeave"
+    >
+      <view class="content">这是一个带有懒渲染和生命周期事件的内容</view>
+    </wd-transition>
+  </view>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const show = ref(false)
+const events = ref<string[]>([])
+
+const addEvent = (event: string) => {
+  events.value.push(`${new Date().toLocaleTimeString()}: ${event}`)
+  // 只保留最近10条事件
+  if (events.value.length > 10) {
+    events.value.shift()
+  }
+}
+
+const onBeforeEnter = () => addEvent('before-enter')
+const onEnter = () => addEvent('enter')
+const onAfterEnter = () => addEvent('after-enter')
+const onBeforeLeave = () => addEvent('before-leave')
+const onLeave = () => addEvent('leave')
+const onAfterLeave = () => addEvent('after-leave')
+</script>
+
+<style scoped>
+.demo {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.content {
+  width: 200px;
+  height: 100px;
+  background-color: #1989fa;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.events {
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ebedf0;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.event-item {
+  padding: 5px 0;
+  font-size: 14px;
+  color: #646566;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.event-item:last-child {
+  border-bottom: none;
+}
+</style>
+```
+
+### 自定义过渡类名
+
+```vue
+<template>
+  <view class="demo">
+    <wd-button @click="show = !show">切换显示</wd-button>
+    <wd-transition 
+      :show="show" 
+      enter-class="custom-enter" 
+      enter-active-class="custom-enter-active" 
+      enter-to-class="custom-enter-to" 
+      leave-class="custom-leave" 
+      leave-active-class="custom-leave-active" 
+      leave-to-class="custom-leave-to"
+    >
+      <view class="content">这是一个带有自定义过渡类名的内容</view>
+    </wd-transition>
+  </view>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const show = ref(false)
+</script>
+
+<style scoped>
+.demo {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.content {
+  width: 200px;
+  height: 100px;
+  background-color: #1989fa;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+/* 自定义进入动画 */
+:deep(.custom-enter) {
+  opacity: 0;
+  transform: scale(0.5) rotate(-180deg);
+}
+
+:deep(.custom-enter-active) {
+  transition: all 0.5s ease;
+}
+
+:deep(.custom-enter-to) {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* 自定义离开动画 */
+:deep(.custom-leave) {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+:deep(.custom-leave-active) {
+  transition: all 0.5s ease;
+}
+
+:deep(.custom-leave-to) {
+  opacity: 0;
+  transform: scale(0.5) rotate(180deg);
+}
+</style>
+```
+
+## 样式定制
+
+### 自定义样式
+
+使用 `customStyle` 和 `customClass` 属性可以自定义 Transition 组件的根节点样式：
+
+```vue
+<template>
+  <view class="demo">
+    <wd-button @click="show = !show">切换显示</wd-button>
+    <wd-transition 
+      :show="show" 
+      name="fade" 
+      customClass="my-transition"
+      customStyle="border-radius: 12px; overflow: hidden;"
+    >
+      <view class="content">这是一个带有自定义样式的内容</view>
+    </wd-transition>
+  </view>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const show = ref(false)
+</script>
+
+<style scoped>
+.demo {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.content {
+  width: 200px;
+  height: 100px;
+  background-color: #1989fa;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:deep(.my-transition) {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+</style>
+```
+
+### 预设动画类型
+
+组件支持以下预设动画类型：
+
+| 动画名称 | 描述 |
+| --- | --- |
+| fade | 淡入淡出 |
+| fade-up | 向上淡入 |
+| fade-down | 向下淡入 |
+| fade-left | 向左淡入 |
+| fade-right | 向右淡入 |
+| slide-up | 向上滑入 |
+| slide-down | 向下滑入 |
+| slide-left | 向左滑入 |
+| slide-right | 向右滑入 |
+| zoom-in | 放大进入 |
+| zoom-out | 缩小进入 |
+
+## 注意事项
+
+1. **动画类型**：
+   - 支持单个动画类型，也支持数组形式的多个动画类型
+   - 当使用数组形式时，会同时应用多个动画效果
+
+2. **动画时长**：
+   - 支持数字类型，表示统一的进入和离开时长
+   - 支持对象类型，可以分别设置进入和离开时长：`{ enter: 300, leave: 500 }`
+   - 支持布尔值 `false`，表示不设置动画时长，使用 CSS 中定义的时长
+
+3. **懒渲染**：
+   - 当 `lazyRender` 为 `true` 时，只有在组件显示时才会渲染内容
+   - 适用于内容较大或复杂的场景，可以提高初始渲染性能
+
+4. **销毁元素**：
+   - 当 `destroy` 为 `true` 时，动画结束后会设置 `display: none`
+   - 当 `destroy` 为 `false` 时，动画结束后元素仍然保持 `display: block`，只是透明度为 0
+
+5. **生命周期事件**：
+   - 提供了完整的动画生命周期事件，可以在不同阶段执行自定义逻辑
+   - 事件触发顺序：before-enter → enter → after-enter（进入动画）；before-leave → leave → after-leave（离开动画）
+
+6. **触摸滚动**：
+   - 当 `disableTouchMove` 为 `true` 时，会阻止组件内部的触摸滚动
+   - 适用于模态框等需要阻止背景滚动的场景
+
+7. **性能优化**：
+   - 对于频繁切换显示/隐藏的组件，建议使用 `lazyRender` 优化初始渲染性能
+   - 避免在动画过程中进行复杂的 DOM 操作
+   - 对于复杂的自定义动画，建议使用 CSS 动画而非 JavaScript 动画
+
+8. **跨平台兼容**：
+   - 组件在不同平台上的表现基本一致
+   - 某些平台可能存在动画效果的细微差异
+   - 建议在目标平台上进行充分测试

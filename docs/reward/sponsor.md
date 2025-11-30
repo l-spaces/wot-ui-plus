@@ -9,8 +9,6 @@ wot-ui-Plus 是采用 MIT 许可的开源项目，使用完全免费。
 可以通过微信扫码来支持 wot-ui-Plus 的开发，赞助时可以联系 1054595856@qq.com 对接相关事宜。赞助分为铂金赞助商和黄金赞助商，爱发电上的赞助等级和本页下面列出的赞助等级是一一对应的。
 
 <p style="display: flex;">
-<!-- <a href="https://afdian.com/a/weisheng233" style="margin-right: 20px;"> -->
-</a >
 
 <img src="/avatar.jpg" alt="avatar.jpg" style="max-width: 200px;" />
 </p>

@@ -1,216 +1,353 @@
 # Textarea 文本域
 
-用于输入多行文本信息。
+## 组件概述
 
-## 基本用法
+wd-textarea 是一个功能强大的多行文本输入组件，用于在 UniApp 应用中实现各种文本输入场景。它支持丰富的配置选项、表单验证、字数统计、自动增高、清空按钮等功能，是构建表单和文本输入界面的核心组件。
 
-可以通过 `v-model` 双向绑定输入框的值，通过 `placeholder` 设置占位提示文字。
+### 功能特点
+- 支持双向数据绑定
+- 提供丰富的配置选项，如禁用、只读、密码模式等
+- 支持自动增高功能，根据内容自适应高度
+- 提供清空按钮，支持自定义触发时机
+- 支持字数统计和限制
+- 支持表单验证集成
+- 支持前缀图标和自定义标签
+- 提供多种事件监听，如输入、聚焦、失焦等
+- 支持键盘相关事件和配置
 
-```html
-<wd-textarea v-model="value" placeholder="请填写评价" />
+### 适用场景
+- 表单中的多行文本输入，如备注、描述等
+- 需要字数限制的文本输入，如评论、留言等
+- 需要自动增高的文本输入，如聊天输入框
+- 需要清空功能的文本输入
+- 需要表单验证的文本输入
+
+## API 参考
+
+### Props
+
+| 参数名 | 类型 | 默认值 | 必填 | 描述 |
+| --- | --- | --- | --- | --- |
+| customStyle | string | '' | 否 | 自定义根节点样式 |
+| customClass | string | '' | 否 | 自定义根节点样式类 |
+| customTextareaContainerClass | string | '' | 否 | 自定义文本域容器class名称 |
+| customTextareaClass | string | '' | 否 | 自定义文本域class名称 |
+| customLabelClass | string | '' | 否 | 自定义标签class名称 |
+| modelValue | string / number | '' | 否 | 绑定值 |
+| placeholder | string | '请输入...' | 否 | 占位文本 |
+| placeholderStyle | string | '' | 否 | 指定placeholder的样式 |
+| placeholderClass | string | '' | 否 | 指定placeholder的样式类 |
+| disabled | boolean | false | 否 | 禁用输入框 |
+| maxlength | number | -1 | 否 | 最大输入长度，设置为-1表示不限制最大长度 |
+| autoFocus | boolean | false | 否 | 自动聚焦并拉起键盘 |
+| focus | boolean | false | 否 | 获取焦点 |
+| autoHeight | boolean | false | 否 | 是否自动增高输入框高度，style.height属性在auto-height生效时不生效 |
+| fixed | boolean | false | 否 | 如果textarea处于position:fixed区域，需要设置此属性为true |
+| cursorSpacing | number | 0 | 否 | 指定光标与键盘的距离，取textarea距离底部的距离和cursor-spacing指定的距离的最小值作为实际距离 |
+| cursor | number | -1 | 否 | 指定focus时的光标位置 |
+| confirmType | string | 'done' | 否 | 设置键盘右下角按钮的文字，可选值：'send'、'search'、'next'、'go'、'done' |
+| confirmHold | boolean | false | 否 | 点击键盘右下角按钮时是否保持键盘不收起 |
+| showConfirmBar | boolean | true | 否 | 是否显示键盘上方带有“完成”按钮那一栏 |
+| selectionStart | number | -1 | 否 | 光标起始位置，自动聚集时有效，需与selection-end搭配使用 |
+| selectionEnd | number | -1 | 否 | 光标结束位置，自动聚集时有效，需与selection-start搭配使用 |
+| adjustPosition | boolean | true | 否 | 键盘弹起时是否自动上推页面 |
+| disableDefaultPadding | boolean | false | 否 | 是否去掉iOS下的默认内边距 |
+| holdKeyboard | boolean | false | 否 | focus状态下点击页面时是否不收起键盘 |
+| showPassword | boolean | false | 否 | 显示为密码框 |
+| clearable | boolean | false | 否 | 是否显示清空按钮 |
+| readonly | boolean | false | 否 | 输入框只读状态 |
+| prefixIcon | string | '' | 否 | 前置图标，icon组件中的图标类名 |
+| showWordLimit | boolean | false | 否 | 是否显示字数限制，需要同时设置maxlength |
+| label | string | '' | 否 | 设置左侧标题 |
+| labelWidth | string | '' | 否 | 设置左侧标题宽度 |
+| size | string | '' | 否 | 设置输入框大小 |
+| error | boolean | false | 否 | 设置输入框错误状态（红色） |
+| center | boolean | false | 否 | 当存在label属性时，设置标题和输入框垂直居中，默认为顶部居中 |
+| noBorder | boolean | false | 否 | 非cell类型下是否隐藏下划线 |
+| required | boolean | false | 否 | cell类型下必填样式 |
+| prop | string | '' | 否 | 表单域model字段名，在使用表单校验功能的情况下，该属性是必填的 |
+| rules | array | [] | 否 | 表单验证规则 |
+| clearTrigger | string | 'always' | 否 | 显示清除图标的时机，always 表示输入框不为空时展示，focus 表示输入框聚焦且不为空时展示 |
+| focusWhenClear | boolean | true | 否 | 是否在点击清除按钮时聚焦输入框 |
+| ignoreCompositionEvent | boolean | true | 否 | 是否忽略组件内对文本合成系统事件的处理 |
+| inputmode | string | 'text' | 否 | 它提供了用户在编辑元素或其内容时可能输入的数据类型的提示 |
+| markerSide | string | 'before' | 否 | 必填标记位置，可选值：before（标签前）、after（标签后） |
+
+### Events
+
+| 事件名 | 触发条件 | 参数说明 |
+| --- | --- | --- |
+| update:modelValue | 输入值变化时触发 | value: string - 输入框的当前值 |
+| input | 输入内容时触发 | detail: Object - 包含当前输入值和光标位置等信息 |
+| focus | 输入框获得焦点时触发 | detail: Object - 包含当前光标位置等信息 |
+| blur | 输入框失去焦点时触发 | detail: Object - 包含当前输入值和光标位置等信息 |
+| confirm | 点击键盘右下角按钮时触发 | detail: Object - 包含当前输入值 |
+| clear | 点击清空按钮时触发 | - |
+| linechange | 输入框行数变化时触发 | detail: Object - 包含当前行数等信息 |
+| keyboardheightchange | 键盘高度变化时触发 | detail: Object - 包含键盘高度等信息 |
+| clickprefixicon | 点击前置图标时触发 | - |
+| click | 点击组件时触发 | - |
+
+### Slots
+
+| 插槽名 | 作用域变量 | 使用说明 |
+| --- | --- | --- |
+| prefix | - | 前置内容插槽，用于在标签前插入自定义内容 |
+| label | - | 标签内容插槽，用于自定义标签内容 |
+
+### Methods
+
+该组件未对外暴露任何方法。
+
+## 使用示例
+
+### 基础用法
+
+```vue
+<template>
+  <view class="demo">
+    <wd-textarea v-model="value" placeholder="请输入内容" />
+    <view class="result">输入内容：{{ value }}</view>
+  </view>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const value = ref('')
+</script>
+
+<style scoped>
+.demo {
+  padding: 20px;
+}
+
+.result {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+</style>
 ```
 
-```typescript
-const value = ref<string>('')
+### 自动增高
+
+```vue
+<template>
+  <view class="demo">
+    <wd-textarea 
+      v-model="value" 
+      placeholder="请输入内容" 
+      auto-height 
+      :maxlength="100" 
+      show-word-limit
+    />
+  </view>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const value = ref('')
+</script>
+
+<style scoped>
+.demo {
+  padding: 20px;
+}
+</style>
 ```
 
-## 禁用
+### 带标签和前缀图标
 
-通过设置 `disabled` 属性，实现禁用文本域。
+```vue
+<template>
+  <view class="demo">
+    <wd-textarea 
+      v-model="value" 
+      placeholder="请输入备注" 
+      label="备注" 
+      label-width="80px" 
+      prefix-icon="info-circle"
+      @clickprefixicon="handleClickPrefix"
+    />
+  </view>
+</template>
 
-```html
-<wd-textarea v-model="value" disabled></wd-textarea>
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const value = ref('')
+
+const handleClickPrefix = () => {
+  console.log('点击了前缀图标')
+}
+</script>
+
+<style scoped>
+.demo {
+  padding: 20px;
+}
+</style>
 ```
 
-## 只读
+### 带清空按钮和字数限制
 
-通过设置 `readonly` 属性，实现文本域只读。
+```vue
+<template>
+  <view class="demo">
+    <wd-textarea 
+      v-model="value" 
+      placeholder="请输入评论" 
+      clearable 
+      :maxlength="50" 
+      show-word-limit
+      clear-trigger="focus"
+    />
+  </view>
+</template>
 
-```html
-<wd-textarea v-model="value" readonly></wd-textarea>
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const value = ref('')
+</script>
+
+<style scoped>
+.demo {
+  padding: 20px;
+}
+</style>
 ```
 
-## 清空按钮
+### 禁用和只读
 
-通过设置 `clearable` 属性实现清空按钮，设置`show-word-limit`与`maxlength`实现字数限制。
+```vue
+<template>
+  <view class="demo">
+    <wd-textarea 
+      v-model="disabledValue" 
+      placeholder="禁用状态" 
+      disabled
+    />
+    <wd-textarea 
+      v-model="readonlyValue" 
+      placeholder="只读状态" 
+      readonly
+    />
+  </view>
+</template>
 
-```html
-<wd-textarea v-model="value" :maxlength="120" clearable show-word-limit />
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const disabledValue = ref('禁用内容')
+const readonlyValue = ref('只读内容')
+</script>
+
+<style scoped>
+.demo {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+</style>
 ```
 
-## 有值且聚焦时展示清空按钮
+## 样式定制
 
-设置 `clear-trigger` 属性，可以控制是否聚焦时才展示清空按钮。
+### 自定义样式
 
-:::warning 注意
-支付宝小程序暂不支持 `clear-trigger` 属性，且某种情况下清空按钮无法点击，原因参考此[issue](https://github.com/ant-design/ant-design-mini/issues/1255)（希望可以早点解决，所以直接给蚂蚁的组件库提了个 issue）。
-:::
+使用 `customStyle` 属性可以直接设置组件的内联样式：
 
-```html
-<wd-textarea clear-trigger="focus" v-model="value14" :maxlength="120" clearable show-word-limit />
+```vue
+<wd-textarea 
+  v-model="value" 
+  placeholder="请输入内容" 
+  customStyle="margin: 10px; border: 1px solid #ddd; border-radius: 4px;"
+/>
 ```
 
-## 点击清除按钮时不自动聚焦
+### 自定义类名
 
-设置`focus-when-clear` 属性，可以控制点击清除按钮时是否自动聚焦。
+使用 `customClass`、`customTextareaContainerClass`、`customTextareaClass` 和 `customLabelClass` 属性可以为组件的不同部分添加自定义的 CSS 类：
 
-```html
-<wd-textarea v-model="value" :focus-when-clear="false" :maxlength="120" clearable show-word-limit />
+```vue
+<template>
+  <wd-textarea 
+    v-model="value" 
+    placeholder="请输入内容" 
+    label="自定义样式" 
+    customClass="my-textarea" 
+    customTextareaClass="my-textarea-inner" 
+    customLabelClass="my-textarea-label"
+  />
+</template>
+
+<style scoped>
+:deep(.my-textarea) {
+  background-color: #f9f9f9;
+}
+
+:deep(.my-textarea-label) {
+  color: #1989fa;
+  font-weight: bold;
+}
+
+:deep(.my-textarea-inner) {
+  font-size: 16px;
+  line-height: 1.5;
+}
+</style>
 ```
 
-## 高度自适应
+### CSS 变量
 
-通过设置 `auto-height` 属性，实现高度自适应。
+组件支持通过 CSS 变量进行样式定制，以下是常用的 CSS 变量：
 
-```html
-<wd-textarea v-model="value" auto-height />
-```
+| 变量名 | 描述 | 默认值 |
+| --- | --- | --- |
+| --textarea-background-color | 文本域背景色 | #ffffff |
+| --textarea-text-color | 文本域文字颜色 | #323233 |
+| --textarea-placeholder-color | 占位符文字颜色 | #969799 |
+| --textarea-border-color | 边框颜色 | #ebedf0 |
+| --textarea-font-size | 字体大小 | 32rpx |
+| --textarea-line-height | 行高 | 48rpx |
+| --textarea-padding | 内边距 | 20rpx |
+| --textarea-label-color | 标签文字颜色 | #323233 |
+| --textarea-label-font-size | 标签字体大小 | 32rpx |
+| --textarea-error-color | 错误状态颜色 | #ee0a24 |
 
-## 前置 icon
+## 注意事项
 
-设置前置 icon `prefix-icon`，icon 为 [icon](/component/icon) 章节中的图标，如果没有你需要的图标，则使用 `prefix` 插槽进行自定义插入。
+1. **自动增高**：
+   - 当 `autoHeight` 为 `true` 时，`style.height` 属性将不生效
+   - 自动增高功能在不同平台上的表现可能有所差异
 
-```html
-<wd-textarea v-model="value" prefix-icon="dong"></wd-textarea>
-```
+2. **字数限制**：
+   - `showWordLimit` 属性需要配合 `maxlength` 属性使用才会生效
+   - 当输入内容超过 `maxlength` 时，会自动截断
 
-## 设置 label 标题
+3. **清空按钮**：
+   - `clearable` 属性控制是否显示清空按钮
+   - `clearTrigger` 属性控制清空按钮的显示时机
+   - `focusWhenClear` 属性控制点击清空按钮后是否聚焦输入框
 
-设置 `label` 标题，可以和 `cell-group` 组合使用，形成 `cell` 展示类型。可以通过 `label-width` 设置标题宽度，默认为 '33%'。
+4. **表单验证**：
+   - 当与 `wd-form` 组件配合使用时，需要设置 `prop` 属性
+   - 表单验证规则可以通过 `rules` 属性设置，也可以在 `wd-form` 组件中统一设置
 
-```html
-<wd-cell-group border>
-  <wd-textarea label="基本用法" clearable v-model="value" placeholder="请输入..." />
-</wd-cell-group>
-```
+5. **键盘配置**：
+   - `confirmType` 属性控制键盘右下角按钮的文字
+   - `confirmHold` 属性控制点击确认按钮后是否保持键盘不收起
+   - `adjustPosition` 属性控制键盘弹起时是否自动上推页面
 
-## 必填样式
+6. **跨平台兼容**：
+   - 组件在不同平台上的表现可能有所差异，特别是在键盘处理和自动增高方面
+   - 建议在目标平台上进行充分测试
 
-设置了 `label` 的情况下，设置 `required` 属性，展示必填样式。
-
-```html
-<wd-textarea v-model="value" placeholder="请输入..." label="必填" required></wd-textarea>
-```
-
-## 输入框大小
-
-通过设置 `size` 修改输入框大小，将 `size` 设置为 'large' 时字号为 16px。
-
-```html
-<wd-textarea label="基本用法" size="large" v-model="value" placeholder="请输入..." />
-```
-
-## 错误状态
-
-设置 `error` 属性，输入框的值显示为红色。
-
-```html
-<wd-textarea v-model="value" placeholder="请输入用户名" error />
-```
-
-## 垂直居中
-
-当设置 `label` 标题时，默认为顶部居中，设置 `center` 属性可以使标题和输入框垂直居中。
-
-```html
-<wd-textarea label="基本用法" v-model="value" center />
-```
-
-## Attributes
-
-| 参数                    | 说明                                                                                              | 类型              | 可选值                             | 默认值    | 最低版本 |
-| ----------------------- | ------------------------------------------------------------------------------------------------- | ----------------- | ---------------------------------- | --------- | -------- |
-| v-model                 | 绑定值                                                                                            | string / number   | -                                  | -         | -        |
-| placeholder             | 占位文本                                                                                          | string            | -                                  | 请输入... | -        |
-| placeholderStyle        | 原生属性，指定 placeholder 的样式                                                                 | string            | -                                  | -         | -        |
-| placeholderClass        | 原生属性，指定 placeholder 的样式类                                                               | string            | -                                  | -         | -        |
-| disabled                | 原生属性，禁用                                                                                    | boolean           | -                                  | false     | -        |
-| maxlength               | 原生属性，最大输入长度，设置为 -1 时不限制最大长度                                                | number            | -                                  | -         | -        |
-| auto-focus              | 原生属性，自动聚焦，拉起键盘                                                                      | boolean           | -                                  | false     | -        |
-| focus                   | 原生属性，获取焦点                                                                                | boolean           | -                                  | false     | -        |
-| auto-height             | 原生属性，是否自动增高（设置时 style.height 不生效）                                              | boolean           | -                                  | false     | -        |
-| fixed                   | 在 position:fixed 区域时需要设置为 true                                                           | boolean           | -                                  | false     | -        |
-| cursorSpacing           | 原生属性，指定光标与键盘的距离（取 textarea 底部距离和该值的最小值）                              | number            | -                                  | 0         | -        |
-| cursor                  | 原生属性，指定 focus 时的光标位置                                                                 | number            | -                                  | -1        | -        |
-| confirm-type            | 设置键盘右下角按钮的文字                                                                          | string            | `done`/`go`/`next`/`search`/`send` | -         | -        |
-| confirm-hold            | 点击键盘右下角按钮时是否保持键盘不收起                                                            | boolean           | -                                  | false     | -        |
-| show-confirm-bar        | 是否显示键盘上方"完成"栏                                                                          | boolean           | -                                  | true      | -        |
-| selection-start         | 原生属性，光标起始位置（需与 selection-end 搭配使用）                                             | number            | -                                  | -1        | -        |
-| selection-end           | 原生属性，光标结束位置（需与 selection-start 搭配使用）                                           | number            | -                                  | -1        | -        |
-| adjust-position         | 原生属性，键盘弹起时是否自动上推页面                                                              | boolean           | -                                  | true      | -        |
-| disable-default-padding | 原生属性，是否去掉 iOS 默认内边距                                                                 | boolean           | -                                  | false     | -        |
-| hold-keyboard           | 原生属性，focus 时点击页面不收起键盘                                                              | boolean           | -                                  | false     | -        |
-| show-password           | 显示为密码框                                                                                      | boolean           | -                                  | false     | -        |
-| clearable               | 显示清空按钮                                                                                      | boolean           | -                                  | false     | -        |
-| readonly                | 只读                                                                                              | boolean           | -                                  | false     | -        |
-| prefix-icon             | 前置图标（使用 icon 组件类名）                                                                    | string            | -                                  | -         | -        |
-| show-word-limit         | 显示字数限制（需设置 maxlength）                                                                  | boolean           | -                                  | false     | -        |
-| label                   | 设置左侧标题                                                                                      | string            | -                                  | -         | -        |
-| label-width             | 设置左侧标题宽度                                                                                  | string            | -                                  | 33%       | -        |
-| size                    | 设置输入框大小                                                                                    | string            | -                                  | -         | -        |
-| error                   | 设置输入框错误状态（红色标识）                                                                    | boolean           | -                                  | false     | -        |
-| center                  | 有 label 时设置标题和输入框垂直居中（默认顶部居中）                                               | boolean           | -                                  | false     | -        |
-| no-border               | 非 cell 类型下是否隐藏下划线                                                                      | boolean           | -                                  | false     | -        |
-| required                | cell 类型下必填样式                                                                               | boolean           | -                                  | false     | -        |
-| marker-side             | 必填标记的位置                                                                                    | string            | before / after                     | before    | 1.12.0   |
-| prop                    | 表单域 `model` 字段名（表单校验必填）                                                             | string            | -                                  | -         | -        |
-| rules                   | 表单验证规则                                                                                      | FormItemRule[]    | -                                  | []        | -        |
-| clearTrigger            | 显示清除图标的时机：always（输入框非空时展示）/ focus（聚焦且非空时展示）                         | InputClearTrigger | `focus`/`always`                   | `always`  | 1.3.7    |
-| focusWhenClear          | 点击清除按钮时是否聚焦输入框                                                                      | boolean           | -                                  | true      | 1.3.7    |
-| ignoreCompositionEvent  | 是否忽略文本合成系统事件处理（为 false 时触发 composition 相关事件，且在合成期间触发 input 事件） | boolean           | -                                  | true      | 1.3.11   |
-| inputmode               | 输入数据类型提示                                                                                  | InputMode         | -                                  | text      | 1.5.0    |
-
-### InputMode 可选值
-
-> 新增于 uni-app 3.6.16+ inputmode 是 html 规范后期更新的内容。各家小程序还未支持此属性。
-
-在符合条件的高版本 webview 里，uni-app 的 web 和 app-vue 平台中可使用本属性，参见[inputmode](https://uniapp.dcloud.net.cn/component/input.html#inputmode)。
-
-| 值      | 说明                                                                                                                 |
-| ------- | -------------------------------------------------------------------------------------------------------------------- |
-| none    | 无虚拟键盘。在应用程序或者站点需要实现自己的键盘输入控件时很有用。                                                   |
-| text    | 使用用户本地区域设置的标准文本输入键盘。                                                                             |
-| decimal | 小数输入键盘，包含数字和分隔符（通常是“ . ”或者“ , ”），设备可能也可能不显示减号键。                                 |
-| numeric | 数字输入键盘，所需要的就是 0 到 9 的数字，设备可能也可能不显示减号键。                                               |
-| tel     | 电话输入键盘，包含 0 到 9 的数字、星号（\*）和井号（#）键。表单输入里面的电话输入通常应该使用 <input type="tel"> 。  |
-| search  | 为搜索输入优化的虚拟键盘，比如，返回键可能被重新标记为“搜索”，也可能还有其他的优化。                                 |
-| email   | 为邮件地址输入优化的虚拟键盘，通常包含"@"符号和其他优化。表单里面的邮件地址输入应该使用 <input type="email">。       |
-| url     | 为网址输入优化的虚拟键盘，比如，“/”键会更加明显、历史记录访问等。表单里面的网址输入通常应该使用 <input type="url">。 |
-
-### FormItemRule 数据结构
-
-| 键名      | 说明                                                    | 类型                                  |
-| --------- | ------------------------------------------------------- | ------------------------------------- |
-| required  | 是否为必选字段                                          | `boolean`                             |
-| message   | 错误提示文案                                            | `string`                              |
-| validator | 通过函数进行校验，可以返回一个 `Promise` 来进行异步校验 | `(value, rule) => boolean \| Promise` |
-| pattern   | 通过正则表达式进行校验，正则无法匹配表示校验不通过      | `RegExp`                              |
-
-## Events
-
-| 事件名称             | 说明                             | 参数                                         | 最低版本 |
-| -------------------- | -------------------------------- | -------------------------------------------- | -------- |
-| input                | 监听输入框 input 事件            | ` {value, cursor, keyCode}`                  | -        |
-| focus                | 监听输入框 focus 事件            | ` { value, height }`, height 为键盘高度      | -        |
-| blur                 | 监听输入框 blur 事件             | ` { value }`                                 | -        |
-| clear                | 监听输入框清空按钮事件           | -                                            | -        |
-| linechange           | 监听输入框行数变化               | ` { height: 0, heightRpx: 0, lineCount: 0 }` | -        |
-| confirm              | 点击完成时， 触发 confirm 事件   | ` { value }`                                 | -        |
-| keyboardheightchange | 键盘高度发生变化的时候触发此事件 | ` { height, duration }`                      | -        |
-| clickprefixicon      | 点击前置图标时触发               | -                                            | -        |
-| clicksuffixicon      | 点击后置图标时触发               | -                                            | -        |
-
-## Slot
-
-| name   | 说明         | 最低版本 |
-| ------ | ------------ | -------- |
-| label  | 左侧标题插槽 | -        |
-| prefix | 前置插槽     | -        |
-
-## 外部样式类
-
-| 类名                            | 说明                        | 最低版本 |
-| ------------------------------- | --------------------------- | -------- |
-| custom-class                    | 根节点样式                  | -        |
-| custom-textarea-container-class | textarea 容器外部自定义样式 | -        |
-| custom-textarea-class           | textarea 外部自定义样式     | -        |
+7. **性能优化**：
+   - 对于大量文本输入，建议设置合理的 `maxlength` 限制
+   - 避免在频繁输入的场景下使用复杂的计算属性或监听器

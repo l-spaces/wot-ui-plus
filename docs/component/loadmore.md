@@ -1,144 +1,401 @@
-# loadmore 加载更多
+# wd-loadmore 加载更多组件
 
-用于在列表底部展示加载状态。
+## 组件概述
 
-## 基本用法
+wd-loadmore 是一个用于列表或长页面底部的加载状态指示器组件，用于在滚动加载更多数据时向用户提供清晰的状态反馈。该组件支持多种加载状态（加载中、加载失败、加载完成），并提供国际化支持和高度的自定义能力。
 
-在需要进行加载的列表的底部引入该组件即可。当滑动到列表底部时，通过设置`state`展示不同的文案。
+### 功能特点
+- 支持三种加载状态：加载中、加载失败、加载完成
+- 内置国际化支持，支持多语言切换
+- 加载失败时可点击重新加载
+- 支持自定义加载动画和文案
+- 集成了 wd-loading、wd-divider 和 wd-icon 组件
+- 支持自定义样式和类名
 
-```html
-<wd-loadmore custom-class="loadmore" state="loading" />
+### 适用场景
+- 列表滚动加载更多数据
+- 长页面分段加载
+- 分页数据加载状态显示
+- 无限滚动列表
+- 下拉刷新和上拉加载组合使用
 
-<wd-loadmore custom-class="loadmore" state="finished" />
+## API 参考
 
-<wd-loadmore custom-class="loadmore" state="error" />
-```
+### Props
 
-```scss
-:deep(.loadmore) {
-  background-color: #f4f4f4;
-  margin: 20px 0;
-}
-```
+| 属性名 | 类型 | 默认值 | 必填 | 描述 |
+| --- | --- | --- | --- | --- |
+| state | string |  | 否 | 加载状态，可选值：'loading'（加载中）、'error'（加载失败）、'finished'（加载完成） |
+| loadingText | string |  | 否 | 加载提示文案，默认使用国际化翻译 |
+| finishedText | string |  | 否 | 全部加载完的提示文案，默认使用国际化翻译 |
+| errorText | string |  | 否 | 加载失败的提示文案，默认使用国际化翻译 |
+| loadingProps | object |  | 否 | 加载中 loading 组件的属性，参考 wd-loading 组件 |
+| customStyle | string |  | 否 | 自定义根节点样式，如 'margin: 10px; color: red;' |
+| customClass | string |  | 否 | 自定义根节点样式类，如 'custom-class1 custom-class2' |
 
-## 自定义文案
+### Events
 
-通过设置`loading-text`、`finished-text`、`error-text`配合`state`展示不同状态时的文案
+| 事件名 | 触发条件 | 参数说明 |
+| --- | --- | --- |
+| reload | 加载失败状态下点击组件时触发 | 无 |
 
-```html
-<wd-loadmore custom-class="loadmore" state="loading" loading-text="自定义加载文案" />
+### Methods
 
-<wd-loadmore custom-class="loadmore" state="finished" finished-text="自定义完成文案" />
+该组件不对外暴露任何方法。
 
-<wd-loadmore custom-class="loadmore" state="error" error-text="自定义错误文案" />
-```
+### Slots
 
-## 点击继续加载
+该组件不提供任何插槽。
 
-当 state 为 error 时，点击文案，组件会触发`loadmore`事件
+## 使用示例
 
-```html
-<wd-loadmore custom-class="loadmore" state="error" @reload="loadmore" />
-```
+### 1. 基础用法
 
-## 应用实现
-
-配合`onReachBottom`事件实现滚动到底部加载更多
-
-```html
-<view class="container">
-  <view v-for="index in num" :key="index" class="list-item">
-    <image src="https://img10.360buyimg.com/jmadvertisement/jfs/t1/70325/36/14954/36690/5dcd3e3bEee5006e0/aed1ccf6d5ffc764.png" />
-    <view class="right">这是一条测试{{ index + 1 }}</view>
+```vue
+<template>
+  <view>
+    <!-- 列表内容 -->
+    <view v-for="item in list" :key="item.id" class="list-item">
+      {{ item.content }}
+    </view>
+    
+    <!-- 加载更多组件 -->
+    <wd-loadmore 
+      :state="loadMoreState" 
+      @reload="onReload" 
+    />
   </view>
-  <wd-loadmore :state="state" @reload="loadmore" />
-</view>
-```
+</template>
 
-```typescript
-import { onLoad, onReachBottom } from '@dcloudio/uni-app'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-const state = ref<string>('loading')
-const num = ref<number>(0)
-const max = ref<number>(60)
+// 列表数据
+const list = ref([
+  { id: 1, content: '列表项 1' },
+  { id: 2, content: '列表项 2' },
+  // ... 更多列表项
+])
 
-onReachBottom(() => {
-  if (num.value === 45) {
-    state.value = 'error'
-  } else if (num.value < max.value) {
-    loadmore()
-  } else if (num.value === max.value) {
-    state.value = 'finished'
-  }
-})
+// 加载状态
+const loadMoreState = ref('loading') // 可选值：'loading' | 'error' | 'finished'
 
-onLoad(() => {
-  loadmore()
-})
-
-function loadmore() {
-  setTimeout(() => {
-    num.value = num.value + 15
-    state.value = 'loading'
-  }, 200)
+// 重新加载
+const onReload = () => {
+  loadMoreState.value = 'loading'
+  // 执行重新加载逻辑
 }
-```
+</script>
 
-```scss
+<style scoped>
 .list-item {
-  position: relative;
-  display: flex;
-  padding: 10px 15px;
-  background: #fff;
-  color: #464646;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #eee;
 }
-
-.list-item:after {
-  position: absolute;
-  display: block;
-  content: '';
-  height: 1px;
-  left: 0;
-  width: 100%;
-  bottom: 0;
-  background: #eee;
-  transform: scaleY(0.5);
-}
-image {
-  display: block;
-  width: 120px;
-  height: 78px;
-  margin-right: 15px;
-}
-.right {
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
+</style>
 ```
 
-## Attributes
+### 2. 自定义文案
 
-| 参数          | 说明                 | 类型                    | 可选值                 | 默认值             | 最低版本 |
-| ------------- | -------------------- | ----------------------- | ---------------------- | ------------------ | -------- |
-| state         | 加载状态             | string                  | loading/finished/error | -                  | -        |
-| loading-text  | 加载提示文案         | string                  | -                      | 加载中...          | -        |
-| finished-text | 全部加载完的提示文案 | string                  | -                      | 没有更多了         | -        |
-| error-text    | 加载失败的提示文案   | string                  | -                      | 加载失败，点击重试 | -        |
-| loading-props | loading 加载组件属性 | `Partial<LoadingProps>` | -                      | -                  | 1.3.14   |
+```vue
+<template>
+  <view>
+    <!-- 列表内容 -->
+    <view v-for="item in list" :key="item.id" class="list-item">
+      {{ item.content }}
+    </view>
+    
+    <!-- 自定义文案 -->
+    <wd-loadmore 
+      :state="loadMoreState" 
+      loading-text="正在加载中..." 
+      finished-text="没有更多数据了" 
+      error-text="加载失败" 
+      @reload="onReload" 
+    />
+  </view>
+</template>
 
-#### LoadingProps
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-参见[LoadingProps](/component/loading.html#attributes)
+// 列表数据
+const list = ref([/* 列表数据 */])
 
-## Events
+// 加载状态
+const loadMoreState = ref('loading')
 
-| 事件名称 | 说明                                                | 参数 | 最低版本 |
-| -------- | --------------------------------------------------- | ---- | -------- |
-| reload   | state 为 error 加载错误时，点击文案触发 reload 事件 | -    | -        |
+// 重新加载
+const onReload = () => {
+  loadMoreState.value = 'loading'
+  // 执行重新加载逻辑
+}
+</script>
+```
 
-## 外部样式类
+### 3. 自定义加载动画
 
-| 类名         | 说明       | 最低版本 |
-| ------------ | ---------- | -------- |
-| custom-class | 根节点样式 | -        |
+```vue
+<template>
+  <view>
+    <!-- 列表内容 -->
+    <view v-for="item in list" :key="item.id" class="list-item">
+      {{ item.content }}
+    </view>
+    
+    <!-- 自定义加载动画 -->
+    <wd-loadmore 
+      :state="loadMoreState" 
+      :loading-props="{
+        type: 'outline',
+        color: '#4D80F0',
+        size: 24
+      }" 
+      @reload="onReload" 
+    />
+  </view>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+// 列表数据
+const list = ref([/* 列表数据 */])
+
+// 加载状态
+const loadMoreState = ref('loading')
+
+// 重新加载
+const onReload = () => {
+  loadMoreState.value = 'loading'
+  // 执行重新加载逻辑
+}
+</script>
+```
+
+### 4. 自定义样式
+
+```vue
+<template>
+  <view>
+    <!-- 列表内容 -->
+    <view v-for="item in list" :key="item.id" class="list-item">
+      {{ item.content }}
+    </view>
+    
+    <!-- 自定义样式 -->
+    <wd-loadmore 
+      :state="loadMoreState" 
+      custom-style="padding: 30rpx 0;" 
+      custom-class="my-loadmore" 
+      @reload="onReload" 
+    />
+  </view>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+// 列表数据
+const list = ref([/* 列表数据 */])
+
+// 加载状态
+const loadMoreState = ref('loading')
+
+// 重新加载
+const onReload = () => {
+  loadMoreState.value = 'loading'
+  // 执行重新加载逻辑
+}
+</script>
+
+<style scoped>
+.my-loadmore {
+  /* 自定义样式 */
+  background-color: #f5f5f5;
+  
+  /* 自定义文字颜色 */
+  .wd-loadmore__text {
+    color: #666;
+  }
+  
+  /* 自定义重试文字颜色 */
+  .wd-loadmore__text.is-light {
+    color: #4D80F0;
+  }
+}
+</style>
+```
+
+### 5. 与滚动组件结合使用
+
+```vue
+<template>
+  <view>
+    <!-- 滚动容器 -->
+    <scroll-view 
+      scroll-y 
+      :style="{ height: '600rpx' }" 
+      @scrolltolower="onScrollToLower" 
+    >
+      <!-- 列表内容 -->
+      <view v-for="item in list" :key="item.id" class="list-item">
+        {{ item.content }}
+      </view>
+      
+      <!-- 加载更多组件 -->
+      <wd-loadmore 
+        :state="loadMoreState" 
+        @reload="onReload" 
+      />
+    </scroll-view>
+  </view>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+// 列表数据
+const list = ref([/* 初始列表数据 */])
+
+// 加载状态
+const loadMoreState = ref('')
+
+// 滚动到底部触发
+const onScrollToLower = () => {
+  // 避免重复加载
+  if (loadMoreState.value === 'loading' || loadMoreState.value === 'finished') {
+    return
+  }
+  
+  // 设置加载状态
+  loadMoreState.value = 'loading'
+  
+  // 模拟加载数据
+  setTimeout(() => {
+    // 假设加载了新数据
+    const newData = [/* 新数据 */]
+    
+    if (newData.length > 0) {
+      // 添加新数据
+      list.value.push(...newData)
+      // 恢复默认状态
+      loadMoreState.value = ''
+    } else {
+      // 没有更多数据
+      loadMoreState.value = 'finished'
+    }
+  }, 1000)
+}
+
+// 重新加载
+const onReload = () => {
+  loadMoreState.value = 'loading'
+  // 执行重新加载逻辑
+}
+</script>
+```
+
+## 样式定制指南
+
+### 1. 使用 customStyle 和 customClass
+
+通过 `customStyle` 和 `customClass` 可以自定义组件的根节点样式：
+
+```vue
+<wd-loadmore 
+  :state="loadMoreState" 
+  custom-style="padding: 20rpx;" 
+  custom-class="my-loadmore" 
+/>
+
+<style>
+.my-loadmore {
+  /* 自定义样式 */
+  background-color: #f0f0f0;
+  /* 可以添加更多自定义样式 */
+}
+</style>
+```
+
+### 2. 覆盖组件内部样式
+
+可以通过深度选择器覆盖组件内部样式：
+
+```vue
+<wd-loadmore :state="loadMoreState" custom-class="my-loadmore" />
+
+<style scoped>
+.my-loadmore {
+  /* 自定义文字颜色 */
+  .wd-loadmore__text {
+    color: #4D80F0;
+    font-size: 28rpx;
+  }
+  
+  /* 自定义重试文字样式 */
+  .wd-loadmore__text.is-light {
+    color: #07c160;
+    text-decoration: underline;
+  }
+  
+  /* 自定义刷新图标样式 */
+  .wd-loadmore__refresh {
+    color: #4D80F0;
+    margin-left: 10rpx;
+  }
+  
+  /* 自定义加载动画样式 */
+  .wd-loadmore__loading {
+    margin-right: 10rpx;
+  }
+}
+</style>
+```
+
+### 3. 自定义加载动画
+
+通过 `loadingProps` 属性可以自定义内置的加载动画：
+
+```vue
+<wd-loadmore 
+  :state="loadMoreState" 
+  :loading-props="{
+    type: 'outline',
+    color: '#4D80F0',
+    size: 30
+  }" 
+/>
+```
+
+## 注意事项
+
+### 1. 状态管理
+- 确保正确管理 `state` 属性，避免状态不一致导致的显示问题
+- 加载完成后应将 `state` 设置为 'finished'，避免重复触发加载
+- 加载失败时应将 `state` 设置为 'error'，允许用户点击重试
+
+### 2. 性能优化
+- 避免在滚动过程中频繁更新 `state` 属性，影响性能
+- 建议在数据加载完成后再更新 `state` 属性
+- 对于大量数据的列表，建议结合虚拟列表使用，提升性能
+
+### 3. 国际化支持
+- 组件内置了国际化支持，默认使用中文
+- 可以通过自定义文案覆盖默认的国际化翻译
+- 支持通过 `useTranslate` 钩子函数扩展其他语言
+
+### 4. 常见问题解决方案
+- **问题**：加载更多组件不显示
+  **解决方案**：检查 `state` 属性是否正确设置，确保组件处于可见区域
+
+- **问题**：点击重试没有触发 reload 事件
+  **解决方案**：确保 `state` 属性为 'error'，只有在加载失败状态下才会触发 reload 事件
+
+- **问题**：自定义加载动画不生效
+  **解决方案**：检查 `loadingProps` 属性是否正确设置，参考 wd-loading 组件的 API
+
+### 5. 使用限制
+- 该组件主要用于列表底部的加载状态显示，不建议用于其他场景
+- 组件的点击重试功能仅在 `state` 为 'error' 时生效
+- 自定义加载动画时，建议使用合适的大小，避免影响整体布局

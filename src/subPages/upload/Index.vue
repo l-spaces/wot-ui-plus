@@ -124,7 +124,7 @@
   const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload'
   const fileList = ref<UploadFile[]>([
     {
-      url: 'https://wot-ui.cn/assets/panda.jpg'
+      url: 'https://wot-ui-plus.cn/assets/panda.jpg'
     }
   ])
 
@@ -149,13 +149,13 @@
   const fileList15 = ref<UploadFile[]>([])
   const fileList16 = ref<UploadFile[]>([
     {
-      url: 'https://wot-ui.cn/assets/panda.jpg',
+      url: 'https://wot-ui-plus.cn/assets/panda.jpg',
       name: 'panda'
     }
   ])
   const fileList17 = ref<UploadFile[]>([
     {
-      url: 'https://wot-ui.cn/assets/panda.jpg'
+      url: 'https://wot-ui-plus.cn/assets/panda.jpg'
     }
   ])
   const fileList18 = ref<UploadFile[]>([])

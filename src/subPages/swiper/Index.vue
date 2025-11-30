@@ -192,25 +192,25 @@
   const { t } = useI18n()
 
   const swiperList = ref([
-    'https://wot-ui.cn/assets/redpanda.jpg',
-    'https://wot-ui.cn/assets/capybara.jpg',
-    'https://wot-ui.cn/assets/panda.jpg',
-    'https://wot-ui.cn/assets/moon.jpg',
-    'https://wot-ui.cn/assets/meng.jpg'
+    'https://wot-ui-plus.cn/assets/redpanda.jpg',
+    'https://wot-ui-plus.cn/assets/capybara.jpg',
+    'https://wot-ui-plus.cn/assets/panda.jpg',
+    'https://wot-ui-plus.cn/assets/moon.jpg',
+    'https://wot-ui-plus.cn/assets/meng.jpg'
   ])
 
   const customSwiperList = ref([
-    { url: 'https://wot-ui.cn/assets/redpanda.jpg', title: t('xiao-xiong-mao') },
-    { url: 'https://wot-ui.cn/assets/capybara.jpg', title: t('ka-pi-ba-la') },
-    { url: 'https://wot-ui.cn/assets/panda.jpg', title: t('da-xiong-mao') },
-    { url: 'https://wot-ui.cn/assets/moon.jpg', title: t('shi-hua-zhong-guo') }
+    { url: 'https://wot-ui-plus.cn/assets/redpanda.jpg', title: t('xiao-xiong-mao') },
+    { url: 'https://wot-ui-plus.cn/assets/capybara.jpg', title: t('ka-pi-ba-la') },
+    { url: 'https://wot-ui-plus.cn/assets/panda.jpg', title: t('da-xiong-mao') },
+    { url: 'https://wot-ui-plus.cn/assets/moon.jpg', title: t('shi-hua-zhong-guo') }
   ])
 
   const videoList = ref([
     'https://unpkg.com/wot-ui-plus-assets@1.0.3/VID_115503.mp4',
     'https://unpkg.com/wot-ui-plus-assets@1.0.3/VID_150752.mp4',
     'https://unpkg.com/wot-ui-plus-assets@1.0.3/VID_155516.mp4',
-    'https://wot-ui.cn/assets/moon.jpg'
+    'https://unpkg.com/wot-ui-plus-assets@1.0.3/VID_155516.mp4'
   ])
 
   const current = ref<number>(0)

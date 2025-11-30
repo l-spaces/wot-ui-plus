@@ -1,516 +1,293 @@
-# Sidebar 侧边导航
+# wd-sidebar 侧边栏
 
-垂直展示的导航栏，用于在不同的内容区域之间进行切换。
+## 组件概述
 
-## 基础用法
+侧边栏组件是一种常用的 UI 组件，用于在页面左侧或右侧提供导航选项。`wd-sidebar` 组件提供了一个容器，用于放置 `wd-sidebar-item` 子组件，支持单选、自定义样式、徽标等功能，适用于各种需要侧边导航的场景。
 
-通过 `v-model` 绑定当前选中项的索引。
+### 功能特性
+- 支持单选模式
+- 支持自定义样式
+- 支持徽标显示
+- 支持图标显示
+- 支持禁用状态
+- 支持切换前校验
+- 支持自定义图标插槽
 
-```html
-<wd-sidebar v-model="active">
-  <wd-sidebar-item :value="0" label="标签名称" />
-  <wd-sidebar-item :value="1" label="标签名称" />
-  <wd-sidebar-item :value="2" label="标签名称" />
-</wd-sidebar>
-```
+### 适用场景
+- 后台管理系统的侧边导航
+- 移动端应用的侧边菜单
+- 多标签页切换
+- 分类导航
 
-```typescript
-const active = ref(0)
-```
+## API 参考
 
-## 徽标提示
+### Props
 
-设置 `is-dot` 属性后，会在右上角展示一个小红点；设置 `badge` 属性后，会在右上角展示相应的徽标。
+#### wd-sidebar
 
-```html
-<wd-sidebar v-model="active">
-  <wd-sidebar-item :value="0" label="标签名称" is-dot />
-  <wd-sidebar-item :value="1" label="标签名称" badge="5" />
-  <wd-sidebar-item :value="2" label="标签名称" />
-</wd-sidebar>
-```
+| 属性名 | 类型 | 默认值 | 必填 | 描述 |
+| --- | --- | --- | --- | --- |
+| customStyle | string | '' | 否 | 自定义根节点样式 |
+| customClass | string | '' | 否 | 自定义根节点样式类 |
+| modelValue | number/string | 0 | 否 | 当前导航项的索引 |
+| beforeChange | function | - | 否 | 切换前的钩子函数，返回 false 可阻止切换 |
 
-## 禁用选项
+#### wd-sidebar-item
 
-通过 `disabled` 属性禁用选项。
+| 属性名 | 类型 | 默认值 | 必填 | 描述 |
+| --- | --- | --- | --- | --- |
+| customStyle | string | '' | 否 | 自定义根节点样式 |
+| customClass | string | '' | 否 | 自定义根节点样式类 |
+| label | string | - | 是 | 当前选项标题 |
+| value | number/string | - | 是 | 当前选项的值，唯一标识 |
+| badge | string/number/null | null | 否 | 徽标显示值 |
+| badgeProps | object | - | 否 | 徽标属性，透传给 Badge 组件 |
+| icon | string | - | 否 | 图标名称 |
+| isDot | boolean | false | 否 | 是否点状徽标 |
+| max | number | 99 | 否 | 徽标最大值 |
+| disabled | boolean | false | 否 | 是否禁用 |
 
-```html
-<wd-sidebar v-model="active">
-  <wd-sidebar-item :value="0" label="标签名称" />
-  <wd-sidebar-item :value="1" label="标签名称" disabled />
-  <wd-sidebar-item :value="2" label="标签名称" />
-</wd-sidebar>
-```
+### Events
 
-## 监听切换事件
+| 事件名 | 触发条件 | 参数说明 |
+| --- | --- | --- |
+| update:modelValue | 选中值变化时触发 | 选中的值 |
+| change | 选中值变化时触发 | { value: 选中的值, label: 选中项的标题 } |
 
-设置 `change` 方法来监听切换导航项时的事件。
+### Slots
 
-```html
-<wd-sidebar v-model="active" @change="handleChange">
-  <wd-sidebar-item :value="0" label="标签名称 1" />
-  <wd-sidebar-item :value="1" label="标签名称 2" />
-  <wd-sidebar-item :value="2" label="标签名称 3" />
-</wd-sidebar>
-```
+#### wd-sidebar
 
-```typescript
-import { useToast } from '@/uni_modules/wot-ui-plus'
+| 插槽名 | 作用域变量 | 描述 |
+| --- | --- | --- |
+| default | - | 用于放置 wd-sidebar-item 子组件 |
 
-const toast = useToast()
-const active = ref<number>(1)
+#### wd-sidebar-item
 
-function handleChange({ value, label }) {
-  toast.show(`当前标签名 ${label}`)
-}
-```
+| 插槽名 | 作用域变量 | 描述 |
+| --- | --- | --- |
+| icon | - | 自定义图标插槽 |
 
-## 异步切换
+### Methods
 
-通过 `before-change` 属性可以在切换标签前执行特定的逻辑。它接收 `{ value, resolve }` 参数，通过 `resolve` `继续执行，resolve` 接收 1 个 boolean 参数
+该组件没有对外暴露的方法。
 
-```html
-<wd-sidebar v-model="active" :before-change="beforeChange">
-  <wd-sidebar-item :value="0" label="标签名称" />
-  <wd-sidebar-item :value="1" label="标签名称" disabled />
-  <wd-sidebar-item :value="2" label="标签名称" />
-</wd-sidebar>
-```
+## 使用示例
 
-```typescript
-import { useToast } from '@/uni_modules/wot-ui-plus'
-import type { SidebarBeforeChange } from '@/uni_modules/wot-ui-plus/components/wd-sidebar/types'
+### 基础用法
+
+```vue
+<template>
+  <wd-sidebar v-model="active">
+    <wd-sidebar-item :label="'选项1'" :value="1"></wd-sidebar-item>
+    <wd-sidebar-item :label="'选项2'" :value="2"></wd-sidebar-item>
+    <wd-sidebar-item :label="'选项3'" :value="3"></wd-sidebar-item>
+  </wd-sidebar>
+</template>
+
+<script setup lang="ts">
 import { ref } from 'vue'
-const { loading: showLoading, close: closeLoading } = useToast()
 
-const toast = useToast()
-const active = ref<number>(1)
-
-const beforeChange: SidebarBeforeChange = ({ value, resolve }) => {
-  showLoading('切换中')
-  setTimeout(() => {
-    closeLoading()
-    resolve(true)
-  }, 2000)
-}
+const active = ref(1)
+</script>
 ```
 
-## 锚点用法示例
+### 带徽标的侧边栏
 
-sidebar 组件的锚点用法可以帮助用户在长页面上快速导航到特定的部分。
-
-::: details 查看锚点用法示例
-::: code-group
-
-```html [vue]
-<view class="wraper">
-  <wd-sidebar v-model="active" @change="handleChange">
-    <wd-sidebar-item v-for="(item, index) in categories" :key="index" :value="index" :label="item.label" />
+```vue
+<template>
+  <wd-sidebar v-model="active">
+    <wd-sidebar-item :label="'选项1'" :value="1" :badge="5"></wd-sidebar-item>
+    <wd-sidebar-item :label="'选项2'" :value="2" :badge="100"></wd-sidebar-item>
+    <wd-sidebar-item :label="'选项3'" :value="3" :is-dot="true"></wd-sidebar-item>
   </wd-sidebar>
-  <scroll-view class="content" scroll-y scroll-with-animation :scroll-top="scrollTop" :throttle="false" @scroll="onScroll">
-    <view v-for="(item, index) in categories" :key="index" class="category">
-      <wd-cell-group :title="item.title" border>
-        <wd-cell v-for="(cell, index) in item.items" :key="index" :title="cell.title" :label="cell.label">
-          <wd-icon name="github-filled" size="24px"></wd-icon>
-        </wd-cell>
-      </wd-cell-group>
-    </view>
-  </scroll-view>
-</view>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const active = ref(1)
+</script>
 ```
 
-```typescript [typescript]
-<script lang="ts" setup>
-import { onMounted, ref } from 'vue'
-import { getRect, isArray } from '@/uni_modules/wot-ui-plus/components/common/util'
+### 带图标的侧边栏
 
-const active = ref<number>(1)
-const scrollTop = ref<number>(0)
-const itemScrollTop = ref<number[]>([])
+```vue
+<template>
+  <wd-sidebar v-model="active">
+    <wd-sidebar-item :label="'首页'" :value="1" icon="home"></wd-sidebar-item>
+    <wd-sidebar-item :label="'分类'" :value="2" icon="category"></wd-sidebar-item>
+    <wd-sidebar-item :label="'购物车'" :value="3" icon="cart"></wd-sidebar-item>
+    <wd-sidebar-item :label="'我的'" :value="4" icon="user"></wd-sidebar-item>
+  </wd-sidebar>
+</template>
 
-const subCategories = new Array(24).fill({ title: '标题文字', label: '这是描述这是描述' }, 0, 24)
-const categories = ref([
-  {
-    label: '分类一',
-    title: '标题一',
-    items: subCategories
-  },
-  {
-    label: '分类二',
-    title: '标题二',
-    items: subCategories
-  },
-  {
-    label: '分类三',
-    title: '标题三',
-    items: subCategories.slice(0, 18)
-  },
-  {
-    label: '分类四',
-    title: '标题四',
-    items: subCategories.slice(0, 21)
-  },
-  {
-    label: '分类五',
-    title: '标题五',
-    items: subCategories
-  },
-  {
-    label: '分类六',
-    title: '标题六',
-    items: subCategories.slice(0, 18)
-  },
-  {
-    label: '分类七',
-    title: '标题七',
-    items: subCategories
-  }
-])
+<script setup lang="ts">
+import { ref } from 'vue'
 
-onMounted(() => {
-  getRect('.category', true).then((rects) => {
-    if (isArray(rects)) {
-      itemScrollTop.value = rects.map((item) => item.top || 0)
-      scrollTop.value = rects[active.value].top || 0
+const active = ref(1)
+</script>
+```
+
+### 自定义图标
+
+```vue
+<template>
+  <wd-sidebar v-model="active">
+    <wd-sidebar-item :label="'首页'" :value="1">
+      <template #icon>
+        <view class="custom-icon">🏠</view>
+      </template>
+    </wd-sidebar-item>
+    <wd-sidebar-item :label="'分类'" :value="2">
+      <template #icon>
+        <view class="custom-icon">📚</view>
+      </template>
+    </wd-sidebar-item>
+    <wd-sidebar-item :label="'购物车'" :value="3">
+      <template #icon>
+        <view class="custom-icon">🛒</view>
+      </template>
+    </wd-sidebar-item>
+  </wd-sidebar>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const active = ref(1)
+</script>
+
+<style scoped>
+.custom-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+</style>
+```
+
+### 禁用状态
+
+```vue
+<template>
+  <wd-sidebar v-model="active">
+    <wd-sidebar-item :label="'选项1'" :value="1"></wd-sidebar-item>
+    <wd-sidebar-item :label="'选项2'" :value="2" disabled></wd-sidebar-item>
+    <wd-sidebar-item :label="'选项3'" :value="3"></wd-sidebar-item>
+  </wd-sidebar>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const active = ref(1)
+</script>
+```
+
+### 切换前校验
+
+```vue
+<template>
+  <wd-sidebar v-model="active" :before-change="beforeChange">
+    <wd-sidebar-item :label="'选项1'" :value="1"></wd-sidebar-item>
+    <wd-sidebar-item :label="'选项2'" :value="2"></wd-sidebar-item>
+    <wd-sidebar-item :label="'选项3'" :value="3"></wd-sidebar-item>
+  </wd-sidebar>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const active = ref(1)
+
+const beforeChange = (option: { value: number | string, resolve: (pass: boolean) => void }) => {
+  // 模拟异步校验
+  uni.showModal({
+    title: '提示',
+    content: `确定要切换到选项${option.value}吗？`,
+    success: (res) => {
+      option.resolve(res.confirm)
     }
   })
-})
-
-function handleChange({ value }) {
-  active.value = value
-  scrollTop.value = itemScrollTop.value[value]
-}
-function onScroll(e) {
-  const { scrollTop } = e.detail
-  const threshold = 50 // 下一个标题与顶部的距离
-  if (scrollTop < threshold) {
-    active.value = 0
-    return
-  }
-  const index = itemScrollTop.value.findIndex((top) => top > scrollTop && top - scrollTop <= threshold)
-  if (index > -1) {
-    active.value = index
-  }
 }
 </script>
 ```
 
-```css [css]
-.wraper {
-  display: flex;
-  height: calc(100vh - var(--window-top));
-  height: calc(100vh - var(--window-top) - constant(safe-area-inset-bottom));
-  height: calc(100vh - var(--window-top) - env(safe-area-inset-bottom));
-}
+## 样式定制
 
-.content {
-  flex: 1;
-  background: #fff;
-}
+### 自定义根节点样式
+
+使用 `customStyle` 属性可以自定义组件根节点的样式：
+
+```vue
+<wd-sidebar
+  v-model="active"
+  :custom-style="{ backgroundColor: '#f5f7fa', borderRadius: '8px' }"
+>
+  <wd-sidebar-item :label="'选项1'" :value="1"></wd-sidebar-item>
+  <wd-sidebar-item :label="'选项2'" :value="2"></wd-sidebar-item>
+</wd-sidebar>
 ```
 
-:::
+### 自定义根节点类名
 
-## 切换页面用法示例
+使用 `customClass` 属性可以自定义组件根节点的类名：
 
-sidebar 组件在每次切换激活项时，跳转到指定的页面，且无法通过滚动导航到下一个 sidebar 项。
+```vue
+<wd-sidebar
+  v-model="active"
+  custom-class="my-sidebar"
+>
+  <wd-sidebar-item :label="'选项1'" :value="1"></wd-sidebar-item>
+  <wd-sidebar-item :label="'选项2'" :value="2"></wd-sidebar-item>
+</wd-sidebar>
 
-::: details 查看切换页面用法示例
-::: code-group
-
-```html [vue]
-<view class="wraper">
-  <wd-sidebar v-model="active" @change="handleChange">
-    <wd-sidebar-item
-      v-for="(item, index) in categories"
-      :key="index"
-      :value="index"
-      :label="item.label"
-      :icon="item.icon"
-      :disabled="item.disabled"
-    />
-  </wd-sidebar>
-  <view class="content" :style="`transform: translateY(-${active * 100}%)`">
-    <scroll-view
-      v-for="(item, index) in categories"
-      :key="index"
-      class="category"
-      scroll-y
-      scroll-with-animation
-      :show-scrollbar="false"
-      :scroll-top="scrollTop"
-      :throttle="false"
-    >
-      <wd-cell-group :title="item.title" border>
-        <wd-cell v-for="(cell, index) in item.items" :key="index" :title="cell.title" :label="cell.label">
-          <wd-icon name="github-filled" size="24px"></wd-icon>
-        </wd-cell>
-      </wd-cell-group>
-    </scroll-view>
-  </view>
-</view>
+<style scoped>
+:deep(.my-sidebar) {
+  background-color: '#f5f7fa';
+  border-radius: '8px';
+}
+</style>
 ```
 
-```typescript [typescript]
-<script lang="ts" setup>
-import { ref, nextTick } from 'vue'
+### 自定义侧边栏项样式
 
-const active = ref<number>(1)
-const scrollTop = ref<number>(0)
-const subCategories = new Array(24).fill({ title: '标题文字', label: '这是描述这是描述' }, 0, 24)
-const categories = ref([
-  {
-    label: '分类一',
-    title: '标题一',
-    icon: 'thumb-up',
-    items: subCategories,
-    disabled: false
-  },
-  {
-    label: '分类二',
-    title: '标题二',
-    icon: 'thumb-up',
-    items: subCategories,
-    disabled: false
-  },
-  {
-    label: '分类三',
-    title: '标题三',
-    icon: 'thumb-up',
-    items: subCategories.slice(0, 18),
-    disabled: false
-  },
-  {
-    label: '分类四',
-    title: '标题四',
-    icon: 'thumb-up',
-    items: subCategories.slice(0, 21),
-    disabled: false
-  },
-  {
-    label: '分类五',
-    title: '标题五',
-    icon: 'thumb-up',
-    items: subCategories,
-    disabled: false
-  },
-  {
-    label: '分类六',
-    title: '标题六',
-    icon: 'thumb-up',
-    items: subCategories.slice(0, 18),
-    disabled: false
-  },
-  {
-    label: '分类七',
-    title: '标题七',
-    icon: 'thumb-up',
-    items: subCategories,
-    disabled: true
-  }
-])
+使用 `customStyle` 和 `customClass` 属性可以自定义侧边栏项的样式：
 
-function handleChange({ value }) {
-  active.value = value
-  scrollTop.value = -1
-  nextTick(() => {
-    scrollTop.value = 0
-  })
+```vue
+<wd-sidebar v-model="active">
+  <wd-sidebar-item
+    :label="'选项1'"
+    :value="1"
+    :custom-style="{ color: '#3c9cff', fontSize: '16px' }"
+  ></wd-sidebar-item>
+  <wd-sidebar-item
+    :label="'选项2'"
+    :value="2"
+    custom-class="my-sidebar-item"
+  ></wd-sidebar-item>
+</wd-sidebar>
+
+<style scoped>
+:deep(.my-sidebar-item) {
+  color: '#606266';
+  fontSize: '14px';
 }
-</script>
+</style>
 ```
 
-```css [css]
-.wraper {
-  display: flex;
-  height: calc(100vh - var(--window-top));
-  height: calc(100vh - var(--window-top) - constant(safe-area-inset-bottom));
-  height: calc(100vh - var(--window-top) - env(safe-area-inset-bottom));
-  overflow: hidden;
-}
-.content {
-  flex: 1;
-  background: #fff;
-  transition: transform 0.3s ease;
-}
-.category {
-  box-sizing: border-box;
-  height: 100%;
-}
-```
+## 注意事项
 
-:::
+1. **父子组件关系**：`wd-sidebar-item` 必须作为 `wd-sidebar` 的直接子组件使用。
 
-## 自定义图标用法示例
+2. **唯一标识**：每个 `wd-sidebar-item` 必须设置唯一的 `value` 属性。
 
-设置`sidebar-item`的`icon`属性，自定义图标。
+3. **徽标最大值**：徽标默认最大值为 99，超过则显示 "99+"，可通过 `max` 属性自定义。
 
-::: details 自定义图标用法示例
-::: code-group
+4. **禁用状态**：设置 `disabled` 为 `true` 时，点击事件不会触发。
 
-```html [vue]
-<view class="wraper">
-  <wd-sidebar v-model="active" @change="handleChange">
-    <wd-sidebar-item v-for="(item, index) in categories" :key="index" :value="index" :label="item.label" :icon="item.icon" />
-  </wd-sidebar>
-  <scroll-view class="content" scroll-y scroll-with-animation :scroll-top="scrollTop" :throttle="false" @scroll="onScroll">
-    <view v-for="(item, index) in categories" :key="index" class="category">
-      <wd-cell-group :title="item.title" border>
-        <wd-cell v-for="(cell, index) in item.items" :key="index" :title="cell.title" :label="cell.label">
-          <wd-icon name="github-filled" size="24px"></wd-icon>
-        </wd-cell>
-      </wd-cell-group>
-    </view>
-  </scroll-view>
-</view>
-```
+5. **切换前校验**：`beforeChange` 函数接收一个对象参数，包含 `value` 和 `resolve` 两个属性，通过调用 `resolve(true)` 或 `resolve(false)` 来决定是否允许切换。
 
-```typescript [typescript]
-<script lang="ts" setup>
-import { onMounted, ref } from 'vue'
-import { getRect, isArray } from '@/uni_modules/wot-ui-plus/components/common/util'
+6. **图标优先级**：当同时传入 `icon` 属性和 `icon` 插槽时，优先使用插槽内容。
 
-const active = ref<number>(1)
-const scrollTop = ref<number>(0)
-const itemScrollTop = ref<number[]>([])
-
-const subCategories = new Array(24).fill({ title: '标题文字', label: '这是描述这是描述' }, 0, 24)
-const categories = ref([
-  {
-    label: '分类一',
-    title: '标题一',
-    icon: 'thumb-up',
-    items: subCategories
-  },
-  {
-    label: '分类二',
-    title: '标题二',
-    icon: 'qrcode',
-    items: subCategories
-  },
-  {
-    label: '分类三',
-    title: '标题三',
-    icon: 'location',
-    items: subCategories.slice(0, 18)
-  },
-  {
-    label: '分类四',
-    title: '标题四',
-    icon: 'ie',
-    items: subCategories.slice(0, 21)
-  },
-  {
-    label: '分类五',
-    title: '标题五',
-    icon: 'github-filled',
-    items: subCategories
-  },
-  {
-    label: '分类六',
-    title: '标题六',
-    icon: 'chrome',
-    items: subCategories.slice(0, 18)
-  },
-  {
-    label: '分类七',
-    title: '标题七',
-    icon: 'android',
-    items: subCategories
-  }
-])
-
-onMounted(() => {
-  getRect('.category', true).then((rects) => {
-    if (isArray(rects)) {
-      itemScrollTop.value = rects.map((item) => item.top || 0)
-      scrollTop.value = rects[active.value].top || 0
-    }
-  })
-})
-
-function handleChange({ value }) {
-  active.value = value
-  scrollTop.value = itemScrollTop.value[value]
-}
-function onScroll(e) {
-  const { scrollTop } = e.detail
-  const threshold = 50 // 下一个标题与顶部的距离
-  if (scrollTop < threshold) {
-    active.value = 0
-    return
-  }
-  const index = itemScrollTop.value.findIndex((top) => top > scrollTop && top - scrollTop <= threshold)
-  if (index > -1) {
-    active.value = index
-  }
-}
-</script>
-```
-
-```css [css]
-.wraper {
-  display: flex;
-  height: calc(100vh - var(--window-top));
-  height: calc(100vh - var(--window-top) - constant(safe-area-inset-bottom));
-  height: calc(100vh - var(--window-top) - env(safe-area-inset-bottom));
-}
-.content {
-  flex: 1;
-  background: #fff;
-}
-```
-
-:::
-
-## Attributes
-
-| 参数                 | 说明                                                                                                                                  | 类型            | 可选值 | 默认值 | 最低版本 |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | --------------- | ------ | ------ | -------- |
-| modelValue / v-model | 当前导航项的索引                                                                                                                      | string / number | -      | 0      | 0.1.49   |
-| before-change        | 切换导航项前钩子，可以在切换标签前执行特定的逻辑，接收 { value, resolve } 参数，通过 resolve 继续执行，resolve 接收 1 个 boolean 参数 | function        | -      | -      | 1.4.0    |
-
-## Events
-
-| 事件名称 | 说明           | 参数                                       | 最低版本 |
-| -------- | -------------- | ------------------------------------------ | -------- |
-| change   | 选项切换时触发 | `(value: number \| string, label: string)` | 0.1.49   |
-
-## Slots
-
-| name    | 说明       | 参数 | 最低版本 |
-| ------- | ---------- | ---- | -------- |
-| default | 自定义展示 | -    | 0.1.49   |
-
-## 外部样式类
-
-| 类名        | 说明         | 最低版本 |
-| ----------- | ------------ | -------- |
-| customStyle | 自定义样式   | 0.1.49   |
-| customClass | 自定义样式类 | 0.1.49   |
-
-## SidebarItem Attributes
-
-| 参数        | 说明                                                                                     | 类型                     | 可选值 | 默认值 | 最低版本 |
-| ----------- | ---------------------------------------------------------------------------------------- | ------------------------ | ------ | ------ | -------- |
-| label       | 当前选项标题                                                                             | string                   | -      | -      | 0.1.49   |
-| value       | 当前选项的值，唯一标识                                                                   | `number / string`        | -      | -      | 0.1.49   |
-| icon        | 图标                                                                                     | string                   | -      | -      | 0.1.49   |
-| badge       | 徽标属性，徽标显示值                                                                     | `number / string / null` | -      | -      | 0.1.49   |
-| isDot       | 徽标属性，是否点状徽标                                                                   | boolean                  | -      | false  | 0.1.49   |
-| max         | 徽标属性，徽标最大值                                                                     | number                   | -      | 99     | 0.1.49   |
-| disabled    | 是否禁用                                                                                 | boolean                  | -      | false  | 0.1.49   |
-| badge-props | 自定义徽标的属性，传入的对象会被透传给 [Badge 组件的 props](/component/badge#attributes) | BadgeProps               | -      | -      | 0.1.50   |
-
-## SidebarItem Slots
-
-| name | 说明       | 参数 | 最低版本 |
-| ---- | ---------- | ---- | -------- |
-| icon | 自定义图标 | -    | 0.1.49   |
-
-## SidebarItem 外部样式类
-
-| 类名        | 说明         | 最低版本 |
-| ----------- | ------------ | -------- |
-| customStyle | 自定义样式   | 0.1.49   |
-| customClass | 自定义样式类 | 0.1.49   |
+7. **样式隔离**：组件使用了 `styleIsolation: 'shared'`，可以直接覆盖组件内部样式。

@@ -1,159 +1,428 @@
-# Popover 气泡
+# wd-popover 弹出层组件
 
-常用于展示提示信息。
+## 组件概述
 
-## 基本用法
+wd-popover 是一个功能强大的弹出层组件，支持多种放置位置和显示模式，可用于展示提示信息、菜单选项或自定义内容。组件基于 Vue 3 + TypeScript + UniApp 开发，提供了丰富的配置选项和灵活的自定义能力，能够满足各种复杂的弹出层需求。
 
-Popover 的属性与 [Tooltip](/component/tooltip.html) 很类似，因此对于重复属性，请参考 [Tooltip](/component/tooltip.html) 的文档，在此文档中不做详尽解释。
+### 功能特点
 
-因为`uni-app`组件无法监听点击自己以外的地方，为了在点击页面其他地方时，可以自动关闭 `popover` ，建议使用组件库的 `useQueue` hook（会关闭所有 dropmenu、popover、toast、swipeAction、fab），在页面的根元素上监听点击事件的冒泡。
+- 支持 12 种不同的放置位置
+- 提供普通模式和菜单模式两种显示方式
+- 可自定义箭头样式和弹出层样式
+- 支持内容插槽自定义
+- 支持关闭按钮和自动关闭功能
+- 支持通过 v-model 控制显示状态
+- 提供打开和关闭的方法
+- 支持点击外部关闭
+- 跨平台兼容（H5、小程序、App）
 
-:::warning
-如果存在用户手动点击 `popover` 以外某个地方如按钮弹出 `popover` 的场景，则需要在点击的元素（在这里上按钮）加上 click 阻止事件冒泡到根元素上，避免触发 `closeOutside` 把要手动打开的 `popover` 关闭了。
-:::
+### 适用场景
 
-```html
-<view @click="closeOutside">
-  <wd-popover content="这是一段信息。" @change="handleChange">
-    <wd-button>点击展示</wd-button>
-  </wd-popover>
-</view>
+- 展示提示信息
+- 提供操作菜单
+- 显示详细信息
+- 实现下拉菜单
+- 实现气泡提示
+- 其他需要弹出层的场景
+
+## API 参考
+
+### Props
+
+| 名称 | 类型 | 默认值 | 必填 | 描述 |
+|------|------|--------|------|------|
+| customArrow | string | '' | 否 | 自定义箭头样式类名 |
+| customPop | string | '' | 否 | 自定义弹出层样式类名 |
+| visibleArrow | boolean | true | 否 | 是否显示 popover 箭头 |
+| content | string \| Array<Record<string, any>> | - | 否 | 显示的内容，也可以通过 slot#content 传入 |
+| placement | 'top' \| 'top-start' \| 'top-end' \| 'bottom' \| 'bottom-start' \| 'bottom-end' \| 'left' \| 'left-start' \| 'left-end' \| 'right' \| 'right-start' \| 'right-end' | 'bottom' | 否 | 指定 popover 的放置位置 |
+| offset | number | 0 | 否 | 偏移量 |
+| useContentSlot | boolean | false | 否 | 是否使用内容插槽 |
+| disabled | boolean | false | 否 | 是否禁用 popover |
+| showClose | boolean | false | 否 | 是否显示关闭按钮 |
+| modelValue | boolean | false | 否 | 控制 popover 的显示状态 |
+| mode | 'menu' \| 'normal' | 'normal' | 否 | 当前显示的模式，决定内容的展现形式，可选值：normal（普通模式）/ menu（菜单模式） |
+| customStyle | string \| object | - | 否 | 自定义样式 |
+| customClass | string | - | 否 | 自定义类名 |
+
+### Events
+
+| 事件名 | 触发条件 | 参数说明 |
+|--------|----------|----------|
+| update:modelValue | popover 显示状态变化时 | 新的显示状态（boolean） |
+| menuclick | 菜单模式下点击菜单项时 | { item: 点击的菜单项, index: 菜单项索引 } |
+| change | popover 显示状态变化时 | { show: 新的显示状态 } |
+| open | popover 打开时 | - |
+| close | popover 关闭时 | - |
+
+### Methods
+
+| 方法名 | 参数 | 返回值 | 功能说明 |
+|--------|------|--------|----------|
+| open | - | - | 打开 popover |
+| close | - | - | 关闭 popover |
+
+### Slots
+
+| 插槽名 | 作用域变量 | 使用场景说明 |
+|--------|------------|--------------|
+| default | - | 触发 popover 显示的内容 |
+| content | - | 自定义 popover 内容，需要设置 useContentSlot 为 true |
+
+## 使用示例
+
+### 1. 基础用法
+
+```vue
+<template>
+  <view class="demo">
+    <wd-popover
+      v-model="showPopover"
+      content="这是一个简单的弹出层"
+      placement="bottom"
+    >
+      <wd-button type="primary">点击显示弹出层</wd-button>
+    </wd-popover>
+  </view>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const showPopover = ref(false)
+</script>
 ```
 
-```typescript
-import { useQueue } from '@/uni_modules/wot-ui-plus'
+### 2. 菜单模式
 
-const { closeOutside } = useQueue()
-function handleChange({ show }) {
-  console.log(show)
+```vue
+<template>
+  <view class="demo">
+    <wd-popover
+      v-model="showPopover"
+      :content="menuList"
+      mode="menu"
+      placement="bottom-end"
+      @menuclick="onMenuClick"
+    >
+      <wd-button type="primary">点击显示菜单</wd-button>
+    </wd-popover>
+  </view>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const showPopover = ref(false)
+
+const menuList = [
+  { iconClass: 'edit', content: '编辑' },
+  { iconClass: 'delete', content: '删除' },
+  { iconClass: 'share', content: '分享' }
+]
+
+const onMenuClick = ({ item, index }) => {
+  console.log('点击了菜单项：', item, index)
+  // 处理菜单点击事件
 }
+</script>
 ```
 
-## 模式 mode
+### 3. 自定义内容插槽
 
-使用 `mode` 属性控制当前文字提示的展示模式。`mode` 可选参数为 `normal` / `menu`：
+```vue
+<template>
+  <view class="demo">
+    <wd-popover
+      v-model="showPopover"
+      use-content-slot
+      placement="right"
+      show-close
+    >
+      <wd-button type="primary">点击显示自定义内容</wd-button>
+      <template #content>
+        <view class="custom-content">
+          <view class="custom-title">自定义标题</view>
+          <view class="custom-text">这是自定义的弹出层内容，可以包含任何组件和样式。</view>
+          <wd-button type="primary" size="small" @click="showPopover = false">确定</wd-button>
+        </view>
+      </template>
+    </wd-popover>
+  </view>
+</template>
 
-- **normal**（普通文字模式）:
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-  - 当 `mode` 处于默认状态，`content` 属性传入要显示的 `String` 字符串。
+const showPopover = ref(false)
+</script>
 
-- **menu**（列表模式）:
-  - 文字提示框会展示成列表形式，此时 `content` 属性传入 `Array` 类型，数组内对象数据结构如下方列表所示。
-  - 绑定事件 `menuclick`，在选择结束后，执行操作，列表关闭。
-
-列表模式下 `content` 数组内对象的数据结构：
-
-| 键名                                  | 说明   | 类型   | 是否必填 | 最低版本 |
-| ------------------------------------- | ------ | ------ | -------- | -------- |
-| content                               | 选项名 | string | 是       | -        |
-| iconClass（不设置该属性时只展示标题） | 选项值 | string | 否       | -        |
-
-**注意：iconClass 属性值为组件库内部的 icon 图标名。**
-
-```html
-<wd-popover mode="menu" :content="menu" @menuclick="link" @change="handleChange">
-  <wd-button>列表</wd-button>
-</wd-popover>
-```
-
-```typescript
-import { useToast } from '@/uni_modules/wot-ui-plus'
-
-const toast = useToast()
-
-const menu = ref<Array<Record<string, any>>>([
-  {
-    iconClass: 'read',
-    content: '全部标记已读'
-  },
-  {
-    iconClass: 'delete',
-    content: '清空最近会话'
-  },
-  {
-    iconClass: 'detection',
-    content: '消息订阅设置'
-  },
-  {
-    iconClass: 'subscribe',
-    content: '消息异常检测'
+<style lang="scss">
+.custom-content {
+  padding: 16px;
+  width: 200px;
+  
+  .custom-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
   }
-])
-
-function link(e) {
-  toast.show('选择了' + e.item.content)
+  
+  .custom-text {
+    font-size: 14px;
+    color: #606266;
+    margin-bottom: 16px;
+  }
 }
+</style>
 ```
 
-## 嵌套信息
+### 4. 不同放置位置
 
-开启属性 `use-content-slot`，使用插槽 `content`， 可以在 Popover 中嵌套多种类型信息。
-:::warning 注意
-目前使用`content`插槽时，组件内部无法正确获取气泡的宽高，此时设置偏移的`placement`无法生效，例如`bottom-end`。
-:::
+```vue
+<template>
+  <view class="demo">
+    <view class="position-demo">
+      <wd-popover
+        v-model="showTop"
+        content="顶部弹出"
+        placement="top"
+      >
+        <wd-button type="primary">顶部</wd-button>
+      </wd-popover>
+      
+      <wd-popover
+        v-model="showBottom"
+        content="底部弹出"
+        placement="bottom"
+      >
+        <wd-button type="primary">底部</wd-button>
+      </wd-popover>
+      
+      <wd-popover
+        v-model="showLeft"
+        content="左侧弹出"
+        placement="left"
+      >
+        <wd-button type="primary">左侧</wd-button>
+      </wd-popover>
+      
+      <wd-popover
+        v-model="showRight"
+        content="右侧弹出"
+        placement="right"
+      >
+        <wd-button type="primary">右侧</wd-button>
+      </wd-popover>
+    </view>
+  </view>
+</template>
 
-```html
-<wd-popover use-content-slot>
-  <template #content>
-    <view class="pop-content">这是一段自定义样式的内容。</view>
-  </template>
-  <wd-button>点击展示</wd-button>
-</wd-popover>
-```
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-```scss
-.pop-content {
-  /* 必填 开始 */
-  position: relative;
-  z-index: 500;
-  border-radius: 4px;
-  /* 必填 结束 */
-  background: #fff;
-  color: #8268de;
-  font-weight: bolder;
-  padding: 10px;
-  width: 150px;
+const showTop = ref(false)
+const showBottom = ref(false)
+const showLeft = ref(false)
+const showRight = ref(false)
+</script>
+
+<style lang="scss">
+.position-demo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
 }
+</style>
 ```
 
-## Popover Attributes
+### 5. 自定义样式
 
-| 参数          | 说明                                       | 类型                                                         | 可选值                                                                                                                          | 默认值 | 最低版本 |
-| ------------- | ------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
-| v-model       | 手动状态是否可见                           | boolean                                                      | -                                                                                                                               | false  | -        |
-| content       | 显示的内容，也可以通过 `slot#content` 传入 | string/array（当模式为菜单模式时，content 属性格式为 Array） | -                                                                                                                               | -      | -        |
-| mode          | 当前显示的模式，决定内容的展现形式         | string                                                       | normal（普通模式）/ menu（菜单模式）                                                                                            | normal | -        |
-| placement     | popover 的出现位置                         | string                                                       | top / top-start / top-end / bottom / bottom-start / bottom-end / left / left-start / left-end / right / right-start / right-end | bottom | -        |
-| visible-arrow | 是否显示 popover 箭头                      | boolean                                                      | -                                                                                                                               | true   | -        |
-| disabled      | popover 是否可用                           | boolean                                                      | -                                                                                                                               | false  | -        |
-| offset        | 出现位置的偏移量                           | number                                                       | -                                                                                                                               | 0      | -        |
+```vue
+<template>
+  <view class="demo">
+    <wd-popover
+      v-model="showPopover"
+      content="自定义样式的弹出层"
+      placement="bottom"
+      custom-arrow="custom-arrow"
+      custom-pop="custom-pop"
+      :custom-style="{ borderRadius: '8px' }"
+    >
+      <wd-button type="primary">点击显示自定义样式</wd-button>
+    </wd-popover>
+  </view>
+</template>
 
-## Slot
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-| name    | 说明                     | 最低版本 |
-| ------- | ------------------------ | -------- |
-| content | 多行内容或用户自定义样式 | -        |
+const showPopover = ref(false)
+</script>
 
-## Events
+<style lang="scss">
+.custom-arrow {
+  /* 自定义箭头样式 */
+  background-color: #4D80F0;
+}
 
-| 事件名称  | 说明                        | 回调参数          | 最低版本 |
-| --------- | --------------------------- | ----------------- | -------- |
-| open      | 显示时触发                  | -                 | -        |
-| close     | 隐藏时触发                  | -                 | -        |
-| change    | pop 显隐值变化时触发        | -                 | -        |
-| menuclick | menu 模式下点击某一选项触发 | `{ item, index }` | -        |
+.custom-pop {
+  /* 自定义弹出层样式 */
+  background-color: #4D80F0;
+  color: white;
+  padding: 12px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+</style>
+```
 
-## Methods
+## 样式定制指南
 
-| 方法名称 | 说明             | 参数 | 最低版本 |
-| -------- | ---------------- | ---- | -------- |
-| open     | 打开文字提示弹框 | -    | -        |
-| close    | 关闭文字提示弹框 | -    | -        |
+### 1. 使用 customClass 和 customStyle
 
-## Popover 外部样式类
+```vue
+<template>
+  <view class="demo">
+    <wd-popover
+      v-model="showPopover"
+      content="自定义样式"
+      custom-class="custom-popper"
+      :custom-style="{ backgroundColor: '#f5f7fa', border: '1px solid #e4e7ed' }"
+    >
+      <wd-button type="primary">点击显示</wd-button>
+    </wd-popover>
+  </view>
+</template>
 
-| 类名         | 说明         | 最低版本 |
-| ------------ | ------------ | -------- |
-| custom-class | 根节点样式   | -        |
-| custom-arrow | 尖角样式     | -        |
-| custom-pop   | 文字提示样式 | -        |
+<style lang="scss">
+.custom-popper {
+  // 自定义类样式
+  .wd-popover__inner {
+    font-size: 14px;
+    color: #303133;
+  }
+}
+</style>
+```
+
+### 2. 自定义箭头和弹出层
+
+```vue
+<template>
+  <view class="demo">
+    <wd-popover
+      v-model="showPopover"
+      content="自定义箭头和弹出层"
+      custom-arrow="my-arrow"
+      custom-pop="my-pop"
+    >
+      <wd-button type="primary">点击显示</wd-button>
+    </wd-popover>
+  </view>
+</template>
+
+<style lang="scss">
+.my-arrow {
+  // 自定义箭头样式
+  width: 10px;
+  height: 10px;
+  background-color: #4D80F0;
+  transform: rotate(45deg);
+}
+
+.my-pop {
+  // 自定义弹出层样式
+  background-color: #4D80F0;
+  color: white;
+  border-radius: 8px;
+  padding: 12px;
+}
+</style>
+```
+
+### 3. 自定义菜单样式
+
+```vue
+<template>
+  <view class="demo">
+    <wd-popover
+      v-model="showPopover"
+      :content="menuList"
+      mode="menu"
+      custom-pop="custom-menu"
+    >
+      <wd-button type="primary">点击显示菜单</wd-button>
+    </wd-popover>
+  </view>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const showPopover = ref(false)
+
+const menuList = [
+  { iconClass: 'edit', content: '编辑' },
+  { iconClass: 'delete', content: '删除' }
+]
+</script>
+
+<style lang="scss">
+.custom-menu {
+  // 自定义菜单样式
+  .wd-popover__menu-inner {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    &:active {
+      background-color: #f5f7fa;
+    }
+  }
+  
+  .wd-popover__icon {
+    margin-right: 8px;
+    color: #4D80F0;
+  }
+}
+</style>
+```
+
+## 注意事项
+
+1. **内容类型要求**：
+   - 普通模式下，content 属性必须是字符串类型
+   - 菜单模式下，content 属性必须是对象数组类型
+
+2. **放置位置**：
+   - 支持 12 种不同的放置位置
+   - 组件会自动调整位置，确保在可视区域内显示
+
+3. **性能优化**：
+   - 避免在弹出层中放置过多复杂内容
+   - 频繁显示/隐藏的弹出层，建议使用 v-if 而非 v-show
+
+4. **跨平台兼容**：
+   - 组件在不同平台上的表现可能略有差异
+   - 特别是在定位和动画效果方面
+
+5. **关闭机制**：
+   - 点击外部区域会自动关闭弹出层
+   - 可以通过 showClose 属性显示关闭按钮
+   - 支持通过 close 方法手动关闭
+
+6. **插槽使用**：
+   - 使用内容插槽时，需要设置 useContentSlot 为 true
+   - 插槽内容的样式需要自行管理
+
+7. **箭头显示**：
+   - 可以通过 visibleArrow 属性控制箭头的显示
+   - 箭头样式可以通过 customArrow 属性自定义
+
+8. **菜单模式**：
+   - 菜单模式下，content 数组中的每个对象可以包含 iconClass 和 content 属性
+   - iconClass 用于显示图标，content 用于显示文本

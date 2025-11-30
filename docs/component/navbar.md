@@ -1,189 +1,337 @@
-# Navbar 导航栏
+# wd-navbar 导航栏组件
 
-为页面提供导航功能，常用于页面顶部。
+## 组件概述
 
-::: tip 常见问题
+wd-navbar 是一个用于页面顶部导航的组件，提供了标题、左侧按钮、右侧按钮等常见导航元素，支持自定义样式和交互。该组件适配不同平台，支持固定定位、安全区域适配等特性，是构建移动端应用导航栏的核心组件。
 
-**右图标被小程序胶囊挡住？**
+### 功能特点
+- 支持自定义标题、左侧按钮、右侧按钮
+- 支持左侧箭头显示
+- 支持固定到顶部
+- 支持占位元素生成
+- 支持安全区域适配
+- 支持自定义边框显示
+- 支持禁用左侧/右侧按钮
+- 提供丰富的插槽，支持完全自定义
 
-在小程序平台开启自定义顶部导航时，右上角会固定显示胶囊，所以此时右侧插槽及选项是不建议使用。
+### 适用场景
+- 页面顶部导航栏
+- 应用标题栏
+- 带返回按钮的页面导航
+- 需要自定义导航栏的场景
 
-**如何设置为背景透明？**
+## API 参考
 
-通过 `custom-style` 设置组件 `background-color` 为 `transparent`。
+### Props
 
-```html
-<wd-navbar title="标题" custom-style="background-color: transparent !important;"></wd-navbar>
-```
+| 属性名 | 类型 | 默认值 | 必填 | 描述 |
+| --- | --- | --- | --- | --- |
+| title | string |  | 否 | 标题文字 |
+| leftText | string |  | 否 | 左侧文案 |
+| rightText | string |  | 否 | 右侧文案 |
+| leftArrow | boolean | false | 否 | 是否显示左侧箭头 |
+| bordered | boolean | true | 否 | 是否显示下边框 |
+| fixed | boolean | false | 否 | 是否固定到顶部 |
+| placeholder | boolean | false | 否 | 固定在顶部时，是否在标签位置生成一个等高的占位元素 |
+| zIndex | number | 500 | 否 | 导航栏 z-index |
+| safeAreaInsetTop | boolean | false | 否 | 是否开启顶部安全区适配 |
+| leftDisabled | boolean | false | 否 | 是否禁用左侧按钮，禁用时透明度降低，且无法点击 |
+| rightDisabled | boolean | false | 否 | 是否禁用右侧按钮，禁用时透明度降低，且无法点击 |
+| customStyle | string |  | 否 | 自定义根节点样式，如 'margin: 10px; color: red;' |
+| customClass | string |  | 否 | 自定义根节点样式类，如 'custom-class1 custom-class2' |
 
-**组件会被 `video` 覆盖？**
+### Events
 
-`video`为原生组件，层级较高，目前无法遮盖，需要具体平台具体分析。
-:::
+| 事件名 | 触发条件 | 参数说明 |
+| --- | --- | --- |
+| click-left | 点击左侧按钮时触发 | 无 |
+| click-right | 点击右侧按钮时触发 | 无 |
 
-## 基础用法
+### Methods
 
-通过 `title` 属性设置导航栏标题。
+该组件不对外暴露任何方法。
 
-```html
-<wd-navbar title="标题"></wd-navbar>
-```
+### Slots
 
-## 返回上级
+| 插槽名 | 作用域变量 | 使用说明 |
+| --- | --- | --- |
+| left | - | 左侧自定义内容，替换默认的左侧按钮 |
+| title | - | 标题自定义内容，替换默认的标题文字 |
+| right | - | 右侧自定义内容，替换默认的右侧按钮 |
+| capsule | - | 胶囊区域自定义内容，优先级高于左侧按钮 |
 
-在导航栏实现返回上级功能。
+## 使用示例
 
-```html
-<wd-navbar title="标题" left-text="返回" left-arrow @click-left="handleClickLeft"></wd-navbar>
-```
+### 1. 基础用法
 
-```ts
-function handleClickLeft() {
+```vue
+<template>
+  <view>
+    <wd-navbar title="基础导航栏" left-arrow @click-left="onClickLeft" />
+  </view>
+</template>
+
+<script lang="ts" setup>
+// 左侧按钮点击事件
+const onClickLeft = () => {
+  console.log('点击了左侧按钮')
+  // 通常用于返回上一页
   uni.navigateBack()
 }
+</script>
 ```
 
-## 右侧按钮
+### 2. 带右侧按钮的导航栏
 
-在导航栏右侧添加可点击的按钮。
+```vue
+<template>
+  <view>
+    <wd-navbar 
+      title="带右侧按钮" 
+      left-arrow 
+      right-text="右侧" 
+      @click-left="onClickLeft" 
+      @click-right="onClickRight" 
+    />
+  </view>
+</template>
 
-```html
-<wd-toast></wd-toast>
-
-<wd-navbar title="标题" left-text="返回" left-arrow right-text="按钮" @click-left="handleClickLeft" @click-right="handleClickRight"></wd-navbar>
-```
-
-```ts
-import { useToast } from '@/uni_modules/wot-ui-plus'
-
-const { show: showToast } = useToast()
-
-function handleClickRight() {
-  showToast('按钮')
-}
-```
-
-## 使用插槽
-
-可以通过 `left` 和 `right` 插槽自定义导航栏两侧的内容。
-
-```html
-<wd-navbar title="标题" left-text="返回" left-arrow>
-  <template #right>
-    <wd-icon name="search" size="18" />
-  </template>
-</wd-navbar>
-```
-
-## 固定在顶部
-
-通过 `fixed` 可以设置导航条固定在页面顶部，通过设置 `placeholder` 可以在顶部生成占位空间，通过设置 `safeAreaInsetTop` 可以开启顶部安全区的适配。
-
-```html
-<wd-navbar fixed placeholder title="Navbar 导航条" left-arrow safeAreaInsetTop></wd-navbar>
-```
-
-## 禁用按钮
-
-通过 `left-disabled` 或 `right-disabled` 属性来禁用两侧的按钮。按钮被禁用时透明度降低，且无法点击。
-
-```html
-<wd-navbar title="标题" left-text="返回" right-text="按钮" left-arrow left-disabled right-disabled></wd-navbar>
-```
-
-## 胶囊样式
-
-通过 `capsule` 插槽和 `navbar-capsule` 组件定制返回胶囊。
-
-```html
-<wd-navbar title="标题" left-text="返回" right-text="设置" left-arrow>
-  <template #capsule>
-    <wd-navbar-capsule @back="handleBack" @back-home="handleBackHome" />
-  </template>
-</wd-navbar>
-```
-
-```ts
-function handleBack() {
-  uni.navigateBack({})
+<script lang="ts" setup>
+// 左侧按钮点击事件
+const onClickLeft = () => {
+  uni.navigateBack()
 }
 
-function handleBackHome() {
-  uni.reLaunch({ url: '/pages/index/Index' })
+// 右侧按钮点击事件
+const onClickRight = () => {
+  console.log('点击了右侧按钮')
+  // 执行右侧按钮操作
 }
+</script>
 ```
 
-## 带搜索栏
+### 3. 固定到顶部
 
-通过 `title` 插槽，自定义标题。
-
-```html
-<wd-navbar left-text="返回" right-text="设置" left-arrow>
-  <template #title>
-    <view class="search-box">
-      <wd-search v-model="keyword" hide-cancel placeholder-left></wd-search>
+```vue
+<template>
+  <view>
+    <wd-navbar 
+      title="固定导航栏" 
+      left-arrow 
+      fixed 
+      placeholder 
+      @click-left="onClickLeft" 
+    />
+    <!-- 页面内容 -->
+    <view class="page-content">
+      <text>这是页面内容</text>
     </view>
-  </template>
-</wd-navbar>
+  </view>
+</template>
+
+<script lang="ts" setup>
+// 左侧按钮点击事件
+const onClickLeft = () => {
+  uni.navigateBack()
+}
+</script>
+
+<style scoped>
+.page-content {
+  padding: 20rpx;
+  height: 2000rpx; /* 模拟长页面 */
+  background-color: #f5f5f5;
+}
+</style>
 ```
 
-```scss
-.search-box {
+### 4. 自定义内容
+
+```vue
+<template>
+  <view>
+    <wd-navbar 
+      left-arrow 
+      @click-left="onClickLeft" 
+      @click-right="onClickRight" 
+    >
+      <!-- 自定义标题 -->
+      <template #title>
+        <view class="custom-title">
+          <wd-icon name="home" size="24" color="#4D80F0" />
+          <text class="title-text">自定义标题</text>
+        </view>
+      </template>
+      <!-- 自定义右侧内容 -->
+      <template #right>
+        <view class="custom-right">
+          <wd-icon name="search" size="24" color="#666" />
+          <wd-icon name="more" size="24" color="#666" style="margin-left: 20rpx;" />
+        </view>
+      </template>
+    </wd-navbar>
+  </view>
+</template>
+
+<script lang="ts" setup>
+// 左侧按钮点击事件
+const onClickLeft = () => {
+  uni.navigateBack()
+}
+
+// 右侧按钮点击事件
+const onClickRight = () => {
+  console.log('点击了右侧自定义内容')
+}
+</script>
+
+<style scoped>
+.custom-title {
   display: flex;
-  height: 100%;
   align-items: center;
-  --wot-search-padding: 0;
-  --wot-search-side-padding: 0;
-  :deep() {
-    .wd-search {
-      background: transparent;
-    }
+  gap: 10rpx;
+}
+
+.title-text {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.custom-right {
+  display: flex;
+  align-items: center;
+}
+</style>
+```
+
+### 5. 安全区域适配
+
+```vue
+<template>
+  <view>
+    <wd-navbar 
+      title="安全区域适配" 
+      left-arrow 
+      safe-area-inset-top 
+      @click-left="onClickLeft" 
+    />
+  </view>
+</template>
+
+<script lang="ts" setup>
+// 左侧按钮点击事件
+const onClickLeft = () => {
+  uni.navigateBack()
+}
+</script>
+```
+
+## 样式定制指南
+
+### 1. 使用 customStyle 和 customClass
+
+通过 `customStyle` 和 `customClass` 可以自定义组件的根节点样式：
+
+```vue
+<wd-navbar 
+  title="自定义样式" 
+  left-arrow 
+  custom-style="background-color: #4D80F0; color: #fff;" 
+  custom-class="my-navbar" 
+  @click-left="onClickLeft" 
+/>
+
+<style>
+.my-navbar {
+  /* 自定义样式 */
+  border-radius: 0 0 20rpx 20rpx;
+}
+</style>
+```
+
+### 2. 覆盖组件内部样式
+
+可以通过深度选择器覆盖组件内部样式：
+
+```vue
+<wd-navbar 
+  title="覆盖内部样式" 
+  left-arrow 
+  custom-class="my-navbar" 
+  @click-left="onClickLeft" 
+/>
+
+<style scoped>
+.my-navbar {
+  /* 自定义标题样式 */
+  :deep(.wd-navbar__title) {
+    color: #4D80F0;
+    font-size: 36rpx;
+    font-weight: 600;
+  }
+  
+  /* 自定义左侧按钮样式 */
+  :deep(.wd-navbar__left) {
+    color: #4D80F0;
+  }
+  
+  /* 自定义箭头样式 */
+  :deep(.wd-navbar__arrow) {
+    color: #4D80F0;
   }
 }
+</style>
 ```
 
-## Navbar Attributes
+### 3. 自定义按钮样式
 
-| 参数             | 说明                                           | 类型    | 可选值      | 默认值 | 最低版本 |
-| ---------------- | ---------------------------------------------- | ------- | ----------- | ------ | -------- |
-| title            | 卡片标题                                       | string  | -           | ''     | 0.1.33   |
-| leftText         | 左侧文案                                       | string  | -           | ''     | 0.1.33   |
-| rightText        | 右侧文案                                       | string  | -           | ''     | 0.1.33   |
-| leftArrow        | 显示左侧箭头                                   | boolean | true, false | false  | 0.1.33   |
-| bordered         | 显示下边框                                     | boolean | true, false | true   | 0.1.33   |
-| fixed            | 固定到顶部                                     | boolean | true, false | false  | 0.1.33   |
-| placeholder      | 固定在顶部时，在标签位置生成一个等高的占位元素 | boolean | true, false | false  | 0.1.33   |
-| zIndex           | 导航栏 z-index                                 | number  | -           | 1      | 0.1.33   |
-| safeAreaInsetTop | 开启顶部安全区适配                             | boolean | true, false | false  | 0.1.33   |
-| leftDisabled     | 禁用左侧按钮，禁用时透明度降低，且无法点击     | boolean | true, false | false  | 0.1.33   |
-| rightDisabled    | 禁用右侧按钮，禁用时透明度降低，且无法点击     | boolean | true, false | false  | 0.1.33   |
+```vue
+<wd-navbar 
+  title="自定义按钮" 
+  left-arrow 
+  right-text="保存" 
+  @click-left="onClickLeft" 
+  @click-right="onClickRight" 
+>
+  <template #right>
+    <wd-button size="small" type="primary" @click.stop="onClickRight">保存</wd-button>
+  </template>
+</wd-navbar>
+```
 
-## Navbar Events
+## 注意事项
 
-| 事件名称    | 说明               | 参数 | 最低版本 |
-| ----------- | ------------------ | ---- | -------- |
-| click-left  | 点击左侧按钮时触发 | -    | 0.1.33   |
-| click-right | 点击右侧按钮时触发 | -    | 0.1.33   |
+### 1. 固定定位
+- 当设置 `fixed: true` 时，导航栏会固定在页面顶部
+- 建议同时设置 `placeholder: true`，生成一个等高的占位元素，避免页面内容上移
+- 可以通过 `zIndex` 属性调整导航栏的层级
 
-## NavbarCapsule Events
+### 2. 安全区域适配
+- 在刘海屏等设备上，建议开启 `safeAreaInsetTop: true`，适配顶部安全区域
+- 开启后，导航栏会自动添加顶部内边距，避免内容被刘海遮挡
 
-| 事件名称  | 说明                   | 参数 | 最低版本 |
-| --------- | ---------------------- | ---- | -------- |
-| back      | 点击返回按钮时触发     | -    | 0.1.33   |
-| back-home | 点击返回首页按钮时触发 | -    | 0.1.33   |
+### 3. 事件处理
+- 左侧和右侧按钮的点击事件分别通过 `click-left` 和 `click-right` 事件触发
+- 当使用自定义插槽时，需要在插槽内容中手动处理点击事件
+- 可以通过 `leftDisabled` 和 `rightDisabled` 属性禁用左侧/右侧按钮
 
-## Navbar Slot
+### 4. 自定义内容
+- 提供了 `left`、`title`、`right` 和 `capsule` 四个插槽，支持完全自定义导航栏内容
+- `capsule` 插槽优先级高于左侧按钮，用于实现胶囊式导航
+- 自定义内容时，建议保持导航栏高度一致，避免布局错乱
 
-| 名称    | 说明                                    | 最低版本 |
-| ------- | --------------------------------------- | -------- |
-| capsule | 自定义胶囊（当存在胶囊时，left 不生效） | 0.1.33   |
-| left    | 左侧内容                                | 0.1.33   |
-| title   | 标题内容                                | 0.1.33   |
-| right   | 右侧内容                                | 0.1.33   |
+### 5. 常见问题解决方案
+- **问题**：导航栏固定后，页面内容被遮挡
+  **解决方案**：设置 `placeholder: true`，生成占位元素
 
-## 外部样式类
+- **问题**：在刘海屏设备上，导航栏内容被遮挡
+  **解决方案**：开启 `safeAreaInsetTop: true`，适配顶部安全区域
 
-| 类名         | 说明         | 最低版本 |
-| ------------ | ------------ | -------- |
-| custom-class | 根节点样式类 | 0.1.33   |
-| custom-style | 根节点样式   | 0.1.33   |
+- **问题**：自定义右侧内容后，点击事件不触发
+  **解决方案**：在自定义内容中手动处理点击事件，或使用 `@click.stop` 阻止事件冒泡
+
+### 6. 性能优化
+- 避免在导航栏中放置过于复杂的组件或大量数据
+- 合理使用条件渲染，减少不必要的DOM元素
+- 固定导航栏时，建议开启 `placeholder`，避免页面重排

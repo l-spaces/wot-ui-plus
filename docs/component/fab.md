@@ -1,141 +1,249 @@
-# Fab 悬浮按钮
+# 悬浮操作按钮组件（wd-fab）
 
-悬浮动作按钮组件，按下可显示一组动作按钮。
+## 组件概述
 
-:::warning
-因为`uni-app`组件无法监听点击自己以外的地方，为了在点击页面其他地方时，可以自动关闭 `fab` ，建议使用组件库的 `useQueue` hook（会关闭所有 dropmenu、popover、toast、swipeAction、fab），在页面的根元素上监听点击事件的冒泡。
+wd-fab 是一个悬浮操作按钮组件，用于在页面中展示可展开的悬浮按钮，支持多种位置、方向和样式配置。该组件基于 UniApp 开发，支持多平台使用，提供了丰富的配置选项，可自定义按钮大小、位置、方向、样式等，适用于各种需要悬浮操作按钮的场景。
 
-如果存在用户手动点击 `fab` 以外某个地方如按钮滑出 `fab` 的场景，则需要在点击的元素（在这里是按钮）加上 `click.stop=""` 阻止事件冒泡到根元素上，避免触发 `closeOutside`把要手动打开的 `fab` 关闭了。
-:::
+### 适用场景
 
-## 基本用法
+- 页面中的主要操作入口
+- 聊天应用中的发送消息按钮
+- 图片浏览应用中的分享按钮
+- 任何需要悬浮操作按钮的场景
 
-通过`type`设置悬浮按钮触发器的类型，`position`设置悬浮按钮触发器的位置，`direction`设置动作按钮的打开方向，`disabled`设置悬浮按钮是否禁用。
+## API 参考
 
-```html
-<wd-fab :disabled="disabled" :type="type" :position="position" :direction="direction">
-  <wd-button @click="showToast('一键三连')" :disabled="disabled" custom-class="custom-button" type="primary" round>
-    <wd-icon name="github-filled" size="22px"></wd-icon>
-  </wd-button>
-  <wd-button @click="showToast('我要收藏')" :disabled="disabled" custom-class="custom-button" type="success" round>
-    <wd-icon name="star" size="22px"></wd-icon>
-  </wd-button>
+### Props
 
-  <wd-button @click="showToast('我要投币')" :disabled="disabled" custom-class="custom-button" type="error" round>
-    <wd-icon name="money-circle" size="22px"></wd-icon>
-  </wd-button>
-  <wd-button @click="showToast('我要点赞')" :disabled="disabled" custom-class="custom-button" type="warning" round>
-    <wd-icon name="thumb-up" size="22px"></wd-icon>
-  </wd-button>
-</wd-fab>
+| 属性名 | 类型 | 默认值 | 必填 | 描述 |
+| --- | --- | --- | --- | --- |
+| active | boolean | false | 否 | 是否激活 |
+| type | string | 'primary' | 否 | 类型，可选值为 'default'、'primary'、'info'、'success'、'warning'、'error' |
+| size | number | 50 | 否 | 悬浮按钮大小，单位为像素 |
+| position | string | 'right-bottom' | 否 | 悬浮按钮位置，可选值为 'left-top'、'right-top'、'left-bottom'、'right-bottom'、'left-center'、'right-center'、'top-center'、'bottom-center' |
+| direction | string | 'top' | 否 | 悬浮按钮菜单弹出方向，可选值为 'top'、'right'、'bottom'、'left' |
+| disabled | boolean | false | 否 | 是否禁用 |
+| inactiveIcon | string | 'add' | 否 | 悬浮按钮未展开时的图标 |
+| activeIcon | string | 'close' | 否 | 悬浮按钮展开时的图标 |
+| zIndex | number | 99 | 否 | 自定义悬浮按钮层级 |
+| draggable | boolean | false | 否 | 是否可拖动 |
+| gap | object | {} | 否 | 自定义悬浮按钮菜单与按钮之间的间距，单位为像素 |
+| expandable | boolean | true | 否 | 用于控制点击时是否展开菜单 |
+| customStyle | string | '' | 否 | 自定义根节点样式，如 'margin: 10px; color: red;' |
+| customClass | string | '' | 否 | 自定义根节点样式类，如 'custom-class1 custom-class2' |
+
+### Events
+
+| 事件名 | 触发条件 | 参数说明 |
+| --- | --- | --- |
+| update:active | 激活状态变化时触发 | value: boolean - 激活状态 |
+| click | 点击悬浮按钮时触发（仅当 expandable 为 false 时触发） | 无 |
+
+### Methods
+
+| 方法名 | 参数 | 返回值 | 功能说明 |
+| --- | --- | --- | --- |
+| open | 无 | 无 | 展开菜单 |
+| close | 无 | 无 | 收起菜单 |
+
+### Slots
+
+| 插槽名 | 作用域变量 | 描述 |
+| --- | --- | --- |
+| default | 无 | 默认插槽，用于放置悬浮按钮的菜单内容 |
+| trigger | 无 | 自定义触发器插槽，用于自定义悬浮按钮的外观 |
+
+## 使用示例
+
+### 基础用法
+
+```vue
+<template>
+  <wd-fab>
+    <wd-button type="primary" size="small" round custom-class="wd-fab__item">
+      <wd-icon name="edit" />
+    </wd-button>
+    <wd-button type="success" size="small" round custom-class="wd-fab__item">
+      <wd-icon name="share" />
+    </wd-button>
+    <wd-button type="warning" size="small" round custom-class="wd-fab__item">
+      <wd-icon name="delete" />
+    </wd-button>
+  </wd-fab>
+</template>
 ```
 
-```ts
-import { useToast } from '@/uni_modules/wot-ui-plus'
-const { show: showToast } = useToast()
-const type = ref<'primary' | 'success' | 'info' | 'warning' | 'error' | 'default'>('primary')
-const position = ref<'left-top' | 'right-top' | 'left-bottom' | 'right-bottom' | 'left-center' | 'right-center' | 'top-center' | 'bottom-center'>(
-  'left-bottom'
-)
-const direction = ref<'top' | 'right' | 'bottom' | 'left'>('top')
-const disabled = ref<boolean>(false)
+### 自定义位置和方向
+
+```vue
+<template>
+  <wd-fab
+    position="left-bottom"
+    direction="right"
+    type="success"
+  >
+    <wd-button type="success" size="small" round custom-class="wd-fab__item">
+      <wd-icon name="edit" />
+    </wd-button>
+    <wd-button type="success" size="small" round custom-class="wd-fab__item">
+      <wd-icon name="share" />
+    </wd-button>
+  </wd-fab>
+</template>
 ```
 
-```scss
-:deep(.custom-button) {
-  min-width: auto !important;
-  box-sizing: border-box;
-  width: 32px !important;
-  height: 32px !important;
-  border-radius: 16px !important;
-  margin: 8rpx;
+### 可拖动
+
+```vue
+<template>
+  <wd-fab
+    draggable
+    type="info"
+  >
+    <wd-button type="info" size="small" round custom-class="wd-fab__item">
+      <wd-icon name="edit" />
+    </wd-button>
+    <wd-button type="info" size="small" round custom-class="wd-fab__item">
+      <wd-icon name="share" />
+    </wd-button>
+  </wd-fab>
+</template>
+```
+
+### 自定义触发器
+
+```vue
+<template>
+  <wd-fab>
+    <template #trigger>
+      <view class="custom-trigger">
+        <wd-icon name="add" size="24" color="#fff" />
+      </view>
+    </template>
+    <wd-button type="primary" size="small" round custom-class="wd-fab__item">
+      <wd-icon name="edit" />
+    </wd-button>
+    <wd-button type="success" size="small" round custom-class="wd-fab__item">
+      <wd-icon name="share" />
+    </wd-button>
+  </wd-fab>
+</template>
+
+<style scoped>
+.custom-trigger {
+  width: 50px;
+  height: 50px;
+  background-color: #3c9cff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
-
-:deep(.custom-radio) {
-  height: 32px !important;
-  line-height: 32px !important;
-}
+</style>
 ```
 
-## 动作菜单展开/收起
+### 非展开模式
 
-通过`v-model:active`控制动作按钮菜单的展开/收起
+```vue
+<template>
+  <wd-fab
+    :expandable="false"
+    @click="handleClick"
+    type="warning"
+  />
+</template>
 
-```html
-<wd-fab v-model:active="active"></wd-fab>
-```
-
-```ts
-const active = ref<boolean>(false)
-```
-
-## 可拖动按钮
-
-```html
-<wd-fab :draggable="true"></wd-fab>
-```
-
-:::warning
-开启拖动后`direction`属性将失效，会根据拖动后的位置自动计算弹出方向。拖动完成后按钮将会自动吸边。
-:::
-
-## 自定义触发器
-
-通过`trigger`插槽自定义触发器，`expandable`控制点击触发器是否展开/收起动作按钮菜单。
-
-```html
-<wd-fab position="left-bottom" :expandable="false">
-  <template #trigger>
-    <wd-button @click="handleClick" icon="share" type="error">分享给朋友</wd-button>
-  </template>
-</wd-fab>
-```
-
-```ts
+<script lang="ts" setup>
 const handleClick = () => {
-  console.log('点击了')
+  console.log('点击了悬浮按钮')
 }
+</script>
 ```
 
-## Attributes
+## 样式定制
 
-| 参数           | 说明                                                  | 类型         | 可选值                                                                                                                                                 | 默认值                                         | 最低版本 |
-| -------------- | ----------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------- | -------- |
-| v-model:active | 是否激活                                              | boolean      | -                                                                                                                                                      | false                                          | 0.1.57   |
-| type           | 类型                                                  | FabType      | 'primary' &#124; 'success' &#124; 'info' &#124; 'warning' &#124; 'error' &#124; 'default'                                                              | 'primary'                                      | 0.1.57   |
-| position       | 悬浮按钮位置                                          | FabPosition  | 'left-top' &#124; 'right-top' &#124; 'left-bottom' &#124; 'right-bottom' &#124; left-center &#124; right-center &#124; top-center &#124; bottom-center | 'right-bottom'                                 | 0.1.57   |
-| draggable      | 按钮能否拖动                                          | boolean      |                                                                                                                                                        | false                                          | 1.2.19   |
-| direction      | 悬浮按钮菜单弹出方向                                  | FabDirection | 'top' &#124; 'right' &#124; 'bottom' &#124; 'left'                                                                                                     | 'top'                                          | 0.1.57   |
-| disabled       | 是否禁用                                              | boolean      | -                                                                                                                                                      | false                                          | 0.1.57   |
-| inactiveIcon   | 悬浮按钮未展开时的图标                                | string       | -                                                                                                                                                      | 'add'                                          | 0.1.57   |
-| activeIcon     | 悬浮按钮展开时的图标                                  | string       | -                                                                                                                                                      | 'close'                                        | 0.1.57   |
-| zIndex         | 自定义悬浮按钮层级                                    | number       | -                                                                                                                                                      | 99                                             | 0.1.57   |
-| gap            | 自定义悬浮按钮与可视区域边缘的间距                    | FabGap       | -                                                                                                                                                      | \{ top: 16, left: 16, right: 16, bottom: 16 \} | 1.2.26   |
-| custom-style   | 自定义样式                                            | string       | -                                                                                                                                                      | ''                                             | 0.1.57   |
-| expandable     | 用于控制点击时是否展开菜单，设置为 false 时触发 click | boolean      | -                                                                                                                                                      | true                                           | 1.3.11   |
+### 通过 customStyle 自定义样式
 
-## Events
+```vue
+<template>
+  <wd-fab
+    custom-style="box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);"
+    type="error"
+  >
+    <wd-button type="error" size="small" round custom-class="wd-fab__item">
+      <wd-icon name="edit" />
+    </wd-button>
+    <wd-button type="error" size="small" round custom-class="wd-fab__item">
+      <wd-icon name="share" />
+    </wd-button>
+  </wd-fab>
+</template>
+```
 
-| 事件名称 | 说明                                         | 参数 | 最低版本 |
-| -------- | -------------------------------------------- | ---- | -------- |
-| click    | expandable 设置为 false 时，点击悬浮按钮触发 | —    | 1.3.11   |
+### 通过 customClass 自定义样式
 
-## Methods
+```vue
+<template>
+  <wd-fab
+    custom-class="custom-fab"
+    type="primary"
+  >
+    <wd-button type="primary" size="small" round custom-class="wd-fab__item">
+      <wd-icon name="edit" />
+    </wd-button>
+    <wd-button type="primary" size="small" round custom-class="wd-fab__item">
+      <wd-icon name="share" />
+    </wd-button>
+  </wd-fab>
+</template>
 
-| 方法名 | 说明     | 参数 | 最低版本 |
-| ------ | -------- | ---- | -------- |
-| open   | 展开菜单 | -    | 0.1.57   |
-| close  | 收起菜单 | -    | 0.1.57   |
+<style scoped>
+.custom-fab {
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
+}
 
-## Slot
+/* 自定义菜单项样式 */
+.custom-fab .wd-fab__item {
+  margin: 8px 0;
+}
+</style>
+```
 
-| name    | 说明                                                           | 最低版本 |
-| ------- | -------------------------------------------------------------- | -------- |
-| default | 动作按钮，通常放置多个按钮                                     | 0.1.57   |
-| trigger | 触发器插槽，用于自定义点击按钮，使用此插槽时组件不会抛出 click | 1.3.11   |
+## 注意事项
 
-## 外部样式类
+1. **性能优化**：
+   - 当页面中有多个悬浮按钮时，建议合理设置 zIndex 属性，避免层级冲突
+   - 避免在悬浮按钮中放置过多的菜单项，影响页面性能
 
-| 类名         | 说明         | 最低版本 |
-| ------------ | ------------ | -------- |
-| custom-class | 自定义样式类 | 0.1.57   |
+2. **布局注意事项**：
+   - 当设置 draggable 为 true 时，用户可拖动按钮调整位置
+   - 拖动结束后，按钮会自动吸附到屏幕左侧或右侧
+
+3. **跨平台兼容性**：
+   - 不同平台的触摸事件处理可能存在差异，需注意测试
+   - 不同平台的阴影效果可能存在差异，需注意测试
+
+4. **样式定制**：
+   - 组件提供了丰富的样式属性，可直接通过 props 自定义组件外观
+   - 也可通过 `customStyle` 和 `customClass` 进行更灵活的样式定制
+   - 建议使用主题变量，确保组件样式与项目主题保持一致
+
+5. **事件处理**：
+   - 当 `expandable` 为 `true` 时，点击按钮会切换激活状态，触发 `update:active` 事件
+   - 当 `expandable` 为 `false` 时，点击按钮会触发 `click` 事件
+
+6. **方法调用**：
+   - `open` 方法用于展开菜单
+   - `close` 方法用于收起菜单
+   - 方法调用需通过 ref 获取组件实例，调用组件的方法
+
+7. **自定义触发器**：
+   - 当使用 `trigger` 插槽自定义触发器时，需确保触发器的尺寸与 `size` 属性设置的尺寸一致
+   - 自定义触发器时，需自行处理点击事件
+
+8. **菜单项样式**：
+   - 建议为菜单项添加 `wd-fab__item` 类名，以获得更好的样式效果
+   - 可通过自定义样式调整菜单项的间距、大小等
+
+

@@ -71,20 +71,32 @@ export default defineConfig({
             link: '/component/button'
           },
           {
-            text: '导航组件',
-            link: '/component/pagination'
+            text: '展示组件',
+            link: '/component/icon'
           },
           {
-            text: '数据输入',
+            text: '表单组件',
+            link: '/component/input'
+          },
+          {
+            text: '日期时间组件',
             link: '/component/calendar'
           },
           {
-            text: '反馈组件',
-            link: '/component/action-sheet'
+            text: '交互组件',
+            link: '/component/popup'
           },
           {
-            text: '数据展示',
-            link: '/component/badge'
+            text: '输入设备组件',
+            link: '/component/keyboard'
+          },
+          {
+            text: '高级组件',
+            link: '/component/transition'
+          },
+          {
+            text: '配置组件',
+            link: '/component/configProvider'
           }
         ]
       },
@@ -182,344 +194,139 @@ export default defineConfig({
           link: '/component/intro'
         },
         {
-          text: '基础',
+          text: '基础组件',
           collapsed: false,
           items: [
-            {
-              link: '/component/button',
-              text: 'Button 按钮'
-            },
-            {
-              link: '/component/icon',
-              text: 'Icon 图标'
-            },
-            {
-              link: '/component/layout',
-              text: 'Layout 布局'
-            },
-            {
-              link: '/component/config-provider',
-              text: 'ConfigProvider 全局配置'
-            },
-            {
-              link: '/component/popup',
-              text: 'Popup 弹出层'
-            },
-            {
-              link: '/component/resize',
-              text: 'Resize 监听元素尺寸变化'
-            },
-            {
-              link: '/component/transition',
-              text: 'Transition 动画'
-            },
-            {
-              link: '/component/fab',
-              text: 'Fab 悬浮按钮'
-            },
-            {
-              link: '/component/text',
-              text: 'Text 文本'
-            },
-            {
-              link: '/component/root-portal',
-              text: 'RootPortal 根节点'
-            }
+            { link: '/component/button', text: 'Button 按钮组件' },
+            { link: '/component/fab', text: 'Fab 悬浮按钮' },
+            { link: '/component/sortButton', text: 'SortButton 排序按钮' },
+            { link: '/component/switch', text: 'Switch 开关组件' },
+            { link: '/component/layout', text: 'Layout 布局组件' },
+            { link: '/component/grid', text: 'Grid 网格布局' },
+            { link: '/component/gap', text: 'Gap 间隔组件' },
+            { link: '/component/divider', text: 'Divider 分割线' },
+            { link: '/component/card', text: 'Card 卡片组件' },
+            { link: '/component/cell', text: 'Cell 单元格组件' },
+            { link: '/component/navbar', text: 'Navbar 导航栏' },
+            { link: '/component/noticeBar', text: 'NoticeBar 通知栏' },
+            { link: '/component/tabbar', text: 'Tabbar 标签栏' },
+            { link: '/component/tabs', text: 'Tabs 标签页' },
+            { link: '/component/sidebar', text: 'Sidebar 侧边栏' },
+            { link: '/component/steps', text: 'Steps 步骤条' },
+            { link: '/component/backtop', text: 'Backtop 返回顶部' },
+            { link: '/component/indexBar', text: 'IndexBar 索引栏' }
           ]
         },
         {
-          text: '导航',
+          text: '展示组件',
           collapsed: false,
           items: [
-            {
-              link: '/component/pagination',
-              text: 'Pagination 分页'
-            },
-            {
-              link: '/component/popover',
-              text: 'Popover 气泡'
-            },
-            {
-              link: '/component/tabs',
-              text: 'Tabs 标签页'
-            },
-            {
-              link: '/component/segmented',
-              text: 'Segmented 分段器'
-            },
-            {
-              link: '/component/tabbar',
-              text: 'Tabbar 标签栏'
-            },
-            {
-              link: '/component/navbar',
-              text: 'Navbar 导航栏'
-            },
-            {
-              link: '/component/sidebar',
-              text: 'Sidebar 侧边栏'
-            },
-            {
-              link: '/component/backtop',
-              text: 'Backtop 回到顶部'
-            },
-            {
-              link: '/component/index-bar',
-              text: 'IndexBar 索引栏'
-            },{
-              link:'/component/tour',
-              text: 'Tour 漫游'
-            }
+            { link: '/component/icon', text: 'Icon 图标组件' },
+            { link: '/component/img', text: 'Img 图片组件' },
+            { link: '/component/imgCropper', text: 'ImgCropper 图片裁剪' },
+            { link: '/component/avatar', text: 'Avatar 头像组件' },
+            { link: '/component/badge', text: 'Badge 徽标组件' },
+            { link: '/component/text', text: 'Text 文本组件' },
+            { link: '/component/tag', text: 'Tag 标签组件' },
+            { link: '/component/progress', text: 'Progress 进度条' },
+            { link: '/component/circle', text: 'Circle 环形进度条' },
+            { link: '/component/rate', text: 'Rate 评分组件' },
+            { link: '/component/skeleton', text: 'Skeleton 骨架屏' },
+            { link: '/component/watermark', text: 'Watermark 水印' },
+            { link: '/component/table', text: 'Table 表格组件' },
+            { link: '/component/swiper', text: 'Swiper 轮播图' },
+            { link: '/component/waterfall', text: 'Waterfall 瀑布流' },
+            { link: '/component/sticky', text: 'Sticky 粘性布局' }
           ]
         },
         {
-          text: '数据输入',
+          text: '表单组件',
           collapsed: false,
           items: [
-            {
-              link: '/component/calendar',
-              text: 'Calendar 日历选择器'
-            },
-            {
-              link: '/component/calendar-view',
-              text: 'CalendarView 日历面板'
-            },
-            {
-              link: '/component/checkbox',
-              text: 'Checkbox 复选框'
-            },
-            {
-              link: '/component/col-picker',
-              text: 'ColPicker 多列选择器'
-            },
-            {
-              link: '/component/datetime-picker',
-              text: 'DatetimePicker 时间选择器'
-            },
-            {
-              link: '/component/datetime-picker-view',
-              text: 'DatetimePickerView 时间选择器视图'
-            },
-            {
-              link: '/component/form',
-              text: 'Form 表单'
-            },
-            {
-              link: '/component/input',
-              text: 'Input 输入框'
-            },
-            {
-              link: '/component/textarea',
-              text: 'Textarea 文本域'
-            },
-            {
-              link: '/component/input-number',
-              text: 'InputNumber 计数器'
-            },
-            {
-              link: '/component/picker',
-              text: 'Picker 选择器'
-            },
-            {
-              link: '/component/picker-view',
-              text: 'PickerView 选择器视图'
-            },
-            {
-              link: '/component/radio',
-              text: 'Radio 单选框'
-            },
-            {
-              link: '/component/rate',
-              text: 'Rate 评分'
-            },
-            {
-              link: '/component/search',
-              text: 'Search 搜索框'
-            },
-            {
-              link: '/component/select-picker',
-              text: 'SelectPicker 单复选选择器'
-            },
-            {
-              link: '/component/slider',
-              text: 'Slider 滑块'
-            },
-            {
-              link: '/component/switch',
-              text: 'Switch 开关'
-            },
-            {
-              link: '/component/upload',
-              text: 'Upload 上传'
-            },
-            {
-              link: '/component/password-input',
-              text: 'PasswordInput 密码输入框'
-            },
-            {
-              link: '/component/signature',
-              text: 'Signature 签名'
-            }
+            { link: '/component/input', text: 'Input 输入框' },
+            { link: '/component/textarea', text: 'Textarea 文本域' },
+            { link: '/component/inputNumber', text: 'InputNumber 计数器' },
+            { link: '/component/passwordInput', text: 'PasswordInput 密码输入框' },
+            { link: '/component/code', text: 'Code 验证码获取' },
+            { link: '/component/codeInput', text: 'CodeInput 验证码输入' },
+            { link: '/component/search', text: 'Search 搜索框' },
+            { link: '/component/radio', text: 'Radio 单选框' },
+            { link: '/component/checkbox', text: 'Checkbox 复选框' },
+            { link: '/component/picker', text: 'Picker 选择器' },
+            { link: '/component/pickerView', text: 'PickerView 选择器视图' },
+            { link: '/component/colPicker', text: 'ColPicker 多列选择器' },
+            { link: '/component/selectPicker', text: 'SelectPicker 选择选择器' },
+            { link: '/component/slider', text: 'Slider 滑块' },
+            { link: '/component/segmented', text: 'Segmented 分段器' },
+            { link: '/component/form', text: 'Form 表单组件' }
           ]
         },
         {
-          text: '反馈',
+          text: '日期时间组件',
           collapsed: false,
           items: [
-            {
-              link: '/component/action-sheet',
-              text: 'ActionSheet 动作面板'
-            },
-            {
-              link: '/component/drop-menu',
-              text: 'DropMenu 下拉菜单'
-            },
-            {
-              link: '/component/floating-panel',
-              text: 'FloatingPanel 浮动面板'
-            },
-            {
-              link: '/component/loading',
-              text: 'Loading 加载'
-            },
-            {
-              link: '/component/message-box',
-              text: 'MessageBox 弹框'
-            },
-            {
-              link: '/component/notice-bar',
-              text: 'NoticeBar 通知栏'
-            },
-            {
-              link: '/component/overlay',
-              text: 'Overlay 遮罩层'
-            },
-            {
-              link: '/component/progress',
-              text: 'Progress 进度条'
-            },
-            {
-              link: '/component/circle',
-              text: 'Circle 环形进度条'
-            },
-            {
-              link: '/component/sort-button',
-              text: 'SortButton 排序按钮'
-            },
-            {
-              link: '/component/status-tip',
-              text: 'StatusTip 缺省提示'
-            },
-            {
-              link: '/component/swipe-action',
-              text: 'SwipeAction 滑动操作'
-            },
-            {
-              link: '/component/toast',
-              text: 'Toast 轻提示'
-            },
-            {
-              link: '/component/notify',
-              text: 'Notify 消息通知'
-            },
-            {
-              link: '/component/tooltip',
-              text: 'Tooltip 文字提示'
-            },
-            {
-              link: '/component/count-down',
-              text: 'CountDown 倒计时'
-            },
-            {
-              link: '/component/count-to',
-              text: 'CountTo 数字滚动'
-            },
-            {
-              link: '/component/keyboard',
-              text: 'Keyboard 虚拟键盘'
-            },
-            {
-              link: '/component/number-keyboard',
-              text: 'NumberKeyboard 数字键盘'
-            }
+            { link: '/component/calendar', text: 'Calendar 日历组件' },
+            { link: '/component/calendarView', text: 'CalendarView 日历视图' },
+            { link: '/component/datetimePicker', text: 'DatetimePicker 日期时间选择器' },
+            { link: '/component/datetimePickerView', text: 'DatetimePickerView 日期时间选择器视图' },
+            { link: '/component/countDown', text: 'CountDown 倒计时' },
+            { link: '/component/countTo', text: 'CountTo 数字动画' },
+            { link: '/component/dateStrip', text: 'DateStrip 日期横条' }
           ]
         },
         {
-          text: '数据展示',
+          text: '交互组件',
           collapsed: false,
           items: [
-            {
-              link: '/component/badge',
-              text: 'Badge 徽标'
-            },
-            {
-              link: '/component/card',
-              text: 'Card 卡片'
-            },
-            {
-              link: '/component/cell',
-              text: 'Cell 单元格'
-            },
-            {
-              link: '/component/collapse',
-              text: 'Collapse 折叠面板'
-            },
-            {
-              link: '/component/curtain',
-              text: 'Curtain 幕帘'
-            },
-            {
-              link: '/component/divider',
-              text: 'Divider 分割线'
-            },
-            {
-              link: '/component/gap',
-              text: 'Gap 间隔槽'
-            },
-            {
-              link: '/component/img',
-              text: 'Img 图片'
-            },
-            {
-              link: '/component/img-cropper',
-              text: 'ImgCropper 图片裁剪'
-            },
-            {
-              link: '/component/grid',
-              text: 'Grid 宫格'
-            },
-            {
-              link: '/component/loadmore',
-              text: 'Loadmore 加载更多'
-            },
-            {
-              link: '/component/skeleton',
-              text: 'Skeleton 骨架屏'
-            },
-            {
-              link: '/component/steps',
-              text: 'Steps 步骤条'
-            },
-            {
-              link: '/component/sticky',
-              text: 'Sticky 粘性布局'
-            },
-            {
-              link: '/component/tag',
-              text: 'Tag 标签'
-            },
-            {
-              link: '/component/watermark',
-              text: 'Watermark 水印'
-            },
-            {
-              link: '/component/swiper',
-              text: 'Swiper 轮播图'
-            },
-            {
-              link: '/component/table',
-              text: 'Table 表格'
-            }
+            { link: '/component/popup', text: 'Popup 弹出层' },
+            { link: '/component/popover', text: 'Popover 气泡弹出框' },
+            { link: '/component/overlay', text: 'Overlay 遮罩层' },
+            { link: '/component/toast', text: 'Toast 轻提示' },
+            { link: '/component/notify', text: 'Notify 通知提示' },
+            { link: '/component/messageBox', text: 'MessageBox 消息框' },
+            { link: '/component/tooltip', text: 'Tooltip 文字提示' },
+            { link: '/component/actionSheet', text: 'ActionSheet 动作面板' },
+            { link: '/component/loading', text: 'Loading 加载中' },
+            { link: '/component/loadingPage', text: 'LoadingPage 加载页面' },
+            { link: '/component/loadmore', text: 'Loadmore 加载更多' },
+            { link: '/component/statusTip', text: 'StatusTip 状态提示' },
+            { link: '/component/swipeAction', text: 'SwipeAction 滑动操作' },
+            { link: '/component/collapse', text: 'Collapse 折叠面板' },
+            { link: '/component/dropMenu', text: 'DropMenu 下拉菜单' },
+            { link: '/component/floatingPanel', text: 'FloatingPanel 浮动面板' },
+            { link: '/component/sliderButton', text: 'SliderButton 滑动按钮' }
+          ]
+        },
+        {
+          text: '输入设备组件',
+          collapsed: false,
+          items: [
+            { link: '/component/keyboard', text: 'Keyboard 键盘组件' },
+            { link: '/component/signature', text: 'Signature 签名板' }
+          ]
+        },
+        {
+          text: '高级组件',
+          collapsed: false,
+          items: [
+            { link: '/component/transition', text: 'Transition 动画组件' },
+            { link: '/component/curtain', text: 'Curtain 幕布组件' },
+            { link: '/component/lazyLoad', text: 'LazyLoad 懒加载' },
+            { link: '/component/resize', text: 'Resize 尺寸监听' },
+            { link: '/component/rootPortal', text: 'RootPortal 根节点传送' },
+            { link: '/component/pagination', text: 'Pagination 分页器' },
+            { link: '/component/tree', text: 'Tree 树形控件' },
+            { link: '/component/upload', text: 'Upload 上传组件' },
+            { link: '/component/tour', text: 'Tour 引导组件' },
+            { link: '/component/wxRewardAd', text: 'WxRewardAd 微信激励广告' }
+          ]
+        },
+        {
+          text: '配置组件',
+          collapsed: false,
+          items: [
+            { link: '/component/configProvider', text: 'ConfigProvider 全局配置' },
+            { link: '/component/color', text: 'Color 默认主题' }
           ]
         },
         {

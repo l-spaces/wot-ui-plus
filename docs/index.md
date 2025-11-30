@@ -7,7 +7,7 @@ titleTemplate: 多平台快速开发的UI框架。
 hero:
   name: Wot UI Plus
   text: 高颜值、轻量化的uni-app多平台快速开发的UI框架
-  tagline: 基于Vue3+TS开发，提供87+高质量组件，支持暗黑模式、国际化和自定义主题。
+  tagline: 基于Vue3+TS开发，提供88+高质量组件，支持暗黑模式、国际化和自定义主题。
   image:
     src: /logo.svg
     alt: Wot uniapp
@@ -36,8 +36,8 @@ features:
     title: 多平台覆盖
     details: 支持 微信小程序、支付宝小程序、钉钉小程序、H5、APP 等平台。
   - icon: 🚀
-    title: 87+ 组件
-    details: 超过87 个高质量组件，覆盖移动端主流场景。
+    title: 88+ 组件
+    details: 超过88 个高质量组件，覆盖移动端主流场景。
   - icon: 💪
     title: TypeScript 支持
     details: 使用 Typescript 构建，提供良好的组件类型系统。
