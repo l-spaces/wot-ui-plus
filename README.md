@@ -1,3 +1,7 @@
+<p align="center">
+    <img alt="logo" src="./src/static/img/wot-logo.svg" width="200">
+</p>
+
 <h1 align="center">Wot UI Plus</h1>
 
 <div align="center">
