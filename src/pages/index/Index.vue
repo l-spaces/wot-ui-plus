@@ -99,7 +99,7 @@
     position: absolute;
     width: 120px;
     height: 100px;
-    right: 100px;
+    left: 200px;
     background: url('../../static/img/wot-logo.svg') no-repeat;
     background-size: cover;
     vertical-align: middle;
