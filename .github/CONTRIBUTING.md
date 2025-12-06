@@ -177,7 +177,6 @@ type：commit message
 
 示例：
 
-- docs: fix typo in quickstart
 - build: optimize build speed
 - fix: incorrect style
 - feat: add color prop
