@@ -21,6 +21,7 @@ yarn-error.log*
 # Editor directories and files
 .project
 .idea
+.trae
 *.suo
 *.ntvs*
 *.njsproj
@@ -32,3 +33,4 @@ attributes.json
 web-types.json
 pnpm-lock.yaml
 docs/.vitepress/dist.zip
+doc/
