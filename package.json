@@ -143,7 +143,7 @@
     "miniprogram-api-typings": "^4.1.0",
     "prettier": "^3.6.2",
     "rimraf": "^6.1.0",
-    "sass": "^1.75.0",
+    "sass": "1.75.0",
     "standard-version": "^9.5.0",
     "typescript": "^5.5.4",
     "unplugin-auto-import": "^20.2.0",
