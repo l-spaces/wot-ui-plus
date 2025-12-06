@@ -10,7 +10,7 @@
  * ├── 文件 → 直接复制
  * └── 目录 → 递归处理
  *     ↓ (递归复制)
- * 文档演示目录 (/docs/.vitepress/dist/demo)
+ * 文档演示目录 (/docs/dist/demo)
  * ```
  *
  * @example-usage
@@ -22,7 +22,7 @@
  * // 复制 H5 构建产物到文档站点
  * copyFolder(
  *   './dist/build/h5',
- *   './docs/.vitepress/dist/demo'
+ *   './docs/dist/demo'
  * )
  * ```
  *
@@ -43,7 +43,7 @@ import path from 'path'
 // 定义源目录路径 - H5构建后的演示文件所在位置
 const srcRoot = path.join(__dirname, '../dist/build/h5')
 // 定义目标目录路径 - 文档站点的演示文件存放位置
-const targetSrcRoot = path.join(__dirname, '../docs/.vitepress/dist/demo')
+const targetSrcRoot = path.join(__dirname, '../docs/dist/demo')
 
 /**
  * 递归复制文件夹及其内容
@@ -95,7 +95,7 @@ const targetSrcRoot = path.join(__dirname, '../docs/.vitepress/dist/demo')
  * // 复制 H5 构建产物到文档站点
  * copyFolder(
  *   '/project/dist/build/h5',
- *   '/project/docs/.vitepress/dist/demo'
+ *   '/project/docs/dist/demo'
  * )
  * ```
  *

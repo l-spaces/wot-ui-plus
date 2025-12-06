@@ -7,7 +7,7 @@ lib/
 website/
 .temp
 .cache
-/docs/.vitepress/cache
+/docs/
 
 # local env files
 .env.local
@@ -31,4 +31,6 @@ tags.json
 attributes.json
 web-types.json
 pnpm-lock.yaml
-docs/.vitepress/dist.zip
+docs/
+doc/
+
