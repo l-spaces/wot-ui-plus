@@ -49,7 +49,7 @@
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
     "commit": "git-cz",
-    "publish": "cd lib && npm publish",
+    "publish": "pnpm compiler && cd lib && npm publish",
     "release-major": "standard-version --release-as major",
     "release-minor": "standard-version --release-as minor",
     "release-patch": "standard-version --release-as patch",
