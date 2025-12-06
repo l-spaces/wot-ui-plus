@@ -80,7 +80,7 @@
     "title": "Wot-UI-Plus",
     "router": {
       "mode": "hash",
-      "base": "./"
+      "base": "/wot-ui-plus/"
     },
     "devServer": {
       "port": 5173
