@@ -29,7 +29,7 @@ export default defineConfig({
    * 设置为 './' 确保在所有部署环境中都能正确加载资源
    * 适用于相对路径部署的场景，提高部署灵活性
    */
-  base: './',
+  base: '/wot-ui-plus/',
 
   /**
    * 插件配置

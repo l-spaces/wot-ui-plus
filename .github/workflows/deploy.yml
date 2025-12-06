@@ -1,0 +1,112 @@
+# 此工作流用于自动化构建 VitePress 文档站点并将构建产物部署到 GitHub Pages
+# 实现了从代码提交到站点发布的完整 CI/CD 流程，确保文档更新的快速迭代与可靠发布
+# ===============================================================================
+
+name: Deploy H5 site to Pages
+
+on:
+  # 工作流触发条件配置
+  # 1. 自动触发：当代码推送到 main 分支时执行
+  #    - 分支名称可根据项目实际主分支调整（如 master）
+  #    - 适用于日常开发中的文档更新场景
+  push:
+    branches: [develop]
+
+  # 2. 手动触发：允许通过 GitHub Actions 页面手动运行此工作流
+  #    - 适用于测试部署流程或紧急发布场景
+  workflow_dispatch:
+
+# 权限配置：设置 GITHUB_TOKEN 所需的最小权限范围
+# 遵循最小权限原则，仅授予工作流执行所需的权限
+permissions:
+  contents: read       # 读取仓库内容权限，用于 checkout 代码
+  pages: write         # 写入 GitHub Pages 权限，用于部署操作
+  id-token: write      # 生成身份令牌权限，用于 GitHub Pages 部署验证
+
+# 并发控制配置：管理同时运行的工作流实例
+# 避免多个部署任务同时执行导致的资源冲突和部署混乱
+concurrency:
+  group: pages         # 并发组名称，用于标识一组相关工作流
+  cancel-in-progress: false  # 是否取消正在运行的部署任务
+                            # 设置为 false 可确保正在进行的生产部署完成，避免中途中断
+                            # 设置为 true 则会取消旧任务，优先执行新任务
+
+jobs:
+  # 工作流任务定义：包含两个核心任务
+  # 1. build：负责构建 VitePress 站点
+  # 2. deploy：负责将构建产物部署到 GitHub Pages
+
+  # build 任务：构建 VitePress 文档站点
+  # 运行环境：Ubuntu 最新版本虚拟机
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 步骤 1：检出代码到工作流运行环境
+      # 使用 actions/checkout@v5 动作，获取最新代码
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0 # 克隆完整的 Git 历史记录
+                        # VitePress 的 lastUpdated 功能需要完整历史记录来显示文件最后更新时间
+                        # 若未启用此功能，可设置为 1 以提高克隆速度
+
+      # 步骤 2：安装 pnpm 包管理器（当前已注释，按需启用）
+      - uses: pnpm/action-setup@v4
+      #   with:
+      #     version: 9
+      # - uses: oven-sh/setup-bun@v1 # 如果使用 Bun，请取消注释
+
+      # 步骤 3：安装并配置 Node.js 环境
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.21.1 # 指定 Node.js 版本，需与项目依赖兼容
+          cache: pnpm # 启用依赖缓存机制，支持 npm/yarn/pnpm
+
+      # 步骤 4：配置 GitHub Pages 环境
+      # 使用 actions/configure-pages@v4 动作，自动配置 Pages 部署环境
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      # 步骤 5：安装项目依赖
+      # 根据项目使用的包管理器执行相应的安装命令
+      - name: Install dependencies
+        run: pnpm install # 或 pnpm install / yarn install / bun install
+
+      # 步骤 6：使用 Vite 构建 H5 站点
+      # 执行 package.json 中定义的 build 脚本
+      # 构建产物默认输出到 dist 目录
+      - name: Build UniApp H5
+        run: pnpm build:h5 # 或 pnpm build / yarn build / bun run build
+
+      # 步骤 7：上传构建产物作为 GitHub Actions 工件
+      # 使用 actions/upload-pages-artifact@v3 动作，将构建目录打包上传
+      # 该工件将被后续 deploy 任务使用
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/build/h5 # 构建产物目录，需与 Vite 配置一致
+
+  # deploy 任务：将构建产物部署到 GitHub Pages
+  # 依赖关系：必须在 build 任务成功完成后执行
+  # 运行环境：Ubuntu 最新版本虚拟机
+  deploy:
+    # 环境配置：关联到 GitHub Pages 环境
+    # 在 GitHub 仓库设置中可配置环境保护规则（如必需的审查、分支保护等）
+    environment:
+      name: gh-pages # 环境名称，用于标识部署目标环境
+      url: ${{ steps.deployment.outputs.page_url }} # 部署成功后生成的站点 URL
+                                                   # 通过 deployment 步骤的输出获取
+    needs: build # 依赖 build 任务，确保只有构建成功后才执行部署
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      # 部署步骤：使用 GitHub 官方部署动作将构建产物部署到 Pages
+      # actions/deploy-pages@v4 会自动处理部署流程，包括：
+      # 1. 下载 build 任务上传的构建产物
+      # 2. 配置 Pages 部署设置
+      # 3. 将构建产物部署到 Pages 服务器
+      # 4. 返回部署结果和站点 URL
+      - name: Deploy to GitHub Pages
+        id: deployment # 步骤 ID，用于后续引用输出结果
+        uses: actions/deploy-pages@v4 # GitHub 官方 Pages 部署动作
