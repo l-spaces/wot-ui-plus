@@ -10,7 +10,7 @@
               <text class="version">@{{ packageConfig.version }}</text>
             </view>
           </view>
-          <view class="page__desc">Wot UI Plus 是一个基于Vue3+TS开发的uni-app组件库，提供87+高质量组件，支持暗黑模式、国际化和自定义主题。</view>
+          <view class="page__desc">Wot UI Plus 是一个基于Vue3+TS开发的uni-app组件库，提供88+高质量组件，支持暗黑模式、国际化和自定义主题。</view>
         </view>
       </view>
       <view class="page__bd">
@@ -77,8 +77,8 @@
 
   .page__hd {
     padding: 40px 40px 30px;
-    margin-bottom: 30px;
-    background: $-dark-color;
+    // margin-bottom: 30px;
+    // background: $-dark-color;
   }
 
   .page__title {
