@@ -1,44 +1,64 @@
+# 微信小程序自动上传工作流
+# 功能：当推送版本标签或手动触发时，自动构建并上传微信小程序代码到微信开发者平台
+# 设计思路：结合Git标签发布机制和手动触发灵活配置，使用uni-mini-ci工具实现自动化上传
 name: Upload To WeixinMiniProgram
 
+# 工作流触发条件
 on:
+  # 1. 自动触发：当推送匹配v*模式的标签时（如v1.0.0、v2.1.3等）
   push:
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
-  # 允许手动触发工作流
+  # 2. 手动触发：允许通过GitHub界面手动触发工作流
   workflow_dispatch:
+    # 手动触发时的输入参数配置
     inputs:
+      # 版本号（必填，如1.0.0）
       version:
         description: '版本号 (例如: 1.0.0)'
         required: true
         type: string
         default: ''
+      # 版本描述（选填，默认值为'手动发布版本'）
       description:
         description: '版本描述'
         required: false
         type: string
         default: '手动发布版本'
+      # 代码分支（选填，默认使用master分支）
       branch:
         description: '要使用的分支'
         required: false
         type: string
         default: 'master'
 
+# 作业定义
 jobs:
+  # 微信小程序上传作业
   upload:
+    # 运行环境：Ubuntu最新版
     runs-on: ubuntu-latest
+    
+    # 作业步骤
     steps:
+    # 1. 检出代码
     - name: Checkout code
       uses: actions/checkout@v4
       with:
+        # 根据触发方式选择分支：手动触发时使用输入的分支，否则使用默认分支
         ref: ${{ github.event.inputs.branch || 'master' }}
+    
+    # 2. 配置微信小程序上传参数
     - shell: bash
+      # 环境变量配置：获取GitHub Secrets中的敏感信息
       env:
-        PRIVATE_KEY: ${{ secrets.MP_PRIVATE_KEY }}
-        APPID: ${{ secrets.MP_APPID }}
-        VERSION: ${{ github.event.inputs.version || '' }}
-        DESCRIPTION: ${{ github.event.inputs.description || '自动发布版本' }}
+        PRIVATE_KEY: ${{ secrets.MP_PRIVATE_KEY }} # 微信小程序上传私钥
+        APPID: ${{ secrets.MP_APPID }} # 微信小程序AppID
+        VERSION: ${{ github.event.inputs.version || '' }} # 手动触发时的版本号
+        DESCRIPTION: ${{ github.event.inputs.description || '自动发布版本' }} # 手动触发时的版本描述
       run: |
+        # 验证私钥是否存在，若不存在则退出并提示错误
         if [[ -z $PRIVATE_KEY ]]; then
           echo "##########"
           echo ""
@@ -47,9 +67,11 @@ jobs:
           echo "##########"
           exit 1
         else
+          # 将私钥写入文件，用于微信小程序上传
           echo "$PRIVATE_KEY" > private.key
 
-          # 如果是手动触发，使用输入的版本号和描述
+          # 条件判断：根据工作流触发方式生成不同的配置文件
+          # 如果是手动触发且提供了版本号，则使用手动输入的版本信息
           if [[ "${{ github.event_name }}" == "workflow_dispatch" && -n "$VERSION" ]]; then
             echo '{
               "weixin": {
@@ -67,6 +89,7 @@ jobs:
               "desc": "'$DESCRIPTION'"
             }' > .minicirc
           else
+            # 自动触发时，使用空的版本信息（微信开发者工具会自动处理）
             echo '{
               "weixin": {
                 "appid": "'$APPID'",
@@ -85,16 +108,23 @@ jobs:
           fi
         fi
 
+    # 3. 安装Node.js环境
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
+        # 使用Node.js 20版本
         node-version: 20
 
+    # 4. 安装pnpm包管理器
     - uses: pnpm/action-setup@v4
       name: Install pnpm
 
+    # 5. 执行微信小程序上传
     - name: upload
       run: |
+        # 全局安装uni-mini-ci工具（用于微信小程序上传）
         npm i uni-mini-ci -g
+        # 安装项目依赖
         pnpm install
+        # 执行微信小程序上传命令（package.json中定义的脚本）
         pnpm upload:mp-weixin

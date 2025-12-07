@@ -1,43 +1,57 @@
+# Issue 标签自动回复工作流
+# 该工作流用于在Issue被添加特定标签时，自动发送标准化回复，提升Issue处理效率和用户体验
 name: Issue Reply
 
+# 工作流触发条件配置
 on:
   issues:
-    types: [labeled]
+    types: [labeled]  # 当Issue被添加标签时触发
 
+# 作业定义
 jobs:
+  # 主作业：根据标签发送自动回复
   issue-reply:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # 运行环境：Ubuntu最新版本
     steps:
+      # 步骤1：当标签为'pending'时的自动回复
       - name: pending
+        # 条件判断：仅当添加的标签名称为'pending'时执行
         if: github.event.label.name == 'pending'
+        # 使用issues-helper工具创建评论
         uses: actions-cool/issues-helper@v3
         with:
-          actions: 'create-comment'
-          issue-number: ${{ github.event.issue.number }}
-          body: |
+          actions: 'create-comment'  # 执行的操作：创建评论
+          issue-number: ${{ github.event.issue.number }}  # 目标Issue编号
+          body: |  # 评论内容
             你好，@${{ github.event.issue.user.login }}。
 
             看起来这条 issue 描述得有些模糊，缺少一些必要的信息，推荐阅读一下[贡献指南](https://gitee.com/my_spaces/wot-ui-plus/blob/main/.github/CONTRIBUTING.md)。
 
+      # 步骤2：当标签为'need reproduce'时的自动回复
       - name: need reproduce
+        # 条件判断：仅当添加的标签名称为'need reproduce'时执行
         if: github.event.label.name == 'need reproduce'
+        # 使用issues-helper工具创建评论
         uses: actions-cool/issues-helper@v3
         with:
-          actions: 'create-comment'
-          issue-number: ${{ github.event.issue.number }}
-          body: |
+          actions: 'create-comment'  # 执行的操作：创建评论
+          issue-number: ${{ github.event.issue.number }}  # 目标Issue编号
+          body: |  # 评论内容
             你好，@${{ github.event.issue.user.login }}。
 
             我们需要你提供一个最小重现demo，以便于我们帮你排查问题。你可以通过 [create-uni](https://github.com/uni-helper/create-uni) 快速创建一个wot-ui-plus项目，并添加相关复现逻辑来提供。
+      
+      # 步骤3：当标签为'help wanted'时的自动回复
       - name: help wanted
+        # 条件判断：仅当添加的标签名称为'help wanted'时执行
         if: github.event.label.name == 'help wanted'
+        # 使用issues-helper工具创建评论
         uses: actions-cool/issues-helper@v3
         with:
-          actions: 'create-comment'
-          token: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: ${{ github.event.issue.number }}
-          body: |
+          actions: 'create-comment'  # 执行的操作：创建评论
+          token: ${{ secrets.GITHUB_TOKEN }}  # GitHub认证令牌
+          issue-number: ${{ github.event.issue.number }}  # 目标Issue编号
+          body: |  # 评论内容
             你好，@${{ github.event.issue.user.login }}。
 
             我们完全同意你的提议/反馈，欢迎直接在此仓库创建一个 Pull Request 来解决这个问题。请将 Pull Request 发到正确的分支，务必填写 Pull Request 内的预设模板，提供改动所需相应的 示例、TypeScript 定义、文档等，并确保在各平台测试通过，我们会尽快进行 Review，提前感谢和期待您的贡献。
-    

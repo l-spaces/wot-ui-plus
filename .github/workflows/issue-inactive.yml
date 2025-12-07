@@ -1,38 +1,49 @@
+# Issue 不活跃状态自动处理工作流
+# 用于自动化管理项目中长时间不活跃的 Issue，保持 Issue 列表的整洁和可维护性
 name: Issue Inactive
 
+# 工作流触发条件配置
 on:
+  # 定时触发：每3天 UTC 时间 12:00（北京时间当日 20:00）自动运行
   schedule:
-    - cron: '0 16 * * *'
+    - cron: '0 12 */3 * *'  # 定时任务表达式，格式：分 时 日 月 周
 
+# 作业定义
 jobs:
+  # 作业1：关闭不活跃的 Issue
+  # 该作业负责关闭长时间不活跃且标记了特定标签的 Issue
   close-issues:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # 运行环境：Ubuntu 最新版本
     steps:
-      - name: need reproduction
-        uses: actions-cool/issues-helper@v3
+      # 步骤1：关闭标记为 "need reproduction" 且 7 天不活跃的 Issue
+      - name: Close issues with "need reproduction" label
+        uses: actions-cool/issues-helper@v3  # 使用第三方 issue 管理工具
         with:
-          actions: 'close-issues'
-          labels: 'need reproduction'
-          inactive-day: 7
+          actions: 'close-issues'             # 执行的操作：关闭 issue
+          labels: 'need reproduction'         # 目标 issue 标签：需要复现
+          inactive-day: 7                     # 不活跃天数阈值：7 天
 
-      - name: pending
-        uses: actions-cool/issues-helper@v3
+      # 步骤2：关闭标记为 "pending" 且 7 天不活跃的 Issue
+      - name: Close issues with "pending" label
+        uses: actions-cool/issues-helper@v3  # 使用第三方 issue 管理工具
         with:
-          actions: 'close-issues'
-          labels: 'pending'
-          inactive-day: 7
-          body: |
+          actions: 'close-issues'             # 执行的操作：关闭 issue
+          labels: 'pending'                   # 目标 issue 标签：等待中
+          inactive-day: 7                     # 不活跃天数阈值：7 天
+          body: |                             # 关闭时添加的评论内容
             由于该 issue 被标记为需要更多信息，却 7 天未收到回应。现关闭 issue，若有任何问题，可评论回复。
 
+  # 作业2：锁定不活跃的已关闭 Issue
+  # 该作业负责锁定长时间不活跃的已关闭 Issue，防止进一步评论
   lock-issues:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # 运行环境：Ubuntu 最新版本
     steps:
-      - name: lock-issues
-        uses: actions-cool/issues-helper@v3
+      # 步骤1：锁定已关闭且 30 天不活跃的 Issue
+      - name: Lock closed issues
+        uses: actions-cool/issues-helper@v3  # 使用第三方 issue 管理工具
         with:
-          actions: 'lock-issues'
-          issue-state: closed
-          inactive-day: 30
-          body: |
+          actions: 'lock-issues'             # 执行的操作：锁定 issue
+          issue-state: closed                # 目标 issue 状态：已关闭
+          inactive-day: 30                   # 不活跃天数阈值：30 天
+          body: |                             # 锁定时添加的评论内容
             此 issue 已被自动锁定，因为关闭后没有任何近期活动。如果有相关 bug，请重新创建一个新 issue。
-

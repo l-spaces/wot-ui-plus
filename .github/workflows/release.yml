@@ -1,63 +1,95 @@
+# 工作流名称：创建发布标签
+# 功能说明：该工作流用于在推送版本标签（v*）时自动创建 GitHub Release，并生成结构化的发布说明
+# 设计思路：通过分析当前标签与上一个标签之间的提交记录，自动分类生成包含新功能、Bug修复、文档更新和性能优化的发布说明
 name: Create Release Tag
 
+# 工作流触发条件配置
 on:
   push:
     tags:
-      - 'v*' # 推送标签，比如 v1.0, v20.15.10
+      - 'v*' # 匹配所有以 v 开头的标签，如 v1.0, v20.15.10 等版本标签
 
+# 定义工作流作业
 jobs:
+  # 作业名称：build
+  # 功能：执行发布标签的创建和发布说明生成流程
   build:
+    # 作业显示名称：创建发布
     name: 创建发布
+    # 运行环境：使用最新版 Ubuntu 虚拟机
     runs-on: ubuntu-latest
 
+    # 作业步骤列表
     steps:
+      # 步骤 1：检出代码
+      # 功能：将当前仓库的代码检出到 GitHub Actions 运行环境中
       - name: 检出代码
         uses: actions/checkout@v4
 
+      # 步骤 2：获取当前和上一个标签
+      # 功能：获取仓库中所有标签，确定当前最新标签和上一个标签，用于后续生成发布说明
       - name: 获取当前和上一个标签
-        id: get_tags
+        id: get_tags # 设置步骤ID，用于后续步骤引用输出
         run: |
-          git fetch --prune --unshallow
-          tags=($(git tag -l --sort=-version:refname))
-          current_tag=${tags[0]}
-          previous_tag=${tags[1]}
+          # 获取所有标签并按版本号降序排序
+          git fetch --prune --unshallow # 确保获取所有标签和完整提交历史
+          tags=($(git tag -l --sort=-version:refname)) # 获取所有标签并按版本号降序排序
+          current_tag=${tags[0]} # 当前最新标签（数组第一个元素）
+          previous_tag=${tags[1]} # 上一个标签（数组第二个元素）
+          
+          # 输出当前标签和上一个标签，供后续步骤使用
           echo "::set-output name=current_tag::$current_tag"
           echo "::set-output name=previous_tag::$previous_tag"
 
+      # 步骤 3：提取并分类提交消息
+      # 功能：提取两个标签之间的所有提交消息，并按类型（feat/fix/docs/perf）分类
       - name: 提取并分类提交消息
-        id: extract_commit_messages
+        id: extract_commit_messages # 设置步骤ID，用于后续步骤引用输出
         run: |
-          set -e
+          set -e # 遇到错误时退出脚本
+          
+          # 引用上一步输出的当前标签和上一个标签
           current_tag="${{ steps.get_tags.outputs.current_tag }}"
           previous_tag="${{ steps.get_tags.outputs.previous_tag }}"
+          
+          # 获取两个标签之间的所有提交消息，过滤出包含feat/fix/docs/perf的提交
           commit_messages=$(git log --pretty=format:"%s %h" "$previous_tag".."$current_tag" | grep -E 'feat|fix|docs|perf')
-          feat_messages=$(echo "$commit_messages" | grep 'feat' || true)
-          fix_messages=$(echo "$commit_messages" | grep 'fix' || true)
-          docs_messages=$(echo "$commit_messages" | grep 'docs' || true)
-          perf_messages=$(echo "$commit_messages" | grep 'perf' || true)
+          
+          # 将提交消息按类型分类
+          feat_messages=$(echo "$commit_messages" | grep 'feat' || true) # 新功能
+          fix_messages=$(echo "$commit_messages" | grep 'fix' || true) # Bug修复
+          docs_messages=$(echo "$commit_messages" | grep 'docs' || true) # 文档更新
+          perf_messages=$(echo "$commit_messages" | grep 'perf' || true) # 性能优化
+          
+          # 输出分类后的提交消息，供后续步骤使用
           echo "::set-output name=feat_messages::${feat_messages[@]}"
           echo "::set-output name=fix_messages::${fix_messages[@]}"
           echo "::set-output name=docs_messages::${docs_messages[@]}"
           echo "::set-output name=perf_messages::${perf_messages[@]}"
 
+      # 步骤 4：获取当前分支名
+      # 功能：获取当前工作分支的名称
       - name: 获取当前分支名
-        id: get_branch_name
+        id: get_branch_name # 设置步骤ID，用于后续步骤引用输出
         run: |
-          branch_name=$(git rev-parse --abbrev-ref HEAD)
-          echo "::set-output name=branch_name::$branch_name"
+          branch_name=$(git rev-parse --abbrev-ref HEAD) # 获取当前分支名称
+          echo "::set-output name=branch_name::$branch_name" # 输出分支名称
 
+      # 步骤 5：生成发布说明
+      # 功能：根据分类后的提交消息，生成结构化的Markdown格式发布说明
       - name: 发布说明
-        id: generate_release_notes
+        id: generate_release_notes # 设置步骤ID，用于后续步骤引用输出
         run: |
-            # 提取提交消息分类
+            # 提取分类后的提交消息
             feat_messages=("${{ steps.extract_commit_messages.outputs.feat_messages }}")
             fix_messages=("${{ steps.extract_commit_messages.outputs.fix_messages }}")
             docs_messages=("${{ steps.extract_commit_messages.outputs.docs_messages }}")
             perf_messages=("${{ steps.extract_commit_messages.outputs.perf_messages }}")
         
-            # 生成发布说明的Markdown字符串
+            # 初始化发布说明Markdown字符串
             release_notes="> 请查看 [更新日志](./CHANGELOG.md) 获取所有变更详情。  \n## 更新内容：  \n"
         
+            # 按类型添加新功能到发布说明
             if [[ -n "$feat_messages" ]]; then
               release_notes="$release_notes\n### ✨ Features | 新功能:  \n"
               for message in "${feat_messages[@]}"; do
@@ -65,6 +97,7 @@ jobs:
               done
             fi
         
+            # 按类型添加Bug修复到发布说明
             if [[ -n "$fix_messages" ]]; then
               release_notes="$release_notes\n### 🐛 Bug Fixes | Bug 修复:  \n"
               for message in "${fix_messages[@]}"; do
@@ -72,6 +105,7 @@ jobs:
               done
             fi
         
+            # 按类型添加文档更新到发布说明
             if [[ -n "$docs_messages" ]]; then
               release_notes="$release_notes\n### ✏️ Documentation | 文档:  \n"
               for message in "${docs_messages[@]}"; do
@@ -79,23 +113,31 @@ jobs:
               done
             fi
         
+            # 按类型添加性能优化到发布说明
             if [[ -n "$perf_messages" ]]; then
               release_notes="$release_notes\n### ⚡ Performance Improvements | 性能优化:  \n"
               for message in "${perf_messages[@]}"; do
                 release_notes="$release_notes\n- $message"
               done
             fi
+            
+            # 输出生成的发布说明，供后续步骤使用
             echo "::set-output name=release_notes::$release_notes"
         
-
+      # 步骤 6：写入生成的发布说明到 changelog.md
+      # 功能：将生成的发布说明写入到临时文件 changelog.md，用于后续创建Release时使用
       - name: 写入生成的发布说明到 changelog.md
         run: |
+              # 将发布说明写入到 changelog.md 文件
               echo -e "${{ steps.generate_release_notes.outputs.release_notes }}" > changelog.md
+              # 打印生成的发布说明内容，便于调试
               cat changelog.md
 
+      # 步骤 7：创建标签的发布
+      # 功能：使用生成的发布说明创建GitHub Release
       - name: 创建标签的发布
-        id: release_tag
-        uses: ncipollo/release-action@v1
+        id: release_tag # 设置步骤ID，用于后续步骤引用输出
+        uses: ncipollo/release-action@v1 # 使用第三方Action创建Release
         with:
-          generateReleaseNotes: "false"  # 禁用自动生成发布说明
-          bodyfile: changelog.md
+          generateReleaseNotes: "false"  # 禁用GitHub自动生成发布说明
+          bodyfile: changelog.md # 使用本地changelog.md文件内容作为发布说明

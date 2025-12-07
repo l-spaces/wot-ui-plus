@@ -1,7 +1,11 @@
+# 组件测试工作流 (H5平台)
+# 用于自动化测试 wot-ui-plus 组件库中的组件，确保代码质量和功能正确性
 name: Component Testing (H5)
 
+# 工作流触发条件配置
 on:
-  # 在推送到主分支时运行测试
+  # 1. 自动触发：当推送到 master 分支时
+  #    仅当组件、测试文件、依赖配置或工作流文件变更时运行
   push:
     branches:
       - master
@@ -12,7 +16,8 @@ on:
       - 'pnpm-lock.yaml'
       - '.github/workflows/component-testing.yml'
 
-  # 在创建 Pull Request 时运行测试
+  # 2. 自动触发：当创建 Pull Request 到 master 分支时
+  #    触发条件与 push 相同
   pull_request:
     branches:
       - master
@@ -23,24 +28,27 @@ on:
       - 'pnpm-lock.yaml'
       - '.github/workflows/component-testing.yml'
 
-  # 允许手动触发工作流
+  # 3. 手动触发：支持通过 GitHub Actions 界面手动启动工作流
   workflow_dispatch:
+    # 手动触发时的输入参数配置
     inputs:
       component:
         description: '要测试的组件名称（例如：wd-button）'
         required: false
         type: string
 
-  # 定时运行测试，每周一凌晨3点
+  # 4. 定时触发：每周一凌晨3点（UTC时间）自动运行测试
   schedule:
     - cron: '0 3 * * 1'
 
-# 设置环境变量
+# 全局环境变量配置
 env:
   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
+# 作业定义
 jobs:
-  # 确定要测试的组件
+  # 作业1：确定要测试的组件列表
+  # 该作业根据触发方式和代码变更情况动态确定需要测试的组件
   determine-test-matrix:
     name: Determine Test Matrix
     runs-on: ubuntu-latest
@@ -48,20 +56,24 @@ jobs:
       components: ${{ steps.set-components.outputs.components }}
 
     steps:
+      # 步骤1：检出代码
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      # 步骤2：设置 Node.js 环境
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           registry-url: https://registry.npmjs.org
 
+      # 步骤3：安装 pnpm 包管理器
       - uses: pnpm/action-setup@v4
         name: Install pnpm
 
+      # 步骤4：确定变更的文件
       - name: Determine changed files
         id: changed-files
         uses: tj-actions/changed-files@v42
@@ -70,6 +82,7 @@ jobs:
             src/uni_modules/wot-ui-plus/components/**
             tests/**
 
+      # 步骤5：设置要测试的组件列表
       - name: Set components to test
         id: set-components
         run: |
@@ -85,14 +98,18 @@ jobs:
             COMPONENTS=()
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               if [[ $file == src/uni_modules/wot-ui-plus/components/* ]]; then
+                # 提取组件名称
                 COMPONENT_NAME=$(echo $file | sed -n 's/.*components\/\([^\/]*\)\/.*/\1/p')
+                # 如果组件名称不为空且未包含在列表中，则添加到列表
                 if [[ ! -z "$COMPONENT_NAME" && ! " ${COMPONENTS[@]} " =~ " ${COMPONENT_NAME} " ]]; then
-                  COMPONENTS+=("$COMPONENT_NAME")
+                  COMPONENTS+=($COMPONENT_NAME)
                 fi
               elif [[ $file == tests/components/*.test.ts ]]; then
+                # 提取组件名称
                 COMPONENT_NAME=$(echo $file | sed -n 's/tests\/components\/\(.*\)\.test\.ts/\1/p')
+                # 如果组件名称不为空且未包含在列表中，则添加到列表
                 if [[ ! -z "$COMPONENT_NAME" && ! " ${COMPONENTS[@]} " =~ " ${COMPONENT_NAME} " ]]; then
-                  COMPONENTS+=("$COMPONENT_NAME")
+                  COMPONENTS+=($COMPONENT_NAME)
                 fi
               elif [[ $file == tests/* ]]; then
                 # 如果是 tests 目录下的其他文件变化，则测试所有组件
@@ -103,69 +120,81 @@ jobs:
               fi
             done
 
+            # 如果没有找到要测试的组件，则测试所有组件
             if [[ ${#COMPONENTS[@]} -eq 0 ]]; then
-              # 如果没有找到组件，则测试所有组件
               COMPONENTS=$(find tests/components -name "*.test.ts" | sed -e 's/tests\/components\///' -e 's/\.test\.ts//' | jq -R -s -c 'split("\n") | map(select(length > 0))')
             else
-              # 将数组转换为 JSON
+              # 将组件数组转换为 JSON 字符串
               COMPONENTS_JSON=$(printf '%s\n' "${COMPONENTS[@]}" | jq -R -s -c 'split("\n") | map(select(length > 0))')
               COMPONENTS="$COMPONENTS_JSON"
             fi
             echo "components=$COMPONENTS" >> $GITHUB_OUTPUT
           fi
 
-  # 运行 ESLint 检查
+  # 作业2：运行 ESLint 代码质量检查
   lint:
     name: ESLint Check
     runs-on: ubuntu-latest
 
     steps:
+      # 步骤1：检出代码
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 步骤2：设置 Node.js 环境
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           registry-url: https://registry.npmjs.org
 
+      # 步骤3：安装 pnpm 包管理器
       - uses: pnpm/action-setup@v4
         name: Install pnpm
 
+      # 步骤4：安装项目依赖
       - name: Install dependencies
         run: pnpm install
 
+      # 步骤5：运行 ESLint 检查
       - name: Run ESLint
         run: pnpm lint
 
-  # 运行组件测试
+  # 作业3：运行组件测试
+  # 该作业根据 determine-test-matrix 作业输出的组件列表并行运行测试
   test-components:
     name: Test Components
     needs: [determine-test-matrix, lint]
     runs-on: ubuntu-latest
 
+    # 并行测试策略配置
     strategy:
       fail-fast: false
       matrix:
         component: ${{ fromJson(needs.determine-test-matrix.outputs.components) }}
 
     steps:
+      # 步骤1：检出代码
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 步骤2：设置 Node.js 环境
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           registry-url: https://registry.npmjs.org
 
+      # 步骤3：安装 pnpm 包管理器
       - uses: pnpm/action-setup@v4
         name: Install pnpm
 
+      # 步骤4：获取 pnpm 存储目录（用于缓存）
       - name: Get pnpm store directory
         id: pnpm-cache
         run: echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
 
+      # 步骤5：设置 pnpm 缓存
       - name: Setup pnpm cache
         uses: actions/cache@v4
         with:
@@ -174,9 +203,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      # 步骤6：安装项目依赖
       - name: Install dependencies
         run: pnpm install
 
+      # 步骤7：运行组件测试
       - name: Run component test
         env:
           UNI_PLATFORM: h5
@@ -188,6 +219,7 @@ jobs:
             pnpm vitest run tests/components/${{ matrix.component }}.test.ts --coverage
           fi
 
+      # 步骤8：上传覆盖率报告到 Codecov
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
@@ -197,6 +229,7 @@ jobs:
           name: ${{ matrix.component }}-h5
           fail_ci_if_error: false
 
+      # 步骤9：生成组件测试报告
       - name: Generate test report
         run: |
           echo "# 组件测试报告" > test-report-${{ matrix.component }}.md
@@ -204,6 +237,7 @@ jobs:
           echo "## 测试组件: ${{ matrix.component }}" >> test-report-${{ matrix.component }}.md
           echo "## 测试平台: H5" >> test-report-${{ matrix.component }}.md
 
+          # 如果存在覆盖率报告，则添加覆盖率数据
           if [ -f "./coverage/coverage-summary.json" ]; then
             echo "## 覆盖率数据:" >> test-report-${{ matrix.component }}.md
             echo "\`\`\`json" >> test-report-${{ matrix.component }}.md
@@ -211,6 +245,7 @@ jobs:
             echo "\`\`\`" >> test-report-${{ matrix.component }}.md
           fi
 
+      # 步骤10：上传测试报告作为构建产物
       - name: Upload test report
         uses: actions/upload-artifact@v4
         with:
@@ -219,7 +254,8 @@ jobs:
             ./test-report-${{ matrix.component }}.md
             ./coverage
 
-  # 生成测试摘要
+  # 作业4：生成测试摘要
+  # 该作业汇总所有组件的测试结果，生成统一的测试报告
   test-summary:
     name: Generate Test Summary
     needs: [test-components]
@@ -227,25 +263,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 步骤1：检出代码
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 步骤2：下载所有组件的测试报告
       - name: Download all test reports
         uses: actions/download-artifact@v4
 
+      # 步骤3：生成测试摘要报告
       - name: Generate summary report
         run: |
+          # 创建 Markdown 格式的测试摘要
           echo "# 组件测试摘要 (H5 平台)" > test-summary.md
           echo "## 测试时间: $(date)" >> test-summary.md
           echo "## 测试结果" >> test-summary.md
           echo "| 组件 | 状态 | 覆盖率 |" >> test-summary.md
           echo "| ---- | ---- | ------ |" >> test-summary.md
 
+          # 遍历所有测试报告目录
           for report_dir in test-report-*; do
             if [[ -d "$report_dir" ]]; then
+              # 提取组件名称
               component=$(echo $report_dir | sed -n 's/test-report-\(.*\)/\1/p')
 
+              # 根据是否存在覆盖率报告判断测试结果
               if [[ -f "$report_dir/coverage/coverage-summary.json" ]]; then
+                # 提取覆盖率数据
                 coverage=$(cat "$report_dir/coverage/coverage-summary.json" | jq -r '.total.lines.pct')
                 echo "| $component | ✅ 通过 | $coverage% |" >> test-summary.md
               else
@@ -254,12 +298,14 @@ jobs:
             fi
           done
 
+      # 步骤4：上传测试摘要报告作为构建产物
       - name: Upload summary report
         uses: actions/upload-artifact@v4
         with:
           name: test-summary
           path: ./test-summary.md
 
+      # 步骤5：在 PR 中添加测试结果评论
       - name: Add PR comment with test results
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
