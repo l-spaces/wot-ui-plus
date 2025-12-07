@@ -464,11 +464,6 @@ export const list = [
         id: 'tour',
         icon: 'tour',
         name: '引导组件'
-      },
-      {
-        id: 'wxRewardAd',
-        icon: 'wxRewardAd',
-        name: '微信激励广告'
       }
     ]
   },
@@ -484,7 +479,7 @@ export const list = [
       {
         id: 'color',
         icon: 'color',
-        name: '默认主题'
+        name: '主题配置'
       }
     ]
   }
