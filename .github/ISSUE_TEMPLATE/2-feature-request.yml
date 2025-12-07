@@ -19,7 +19,7 @@ body:
         感谢您关注 wot ui plus 我们欢迎开发者和用户为框架提出新功能建议。请详细描述您希望添加的功能、预期的使用场景，以及该功能将如何提升开发体验或解决实际问题。我们会认真评估每一条建议，并根据实际情况进行规划和实现
 
   - type: textarea
-    id: description
+    id: requirement
     attributes:
       label: 1. 提交要求？
       description: 请尽可能详细地说明这个功能的使用场景。
@@ -45,4 +45,3 @@ body:
         - 其他能提升开发效率或用户体验的创新点
     validations:
       required: true
-
