@@ -11,11 +11,11 @@ body:
         - 尝试在 [Issue](https://github.com/l-spacs/wot-ui-plus/issues) 列表中搜索相同问题
         - 如果不是反馈 Bug，请到 [Discussions 讨论区](https://github.com/l-spaces/wot-ui-plus/discussions) 发帖。
 
-  - type: input
+  - type: dropdown
     id: version
     attributes:
-      label: 版本号
-      multiple: true
+      label: 版本号:
+      multiple: false
       description: 你正在使用的组件库版本号（请填写 wot-ui-plus/package.json 里实际安装的版本）
       options:
         - v3.0.1
@@ -31,7 +31,7 @@ body:
   - type: dropdown
     id: platform
     attributes:
-      label: 平台
+      label: 平台:
       multiple: true
       description: 选择对应的平台
       options:
