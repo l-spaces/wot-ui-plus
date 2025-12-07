@@ -148,7 +148,7 @@ commit 描述说明了我们本次提交的具体描述，具体内容视情况�
 
 如果你是第一次在 GitHub 上提 Pull Request ，可以阅读下面这两篇文章来学习：
 
-- [第一次参与开源](https://github.com/firstcontributions/first-contributions/blob/main/translations/README.zh-cn.md)
+- [第一次参与开源](https://github.com/firstcontributions/first-contributions/blob/main/docs/translations/README.zh-cn.md)
 - [如何优雅地在 GitHub 上贡献代码](https://segmentfault.com/a/1190000000736629)
 
 ### Pull Request 规范
@@ -162,7 +162,7 @@ commit 描述说明了我们本次提交的具体描述，具体内容视情况�
 ### Pull Request 流程
 
 1. fork 主仓库，如果已经 fork 过，请同步主仓库的最新代码。
-2. 基于 fork 后仓库的 master 分支新建一个分支，比如 `feature/add_button`。
+2. 基于 fork 后仓库的 master 分支新建一个分支，比如 `feature/wd_button-issue-123`。
 3. 在新分支上进行开发，开发完成后，提 Pull Request 到主仓库的 main 分支。
 4. Pull Request 会在 Review 通过后被合并到主仓库。
 5. 等待组件库发布新版本。
@@ -203,7 +203,7 @@ type：commit message
 
 ```bash
 # 添加主仓库到 remote
-git remote add upstream https://gitee.com/my_spaces/wot-ui-plus.git
+git remote add upstream https://github.com/l-spaces/wot-ui-plus.git
 
 # 拉取主仓库最新代码
 git fetch upstream

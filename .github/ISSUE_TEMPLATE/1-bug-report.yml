@@ -1,5 +1,5 @@
 name: Bug 反馈
-description: 创建一个 Issue 描述你遇到的问题。
+description: 创建一个 Issue 描述您遇到的问题。
 title: "[Bug 上报] 标题"
 labels: ["🐞bug: need confirm"]
 body:
