@@ -15,6 +15,7 @@ body:
     id: version
     attributes:
       label: 版本号
+      multiple: true
       description: 你正在使用的组件库版本号（请填写 wot-ui-plus/package.json 里实际安装的版本）
       options:
         - v3.0.1
