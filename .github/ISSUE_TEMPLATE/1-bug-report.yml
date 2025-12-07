@@ -14,7 +14,7 @@ body:
   - type: dropdown
     id: version
     attributes:
-      label: 版本号:
+      label: 版本号
       multiple: false
       description: 你正在使用的组件库版本号（请填写 wot-ui-plus/package.json 里实际安装的版本）
       options:
@@ -31,7 +31,7 @@ body:
   - type: dropdown
     id: platform
     attributes:
-      label: 平台:
+      label: 平台
       multiple: true
       description: 选择对应的平台
       options:
@@ -68,7 +68,7 @@ body:
       required: true
 
   - type: textarea
-    id: uni-app
+    id: env-info
     attributes:
       label: 环境信息
       description: |
