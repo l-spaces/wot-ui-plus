@@ -1,19 +1,27 @@
+# Issue 不活跃标签自动移除工作流
+# 该工作流用于在特定条件下自动移除Issue上的"need reproduce"和"pending"标签，优化Issue管理流程
 name: Issue Remove Inactive
 
+# 工作流触发条件配置
 on:
   issues:
-    types: [edited]
+    types: [edited]  # 当Issue被编辑时触发
   issue_comment:
-    types: [created, edited]
+    types: [created, edited]  # 当Issue评论被创建或编辑时触发
 
+# 作业定义
 jobs:
+  # 主作业：移除不活跃标签
   issue-remove-inactive:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # 运行环境：Ubuntu最新版本
     steps:
+      # 步骤：移除"need reproduce"和"pending"标签
       - name: remove inactive
+        # 条件判断：仅当Issue处于打开状态且操作者是Issue创建者时才执行
         if: github.event.issue.state == 'open' && github.actor == github.event.issue.user.login
+        # 使用issues-helper工具执行标签操作
         uses: actions-cool/issues-helper@v3
         with:
-          actions: 'remove-labels'
-          issue-number: ${{ github.event.issue.number }}
-          labels: 'need reproduce, pending'
+          actions: 'remove-labels'  # 执行的操作：移除标签
+          issue-number: ${{ github.event.issue.number }}  # 目标Issue编号
+          labels: 'need reproduce, pending'  # 需要移除的标签列表

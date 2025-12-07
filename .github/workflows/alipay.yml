@@ -1,91 +1,112 @@
+# 支付宝小程序自动上传工作流
+# 用于将 wot-ui-plus 组件库打包并上传到支付宝小程序平台
 name: Upload To AlipayMiniProgram
 
+# 工作流触发条件配置
 on:
+  # 1. 自动触发：当推送符合 v* 格式的标签时（如 v1.0.0, v2.0.1-alpha 等）
   push:
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
-  # 允许手动触发工作流
+  # 2. 手动触发：支持通过 GitHub Actions 界面手动启动工作流
   workflow_dispatch:
+    # 手动触发时的输入参数配置
     inputs:
       version:
-        description: '版本号 (例如: 1.0.0)'
-        required: true
-        type: string
-        default: ''
+        description: '版本号 (例如: 1.0.0)' # 参数描述
+        required: true                  # 是否必填
+        type: string                    # 参数类型
+        default: ''                     # 默认值
       description:
-        description: '版本描述'
-        required: false
-        type: string
-        default: '手动发布版本'
+        description: '版本描述'          # 参数描述
+        required: false                 # 是否必填
+        type: string                    # 参数类型
+        default: '手动发布版本'         # 默认值
       branch:
-        description: '要使用的分支'
-        required: false
-        type: string
-        default: 'master'
+        description: '要使用的分支'      # 参数描述
+        required: false                 # 是否必填
+        type: string                    # 参数类型
+        default: 'master'               # 默认值
 
+# 作业定义
 jobs:
+  # 单个作业：上传支付宝小程序
   upload:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # 运行环境：最新版 Ubuntu
     steps:
+    # 步骤1：检出代码
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4  # 使用官方代码检出 action
       with:
+        # 检出分支：如果是手动触发则使用输入的分支，否则默认使用 master
         ref: ${{ github.event.inputs.branch || 'master' }}
-    - shell: bash
+    
+    # 步骤2：准备支付宝小程序上传配置文件
+    - shell: bash  # 使用 bash 执行脚本
       env:
-        TOOLID: ${{ secrets.ALI_TOOL_ID }}
-        APPID: ${{ secrets.ALI_APPID }}
-        PRIVATE_KEY: ${{ secrets.ALI_PRIVATE_KEY }}
-        VERSION: ${{ github.event.inputs.version || '' }}
-        DESCRIPTION: ${{ github.event.inputs.description || '自动发布版本' }}
+        # 从 GitHub Secrets 获取支付宝小程序相关配置
+        TOOLID: ${{ secrets.ALI_TOOL_ID }}         # 支付宝开发者工具 ID
+        APPID: ${{ secrets.ALI_APPID }}            # 支付宝小程序 AppID
+        PRIVATE_KEY: ${{ secrets.ALI_PRIVATE_KEY }} # 支付宝开发者私钥
+        VERSION: ${{ github.event.inputs.version || '' }}  # 版本号（手动触发时使用）
+        DESCRIPTION: ${{ github.event.inputs.description || '自动发布版本' }}  # 版本描述
       run: |
+        # 检查私钥是否存在
         if [[ -z $PRIVATE_KEY ]]; then
           echo "##########"
           echo ""
           echo "Please set 'ALI_PRIVATE_KEY' key in actions secrets"
           echo ""
           echo "##########"
-          exit 1
+          exit 1  # 私钥不存在时终止工作流
         else
-          # 如果是手动触发，使用输入的版本号和描述
+          # 根据触发方式生成不同的配置文件
+          # 如果是手动触发且提供了版本号，则使用手动输入的版本信息
           if [[ "${{ github.event_name }}" == "workflow_dispatch" && -n "$VERSION" ]]; then
             echo '{
               "alipay": {
                 "appid": "'$APPID'",
                 "toolId":"'$TOOLID'",
                 "privateKey": "'$PRIVATE_KEY'",
-                "projectPath": "dist/build/mp-alipay",
-                "autoincrement":true
+                "projectPath": "dist/build/mp-alipay",  # 小程序打包输出目录
+                "autoincrement":true                      # 是否自动递增版本号
               },
-              "version": "'$VERSION'",
-              "desc": "'$DESCRIPTION'"
-            }' > .minicirc
+              "version": "'$VERSION'",  # 手动指定的版本号
+              "desc": "'$DESCRIPTION'"   # 手动指定的版本描述
+            }' > .minicirc  # 生成上传配置文件
           else
+            # 自动触发时使用默认配置（版本号由工具自动生成）
             echo '{
               "alipay": {
                 "appid": "'$APPID'",
                 "toolId":"'$TOOLID'",
                 "privateKey": "'$PRIVATE_KEY'",
-                "projectPath": "dist/build/mp-alipay",
-                "autoincrement":true
+                "projectPath": "dist/build/mp-alipay",  # 小程序打包输出目录
+                "autoincrement":true                      # 是否自动递增版本号
               },
-              "version": "",
-              "desc": ""
-            }' > .minicirc
+              "version": "",  # 空版本号表示由工具自动生成
+              "desc": ""       # 空描述表示使用默认描述
+            }' > .minicirc  # 生成上传配置文件
           fi
         fi
 
+    # 步骤3：设置 Node.js 环境
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v4  # 使用官方 Node.js 安装 action
       with:
-        node-version: 20
+        node-version: 20  # 指定 Node.js 版本为 20.x
 
-    - uses: pnpm/action-setup@v4
+    # 步骤4：安装 pnpm 包管理器
+    - uses: pnpm/action-setup@v4  # 使用官方 pnpm 安装 action
       name: Install pnpm
 
+    # 步骤5：执行支付宝小程序上传
     - name: upload
       run: |
+        # 全局安装 uni-mini-ci 工具（用于小程序上传）
         npm i uni-mini-ci -g
+        # 安装项目依赖
         pnpm install
+        # 执行上传命令（该命令会读取 .minicirc 配置文件）
         pnpm upload:mp-alipay
