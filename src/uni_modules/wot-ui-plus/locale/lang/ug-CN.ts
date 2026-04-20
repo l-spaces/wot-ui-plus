@@ -139,5 +139,9 @@ export default {
     clearText: 'تازىلاش',
     revokeText: 'بىكار قىلىش',
     restoreText: 'ئەسلىگە كەلتۈرۈش'
+  },
+  sliderButton: {
+    text: 'دەلىللەش ئۈچۈن ئوڭغا سۈرۈڭ',
+    successText: 'دەلىللەش مۇۋەپپەقىيەتلىك بولدى'
   }
 }

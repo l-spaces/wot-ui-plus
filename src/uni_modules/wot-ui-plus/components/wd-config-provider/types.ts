@@ -1041,16 +1041,16 @@ export type avatarGroupThemeVars = {
   avatarGroupCollapseFontSize?: string
 }
 
-export type slideVerifyThemeVars = {
-  slideVerifyDisabledColor?: string
-  slideVerifyTextColor?: string
-  slideVerifyTextSize?: string
-  slideVerifySuccessTextColor?: string
-  slideVerifyButtonBg?: string
-  slideVerifyButtonShadow?: string
-  slideVerifyButtonColor?: string
-  slideVerifyButtonSize?: string
-  slideVerifyTrackWidth?: string
+export type sliderButtonThemeVars = {
+  sliderButtonDisabledColor?: string
+  sliderButtonTextColor?: string
+  sliderButtonTextSize?: string
+  sliderButtonSuccessTextColor?: string
+  sliderButtonButtonBg?: string
+  sliderButtonButtonShadow?: string
+  sliderButtonButtonColor?: string
+  sliderButtonButtonSize?: string
+  sliderButtonTrackWidth?: string
 }
 
 export type ConfigProviderThemeVars = baseThemeVars &
@@ -1121,4 +1121,4 @@ export type ConfigProviderThemeVars = baseThemeVars &
   tourThemeVars &
   avatarThemeVars &
   avatarGroupThemeVars &
-  slideVerifyThemeVars
+  sliderButtonThemeVars

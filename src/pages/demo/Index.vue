@@ -1,6 +1,6 @@
 <template>
   <wd-toast></wd-toast>
-  <wd-button type="primary" @click="showToast">显示提示</wd-button>
+  <wd-slider-button />
 </template>
 
 <script setup lang="ts">

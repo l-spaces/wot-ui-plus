@@ -140,7 +140,7 @@ export default {
     revokeText: '撤销',
     restoreText: '恢复'
   },
-  slideVerify: {
+  sliderButton: {
     text: '向右滑动验证',
     successText: '验证通过'
   }

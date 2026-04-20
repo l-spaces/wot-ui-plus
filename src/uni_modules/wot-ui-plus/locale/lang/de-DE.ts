@@ -135,5 +135,9 @@ export default {
     clearText: 'Löschen',
     revokeText: 'Rückgängig machen',
     restoreText: 'Wiederherstellen'
+  },
+  sliderButton: {
+    text: 'Nach rechts schieben zur Verifizierung',
+    successText: 'Verifizierung erfolgreich'
   }
 }

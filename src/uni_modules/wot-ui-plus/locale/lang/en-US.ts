@@ -136,8 +136,8 @@ export default {
     revokeText: 'Undo',
     restoreText: 'Restore'
   },
-  slideVerify: {
-    text: 'Slide right to verify',
+  sliderButton: {
+    text: 'Slide right to button',
     successText: 'Verification passed'
   }
 }

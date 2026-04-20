@@ -1,7 +1,7 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
-@include b(slide-verify) {
+@include b(slider-button) {
   position: relative;
   display: flex;
   align-items: center;
@@ -16,15 +16,15 @@
       opacity: 0.8;
 
       @include e(button) {
-        color: $-slide-verify-disabled-color;
+        color: $-slider-button-disabled-color;
         cursor: not-allowed;
       }
     }
   }
 
   @include e(text-inner) {
-    color: $-slide-verify-text-color;
-    font-size: $-slide-verify-text-size;
+    color: $-slider-button-text-color;
+    font-size: $-slider-button-text-size;
     transition: color 0.3s ease;
   }
 
@@ -42,7 +42,7 @@
     position: absolute;
     left: 0;
     height: 100%;
-    min-width: $-slide-verify-track-width;
+    min-width: $-slider-button-track-width;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,7 +50,7 @@
     pointer-events: none;
 
     @include m(success) {
-      color: $-slide-verify-success-text-color;
+      color: $-slider-button-success-text-color;
     }
   }
 
@@ -61,9 +61,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: $-slide-verify-button-bg;
-    box-shadow: 0 2px 8px $-slide-verify-button-shadow;
-    color: $-slide-verify-button-color;
+    background: $-slider-button-button-bg;
+    box-shadow: 0 2px 8px $-slider-button-button-shadow;
+    color: $-slider-button-button-color;
     cursor: grab;
     will-change: transform;
   }
@@ -71,8 +71,8 @@
   // 按钮图标
   @include e(button-icon) {
     @include m(success) {
-      width: calc($-slide-verify-button-size * 0.5);
-      height: calc($-slide-verify-button-size * 0.5);
+      width: calc($-slider-button-button-size * 0.5);
+      height: calc($-slider-button-button-size * 0.5);
       border-radius: 50%;
       display: flex;
       align-items: center;

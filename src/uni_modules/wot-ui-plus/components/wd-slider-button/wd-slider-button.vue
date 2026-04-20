@@ -1,20 +1,20 @@
 <template>
   <view :class="rootClass" :style="rootStyle">
     <!-- 背景提示文字 -->
-    <view class="wd-slide-verify__text">
+    <view class="wd-slider-button__text">
       <slot name="text">
-        <text class="wd-slide-verify__text-inner">
-          {{ slideVerifyText }}
+        <text class="wd-slider-button__text-inner">
+          {{ sliderButtonText }}
         </text>
       </slot>
     </view>
 
     <!-- 滑过区域 -->
-    <view class="wd-slide-verify__track" :style="trackStyle">
-      <view class="wd-slide-verify__track-text">
+    <view class="wd-slider-button__track" :style="trackStyle">
+      <view class="wd-slider-button__track-text">
         <slot name="success-text">
-          <text class="wd-slide-verify__track-text--success">
-            {{ slideVerifySuccessText }}
+          <text class="wd-slider-button__track-text--success">
+            {{ sliderButtonSuccessText }}
           </text>
         </slot>
       </view>
@@ -22,7 +22,7 @@
 
     <!-- 滑块 -->
     <view
-      class="wd-slide-verify__button"
+      class="wd-slider-button__button"
       @touchstart.prevent="onTouchStart"
       @touchmove.prevent="onTouchMove"
       @touchend="onTouchEnd"
@@ -30,7 +30,7 @@
     >
       <slot v-if="isPass" name="success-icon">
         <view
-          class="wd-slide-verify__button-icon--success"
+          class="wd-slider-button__button-icon--success"
           :style="{
             backgroundColor: activeBackgroundColor
           }"
@@ -40,7 +40,7 @@
       </slot>
 
       <slot v-else name="icon">
-        <view class="wd-slide-verify__button-icon">
+        <view class="wd-slider-button__button-icon">
           <wd-icon :name="icon" :size="iconSize" />
         </view>
       </slot>
@@ -50,7 +50,7 @@
 
 <script lang="ts">
   export default {
-    name: 'wd-slide-verify',
+    name: 'wd-slider-button',
     options: {
       addGlobalClass: true,
       virtualHost: true,
@@ -62,28 +62,28 @@
 <script lang="ts" setup>
   import { ref, computed, onBeforeUnmount, type CSSProperties } from 'vue'
   import wdIcon from '../wd-icon/wd-icon.vue'
-  import { slideVerifyProps, type SlideVerifyExpose } from './types'
+  import { sliderButtonProps, type SliderButtonExpose } from './types'
   import { useTouch } from '../composables/useTouch'
   import { useTranslate } from '../composables/useTranslate'
   import { objToStyle, addUnit, isDef } from '../common/util'
 
-  const props = defineProps(slideVerifyProps)
+  const props = defineProps(sliderButtonProps)
   const emit = defineEmits(['success', 'fail'])
 
   const touch = useTouch()
-  const { translate } = useTranslate('slideVerify')
+  const { translate } = useTranslate('sliderButton')
 
-  const slideVerifyText = computed(() => {
+  const sliderButtonText = computed(() => {
     return isDef(props.text) && props.text !== '' ? props.text : translate('text')
   })
 
-  const slideVerifySuccessText = computed(() => {
+  const sliderButtonSuccessText = computed(() => {
     return isDef(props.successText) && props.successText !== '' ? props.successText : translate('successText')
   })
 
   const rootClass = computed(() => {
     return [
-      'wd-slide-verify',
+      'wd-slider-button',
       {
         'is-disabled': props.disabled,
         'is-success': isPass.value,
@@ -110,7 +110,7 @@
       height: addUnit(size),
       transform: `translate(${currentPosition.value}px, 0)`,
       transition: isResetting.value ? 'all 0.3s ease' : 'none',
-      '--wd-slide-verify-button-size': addUnit(size)
+      '--wd-slider-button-button-size': addUnit(size)
     }
     return objToStyle(style)
   })
@@ -119,7 +119,7 @@
     const style: CSSProperties = {
       width: `${currentPosition.value}px`,
       background: props.activeBackgroundColor,
-      '--wot-slide-verify-track-width': addUnit(props.width)
+      '--wot-slider-button-track-width': addUnit(props.width)
     }
     return objToStyle(style)
   })
@@ -236,7 +236,7 @@
     }, 300)
   }
 
-  defineExpose<SlideVerifyExpose>({ reset })
+  defineExpose<SliderButtonExpose>({ reset })
 </script>
 
 <style lang="scss" scoped>

@@ -1,7 +1,7 @@
 import type { ComponentPublicInstance, ExtractPropTypes } from 'vue'
 import { baseProps, makeBooleanProp, makeNumericProp, makeStringProp } from '../common/props'
 
-export const slideVerifyProps = {
+export const sliderButtonProps = {
   ...baseProps,
   /**
    * 滑动条宽度(单位:px)
@@ -76,13 +76,13 @@ export const slideVerifyProps = {
   successIconSize: makeNumericProp(12)
 }
 
-export type SlideVerifyProps = ExtractPropTypes<typeof slideVerifyProps>
+export type SliderButtonProps = ExtractPropTypes<typeof sliderButtonProps>
 
-export type SlideVerifyExpose = {
+export type SliderButtonExpose = {
   /**
    * 重置验证组件到初始状态
    */
   reset: () => void
 }
 
-export type SlideVerifyInstance = ComponentPublicInstance<SlideVerifyProps, SlideVerifyExpose>
+export type SliderButtonInstance = ComponentPublicInstance<SliderButtonProps, SliderButtonExpose>

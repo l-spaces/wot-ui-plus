@@ -140,5 +140,9 @@ export default {
     clearText: 'Temizle',
     revokeText: 'Geri Al',
     restoreText: 'Geri Yükle'
+  },
+  sliderButton: {
+    text: 'Doğrulamak için sağa kaydırın',
+    successText: 'Doğrulama başarılı'
   }
 }
