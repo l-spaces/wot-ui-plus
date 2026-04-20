@@ -4,49 +4,49 @@
       <demo-block title="基本用法">
         <view class="top">
           <wd-tooltip placement="bottom-start" content="bottom-start 提示文字" @change="handleChange1">
-            <wd-button :round="false">bottom-start</wd-button>
+            <wd-button :round="false">底部开始</wd-button>
           </wd-tooltip>
           <wd-tooltip placement="bottom" content="bottom 提示文字" @change="handleChange2">
-            <wd-button :round="false">bottom</wd-button>
+            <wd-button :round="false">底部</wd-button>
           </wd-tooltip>
           <wd-tooltip placement="bottom-end" content="bottom-end 提示文字" @change="handleChange3">
-            <wd-button :round="false">bottom-end</wd-button>
+            <wd-button :round="false">底部结束</wd-button>
           </wd-tooltip>
         </view>
         <view class="left">
           <wd-tooltip placement="right-start" content="right-start 提示文字" @change="handleChange4">
-            <wd-button :round="false">right-start</wd-button>
+            <wd-button :round="false">右侧开始</wd-button>
           </wd-tooltip>
           <wd-tooltip placement="right" content="right 提示文字" customStyle="margin: 20px 0" @change="handleChange5">
-            <wd-button :round="false">right</wd-button>
+            <wd-button :round="false">右侧</wd-button>
           </wd-tooltip>
           <wd-tooltip placement="right-end" content="right-end 提示文字" @change="handleChange6">
-            <wd-button :round="false">right-end</wd-button>
+            <wd-button :round="false">右侧结束</wd-button>
           </wd-tooltip>
         </view>
         <view class="right">
           <wd-tooltip placement="left-start" content="left-start 提示文字" @change="handleChange7">
             <wd-button :round="false">
-              left-start
+              左侧开始
               <wd-icon name="setting" />
             </wd-button>
           </wd-tooltip>
           <wd-tooltip placement="left" content="left 提示文字" customStyle="margin: 20px 0" @change="handleChange8">
-            <wd-button :round="false">left</wd-button>
+            <wd-button :round="false">左侧</wd-button>
           </wd-tooltip>
           <wd-tooltip placement="left-end" content="left-end 提示文字" @change="handleChange9">
-            <wd-button :round="false">left-end</wd-button>
+            <wd-button :round="false">左侧结束</wd-button>
           </wd-tooltip>
         </view>
         <view class="bottom">
           <wd-tooltip placement="top-start" content="top-start 提示文字" @change="handleChange10">
-            <wd-button :round="false">top-start</wd-button>
+            <wd-button :round="false">顶部开始</wd-button>
           </wd-tooltip>
           <wd-tooltip placement="top" content="top 提示文字" @change="handleChange11">
-            <wd-button :round="false">top</wd-button>
+            <wd-button :round="false">顶部</wd-button>
           </wd-tooltip>
           <wd-tooltip placement="top-end" content="top-end 提示文字" @change="handleChange12">
-            <wd-button :round="false">top-end</wd-button>
+            <wd-button :round="false">顶部结束</wd-button>
           </wd-tooltip>
         </view>
       </demo-block>

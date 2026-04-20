@@ -91,7 +91,7 @@ export class AbortablePromise<T> {
 
       // 保存 reject 方法的引用，以便在调用 abort 方法时能够中止 Promise
       // 这是实现可中止功能的关键机制
-      this._reject = reject
+      this._reject = reject // 保存reject方法的引用，以便在abort时调用
     })
   }
 
@@ -138,11 +138,7 @@ export class AbortablePromise<T> {
     if (this._reject) {
       // 调用保存的 reject 方法，使 Promise 进入拒绝状态
       // 传递可选的错误信息，便于错误处理和调试
-      this._reject(error)
-
-      // 执行后将 _reject 设置为 null，防止重复调用
-      // 这是实现"一次性中止"机制的关键
-      this._reject = null
+      this._reject(error) // 调用reject方法来中止Promise
     }
     // 如果 _reject 为 null，说明 Promise 已经完成或已被中止，不做任何操作
   }
@@ -198,16 +194,10 @@ export class AbortablePromise<T> {
    * ```
    */
   then<TResult1 = T, TResult2 = never>(
-    onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | null,
-    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null
-  ): AbortablePromise<TResult1 | TResult2> {
-    // 调用内部 Promise 的 then 方法，并返回新的 AbortablePromise 实例
-    // 这样保持了链式调用的同时，新的 Promise 也具有可中止特性
-    return new AbortablePromise<TResult1 | TResult2>((resolve, reject) => {
-      // 将回调函数传递给内部 Promise 的 then 方法
-      // 使用 Promise 链式调用的标准模式
-      this.promise.then(onfulfilled, onrejected).then(resolve, reject)
-    })
+    onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+  ): Promise<TResult1 | TResult2> {
+    return this.promise.then(onfulfilled, onrejected)
   }
 
   /**
@@ -270,13 +260,7 @@ export class AbortablePromise<T> {
    * })
    * ```
    */
-  catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | null): AbortablePromise<T | TResult> {
-    // 调用内部 Promise 的 catch 方法，并返回新的 AbortablePromise 实例
-    // 这样保持了错误处理能力的同时，新的 Promise 也具有可中止特性
-    return new AbortablePromise<T | TResult>((resolve, reject) => {
-      // 将错误处理函数传递给内部 Promise 的 catch 方法
-      // 使用 Promise 错误处理的标准模式
-      this.promise.catch(onrejected).then(resolve, reject)
-    })
+  catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult> {
+    return this.promise.catch(onrejected)
   }
 }

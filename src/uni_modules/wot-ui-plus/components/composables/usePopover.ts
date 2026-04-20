@@ -180,13 +180,14 @@ export function usePopover(visibleArrow = true) {
   ) {
     // 箭头尺寸计算 - 根据是否显示箭头决定尺寸
     const arrowSize = visibleArrow ? 9 : 0
-
-    // 基础定位计算 - 计算不同方向的基准位置
-    const verticalX = width.value / 2 // 上下定位：水平居中位置
-    const verticalY = arrowSize + height.value + 5 // 上下定位：垂直偏移（包含箭头和间距）
-    const horizontalX = width.value + arrowSize + 5 // 左右定位：水平偏移（包含箭头和间距）
-    const horizontalY = height.value / 2 // 左右定位：垂直居中位置
-
+    // 上下位（纵轴）对应的距离左边的距离
+    const verticalX = width.value / 2
+    // 上下位（纵轴）对应的距离底部的距离
+    const verticalY = arrowSize + height.value + 5
+    // 左右位（横轴）对应的距离左边的距离
+    const horizontalX = width.value + arrowSize + 5
+    // 左右位（横轴）对应的距离底部的距离
+    const horizontalY = height.value / 2
     // 偏移量处理 - 支持多种格式的偏移量配置
     let offsetX = 0
     let offsetY = 0

@@ -1,66 +1,79 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
-/* 平台特定样式适配 */
-/* #ifdef H5 */
-.wd-slider-button {
-  cursor: pointer;
+@include b(slide-verify) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
 
-  &__thumb {
-    &:hover {
-      transform: scale(1.05);
-      transition: transform 0.2s ease;
+  @include when(disabled) {
+    cursor: not-allowed;
+
+    & {
+      opacity: 0.8;
+
+      @include e(button) {
+        color: $-slide-verify-disabled-color;
+        cursor: not-allowed;
+      }
     }
   }
-}
-/* #endif */
 
-/* #ifdef MP-WEIXIN */
-.wd-slider-button {
-  /* 小程序特定样式优化 */
-  &__thumb {
-    /* 优化小程序触摸体验 */
-    -webkit-tap-highlight-color: transparent;
+  @include e(text-inner) {
+    color: $-slide-verify-text-color;
+    font-size: $-slide-verify-text-size;
+    transition: color 0.3s ease;
   }
-}
-/* #endif */
 
-@include b('slider-button') {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  @include e('rail') {
+  @include e(track) {
     position: absolute;
     left: 0;
     top: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    width: 0;
+    height: 100%;
+    transition: background 0.2s ease;
+    overflow: hidden;
   }
 
-  @include e('text') {
-    position: relative;
-    z-index: 5;
-    user-select: none;
-    pointer-events: none;
-  }
-
-  @include e('thumb') {
-    position: relative;
+  @include e(track-text) {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    min-width: $-slide-verify-track-width;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    z-index: 1000;
+    user-select: none;
+    pointer-events: none;
 
-    @include m('inner') {
-      background-color: #ffffff;
-      border-radius: 100px;
-      position: relative;
+    @include m(success) {
+      color: $-slide-verify-success-text-color;
+    }
+  }
+
+  @include e(button) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $-slide-verify-button-bg;
+    box-shadow: 0 2px 8px $-slide-verify-button-shadow;
+    color: $-slide-verify-button-color;
+    cursor: grab;
+    will-change: transform;
+  }
+
+  // 按钮图标
+  @include e(button-icon) {
+    @include m(success) {
+      width: calc($-slide-verify-button-size * 0.5);
+      height: calc($-slide-verify-button-size * 0.5);
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;

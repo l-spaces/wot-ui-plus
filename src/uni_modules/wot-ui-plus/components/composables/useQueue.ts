@@ -30,11 +30,7 @@
  */
 
 // 导入Vue核心API和类型
-import {
-  type Ref, // 响应式引用类型
-  provide, // 提供依赖项
-  ref // 创建响应式引用
-} from 'vue'
+import { type Ref, provide, ref } from 'vue'
 
 /**
  * 用于依赖注入的队列键名

@@ -1,60 +1,61 @@
 /* eslint-disable */
-import * as C from './constant'
-import en from './locale/en'
-import U from './utils'
-var L = 'en' // global locale
+import * as C from './constant';
+import en from './locale/en';
+import U from './utils';
+var L = 'en'; // global locale
 
-var Ls = {} // global loaded locale
+var Ls = {}; // global loaded locale
 
-Ls[L] = en
-var IS_DAYJS = '$isDayjsObject' // eslint-disable-next-line no-use-before-define
+Ls[L] = en;
+var IS_DAYJS = '$isDayjsObject'; // eslint-disable-next-line no-use-before-define
 
 var isDayjs = function isDayjs(d) {
-  return d instanceof Dayjs || !!(d && d[IS_DAYJS])
-}
+  return d instanceof Dayjs || !!(d && d[IS_DAYJS]);
+};
 
 var parseLocale = function parseLocale(preset, object, isLocal) {
-  var l
-  if (!preset) return L
+  var l;
+  if (!preset) return L;
 
   if (typeof preset === 'string') {
-    var presetLower = preset.toLowerCase()
+    var presetLower = preset.toLowerCase();
 
     if (Ls[presetLower]) {
-      l = presetLower
+      l = presetLower;
     }
 
     if (object) {
-      Ls[presetLower] = object
-      l = presetLower
+      Ls[presetLower] = object;
+      l = presetLower;
     }
 
-    var presetSplit = preset.split('-')
+    var presetSplit = preset.split('-');
 
     if (!l && presetSplit.length > 1) {
-      return parseLocale(presetSplit[0])
+      return parseLocale(presetSplit[0]);
     }
   } else {
-    var name = preset.name
-    Ls[name] = preset
-    l = name
+    var name = preset.name;
+    Ls[name] = preset;
+    l = name;
   }
 
-  if (!isLocal && l) L = l
-  return l || (!isLocal && L)
-}
+  if (!isLocal && l) L = l;
+  return l || !isLocal && L;
+};
 
 var dayjs = function dayjs(date, c) {
   if (isDayjs(date)) {
-    return date.clone()
+    return date.clone();
   } // eslint-disable-next-line no-nested-ternary
 
-  var cfg = typeof c === 'object' ? c : {}
-  cfg.date = date
-  cfg.args = arguments // eslint-disable-line prefer-rest-params
 
-  return new Dayjs(cfg) // eslint-disable-line no-use-before-define
-}
+  var cfg = typeof c === 'object' ? c : {};
+  cfg.date = date;
+  cfg.args = arguments; // eslint-disable-line prefer-rest-params
+
+  return new Dayjs(cfg); // eslint-disable-line no-use-before-define
+};
 
 var wrapper = function wrapper(date, instance) {
   return dayjs(date, {
@@ -62,36 +63,37 @@ var wrapper = function wrapper(date, instance) {
     utc: instance.$u,
     x: instance.$x,
     $offset: instance.$offset // todo: refactor; do not use this.$offset in you code
-  })
-}
 
-var Utils = U // for plugin use
+  });
+};
 
-Utils.l = parseLocale
-Utils.i = isDayjs
-Utils.w = wrapper
+var Utils = U; // for plugin use
+
+Utils.l = parseLocale;
+Utils.i = isDayjs;
+Utils.w = wrapper;
 
 var parseDate = function parseDate(cfg) {
   var date = cfg.date,
-    utc = cfg.utc
-  if (date === null) return new Date(NaN) // null is invalid
+      utc = cfg.utc;
+  if (date === null) return new Date(NaN); // null is invalid
 
-  if (Utils.u(date)) return new Date() // today
+  if (Utils.u(date)) return new Date(); // today
 
-  if (date instanceof Date) return new Date(date)
+  if (date instanceof Date) return new Date(date);
 
   if (typeof date === 'string' && !/Z$/i.test(date)) {
-    var d = date.match(C.REGEX_PARSE)
+    var d = date.match(C.REGEX_PARSE);
 
     if (d) {
-      var m = d[2] - 1 || 0
-      var ms = (d[7] || '0').substring(0, 3)
+      var m = d[2] - 1 || 0;
+      var ms = (d[7] || '0').substring(0, 3);
 
       if (utc) {
-        return new Date(Date.UTC(d[1], m, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms))
+        return new Date(Date.UTC(d[1], m, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms));
       }
 
-      return new Date(d[1], m, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms)
+      return new Date(d[1], m, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms);
     }
   }
 

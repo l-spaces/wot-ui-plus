@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, PropType, InjectionKey, ComputedRef } from 'vue'
 import { makeStringProp, baseProps } from '../common/props'
 
 export type ConfigProviderTheme = 'light' | 'dark'
@@ -19,6 +19,12 @@ export const configProviderProps = {
 }
 
 export type ConfigProviderProps = ExtractPropTypes<typeof configProviderProps>
+
+export type ConfigProviderProvide = {
+  themeStyle: ComputedRef<string>
+}
+
+export const CONFIG_PROVIDER_KEY: InjectionKey<ConfigProviderProvide> = Symbol('wd-config-provider')
 
 export type baseThemeVars = {
   colorTheme?: string // 主题色
@@ -172,6 +178,8 @@ export type cellThemeVars = {
   cellGroupTitleColor?: string
   cellGroupValueFs?: string
   cellGroupValueColor?: string
+  cellGroupInsertRadius?: string
+  cellGroupInsertMargin?: string
   cellWrapperPadding?: string
   cellWrapperPaddingLarge?: string
   cellWrapperPaddingWithLabel?: string
@@ -580,10 +588,8 @@ export type switchThemeVars = {
   switchCircleSize?: string
   switchBorderColor?: string
   switchActiveColor?: string
-  switchActiveCircleColor?: string
   switchActiveShadowColor?: string
   switchInactiveColor?: string
-  switchInactiveCircleColor?: string
   switchInactiveShadowColor?: string
 }
 
@@ -651,6 +657,7 @@ export type toastThemeVars = {
 
 export type loadingThemeVars = {
   loadingSize?: string
+  loadingDuration?: string
 }
 
 export type tooltipThemeVars = {
@@ -791,10 +798,11 @@ export type swiperNavThemeVars = {
 }
 
 export type segmentedThemeVars = {
-  subsectionColor?: string
-  subsectionBgColor?: string
-  subsectionActiveColor?: string
-  subsectionActiveBgColor?: string
+  segmentedPadding?: string
+  segmentedItemBgColor?: string
+  segmentedItemColor?: string
+  segmentedItemAcitveBg?: string
+  segmentedItemDisabledColor?: string
 }
 
 export type tabbarThemeVars = {
@@ -986,6 +994,65 @@ export type signatureThemeVars = {
   signatureButtonMarginLeft?: string
 }
 
+export type tourThemeVars = {
+  tourZIndex?: string
+  tourPopoverZIndex?: string
+  tourPopoverPadding?: string
+  tourPopoverRadius?: string
+  tourPopoverMinWidth?: string
+  tourPopoverMaxWidth?: string
+  tourPopoverInfoFontSize?: string
+  tourPopoverBg?: string
+  tourInfoBg?: string
+  tourInfoBorderColor?: string
+  tourInfoBorderWidth?: string
+  tourInfoTextColor?: string
+  tourAnimationDuration?: string
+  tourPopoverAnimationTiming?: string
+  tourHighlightAnimationTiming?: string
+  tourButtonFontSize?: string
+  tourButtonRadius?: string
+  tourButtonPadding?: string
+  tourPrimaryButtonBgColor?: string
+  tourPrimaryButtonTextColor?: string
+  tourSkipBgColor?: string
+  tourButtonTextColor?: string
+  tourHighlightShadowColor?: string
+}
+
+export type avatarThemeVars = {
+  avatarSize?: string
+  avatarSizeLarge?: string
+  avatarSizeMedium?: string
+  avatarSizeSmall?: string
+  avatarTextColor?: string
+  avatarFontWeight?: string
+  avatarFontSize?: string
+  avatarFontSizeLarge?: string
+  avatarFontSizeMedium?: string
+  avatarFontSizeSmall?: string
+  avatarLineHeight?: string
+  avatarBgColor?: string
+  avatarBorderRadius?: string
+}
+
+export type avatarGroupThemeVars = {
+  avatarGroupOverlap?: string
+  avatarGroupCollapseFontSize?: string
+}
+
+export type slideVerifyThemeVars = {
+  slideVerifyDisabledColor?: string
+  slideVerifyTextColor?: string
+  slideVerifyTextSize?: string
+  slideVerifySuccessTextColor?: string
+  slideVerifyButtonBg?: string
+  slideVerifyButtonShadow?: string
+  slideVerifyButtonColor?: string
+  slideVerifyButtonSize?: string
+  slideVerifyTrackWidth?: string
+}
+
 export type ConfigProviderThemeVars = baseThemeVars &
   actionSheetThemeVars &
   badgeThemeVars &
@@ -1050,4 +1117,8 @@ export type ConfigProviderThemeVars = baseThemeVars &
   videoPreviewThemeVars &
   imgCropperThemeVars &
   floatingPanelThemeVars &
-  signatureThemeVars
+  signatureThemeVars &
+  tourThemeVars &
+  avatarThemeVars &
+  avatarGroupThemeVars &
+  slideVerifyThemeVars

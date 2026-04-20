@@ -68,7 +68,7 @@
     "test:component": "esno ./scripts/test-component.ts",
     "test:workflow": "esno ./scripts/test-workflow.ts",
     "type-check": "vue-tsc --noEmit",
-    "lint": "eslint src --ext .js,.vue,.ts",
+    "lint": "eslint --fix --ext .js,.vue,.ts src",
     "lint:fix": "eslint --fix --ext .js,.vue,.ts",
     "format:check": "prettier --check \"**/*.{js,vue,ts,json}\"",
     "format": "prettier --write \"**/*.{js,vue,ts,json,scss,css}\"",
@@ -95,7 +95,7 @@
     "@dcloudio/uni-mp-xhs": "3.0.0-4080520251106001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4080520251106001",
     "vite-plugin-compression": "^0.5.1",
-    "vue": "^3.4.21",
+    "vue": "^3.4.38",
     "vue-i18n": "9.1.9"
   },
   "devDependencies": {

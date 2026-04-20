@@ -1,32 +1,56 @@
 <template>
-  <view class="wd-slider-button" :id="sliderButtonId" :style="rootStyle">
-    <view class="wd-slider-button__rail" :style="railStyle">
-      <view
-        class="wd-slider-button__thumb"
-        :style="thumbStyle"
-        @touchstart.stop.prevent="onThumbStart"
-        @touchmove.stop.prevent="onThumbMove"
-        @touchend.stop.prevent="onThumbEnd"
-        @touchcancel.stop.prevent="onThumbEnd"
-      >
-        <slot name="thumb">
-          <view class="wd-slider-button__thumb--inner" :style="thumbInnerStyle">
-            <wd-icon name="double-right" :color="railColor" size="40"></wd-icon>
-          </view>
+  <view :class="rootClass" :style="rootStyle">
+    <!-- 背景提示文字 -->
+    <view class="wd-slide-verify__text">
+      <slot name="text">
+        <text class="wd-slide-verify__text-inner">
+          {{ slideVerifyText }}
+        </text>
+      </slot>
+    </view>
+
+    <!-- 滑过区域 -->
+    <view class="wd-slide-verify__track" :style="trackStyle">
+      <view class="wd-slide-verify__track-text">
+        <slot name="success-text">
+          <text class="wd-slide-verify__track-text--success">
+            {{ slideVerifySuccessText }}
+          </text>
         </slot>
       </view>
     </view>
-    <slot>
-      <text class="wd-slider-button__text" :style="textStyle">
-        {{ displayText }}
-      </text>
-    </slot>
+
+    <!-- 滑块 -->
+    <view
+      class="wd-slide-verify__button"
+      @touchstart.prevent="onTouchStart"
+      @touchmove.prevent="onTouchMove"
+      @touchend="onTouchEnd"
+      :style="buttonStyle"
+    >
+      <slot v-if="isPass" name="success-icon">
+        <view
+          class="wd-slide-verify__button-icon--success"
+          :style="{
+            backgroundColor: activeBackgroundColor
+          }"
+        >
+          <wd-icon :name="successIcon" :size="successIconSize" color="#fff" />
+        </view>
+      </slot>
+
+      <slot v-else name="icon">
+        <view class="wd-slide-verify__button-icon">
+          <wd-icon :name="icon" :size="iconSize" />
+        </view>
+      </slot>
+    </view>
   </view>
 </template>
 
 <script lang="ts">
   export default {
-    name: 'wd-slider-button',
+    name: 'wd-slide-verify',
     options: {
       addGlobalClass: true,
       virtualHost: true,
@@ -36,212 +60,183 @@
 </script>
 
 <script lang="ts" setup>
-  import { computed, nextTick, onMounted, ref, type CSSProperties } from 'vue'
-  import { addUnit, getRect, uuid } from '../common/util'
-  import { sliderButtonProps } from './types'
+  import { ref, computed, onBeforeUnmount, type CSSProperties } from 'vue'
+  import wdIcon from '../wd-icon/wd-icon.vue'
+  import { slideVerifyProps, type SlideVerifyExpose } from './types'
+  import { useTouch } from '../composables/useTouch'
+  import { useTranslate } from '../composables/useTranslate'
+  import { objToStyle, addUnit, isDef } from '../common/util'
 
-  // 组件属性定义
-  const props = defineProps(sliderButtonProps)
+  const props = defineProps(slideVerifyProps)
+  const emit = defineEmits(['success', 'fail'])
 
-  // 事件定义
-  const emit = defineEmits<{
-    change: [percent: number]
-    success: []
-    reset: []
-  }>()
+  const touch = useTouch()
+  const { translate } = useTranslate('slideVerify')
 
-  // 响应式状态
-  const sliderButtonId = ref(`slider-button-${uuid()}`)
-  const success = ref(false)
-  const useTransition = ref(false)
-  const thumbX = ref(0)
-  const areaWidth = ref(0)
-  const areaLeft = ref(0)
-  const isDragging = ref(false)
-  const dragOffsetX = ref(0)
+  const slideVerifyText = computed(() => {
+    return isDef(props.text) && props.text !== '' ? props.text : translate('text')
+  })
 
-  // 计算属性：根节点样式
-  const rootStyle = computed(() => {
+  const slideVerifySuccessText = computed(() => {
+    return isDef(props.successText) && props.successText !== '' ? props.successText : translate('successText')
+  })
+
+  const rootClass = computed(() => {
     return [
+      'wd-slide-verify',
       {
-        width: addUnit(props.width),
-        height: addUnit(props.height),
-        borderRadius: addUnit(props.round),
-        backgroundColor: props.bgColor
+        'is-disabled': props.disabled,
+        'is-success': isPass.value,
+        'is-dragging': isDragging.value
       },
-      props.customStyle
-    ] as CSSProperties[]
+      props.customClass
+    ]
   })
 
-  // 计算属性：轨道样式
-  const railStyle = computed(() => {
-    const thumbW = getPxValue(props.height)
-    const rawWidth = thumbX.value + thumbW
-    const width = Math.max(thumbW, Math.min(areaWidth.value, rawWidth))
+  const rootStyle = computed(() => {
+    const style: CSSProperties = {
+      width: addUnit(props.width),
+      height: addUnit(props.height),
+      backgroundColor: props.backgroundColor
+    }
 
-    return {
-      zIndex: props.railIndex || 1,
-      width: addUnit(width),
-      backgroundColor: props.railColor,
-      borderRadius: addUnit(props.railRadius),
-      transition: useTransition.value ? 'none' : 'width 0.3s ease-out'
-    } as CSSProperties
+    return `${objToStyle(style)}${props.customStyle}`
   })
 
-  // 计算属性：滑块样式
-  const thumbStyle = computed(() => {
-    return {
-      width: addUnit(props.height),
-      height: addUnit(props.height)
-    } as CSSProperties
-  })
-
-  // 计算属性：滑块内部样式
-  const thumbInnerStyle = computed(() => {
-    const size = getPxValue(props.height) - 8
-    return {
+  const buttonStyle = computed(() => {
+    const size = props.height
+    const style: CSSProperties = {
       width: addUnit(size),
-      height: addUnit(size)
-    } as CSSProperties
-  })
-
-  // 计算属性：文本样式
-  const textStyle = computed(() => {
-    return {
-      fontWeight: props.textBold ? 'bold' : 'normal',
-      fontSize: addUnit(props.fontSize),
-      color: success.value ? props.activeTextColor : props.textColor
-    } as CSSProperties
-  })
-
-  // 计算属性：显示文本
-  const displayText = computed(() => {
-    return success.value ? props.successText : props.text
-  })
-
-  // 计算属性：阈值X坐标
-  const thresholdX = computed(() => {
-    if (props.threshold) {
-      const thresholdValue = getPxValue(props.threshold)
-      return thresholdValue > 0 ? thresholdValue : 0
+      height: addUnit(size),
+      transform: `translate(${currentPosition.value}px, 0)`,
+      transition: isResetting.value ? 'all 0.3s ease' : 'none',
+      '--wd-slide-verify-button-size': addUnit(size)
     }
-    const thumbW = getPxValue(props.height)
-    const max = areaWidth.value - thumbW
-    return max > 0 ? max : 0
+    return objToStyle(style)
   })
 
-  // 工具函数：获取像素值
-  const getPxValue = (value: string | number): number => {
-    if (typeof value === 'number') {
-      return value
+  const trackStyle = computed(() => {
+    const style: CSSProperties = {
+      width: `${currentPosition.value}px`,
+      background: props.activeBackgroundColor,
+      '--wot-slide-verify-track-width': addUnit(props.width)
     }
-    const num = parseFloat(value)
+    return objToStyle(style)
+  })
+
+  /**
+   * 从字符串或数字中解析出有效的数字。
+   *
+   * - 对于 number 类型，直接返回原值（可能包括 Infinity、-Infinity）。
+   * - 对于 string 类型，使用 `parseFloat` 解析前缀中的数字。
+   * - 当无法解析出有效数字（结果为 NaN）时，返回 0 作为安全默认值。
+   *
+   * 注意：后续使用该函数的逻辑（如 `maxPosition` 计算）会额外通过 `isFinite`
+   * 等判断过滤掉 Infinity / 非法值，因此这里不会主动抛错，而是保证返回一个 number。
+   */
+  const parseNumber = (value: string | number): number => {
+    if (typeof value === 'number') return value
+    const num = parseFloat(String(value))
     return isNaN(num) ? 0 : num
   }
 
-  // 初始化组件
-  const init = async () => {
-    try {
-      const rect = await getRect(`#${sliderButtonId.value}`, false)
-      if (rect && typeof rect.width === 'number' && rect.width > 0) {
-        areaWidth.value = rect.width
-        areaLeft.value = rect.left || 0
-      }
-
-      // 确保thumbX不超过阈值
-      if (thumbX.value > thresholdX.value) {
-        thumbX.value = thresholdX.value
-      }
-    } catch (error) {
-      console.warn('wd-slider-button: 初始化失败', error)
+  // 最大位置，避免超出了范围导致展示异常
+  const maxPosition = computed(() => {
+    const width = parseNumber(props.width)
+    const height = parseNumber(props.height)
+    if (!isFinite(width) || !isFinite(height) || width <= 0 || height <= 0) {
+      return 0
     }
+    return Math.max(0, width - height)
+  })
+
+  // 完成状态判断
+  const isComplete = computed(() => {
+    const distance = Math.abs(maxPosition.value - currentPosition.value)
+    return distance <= parseNumber(props.tolerance) // 容差范围内完成
+  })
+
+  // 位置状态
+  const currentPosition = ref<number>(0)
+  const startPosition = ref<number>(0)
+  // 成功状态
+  const isPass = ref<boolean>(false)
+  // 拖动状态
+  const isDragging = ref<boolean>(false)
+  // 回弹
+  const isResetting = ref(false)
+
+  const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(value, max))
+  const updatePosition = (position: number) => {
+    // 限制位置在允许范围内
+    currentPosition.value = clamp(position, 0, maxPosition.value)
   }
 
-  // 触摸开始事件处理
-  const onThumbStart = (event: TouchEvent) => {
-    if (props.disabled || success.value) return
+  const isDisabled = computed(() => props.disabled || isPass.value)
+  const onTouchStart = (event: TouchEvent): void => {
+    if (isDisabled.value || isDragging.value) return
 
-    useTransition.value = true
+    touch.touchStart(event)
+    startPosition.value = currentPosition.value
     isDragging.value = true
-
-    // 记录按下时的指尖相对当前滑块左侧的偏移，避免跳动
-    const touch = event.touches[0]
-    const offset = touch.clientX - (areaLeft.value + thumbX.value)
-    const thumbW = getPxValue(props.height)
-    dragOffsetX.value = Math.min(thumbW, Math.max(0, offset))
   }
 
-  // 触摸移动事件处理
-  const onThumbMove = (event: TouchEvent) => {
-    if (!isDragging.value || props.disabled || success.value) return
+  const onTouchMove = (event: TouchEvent): void => {
+    if (isDisabled.value || !isDragging.value) return
 
-    const touch = event.touches[0]
-    let nextX = touch.clientX - areaLeft.value - dragOffsetX.value
-    const thumbW = getPxValue(props.height)
-    const maxX = Math.max(0, areaWidth.value - thumbW)
-
-    // 限制移动范围
-    nextX = Math.min(maxX, Math.max(0, nextX))
-    thumbX.value = nextX
-
-    // 计算进度百分比
-    const percent = thresholdX.value === 0 ? 0 : Math.min(1, thumbX.value / thresholdX.value)
-    emit('change', percent)
+    touch.touchMove(event)
+    updatePosition(startPosition.value + touch.deltaX.value)
   }
+  // 控制回弹
+  const timer = ref<ReturnType<typeof setTimeout> | null>(null)
 
-  // 触摸结束事件处理
-  const onThumbEnd = () => {
-    if (!isDragging.value) return
-
+  const onTouchEnd = (): void => {
+    if (isDisabled.value || !isDragging.value) return
     isDragging.value = false
-    useTransition.value = false
 
-    if (success.value) return
-
-    if (thumbX.value < thresholdX.value) {
-      reset()
+    if (isComplete.value) {
+      // 完成
+      updatePosition(maxPosition.value)
+      isPass.value = true
+      emit('success')
     } else {
-      handleSuccess()
+      isResetting.value = true
+      // 失败回到起点
+      updatePosition(0)
+      emit('fail')
+
+      timer.value = setTimeout(() => {
+        isResetting.value = false
+      }, 300)
     }
   }
 
-  // 处理成功状态
-  const handleSuccess = () => {
-    if (success.value) return
-
-    success.value = true
-    thumbX.value = areaWidth.value
-    emit('success')
-
-    // 自动重置
-    if (props.autoReset) {
-      setTimeout(() => {
-        useTransition.value = true
-        reset()
-      }, props.resetDelay)
+  onBeforeUnmount(() => {
+    if (timer.value !== null) {
+      clearTimeout(timer.value)
+      timer.value = null
     }
-  }
+  })
 
-  // 重置组件状态
+  /**
+   * 重置验证组件到初始状态
+   */
   const reset = () => {
-    success.value = false
-    thumbX.value = 0
-    emit('reset')
+    if (timer.value !== null) {
+      clearTimeout(timer.value)
+      timer.value = null
+    }
+    isResetting.value = true
+    currentPosition.value = 0
+    startPosition.value = 0
+    isPass.value = false
+    isDragging.value = false
+    timer.value = setTimeout(() => {
+      isResetting.value = false
+    }, 300)
   }
 
-  // 组件挂载后初始化
-  onMounted(() => {
-    nextTick(() => {
-      init()
-    })
-  })
-
-  // 暴露方法给父组件
-  defineExpose({
-    init,
-    reset,
-    handleSuccess
-  })
+  defineExpose<SlideVerifyExpose>({ reset })
 </script>
 
 <style lang="scss" scoped>

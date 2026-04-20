@@ -2,24 +2,24 @@
   <view>
     <page-wraper>
       <demo-block title="Fade 动画">
-        <wd-button @click="fade">fade</wd-button>
-        <wd-button @click="fadeUp">fade-up</wd-button>
-        <wd-button @click="fadeDown">fade-down</wd-button>
-        <wd-button @click="fadeLeft">fade-left</wd-button>
-        <wd-button @click="fadeRight">fade-right</wd-button>
+        <wd-button @click="fade">淡入</wd-button>
+        <wd-button @click="fadeUp">向上淡入</wd-button>
+        <wd-button @click="fadeDown">向下淡入</wd-button>
+        <wd-button @click="fadeLeft">向左淡入</wd-button>
+        <wd-button @click="fadeRight">向右淡入</wd-button>
       </demo-block>
       <demo-block title="Slide 动画">
-        <wd-button @click="slideUp">slide-up</wd-button>
-        <wd-button @click="slideDown">slide-down</wd-button>
-        <wd-button @click="slideLeft">slide-left</wd-button>
-        <wd-button @click="slideRight">slide-right</wd-button>
+        <wd-button @click="slideUp">向上滑入</wd-button>
+        <wd-button @click="slideDown">向下滑入</wd-button>
+        <wd-button @click="slideLeft">向左滑入</wd-button>
+        <wd-button @click="slideRight">向右滑入</wd-button>
       </demo-block>
       <demo-block title="Zoom 动画">
-        <wd-button @click="zoomIn">zoom-in</wd-button>
-        <wd-button @click="zoomOut">zoom-out</wd-button>
+        <wd-button @click="zoomIn">放大</wd-button>
+        <wd-button @click="zoomOut">缩小</wd-button>
       </demo-block>
       <demo-block title="自定义动画">
-        <wd-button @click="custom">custom</wd-button>
+        <wd-button @click="custom">自定义</wd-button>
       </demo-block>
 
       <wd-transition :show="show" :name="name" custom-class="block" />

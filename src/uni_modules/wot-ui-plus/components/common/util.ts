@@ -492,9 +492,9 @@ export function getRect<T extends boolean>(selector: string, all: T, scope?: any
       } else if (!all && rect) {
         resolve(rect as RectResultType<T>)
       } else {
-        //  reject(new Error('No nodes found'))
+        reject(new Error('No nodes found'))
         // 找不到节点时返回默认值，避免抛出错误
-        resolve((all ? [] : { width: 0, height: 0 }) as RectResultType<T>)
+        // resolve((all ? [] : { width: 0, height: 0 }) as RectResultType<T>)
       }
     }
 
@@ -618,7 +618,7 @@ export function isArray(value: any): value is Array<any> {
  * - 事件处理器检查
  * - 高阶函数参数验证
  */
-export function isFunction<T extends (...args: any[]) => any>(value: any): value is T {
+export function isFunction<T extends Function>(value: any): value is T {
   return getType(value) === 'function' || getType(value) === 'asyncfunction'
 }
 
@@ -1336,7 +1336,7 @@ export function debounce<T extends (...args: any[]) => any>(func: T, wait: numbe
  * - 鼠标移动事件
  * - 频繁触发的API调用
  */
-export function throttle<T extends (...args: any[]) => any>(func: T, wait: number): T {
+export function throttle(func: Function, wait: number): Function {
   let timeout: ReturnType<typeof setTimeout> | null = null
   let previous: number = 0
 
@@ -1360,7 +1360,7 @@ export function throttle<T extends (...args: any[]) => any>(func: T, wait: numbe
     }
   }
 
-  return throttled as T
+  return throttled
 }
 
 /**
