@@ -1,98 +1,97 @@
-import type { ComponentPublicInstance, ExtractPropTypes } from 'vue'
-import { baseProps, makeBooleanProp, makeNumericProp, makeStringProp, numericProp } from '../common/props'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import { baseProps } from '../common/props'
 
+/**
+ * 滑块值类型 - 单滑块为数字，双滑块为数组
+ */
 export const sliderButtonProps = {
   ...baseProps,
-  /**
-   * 容错范围（单位：px），距离终点多少距离内视为验证通过
-   * 类型: number
-   * 默认值: 10
-   */
-  tolerance: {
-    type: Number,
-    default: 10
+
+  // 按钮文字
+  text: {
+    type: String,
+    default: '滑动解锁'
+  },
+  // 按钮宽度
+  width: {
+    type: [String, Number],
+    default: ''
+  },
+  // 圆角
+  round: {
+    type: [String, Number],
+    default: 100
+  },
+  // 按钮高度
+  height: {
+    type: [String, Number],
+    default: 45
   },
 
-  /**
-   * 提示文字
-   * 类型: string
-   * 默认值: ''
-   */
-  text: makeStringProp(''),
-
-  /**
-   * 验证成功提示文字
-   * 类型: string
-   * 默认值: ''
-   */
-  successText: makeStringProp(''),
-
-  /**
-   * 是否禁用
-   * 类型: boolean
-   * 默认值: false
-   */
-  disabled: makeBooleanProp(false),
-
-  /**
-   * 背景颜色
-   * 类型: string
-   */
-  backgroundColor: String,
-
-  /**
-   * 激活时的背景颜色
-   * 类型: string
-   */
-  activeBackgroundColor: String,
-
-  /**
-   * 滑块图标名称
-   * 类型: string
-   * 默认值: 'double-right'
-   */
-  icon: makeStringProp('double-right'),
-
-  /**
-   * 成功图标名称
-   * 类型: string
-   * 默认值: 'check-circle-fill'
-   */
-  successIcon: makeStringProp('check-circle-fill'),
-
-  /**
-   * 图标大小（单位：px）
-   * 类型: string | number
-   * 默认值: 20
-   */
-  iconSize: numericProp,
-
-  /**
-   * 成功图标大小（单位：px）
-   * 类型: string | number
-   * 默认值: 12
-   */
-  successIconSize: numericProp
+  // 背景颜色
+  bgColor: {
+    type: String,
+    default: '#e0e0e0'
+  },
+  // 滑道背景颜色
+  railColor: {
+    type: String,
+    default: '#4d80f0'
+  },
+  // 滑道层级
+  railIndex: {
+    type: [String, Number],
+    default: ''
+  },
+  // 轨道圆角
+  railRadius: {
+    type: [String, Number],
+    default: 100
+  },
+  // 文字颜色
+  textColor: {
+    type: String,
+    default: '#c2c2c2'
+  },
+  // 文字大小
+  fontSize: {
+    type: [String, Number],
+    default: 16
+  },
+  textBold: {
+    type: Boolean,
+    default: false
+  },
+  // 激活文字颜色
+  activeTextColor: {
+    type: String,
+    default: '#ffffff'
+  },
+  // 是否禁用
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  // 成功文字
+  successText: {
+    type: String,
+    default: '验证成功'
+  },
+  // 是否自动重置
+  autoReset: {
+    type: Boolean,
+    default: false
+  },
+  // 重置延迟时间（毫秒）
+  resetDelay: {
+    type: Number,
+    default: 300
+  },
+  // 阈值
+  threshold: {
+    type: [String, Number],
+    default: ''
+  }
 }
 
 export type SliderButtonProps = ExtractPropTypes<typeof sliderButtonProps>
-
-export type SliderButtonExpose = {
-  /**
-   * 初始化尺寸信息
-   */
-  init: () => Promise<void>
-  /**
-   * 重置验证组件到初始状态
-   */
-  reset: () => void
-}
-
-export type SliderButtonEmits = {
-  /** 验证成功事件 */
-  success: []
-  /** 验证失败事件 */
-  fail: []
-}
-
-export type SliderButtonInstance = ComponentPublicInstance<SliderButtonProps, SliderButtonExpose, SliderButtonEmits>

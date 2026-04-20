@@ -1,78 +1,69 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
+/* 平台特定样式适配 */
+/* #ifdef H5 */
+.wd-slider-button {
+  cursor: pointer;
 
-@include b(slider-button) {
+  &__thumb {
+    &:hover {
+      transform: scale(1.05);
+      transition: transform 0.2s ease;
+    }
+  }
+}
+/* #endif */
+
+/* #ifdef MP-WEIXIN */
+.wd-slider-button {
+  /* 小程序特定样式优化 */
+  &__thumb {
+    /* 优化小程序触摸体验 */
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+/* #endif */
+
+@include b('slider-button') {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
-  user-select: none;
-  width: $slider-button-width;
-  height: $slider-button-height;
-  background: $slider-button-bg;
-  border-radius: $slider-button-radius;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  @include when(disabled) {
-    cursor: not-allowed;
-    opacity: $slider-button-disabled-opacity;
-  }
-
-  @include e(text-inner) {
-    color: $slider-button-text-color;
-    font-size: $slider-button-text-font-size;
-    line-height: $slider-button-text-line-height;
-    transition: color 0.3s ease;
-  }
-
-  @include e(track) {
+  @include e('rail') {
     position: absolute;
     left: 0;
     top: 0;
-    width: 0;
-    height: 100%;
-    background: $slider-button-track-bg;
-    border-radius: $slider-button-radius;
-    overflow: hidden;
-  }
-
-  @include e(track-text) {
-    position: absolute;
-    color: $slider-button-success-text-color;
-    left: 0;
-    height: 100%;
-    min-width: 100%;
+    bottom: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+  }
+
+  @include e('text') {
+    position: relative;
+    z-index: 5;
     user-select: none;
     pointer-events: none;
-    word-break: keep-all;
   }
 
-  @include e(button) {
-    @include halfPixelBorderSurround($slider-button-border-color);
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: $slider-button-size;
-    height: $slider-button-size;
+  @include e('thumb') {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: $slider-button-bg;
-    box-shadow: $slider-button-shadow;
-    color: $slider-button-color;
-    border-radius: $slider-button-radius;
-    cursor: grab;
-  }
+    overflow: hidden;
+    z-index: 1000;
 
-  // 按钮图标
-  @include edeep(button-icon) {
-    font-size: $slider-button-success-icon-size;
-    @include m(success) {
-      color: $slider-button-success-color;
+    @include m('inner') {
+      background-color: #ffffff;
+      border-radius: 100px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

@@ -559,42 +559,6 @@ $-slider-axie-bg: var(--wot-slider-axie-bg, #e5e5e5) !default; // 滑轴的默�
 $-slider-line-color: var(--wot-slider-line-color, resultColor(315deg, $-color-theme, 'dark' 'light', #517cf0 #769ef5, 0% 100%)) !default; // 进度条颜色
 $-slider-disabled-color: var(--wot-slider-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 禁用状态下字体颜色
 
-/* sort-button */
-// 组件高度
-$slider-button-height: var(--wot-slider-button-height, 40px) !default;
-// 组件宽度
-$slider-button-width: var(--wot-slider-button-width, 100%) !default;
-// 组件背景色
-$slider-button-bg: var(--wot-slider-button-bg, #F7F8FAFF) !default;
-// 圆角
-$slider-button-radius: var(--wot-slider-button-radius, 8px) !default;
-// 成功态track背景色
-$slider-button-track-bg: var(--wot-slider-button-track-bg, #00C49FFF) !default;
-// 禁用态透明度
-$slider-button-disabled-opacity: var(--wot-slider-button-disabled-opacity, 0.5) !default;
-// 提示文字颜色
-$slider-button-text-color: var(--wot-slider-button-text-color, #333333FF) !default;
-// 提示文字字号
-$slider-button-text-font-size: var(--wot-slider-button-text-font-size, 14px) !default;
-// 提示文字行高
-$slider-button-text-line-height: var(--wot-slider-button-text-line-height, 20px) !default;
-// 成功态文字颜色
-$slider-button-success-text-color: var(--wot-slider-button-success-text-color, #FFFFFFFF) !default;
-// 滑块背景色
-$slider-button-bg: var(--wot-slider-button-bg, #FFFFFFFF) !default;
-// 滑块阴影色
-$slider-button-shadow: var(--wot-slider-button-shadow, 0 0 8px 0 rgba(0, 0, 0, 0.045)) !default;
-// 滑块图标颜色
-$slider-button-color: var(--wot-slider-button-color, #FFFFFFFF) !default;
-// 滑块图标成功态颜色
-$slider-button-success-color: var(--wot-slider-button-success-color, #00C49FFF) !default;
-// 滑块尺寸
-$slider-button-size: var(--wot-slider-button-size, $slider-button-height) !default;
-// 滑块边框颜色
-$slider-button-border-color: var(--wot-slider-button-border-color, #D9D9D9FF) !default; 
-// 滑块图标尺寸
-$slider-button-success-icon-size: var(--wot-slider-button-success-icon-size, 20px) !default;
-
 /* steps */
 $-steps-icon-size: var(--wot-steps-icon-size, 22px) !default; // 图标尺寸 (22px)
 $-steps-inactive-color: var(--wot-steps-inactive-color, rgba(0, 0, 0, 0.25)) !default; // 等待状态文字颜色

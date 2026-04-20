@@ -1,88 +1,83 @@
 <template>
-  <page-wraper>
-    <demo-block :title="$t('ji-chu-yong-fa')">
-      <wd-slider-button @success="handleSuccess" @fail="handleFail" />
+  <view class="wd-page">
+    <demo-block title="基础用法">
+      <view class="wd-demo-area">
+        <wd-slider-button :text="'滑动解锁'" @success="onSliderSuccess" @reset="onSliderReset" />
+      </view>
     </demo-block>
 
-    <demo-block :title="$t('zi-ding-yi-wen-an')">
-      <wd-slider-button :text="$t('qing-tuo-dong-hua-kuai')" :success-text="$t('yan-zheng-cheng-gong')" />
+    <demo-block title="自定义样式">
+      <view class="wd-demo-area">
+        <wd-slider-button
+          :text="sliderData.text"
+          :successText="sliderData.successText"
+          :bgColor="sliderData.bgColor"
+          :railColor="sliderData.railColor"
+          :height="45"
+          textColor="#ffffff"
+          :textBold="true"
+          railIndex="10"
+          threshold="150"
+          autoReset
+          @reset="onCustomSuccess"
+        />
+      </view>
     </demo-block>
 
-    <demo-block :title="$t('zi-ding-yi-chi-cun')">
-      <wd-slider-button :width="250" :height="50" icon-size="60rpx" success-icon-size="30rpx" />
+    <demo-block title="禁用状态">
+      <view class="wd-demo-area">
+        <wd-slider-button :text="'已禁用'" :width="300" :height="50" :disabled="true" />
+      </view>
     </demo-block>
-
-    <demo-block :title="$t('zi-ding-yi-yan-se')">
-      <wd-slider-button background-color="#E8F4FF" active-background-color="#4D94FF" />
-    </demo-block>
-
-    <demo-block :title="$t('zi-ding-yi-tu-biao')">
-      <wd-slider-button icon="arrow-right" success-icon="read" :icon-size="24" :success-icon-size="14" />
-    </demo-block>
-
-    <demo-block :title="$t('zi-ding-yi-rong-cuo-fan-wei')">
-      <wd-slider-button :tolerance="20" />
-    </demo-block>
-
-    <demo-block :title="$t('jin-yong-zhuang-tai')">
-      <wd-slider-button disabled />
-    </demo-block>
-
-    <demo-block :title="$t('zhong-zhi-fang-fa')">
-      <wd-slider-button ref="sliderButtonRef" @success="handleSuccess" @fail="handleFail" />
-      <wd-button type="primary" @click="handleReset" style="margin-top: 20px">{{ $t('zhong-zhi') }}</wd-button>
-    </demo-block>
-
-    <demo-block :title="$t('cha-cao-yong-fa')">
-      <wd-slider-button>
-        <template #text>
-          <text>Slide right to complete verification</text>
-        </template>
-        <template #success-text>
-          <text>{{ $t('yan-zheng-tong-guo') }}</text>
-        </template>
-        <template #icon>
-          <view>ICON</view>
-        </template>
-        <template #success-icon>
-          <view style="color: red">OK</view>
-        </template>
-      </wd-slider-button>
-    </demo-block>
-  </page-wraper>
+  </view>
 </template>
 
 <script lang="ts" setup>
-  import { useToast } from '@/uni_modules/wot-ui-plus'
-  import type { SliderButtonInstance } from '@/uni_modules/wot-ui-plus/components/wd-slider-button/types'
   import { ref } from 'vue'
-  import { useI18n } from 'vue-i18n'
 
-  const toast = useToast()
-  const { t } = useI18n()
-
-  const sliderButtonRef = ref<SliderButtonInstance>()
-
-  function handleSuccess() {
-    toast.success(t('yan-zheng-cheng-gong'))
+  // 滑块数据接口定义
+  interface SliderData {
+    text: string
+    successText: string
+    bgColor: string
+    railColor: string
   }
 
-  function handleFail() {
-    toast.error(t('yan-zheng-shi-bai-qing-chong-shi'))
+  // 响应式数据
+  const sliderRef = ref(null)
+  const sliderData = ref<SliderData>({
+    text: '开始出发',
+    successText: '开始出发',
+    bgColor: 'rgb(230, 27, 47)',
+    railColor: 'rgba(230, 27, 47, 0.85)'
+  })
+
+  // 基础用法 - 滑动成功
+  const onSliderSuccess = () => {
+    uni.showToast({
+      title: '滑动验证成功！',
+      icon: 'success'
+    })
   }
 
-  function handleReset() {
-    sliderButtonRef.value?.reset()
-    toast.info(t('yi-zhong-zhi'))
+  // 基础用法 - 重置
+  const onSliderReset = () => {
+    console.log('滑动按钮已重置')
+  }
+
+  // 自定义样式 - 滑动成功
+  const onCustomSuccess = () => {
+    sliderData.value = {
+      text: '接到乘客',
+      successText: '接到乘客',
+      bgColor: 'rgb(47, 230, 117)',
+      railColor: 'rgba(47, 230, 117, 0.85)'
+    }
   }
 </script>
 
-<style lang="scss" scoped>
-  :deep(.wd-slider-button) {
-    margin-bottom: 20px;
-  }
-
-  :deep(.wd-slider-button:last-child) {
-    margin-bottom: 0;
+<style lang="scss">
+  .wd-demo-area {
+    padding: 20px 0;
   }
 </style>
