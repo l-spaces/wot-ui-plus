@@ -560,15 +560,40 @@ $-slider-line-color: var(--wot-slider-line-color, resultColor(315deg, $-color-th
 $-slider-disabled-color: var(--wot-slider-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 禁用状态下字体颜色
 
 /* sort-button */
-$-slider-button-disabled-color: var(--wot-slider-button-disabled-color, #cccccc) !default; // 禁用文字颜色
-$-slider-button-text-color: var(--wot-slider-button-text-color, #333333) !default; // 提示文字颜色
-$-slider-button-text-size: var(--wot-slider-button-text-size, 12px) !default; // 提示文字大小
-$-slider-button-success-text-color: var(--wot-slider-button-success-text-color, #ffffff) !default; // 成功提示文字颜色
-$-slider-button-button-bg: var(--wot-slider-button-button-bg, #ffffff) !default; // 滑块背景色
-$-slider-button-button-shadow: var(--wot-slider-button-button-shadow, rgba(0, 0, 0, 0.15)) !default; // 滑块阴影
-$-slider-button-button-color: var(--wot-slider-button-button-color, #666666) !default; // 滑块图标颜色
-$-slider-button-button-size: var(--wot-slider-button-button-size, 40px) !default; // 滑块尺寸
-$-slider-button-track-width: var(--wot-slider-button-track-width, 100%) !default; // 滑道宽度
+// 组件高度
+$slider-button-height: var(--wot-slider-button-height, 40px) !default;
+// 组件宽度
+$slider-button-width: var(--wot-slider-button-width, 100%) !default;
+// 组件背景色
+$slider-button-bg: var(--wot-slider-button-bg, #F7F8FAFF) !default;
+// 圆角
+$slider-button-radius: var(--wot-slider-button-radius, 8px) !default;
+// 成功态track背景色
+$slider-button-track-bg: var(--wot-slider-button-track-bg, #00C49FFF) !default;
+// 禁用态透明度
+$slider-button-disabled-opacity: var(--wot-slider-button-disabled-opacity, 0.5) !default;
+// 提示文字颜色
+$slider-button-text-color: var(--wot-slider-button-text-color, #333333FF) !default;
+// 提示文字字号
+$slider-button-text-font-size: var(--wot-slider-button-text-font-size, 14px) !default;
+// 提示文字行高
+$slider-button-text-line-height: var(--wot-slider-button-text-line-height, 20px) !default;
+// 成功态文字颜色
+$slider-button-success-text-color: var(--wot-slider-button-success-text-color, #FFFFFFFF) !default;
+// 滑块背景色
+$slider-button-bg: var(--wot-slider-button-bg, #FFFFFFFF) !default;
+// 滑块阴影色
+$slider-button-shadow: var(--wot-slider-button-shadow, 0 0 8px 0 rgba(0, 0, 0, 0.045)) !default;
+// 滑块图标颜色
+$slider-button-color: var(--wot-slider-button-color, #FFFFFFFF) !default;
+// 滑块图标成功态颜色
+$slider-button-success-color: var(--wot-slider-button-success-color, #00C49FFF) !default;
+// 滑块尺寸
+$slider-button-size: var(--wot-slider-button-size, $slider-button-height) !default;
+// 滑块边框颜色
+$slider-button-border-color: var(--wot-slider-button-border-color, #D9D9D9FF) !default; 
+// 滑块图标尺寸
+$slider-button-success-icon-size: var(--wot-slider-button-success-icon-size, 20px) !default;
 
 /* steps */
 $-steps-icon-size: var(--wot-steps-icon-size, 22px) !default; // 图标尺寸 (22px)
