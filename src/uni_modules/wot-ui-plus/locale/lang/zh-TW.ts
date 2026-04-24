@@ -1,11 +1,3 @@
-/*
- * @Author: 810505339
- * @Date: 2025-02-11 21:17:21
- * @LastEditors: 810505339
- * @LastEditTime: 2025-02-18 13:05:10
- * @FilePath: \wot-ui-plus\src\uni_modules\wot-ui-plus\locale\lang\zh-TW.ts
- * 记得注释
- */
 export default {
   calendar: {
     placeholder: '請選擇',

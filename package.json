@@ -1,6 +1,6 @@
 {
   "name": "wot-ui-plus",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "releaseDate": "2025-11-14",
   "description": "一个基于Vue3+TS开发的uni-app组件库，提供88+高质量组件，支持暗黑模式、国际化和自定义主题。",
   "license": "MIT",
@@ -46,7 +46,7 @@
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
     "commit": "git-cz",
-    "publish": "pnpm compiler && cd lib && npm publish",
+    "release:npm": "pnpm compiler && cd lib && npm publish",
     "release-major": "standard-version --release-as major",
     "release-minor": "standard-version --release-as minor",
     "release-patch": "standard-version --release-as patch",

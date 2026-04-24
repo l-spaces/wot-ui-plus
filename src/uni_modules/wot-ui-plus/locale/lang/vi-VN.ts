@@ -1,15 +1,3 @@
-/*
- * @Author: 810505339
- * @Date: 2025-02-11 21:17:21
- * @LastEditors: 810505339
- * @LastEditTime: 2025-02-15 21:32:57
- * @FilePath: \wot-ui-plus\src\uni_modules\wot-ui-plus\locale\lang\vi-VN.ts
- * 记得注释
- */
-/**
- * This file contains localization strings for various components in Vietnamese.
- */
-
 export default {
   calendar: {
     placeholder: 'Vui lòng chọn',
