@@ -23,6 +23,7 @@
             'wd-input__inner',
             prefixIcon ? 'wd-input__inner--prefix' : '',
             showWordCount ? 'wd-input__inner--count' : '',
+            showPassword ? 'wd-input__inner--password' : '',
             alignRight ? 'is-align-right' : '',
             customInputClass
           ]"
@@ -54,8 +55,13 @@
         />
         <view v-if="props.readonly" class="wd-input__readonly-mask" />
         <view v-if="showClear || showPassword || suffixIcon || showWordCount || $slots.suffix" class="wd-input__suffix">
-          <wd-icon v-if="showClear" custom-class="wd-input__clear" name="error-fill" @click="handleClear" />
-          <wd-icon v-if="showPassword" custom-class="wd-input__icon" :name="isPwdVisible ? 'view' : 'eye-close'" @click="togglePwdVisible" />
+          <wd-icon v-if="showClear" custom-class="wd-input__clear" name="close" @click="handleClear" />
+          <wd-icon
+            v-if="showPassword"
+            custom-class="wd-input__icon"
+            :name="isPwdVisible ? 'preview-open' : 'preview-close'"
+            @click="togglePwdVisible"
+          />
           <view v-if="showWordCount" class="wd-input__count">
             <text
               :class="[
@@ -200,14 +206,14 @@
 
   const rootClass = computed(() => {
     const classes = ['wd-input']
-    // 布局相关类名
+
     if (props.label || slots.label) {
       classes.push('is-cell')
     }
     if (props.center) {
       classes.push('is-center')
     }
-    // 边框样式类名 - 确保正确的优先级
+
     if (props.noBorder) {
       classes.push('is-no-border')
     } else if (props.inputBorder === 'border') {
@@ -215,7 +221,7 @@
     } else if (props.inputBorder === 'underline' || cell.border.value) {
       classes.push('is-underline')
     }
-    // 状态相关类名
+
     if (props.size) {
       classes.push(`is-${props.size}`)
     }
@@ -228,13 +234,13 @@
     if (inputValue.value && String(inputValue.value).length > 0) {
       classes.push('is-not-empty')
     }
-    // 自定义类名
     if (props.customClass) {
       classes.push(props.customClass)
     }
+
     return classes.join(' ')
   })
-  // ${props.noBorder || props.plain ? 'is-no-border' : 'is-border'}  ${props.plain ? 'is-plain' : 'is-no-plain'}
+
   const labelClass = computed(() => {
     return `wd-input__label ${props.customLabelClass}`
   })

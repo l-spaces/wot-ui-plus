@@ -68,19 +68,44 @@
   text-align: left;
   background: $-input-bg;
 
+  &::after {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: $-input-border-color;
+    transform: scaleY(0.5);
+    transition: background-color 0.2s ease-in-out;
+  }
+
   @include when(underline) {
-    border-bottom: 1px solid $-input-border-color;
+    &::after {
+      display: block;
+    }
   }
 
   @include when(border) {
     padding: 0px 10px;
     border-radius: 4px;
     border: 0.5px solid $-input-border-color;
+
+    &::after {
+      display: none;
+    }
   }
 
   @include when(not-empty) {
     &:not(.is-disabled):not(.is-cell) {
-      border-color: $-input-not-empty-border-color;
+      &.is-border {
+        border-color: $-input-not-empty-border-color;
+      }
+
+      &:not(.is-border)::after {
+        background-color: $-input-not-empty-border-color;
+      }
+
       :deep(.wd-input__icon) {
         color: $-input-not-empty-border-color;
       }
@@ -258,6 +283,11 @@
     @include when(align-right) {
       text-align: right;
     }
+  }
+
+  :deep(.wd-input__inner--password .uni-input-input::-ms-reveal),
+  :deep(.wd-input__inner--password .uni-input-input::-ms-clear) {
+    display: none;
   }
 
   @include e(readonly-mask) {
