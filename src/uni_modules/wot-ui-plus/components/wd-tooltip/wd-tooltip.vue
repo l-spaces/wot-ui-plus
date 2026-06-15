@@ -55,7 +55,7 @@
     () => props.content,
     (newVal) => {
       if (newVal === null || newVal === undefined) {
-        console.error('[wot-design] warning(wd-tooltip): content can t be null or undefined')
+        console.error('[wot-ui] warning(wd-tooltip): content can t be null or undefined')
       }
     }
   )

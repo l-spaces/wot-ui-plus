@@ -1,6 +1,6 @@
 {
   "name": "wot-ui-plus",
-  "version": "3.2.0",
+  "version": "3.3.2",
   "releaseDate": "2025-11-14",
   "description": "一个基于Vue3+TS开发的uni-app组件库，提供88+高质量组件，支持暗黑模式、国际化和自定义主题。",
   "license": "MIT",
@@ -46,7 +46,7 @@
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
     "commit": "git-cz",
-    "publish": "pnpm compiler && cd lib && npm publish",
+    "release:npm": "pnpm compiler && cd lib && npm publish",
     "release-major": "standard-version --release-as major",
     "release-minor": "standard-version --release-as minor",
     "release-patch": "standard-version --release-as patch",
@@ -68,7 +68,7 @@
     "test:component": "esno ./scripts/test-component.ts",
     "test:workflow": "esno ./scripts/test-workflow.ts",
     "type-check": "vue-tsc --noEmit",
-    "lint": "eslint src --ext .js,.vue,.ts",
+    "lint": "eslint --fix --ext .js,.vue,.ts src",
     "lint:fix": "eslint --fix --ext .js,.vue,.ts",
     "format:check": "prettier --check \"**/*.{js,vue,ts,json}\"",
     "format": "prettier --write \"**/*.{js,vue,ts,json,scss,css}\"",
@@ -95,7 +95,7 @@
     "@dcloudio/uni-mp-xhs": "3.0.0-4080520251106001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4080520251106001",
     "vite-plugin-compression": "^0.5.1",
-    "vue": "^3.4.21",
+    "vue": "^3.4.38",
     "vue-i18n": "9.1.9"
   },
   "devDependencies": {

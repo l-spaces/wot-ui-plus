@@ -129,7 +129,7 @@ module.exports = {
 
     // 组件属性命名风格 关闭 Vue 组件属性命名必须使用短横线命名的检查，允许驼峰命名
     'vue/attribute-hyphenation': 'off',
-    
+
     // 关闭属性顺序检查（允许 v-model 和 required 任意顺序）
     'vue/attributes-order': 'off',
 
@@ -160,7 +160,7 @@ module.exports = {
       }
     ],
 
-    // 空对象类型 允许使用空对象类型 {}，支持类型声明中的使用 
+    // 空对象类型 允许使用空对象类型 {}，支持类型声明中的使用
     '@typescript-eslint/no-empty-object-type': 'off',
 
     // 未使用表达式 允许使用表达式语句，支持调试和特殊场景

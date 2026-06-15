@@ -83,33 +83,27 @@ function isVNode(value: any): value is VNode {
  *
  * @throws 不会抛出异常，但会忽略非 VNode 类型的子节点
  */
-export function flattenVNodes(children: VNodeNormalizedChildren) {
+export function flattenVNodes(children: VNode) {
   const result: VNode[] = []
 
   /**
    * 递归遍历函数
    * @param children - 当前层级的子节点集合
    */
-  const traverse = (children: VNodeNormalizedChildren) => {
-    if (Array.isArray(children)) {
-      children.forEach((child) => {
-        if (isVNode(child)) {
-          // 将当前 VNode 添加到结果数组
-          result.push(child)
-
-          // 如果 VNode 有组件实例且包含子树，递归处理组件子树
-          if (child.component?.subTree) {
-            result.push(child.component.subTree)
-            traverse(child.component.subTree.children)
-          }
-
-          // 如果 VNode 有普通子节点，递归处理子节点
-          if (child.children) {
-            traverse(child.children)
-          }
-        }
-      })
-    }
+  const traverse = (children: VNode | VNodeNormalizedChildren) => {
+    const vNode = Array.isArray(children) ? children : [children]
+    vNode.forEach((child) => {
+      if (Array.isArray(child)) {
+        traverse(child)
+      } else if (isVNode(child) && child.component?.subTree) {
+        result.push(child)
+        traverse(child.component.subTree)
+      } else if (isVNode(child) && Array.isArray(child.children)) {
+        traverse(child.children)
+      } else if (isVNode(child)) {
+        result.push(child)
+      }
+    })
   }
 
   // 开始递归遍历
@@ -167,19 +161,19 @@ export function sortChildren(
   publicChildren: ComponentPublicInstance[],
   internalChildren: ComponentInternalInstance[]
 ) {
-  // 获取父组件的虚拟节点子树并扁平化
-  const vnodes = parent && parent.subTree && parent.subTree.children ? flattenVNodes(parent.subTree.children) : []
-
-  // 根据 VNode 在 DOM 中的顺序对内部组件实例进行排序
+  const vnodes = parent && parent.subTree && parent.subTree.children ? flattenVNodes(parent.subTree) : []
   internalChildren.sort((a, b) => findVNodeIndex(vnodes, a.vnode) - findVNodeIndex(vnodes, b.vnode))
 
-  // 从排序后的内部实例映射出对应的公共实例
   const orderedPublicChildren = internalChildren.map((item) => item.proxy!)
 
-  // 根据排序后的公共实例顺序对原始公共实例数组进行排序
   publicChildren.sort((a, b) => {
-    const indexA = orderedPublicChildren.indexOf(a)
-    const indexB = orderedPublicChildren.indexOf(b)
+    const getIndex = (comp: ComponentPublicInstance) => {
+      const uid = comp.$.uid
+      return orderedPublicChildren.findIndex((i) => i.$.uid === uid)
+    }
+
+    const indexA = getIndex(a)
+    const indexB = getIndex(b)
     return indexA - indexB
   })
 }

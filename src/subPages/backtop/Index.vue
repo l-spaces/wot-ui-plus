@@ -6,6 +6,7 @@
       <wd-checkbox shape="square" size="large" v-model="isTop">自定义距离</wd-checkbox>
       <wd-checkbox shape="square" size="large" v-model="isStyle">自定义样式</wd-checkbox>
       <wd-checkbox shape="square" size="large" v-model="isDuration">自定义返回顶部滚动时间</wd-checkbox>
+      <wd-text text="滚动至底部"></wd-text>
     </demo-block>
     <wd-backtop
       v-if="isCustomIcon"

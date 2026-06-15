@@ -12,7 +12,7 @@ export type InputSize = 'large'
 
 export type InputMode = 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url'
 
-export type InputBorder = 'border' | 'underline' | 'none'
+export type InputBorder = 'border' | 'underline'
 
 export const inputProps = {
   ...baseProps,
@@ -188,7 +188,7 @@ export const inputProps = {
   markerSide: makeStringProp<'before' | 'after'>('before'),
 
   /**
-   * 边框类型，可选值：border（边框）、underline（下划线）
+   * 边框类型，可选值：border（边框）、underline（下横线）
    */
   inputBorder: makeStringProp<InputBorder>('underline')
 }

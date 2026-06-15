@@ -124,10 +124,20 @@ export default {
   tableCol: {
     indexLabel: 'Índice'
   },
+  tour: {
+    prev: 'Anterior',
+    next: 'Siguiente',
+    finish: 'Finalizar',
+    skip: 'Omitir'
+  },
   signature: {
     confirmText: 'Confirmar',
     clearText: 'Limpiar',
     revokeText: 'Deshacer',
     restoreText: 'Restaurar'
+  },
+  sliderButton: {
+    text: 'Desliza a la derecha para verificar',
+    successText: 'Verificación exitosa'
   }
 }

@@ -128,10 +128,20 @@ export default {
   tableCol: {
     indexLabel: 'تەرتىپ نومۇرى'
   },
+  tour: {
+    prev: 'ئالدىنقى قەدەم',
+    next: 'كېيىنكى قەدەم',
+    finish: 'تاماملاش',
+    skip: 'ئاتلاش'
+  },
   signature: {
     confirmText: 'جەزملەش',
     clearText: 'تازىلاش',
     revokeText: 'بىكار قىلىش',
     restoreText: 'ئەسلىگە كەلتۈرۈش'
+  },
+  sliderButton: {
+    text: 'دەلىللەش ئۈچۈن ئوڭغا سۈرۈڭ',
+    successText: 'دەلىللەش مۇۋەپپەقىيەتلىك بولدى'
   }
 }

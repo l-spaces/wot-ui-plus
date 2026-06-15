@@ -1,6 +1,13 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
+.wot-theme-dark {
+  @include b(avatar) {
+    background-color: $-dark-background4;
+    color: $-dark-color;
+  }
+}
+
 @include b(avatar) {
   position: relative;
   display: flex;

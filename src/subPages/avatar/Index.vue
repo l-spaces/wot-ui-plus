@@ -1,5 +1,5 @@
 <template>
-  <page-wraper showDarkMode>
+  <page-wraper>
     <demo-block title="基础演示">
       <view class="avatar-row">
         <view class="wd-avatar-item">
@@ -92,22 +92,24 @@
 <script setup lang="ts">
   import { ref } from 'vue'
 
-  const src1 = ref('http://106.55.153.212:88/a1.png')
-  const src2 = ref('http://106.55.153.212:88/a2.png')
-  const src3 = ref('http://106.55.153.212:88/a3.png')
-  const src4 = ref('http://106.55.153.212:88/a4.png')
-  const src5 = ref('http://106.55.153.212:88/a5.png')
-  const src6 = ref('http://106.55.153.212:88/a6.png')
-  const src7 = ref('http://106.55.153.212:88/a7.png')
-  const src8 = ref('http://106.55.153.212:88/noExist.png')
+  import joy from '../../static/img/a2.png'
+
+  const src1 = ref(joy)
+  const src2 = ref(joy)
+  const src3 = ref(joy)
+  const src4 = ref(joy)
+  const src5 = ref(joy)
+  const src6 = ref(joy)
+  const src7 = ref(joy)
+  const src8 = ref(joy)
   const urls = ref([
-    'http://106.55.153.212:88/a1.png',
-    'http://106.55.153.212:88/a2.png',
-    'http://106.55.153.212:88/a3.png',
-    'http://106.55.153.212:88/a4.png',
-    'http://106.55.153.212:88/a7.png',
-    'http://106.55.153.212:88/a6.png',
-    'http://106.55.153.212:88/a5.png'
+    '../../static/img/a1.png',
+    '../../static/img/a5.png',
+    '../../static/img/a3.png',
+    '../../static/img/a4.png',
+    '../../static/img/a2.png',
+    '../../static/img/a6.png',
+    '../../static/img/a2.png'
   ])
 
   function click(name: any) {

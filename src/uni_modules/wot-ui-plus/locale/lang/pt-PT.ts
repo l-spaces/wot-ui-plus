@@ -124,10 +124,20 @@ export default {
   tableCol: {
     indexLabel: 'Número'
   },
+  tour: {
+    prev: 'Anterior',
+    next: 'Próximo',
+    finish: 'Concluir',
+    skip: 'Pular'
+  },
   signature: {
     confirmText: 'Concluir',
     clearText: 'Limpar',
     revokeText: 'Desfazer',
     restoreText: 'Restaurar'
+  },
+  sliderButton: {
+    text: 'Deslize para a direita para verificar',
+    successText: 'Verificação bem-sucedida'
   }
 }

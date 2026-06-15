@@ -1,15 +1,3 @@
-/*
- * @Author: 810505339
- * @Date: 2025-02-11 21:17:21
- * @LastEditors: 810505339
- * @LastEditTime: 2025-02-15 21:32:57
- * @FilePath: \wot-ui-plus\src\uni_modules\wot-ui-plus\locale\lang\vi-VN.ts
- * 记得注释
- */
-/**
- * This file contains localization strings for various components in Vietnamese.
- */
-
 export default {
   calendar: {
     placeholder: 'Vui lòng chọn',
@@ -77,10 +65,20 @@ export default {
   tableCol: {
     indexLabel: 'Số sê-ri'
   },
+  tour: {
+    prev: 'Trước',
+    next: 'Tiếp',
+    finish: 'Hoàn thành',
+    skip: 'Bỏ qua'
+  },
   signature: {
     confirmText: 'Xác nhận',
     clearText: 'Xóa',
     revokeText: 'Hoàn tác',
     restoreText: 'Khôi phục'
+  },
+  sliderButton: {
+    text: 'Vuốt sang phải để xác minh',
+    successText: 'Xác minh thành công'
   }
 }

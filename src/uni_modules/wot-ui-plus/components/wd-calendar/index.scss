@@ -109,7 +109,13 @@
   }
 
   @include e(confirm) {
+    display: flex;
+    align-items: center;
     padding: 12px 25px 14px;
+  }
+
+  @include e(confirm-btn-wrapper) {
+    flex-grow: 1;
   }
 
   @include edeep(cell) {

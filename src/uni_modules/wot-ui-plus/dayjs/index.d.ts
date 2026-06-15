@@ -1,7 +1,7 @@
 /* eslint-disable */
 /// <reference path="./locale/index.d.ts" />
 
-export = dayjs
+export = dayjs;
 
 declare function dayjs(date?: dayjs.ConfigType): dayjs.Dayjs
 

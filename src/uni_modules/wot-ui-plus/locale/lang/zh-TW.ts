@@ -1,11 +1,3 @@
-/*
- * @Author: 810505339
- * @Date: 2025-02-11 21:17:21
- * @LastEditors: 810505339
- * @LastEditTime: 2025-02-18 13:05:10
- * @FilePath: \wot-ui-plus\src\uni_modules\wot-ui-plus\locale\lang\zh-TW.ts
- * 记得注释
- */
 export default {
   calendar: {
     placeholder: '請選擇',
@@ -66,10 +58,20 @@ export default {
   tableCol: {
     indexLabel: '序號'
   },
+  tour: {
+    prev: '上一步',
+    next: '下一步',
+    finish: '完成',
+    skip: '跳過'
+  },
   signature: {
     confirmText: '確認',
     clearText: '清空',
     revokeText: '撤銷',
     restoreText: '恢復'
+  },
+  sliderButton: {
+    text: '向右滑動驗證',
+    successText: '驗證通過'
   }
 }

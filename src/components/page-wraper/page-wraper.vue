@@ -49,7 +49,7 @@
   // 导入Vue相关的响应式API和生命周期钩子
   import { computed, ref, onMounted, nextTick } from 'vue'
   // 导入UI组件库相关的API和类型
-  import { setNotifyDefaultOptions, useQueue, type ConfigProviderThemeVars } from '@/uni_modules/wot-ui-plus'
+  import { setNotifyDefaultOptions, useQueue, type ConfigProviderThemeVars, useConfigProvider } from '@/uni_modules/wot-ui-plus'
   // 导入状态管理相关的hooks
   import { useDark } from '../../store'
   import { useRewardAd } from '@/store/useRewardAd'
@@ -117,43 +117,19 @@
    * 悬浮按钮激活状态（仅在微信小程序环境有效）
    */
   const fabActive = ref<boolean>(false)
-
-  /**
-   * 横幅广告显示状态（仅在微信小程序环境有效）
-   * 使用随机数控制显示概率，约50%概率显示
-   */
-  const showWxAd = ref<boolean>(Math.random() > 0.5)
-
-  /**
-   * 格子广告显示状态（仅在微信小程序环境有效）
-   * 使用随机数控制显示概率，约67%概率显示
-   */
-  const showWxAd2 = ref<boolean>(Math.random() > 0.33)
-
-  /**
-   * 插屏广告显示状态（仅在微信小程序环境有效）
-   * 使用随机数控制显示概率，约33%概率显示
-   */
-  const showWxAd3 = ref<boolean>(Math.random() > 0.66)
-
-  /**
-   * 插屏广告实例引用（仅在微信小程序环境有效）
-   */
+  // 横幅广告和格子广告可以共存，但插屏广告展示时，不显示横幅广告和格子广告
+  const showWxAd = ref<boolean>(Math.random() > 0.5) // 横幅广告
+  const showWxAd2 = ref<boolean>(Math.random() > 0.33) // 格子广告
+  const showWxAd3 = ref<boolean>(Math.random() > 0.66) // 插屏广告
   let interstitialAd: UniApp.InterstitialAdContext | null = null
   // #endif
 
-  /**
-   * 主题变量配置
-   * 用于设置红色主题的配置
-   */
-  const themeVars: ConfigProviderThemeVars = {
-    colorTheme: 'red'
-  }
+  const themeVars = computed<ConfigProviderThemeVars>(() => {
+    return isRed.value ? { colorTheme: 'red' } : {}
+  })
 
-  /**
-   * 计算属性：当前应用的主题
-   * 当全局深色模式或本地深色模式任一为true时，使用dark主题，否则使用light主题
-   */
+  useConfigProvider({ themeVars })
+
   const theme = computed(() => {
     return darkMode.isDark.value || isDark.value ? 'dark' : 'light'
   })
@@ -191,11 +167,7 @@
       interstitialAd = uni.createInterstitialAd({ adUnitId: 'adunit-fc8522e2b1185c89' })
       // 在下一个DOM更新周期后显示广告
       nextTick(() => {
-        // 安全检查，确保广告实例存在后再调用显示方法
-        if (interstitialAd) {
-          // 显式判断
-          interstitialAd.show() // 明确调用方法
-        }
+        interstitialAd && interstitialAd.show()
       })
     }
 

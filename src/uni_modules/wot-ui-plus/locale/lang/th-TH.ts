@@ -74,7 +74,7 @@ export default {
     inputNoValidate: 'กรุณาตรวจสอบว่าคุณได้ใส่ข้อมูลที่ถูกต้อง'
   },
   numberKeyboard: {
-    confir: 'ตกลง'
+    confirm: 'ตกลง'
   },
   pagination: {
     prev: 'ก่อนหน้า',
@@ -124,10 +124,20 @@ export default {
   tableCol: {
     indexLabel: 'หมายเลขซีเรียล'
   },
+  tour: {
+    prev: 'ก่อนหน้า',
+    next: 'ถัดไป',
+    finish: 'เสร็จสิ้น',
+    skip: 'ข้าม'
+  },
   signature: {
     confirmText: 'ยืนยัน',
     clearText: 'ล้าง',
     revokeText: 'ย้อนกลับ',
     restoreText: 'เรียกคืน'
+  },
+  sliderButton: {
+    text: 'เลื่อนไปทางขวาเพื่อตรวจสอบ',
+    successText: 'ตรวจสอบสำเร็จ'
   }
 }

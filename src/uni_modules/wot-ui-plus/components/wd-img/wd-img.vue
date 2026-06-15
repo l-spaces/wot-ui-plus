@@ -1,11 +1,3 @@
-<!--
- * @Author: 810505339
- * @Date: 2024-09-25 11:30:46
- * @LastEditors: 810505339
- * @LastEditTime: 2025-01-09 11:37:45
- * @FilePath: \wot-ui-plus\src\uni_modules\wot-ui-plus\components\wd-img\wd-img.vue
- * 记得注释
--->
 <template>
   <view :class="rootClass" @click="handleClick" :style="rootStyle">
     <image

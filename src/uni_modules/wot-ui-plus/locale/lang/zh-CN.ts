@@ -128,10 +128,20 @@ export default {
   tableCol: {
     indexLabel: '序号'
   },
+  tour: {
+    prev: '上一步',
+    next: '下一步',
+    finish: '完成',
+    skip: '跳过'
+  },
   signature: {
     confirmText: '确认',
     clearText: '清空',
     revokeText: '撤销',
     restoreText: '恢复'
+  },
+  sliderButton: {
+    text: '向右滑动验证',
+    successText: '验证通过'
   }
 }

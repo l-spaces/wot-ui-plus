@@ -234,6 +234,16 @@ describe('输入框组件', () => {
     expect(wrapper.find('input').attributes('password')).toBe('false')
   })
 
+  test('密码态输入框应用专用类名', () => {
+    const wrapper = mount(WdInput, {
+      props: {
+        showPassword: true
+      }
+    })
+
+    expect(wrapper.find('input').classes()).toContain('wd-input__inner--password')
+  })
+
   // 测试自动获取焦点
   test('处理焦点', async () => {
     const wrapper = mount(WdInput, {
@@ -465,6 +475,33 @@ describe('输入框组件', () => {
     })
 
     expect(wrapper.classes()).toContain('is-no-border')
+  })
+
+  test('根据 inputBorder 应用对应边框类名', () => {
+    const underlineWrapper = mount(WdInput, {
+      props: { inputBorder: 'underline' }
+    })
+
+    expect(underlineWrapper.classes()).toContain('is-underline')
+    expect(underlineWrapper.classes()).not.toContain('is-border')
+
+    const borderWrapper = mount(WdInput, {
+      props: { inputBorder: 'border' }
+    })
+
+    expect(borderWrapper.classes()).toContain('is-border')
+    expect(borderWrapper.classes()).not.toContain('is-underline')
+
+    const noBorderWrapper = mount(WdInput, {
+      props: {
+        inputBorder: 'border',
+        noBorder: true
+      }
+    })
+
+    expect(noBorderWrapper.classes()).toContain('is-no-border')
+    expect(noBorderWrapper.classes()).not.toContain('is-border')
+    expect(noBorderWrapper.classes()).not.toContain('is-underline')
   })
 
   // 测试居中模式

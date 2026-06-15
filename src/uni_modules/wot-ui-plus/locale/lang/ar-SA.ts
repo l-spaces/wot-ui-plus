@@ -124,10 +124,20 @@ export default {
   tableCol: {
     indexLabel: 'فهرس'
   },
+  tour: {
+    prev: 'السابق',
+    next: 'التالي',
+    finish: 'إنهاء',
+    skip: 'تخطي'
+  },
   signature: {
     confirmText: 'تأكيد',
     clearText: 'مسح',
     revokeText: 'تراجع',
     restoreText: 'استعادة'
+  },
+  sliderButton: {
+    text: 'اسحب لليمين للتحقق',
+    successText: 'تم التحقق بنجاح'
   }
 }

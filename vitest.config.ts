@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [
     vitePluginUniConditionalCompile({
       platform
-    }),
+    }) as any,
     vue()
   ],
   resolve: {

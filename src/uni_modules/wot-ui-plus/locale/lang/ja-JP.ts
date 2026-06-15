@@ -124,10 +124,20 @@ export default {
   tableCol: {
     indexLabel: '索引'
   },
+  tour: {
+    prev: '前へ',
+    next: '次へ',
+    finish: '完了',
+    skip: 'スキップ'
+  },
   signature: {
     confirmText: '確認',
     clearText: 'クリア',
     revokeText: '元に戻す',
     restoreText: '復元'
+  },
+  sliderButton: {
+    text: '右にスライドして確認',
+    successText: '検証成功'
   }
 }

@@ -124,10 +124,20 @@ export default {
   tableCol: {
     indexLabel: '№'
   },
+  tour: {
+    prev: 'Назад',
+    next: 'Далее',
+    finish: 'Завершить',
+    skip: 'Пропустить'
+  },
   signature: {
     confirmText: 'Подтвердить',
     clearText: 'Очистить',
     revokeText: 'Отменить',
     restoreText: 'Восстановить'
+  },
+  sliderButton: {
+    text: 'Проведите вправо для проверки',
+    successText: 'Проверка прошла успешно'
   }
 }
